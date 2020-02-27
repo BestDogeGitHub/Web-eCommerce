@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProducersTable extends Migration
+class CreateDeliveryStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateProducersTable extends Migration
      */
     public function up()
     {
-        Schema::create('producers', function (Blueprint $table) {
+        Schema::create('delivery_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',45);
-            $table->string('image_ref',255);
-            $table->string('link',2048);
-            $table->text('details');
-
+            $table->string('status');
+            
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateProducersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('producers');
+        Schema::dropIfExists('delivery_statuses');
     }
 }

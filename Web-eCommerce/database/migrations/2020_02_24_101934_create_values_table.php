@@ -15,6 +15,10 @@ class CreateValuesTable extends Migration
     {
         Schema::create('values', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name',50);
+            
+            $table->unsignedBigInteger('attribute_id');
+
             $table->timestamps();
         });
     }

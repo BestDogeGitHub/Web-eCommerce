@@ -15,6 +15,11 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->smallInteger('quantity');
+
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('product_id');
+
             $table->timestamps();
         });
     }

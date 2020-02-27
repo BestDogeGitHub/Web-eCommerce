@@ -13,9 +13,9 @@ class CreateProductTypeValuePivotTable extends Migration
     public function up()
     {
         Schema::create('product_type_value', function (Blueprint $table) {
-            $table->integer('product_type_id')->unsigned()->index();
+            $table->unsignedBigInteger('product_type_id')->unsigned()->index();
             $table->foreign('product_type_id')->references('id')->on('product_types')->onDelete('cascade');
-            $table->integer('value_id')->unsigned()->index();
+            $table->unsignedBigInteger('value_id')->unsigned()->index();
             $table->foreign('value_id')->references('id')->on('values')->onDelete('cascade');
             $table->primary(['product_type_id', 'value_id']);
         });

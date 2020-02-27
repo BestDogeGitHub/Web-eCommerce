@@ -15,6 +15,14 @@ class CreateProductTypesTable extends Migration
     {
         Schema::create('product_types', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name',45);
+            $table->string('image_ref',255);
+            $table->boolean('available'); // 1 for true
+            $table->tinyInteger('star_rate');
+            $table->mediumInteger('n_reviews'); // number of reviews, user to calculate the mean rate
+
+            $table->unsignedBigInteger('producer_id')->nullable();
+
             $table->timestamps();
         });
     }

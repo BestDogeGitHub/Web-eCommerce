@@ -15,6 +15,11 @@ class CreateCarriersTable extends Migration
     {
         Schema::create('carriers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name',45);
+            $table->string('image_ref',255);
+            $table->string('link',2048);
+            $table->text('details');
+            
             $table->timestamps();
         });
     }

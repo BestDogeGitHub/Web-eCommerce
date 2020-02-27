@@ -13,9 +13,9 @@ class CreateProductUserPivotTable extends Migration
     public function up()
     {
         Schema::create('product_user', function (Blueprint $table) {
-            $table->integer('product_id')->unsigned()->index();
+            $table->unsignedBigInteger('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->integer('user_id')->unsigned()->index();
+            $table->unsignedBigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->primary(['product_id', 'user_id']);
         });

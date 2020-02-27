@@ -15,6 +15,13 @@ class CreateShipmentsTable extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('tracking_number',15);
+            $table->date('delivery_date');
+            
+            $table->unsignedBigInteger('address_id');
+            $table->unsignedBigInteger('carrier_id');
+            $table->unsignedBigInteger('delivery_status_id');
+            
             $table->timestamps();
         });
     }
