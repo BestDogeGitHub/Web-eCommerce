@@ -11,9 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([ RolesTableSeeder::class ]);
+        $this->call([ StaticTableSeeder::class ]);
 
-        $admin = [
+        /*$admin = [
             'id' => 1, 
             'user_role_id' => '2', 
             'degree_id' => NULL,
@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin', 
             'personal_calendar' => FALSE,
             'LAU' => now()
-        ];
+        ];*/
 
-        DB::table('users')->insert($admin);
+        //DB::table('users')->insert($admin);
 
         $this->call([ PopulateSeeder::class ]);
     }

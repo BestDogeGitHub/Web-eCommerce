@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Nation::class, function (Faker $faker) {
     return [
-        //
+        'name' => $faker->country
     ];
 });

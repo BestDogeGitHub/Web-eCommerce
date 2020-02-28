@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Population extends Migration
+class CreateCreditCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class Population extends Migration
      */
     public function up()
     {
-        Artisan::call('db:seed');
+        Schema::create('credit_cards', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ class Population extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('credit_cards');
     }
 }
