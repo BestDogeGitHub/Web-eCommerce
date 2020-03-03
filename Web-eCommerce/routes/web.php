@@ -12,13 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('pages.home');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+/*  OLD FUNCTION
+Route::get('/product/{id}', function ($id) {
+    return view('pages.product_details', ['id' => $id]);
+});
+*/
+
+Route::get('/products/{id}', 'FrontEnd\ProductDetailController@show')->name('product_detail');
 
 Route::get('template', function () {
     return view('layouts/layout');
