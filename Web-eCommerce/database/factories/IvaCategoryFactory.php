@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Attribute;
+use App\IvaCategory;
 use Faker\Generator as Faker;
 
-$factory->define(Attribute::class, function (Faker $faker) {
+$factory->define(IvaCategory::class, function (Faker $faker) {
     return [
         //
     ];

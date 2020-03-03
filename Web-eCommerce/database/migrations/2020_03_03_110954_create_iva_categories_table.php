@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCreditCardsTable extends Migration
+class CreateIvaCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCreditCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('credit_cards', function (Blueprint $table) {
+        Schema::create('iva_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type',20);
-            $table->string('number',20);
-            $table->string('expiration_date',6);
+            $table->string('category',45);
+            $table->tinyInteger('value'); // you have to give the % of iva (ex. 22)
 
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreateCreditCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_cards');
+        Schema::dropIfExists('iva_categories');
     }
 }

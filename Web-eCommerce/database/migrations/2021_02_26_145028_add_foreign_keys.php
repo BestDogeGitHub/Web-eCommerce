@@ -17,6 +17,10 @@ class AddForeignKeys extends Migration
             $table0->foreign('address_id')->references('id')
             ->on('addresses')->onDelete('cascade'); });
 
+        Schema::table('users', function(Blueprint $table0) {
+            $table0->foreign('credit_card_id')->references('id')
+            ->on('credit_cards')->onDelete('cascade'); });
+
         Schema::table('towns', function(Blueprint $table1) {
             $table1->foreign('nation_id')->references('id')
             ->on('nations')->onDelete('cascade'); });
@@ -76,6 +80,10 @@ class AddForeignKeys extends Migration
         Schema::table('products', function(Blueprint $table16) {
             $table16->foreign('product_type_id')->references('id')
             ->on('product_types')->onDelete('cascade'); });
+
+        Schema::table('products', function(Blueprint $table166) {
+            $table166->foreign('iva_category_id')->references('id')
+            ->on('iva_categories')->onDelete('cascade'); });
 
         Schema::table('values', function(Blueprint $table17) {
             $table17->foreign('attribute_id')->references('id')

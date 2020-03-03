@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->text('info');
 
             $table->unsignedBigInteger('product_type_id');
+            $table->unsignedBigInteger('iva_category_id')->nullable();
             
             $table->timestamps();
         });

@@ -48,6 +48,8 @@ class StaticTableSeeder extends Seeder
             DB::table('carriers')->insert($carrier);
         }
 
+        DB::table('iva_categories')->insert(['id' => 1,'category' => 'beni di lusso','value' => 22]);
+
         $producers = [
             [ 'id' => 1, 'name' => 'Gibson', 'image_ref' => '', 
             'link' => 'gibson.com', 'details' => 'Gibson Brands, Inc. (formerly Gibson Guitar Corporation) is an American manufacturer of guitars, other musical instruments, and professional audio equipment from Kalamazoo, Michigan, and now based in Nashville, Tennessee. The company was formerly known as Gibson Guitar Corporation and renamed Gibson Brands, Inc. on June 11, 2013.' ],
@@ -81,6 +83,29 @@ class StaticTableSeeder extends Seeder
     
         foreach ($stats as $stat) {
             DB::table('delivery_statuses')->insert($stat);
+        }
+
+        $attributes = [
+            [ 'id' => 1, 'name' => 'Cord number' ],
+            [ 'id' => 2, 'name' => 'Color' ],
+            [ 'id' => 3, 'name' => 'Brand' ],
+            [ 'id' => 4, 'name' => 'Material' ],
+            [ 'id' => 5, 'name' => 'Lenght' ],
+            [ 'id' => 6, 'name' => 'Weight' ],
+        ];
+    
+        foreach ($attributes as $attribute) {
+            DB::table('attributes')->insert($attribute);
+        }
+
+        $methods = [
+            [ 'id' => 1, 'method' => 'carta di credito' ],
+            [ 'id' => 2, 'method' => 'PayPal' ],
+            [ 'id' => 3, 'method' => 'saldo' ],
+        ];
+    
+        foreach ($methods as $method) {
+            DB::table('payment_methods')->insert($method);
         }
 
 

@@ -15,7 +15,7 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',45);
+            $table->text('details');
             $table->decimal('payment',9,3);
             
             $table->unsignedBigInteger('payment_method_id');
