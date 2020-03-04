@@ -88,14 +88,114 @@ class StaticTableSeeder extends Seeder
         $attributes = [
             [ 'id' => 1, 'name' => 'Cord number' ],
             [ 'id' => 2, 'name' => 'Color' ],
-            [ 'id' => 3, 'name' => 'Brand' ],
-            [ 'id' => 4, 'name' => 'Material' ],
+            [ 'id' => 3, 'name' => 'Body' ],
+            [ 'id' => 4, 'name' => 'Pick ups' ],
             [ 'id' => 5, 'name' => 'Lenght' ],
             [ 'id' => 6, 'name' => 'Weight' ],
+            [ 'id' => 7, 'name' => 'Keys number' ], // piani
+            [ 'id' => 8, 'name' => 'Sounds' ],
+            [ 'id' => 9, 'name' => 'Interface' ],
+            [ 'id' => 10, 'name' => 'Composition' ], // batterie
+            [ 'id' => 11, 'name' => 'Woods' ],
+            [ 'id' => 12, 'name' => 'Effect type' ], // effetti
+            [ 'id' => 13, 'name' => 'Capsule' ], // microfoni
+            [ 'id' => 14, 'name' => 'Polar pattern' ], 
+            [ 'id' => 15, 'name' => 'Tension Type' ], // cavi e alimentatori
+            [ 'id' => 16, 'name' => 'Connectors' ],
+            [ 'id' => 17, 'name' => 'Woofer' ], // casse
+            [ 'id' => 18, 'name' => 'Tweeter' ],
+            [ 'id' => 19, 'name' => 'Watt RMS' ],
+            [ 'id' => 20, 'name' => 'In. number' ], // mixer
+            [ 'id' => 21, 'name' => 'Mic In.' ],
+            [ 'id' => 22, 'name' => 'Multieffect' ], 
+            [ 'id' => 23, 'name' => 'Light Type' ],// luci
+            [ 'id' => 24, 'name' => 'LED' ],
+            [ 'id' => 25, 'name' => 'Light Watt' ],
+            [ 'id' => 26, 'name' => 'DMX' ],
         ];
     
         foreach ($attributes as $attribute) {
             DB::table('attributes')->insert($attribute);
+        }
+
+        $values = [
+            [ 'id' => 1, 'name' => '4', 'attribute_id' => 1 ],
+            [ 'id' => 2, 'name' => '5', 'attribute_id' => 1 ],
+            [ 'id' => 3, 'name' => '6', 'attribute_id' => 1 ],
+            [ 'id' => 4, 'name' => '7', 'attribute_id' => 1 ],
+            [ 'id' => 5, 'name' => 'red', 'attribute_id' => 2 ],
+            [ 'id' => 6, 'name' => 'black', 'attribute_id' => 2 ],
+            [ 'id' => 7, 'name' => 'green', 'attribute_id' => 2 ],
+            [ 'id' => 8, 'name' => 'white', 'attribute_id' => 2 ],
+            [ 'id' => 9, 'name' => 'blue', 'attribute_id' => 2 ],
+            [ 'id' => 10, 'name' => 'pink', 'attribute_id' => 2 ],
+            [ 'id' => 11, 'name' => 'maple', 'attribute_id' => 3 ],
+            [ 'id' => 12, 'name' => 'rosewood', 'attribute_id' => 3 ],
+            [ 'id' => 13, 'name' => 'fir', 'attribute_id' => 3 ],
+            [ 'id' => 14, 'name' => 'mahogany', 'attribute_id' => 3 ],
+            [ 'id' => 15, 'name' => '61', 'attribute_id' => 7 ],
+            [ 'id' => 16, 'name' => '88', 'attribute_id' => 7 ],
+            [ 'id' => 17, 'name' => '74', 'attribute_id' => 7 ],
+            [ 'id' => 18, 'name' => '10', 'attribute_id' => 8 ],
+            [ 'id' => 19, 'name' => '20', 'attribute_id' => 8 ],
+            [ 'id' => 20, 'name' => '30', 'attribute_id' => 8 ],
+            [ 'id' => 21, 'name' => 'USB', 'attribute_id' => 9 ],
+            [ 'id' => 22, 'name' => 'MIDI', 'attribute_id' => 9 ],
+            [ 'id' => 23, 'name' => 'H H', 'attribute_id' => 4 ],
+            [ 'id' => 24, 'name' => 'S S S', 'attribute_id' => 4 ],
+            [ 'id' => 25, 'name' => 'S S H', 'attribute_id' => 4 ],
+            [ 'id' => 26, 'name' => '20+10T+12T+14F+14S', 'attribute_id' => 10 ],
+            [ 'id' => 27, 'name' => '20+10T+15H+15F+14S', 'attribute_id' => 10 ],
+            [ 'id' => 28, 'name' => '30+20T+22T+24F+AAA', 'attribute_id' => 10 ],
+            [ 'id' => 29, 'name' => 'maple', 'attribute_id' => 11 ],
+            [ 'id' => 30, 'name' => 'rosewood', 'attribute_id' => 11 ],
+            [ 'id' => 31, 'name' => 'fir', 'attribute_id' => 11 ],
+            [ 'id' => 32, 'name' => 'phaser', 'attribute_id' => 12 ],
+            [ 'id' => 33, 'name' => 'distortion', 'attribute_id' => 12 ],
+            [ 'id' => 34, 'name' => 'looper', 'attribute_id' => 12 ],
+            [ 'id' => 35, 'name' => 'overdrive', 'attribute_id' => 12 ],
+            [ 'id' => 36, 'name' => 'static', 'attribute_id' => 13 ],
+            [ 'id' => 37, 'name' => 'dynamic', 'attribute_id' => 13 ],
+            [ 'id' => 38, 'name' => 'super', 'attribute_id' => 14 ],
+            [ 'id' => 39, 'name' => 'hyper', 'attribute_id' => 14 ],
+            [ 'id' => 40, 'name' => '5', 'attribute_id' => 5 ],
+            [ 'id' => 41, 'name' => '10', 'attribute_id' => 5 ],
+            [ 'id' => 42, 'name' => '15', 'attribute_id' => 5 ],
+            [ 'id' => 43, 'name' => '9V', 'attribute_id' => 15 ],
+            [ 'id' => 44, 'name' => '12V', 'attribute_id' => 15 ],
+            [ 'id' => 45, 'name' => '18V', 'attribute_id' => 15 ],
+            [ 'id' => 46, 'name' => 'MIDI-MIDI', 'attribute_id' => 16 ],
+            [ 'id' => 47, 'name' => 'MALE Jack-MALE Jack ', 'attribute_id' => 16 ],
+            [ 'id' => 48, 'name' => 'JACK STEREO-XLR Female', 'attribute_id' => 16 ],
+            [ 'id' => 49, 'name' => 'XLR Male-XLR Female', 'attribute_id' => 16 ],
+            [ 'id' => 50, 'name' => '12', 'attribute_id' => 17 ],
+            [ 'id' => 51, 'name' => '15', 'attribute_id' => 17 ],
+            [ 'id' => 52, 'name' => '18', 'attribute_id' => 17 ],
+            [ 'id' => 53, 'name' => '1', 'attribute_id' => 18 ],
+            [ 'id' => 54, 'name' => '2', 'attribute_id' => 18 ],
+            [ 'id' => 55, 'name' => '3', 'attribute_id' => 18 ],
+            [ 'id' => 56, 'name' => '400W', 'attribute_id' => 19 ],
+            [ 'id' => 57, 'name' => '500W', 'attribute_id' => 19 ],
+            [ 'id' => 58, 'name' => '20', 'attribute_id' => 20 ],
+            [ 'id' => 59, 'name' => '30', 'attribute_id' => 20 ],
+            [ 'id' => 60, 'name' => '8', 'attribute_id' => 21 ],
+            [ 'id' => 61, 'name' => '16', 'attribute_id' => 21 ],
+            [ 'id' => 62, 'name' => 'yes', 'attribute_id' => 22 ],
+            [ 'id' => 63, 'name' => 'no', 'attribute_id' => 22 ],
+            [ 'id' => 64, 'name' => 'PAR', 'attribute_id' => 23 ],
+            [ 'id' => 65, 'name' => 'KIT', 'attribute_id' => 23 ],
+            [ 'id' => 66, 'name' => '7x10W, RGBW 4in1', 'attribute_id' => 24 ],
+            [ 'id' => 67, 'name' => '7x10W, RGBW', 'attribute_id' => 24 ],
+            [ 'id' => 68, 'name' => '200W', 'attribute_id' => 25 ],
+            [ 'id' => 69, 'name' => '300W', 'attribute_id' => 25 ],
+            [ 'id' => 70, 'name' => '400W', 'attribute_id' => 25 ],
+            [ 'id' => 71, 'name' => '7 channels', 'attribute_id' => 26 ],
+            [ 'id' => 72, 'name' => '10 channels', 'attribute_id' => 26 ],
+            [ 'id' => 73, 'name' => '18 channels', 'attribute_id' => 26 ],
+        ];
+    
+        foreach ($values as $value) {
+            DB::table('values')->insert($value);
         }
 
         $methods = [
