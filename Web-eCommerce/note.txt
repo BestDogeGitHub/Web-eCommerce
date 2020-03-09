@@ -1,0 +1,36 @@
+(1,N)
+
+    public function classrooms()
+    {
+        return $this->hasMany('App\Classroom');
+    }
+
+    public function building()
+    {
+        return $this->belongsTo('App\Building');
+    }
+
+(N,N)
+
+    public function features()
+    {
+        return $this->belongsToMany('App\Feature', 'product_feature');
+    }
+
+// in Feature model
+    public function products()
+    {
+        return $this->belongsToMany('App\Product', 'product_feature');
+    }
+
+(1,1)
+
+    public function canceledLesson()
+    {
+        return $this->hasOne('App\CanceledLesson');
+    }
+
+    public function lesson()
+    {
+        return $this->belongsTo('App\Lesson');
+    }

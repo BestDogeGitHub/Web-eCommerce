@@ -18,6 +18,7 @@ class CreateShipmentsTable extends Migration
             $table->string('tracking_number',15);
             $table->date('delivery_date');
             
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('address_id');
             $table->unsignedBigInteger('carrier_id');
             $table->unsignedBigInteger('delivery_status_id');

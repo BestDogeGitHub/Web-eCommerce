@@ -19,13 +19,14 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->userName,
+        'username' => $faker->userName,
+        'name' => $faker->firstName,
+        'surname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => $faker->word,
         'remember_token' => Str::random(10),
         'phone' => $faker->e164PhoneNumber,
-        'address_id' => $faker->unique()->numberBetween($min = 1, $max = 1000),
-        'credit_card_id' => $faker->unique()->numberBetween($min = 1, $max = 1000)
+        'address_id' => $faker->unique()->numberBetween($min = 1, $max = 1000)
     ];
 });

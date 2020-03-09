@@ -14,9 +14,9 @@ class CreateCategoryProductTypePivotTable extends Migration
     {
         Schema::create('category_product_type', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category_id')->unsigned()->index();
+            $table->unsignedBigInteger('category_id')->index();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->integer('product_type_id')->unsigned()->index();
+            $table->unsignedBigInteger('product_type_id')->index();
             $table->foreign('product_type_id')->references('id')->on('product_types')->onDelete('cascade');
         });
     }

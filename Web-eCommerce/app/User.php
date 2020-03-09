@@ -39,4 +39,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function creditCard()
+    {
+        return $this->hasOne('App\CreditCard');
+    }
+
+    public function productsInCart()
+    {
+        return $this->belongsToMany('App\Product', 'cart');
+    }
+
+    public function productInWishlist()
+    {
+        return $this->belongsToMany('App\Product', 'wishlist');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    public function address()
+    {
+        return $this->belongsTo('App\Address');
+    }
 }

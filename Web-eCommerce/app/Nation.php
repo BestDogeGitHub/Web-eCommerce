@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nation extends Model
 {
-    //
+    protected $guarded = [];
+
+    public function towns()
+    {
+        return $this->hasMany('App\Town');
+    }
 }

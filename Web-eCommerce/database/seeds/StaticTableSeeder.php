@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Kalnoy\Nestedset\NodeTrait;
+use App\Category;
 
 class StaticTableSeeder extends Seeder
 {
@@ -208,20 +210,48 @@ class StaticTableSeeder extends Seeder
             DB::table('payment_methods')->insert($method);
         }
 
-        $root = new Category([
-            'id' => 1,
-            'name' => 'root',
-        ]);
+        $root = new Category(['id' => 1,'name' => 'root',]);
         
-        $model-saveAsRoot();
+        $node1 = new Category(['name' => 'Strumenti', 'image_ref' => 'another_value']);
+        $node2 = new Category(['name' => 'Accessori e impianti', 'image_ref' => 'another_value']);
+        $node3 = new Category(['name' => 'Chitarre', 'image_ref' => 'another_value']);
+        $node4 = new Category(['name' => 'Batterie', 'image_ref' => 'another_value']);
+        $node5 = new Category(['name' => 'Tastiere', 'image_ref' => 'another_value']);
+        $node6 = new Category(['name' => 'Bassi', 'image_ref' => 'another_value']);
+        $node7 = new Category(['name' => 'Alimentazione e cavi', 'image_ref' => 'another_value']);
+        $node8 = new Category(['name' => 'Impianti e attrezzatura', 'image_ref' => 'another_value']);
+        $node9 = new Category(['name' => 'Alimentatori', 'image_ref' => 'another_value']);
+        $node10 = new Category(['name' => 'Cavi', 'image_ref' => 'another_value']);
+        $node11 = new Category(['name' => 'Impianti', 'image_ref' => 'another_value']);
+        $node12 = new Category(['name' => 'Luci', 'image_ref' => 'another_value']);
+        $node13 = new Category(['name' => 'Microfoni', 'image_ref' => 'another_value']);
+        $node14 = new Category(['name' => 'Effetti', 'image_ref' => 'another_value']);
+        $node15 = new Category(['name' => 'Sub', 'image_ref' => 'another_value']);
+        $node16 = new Category(['name' => 'Casse', 'image_ref' => 'another_value']);
+        $node17 = new Category(['name' => 'Satelliti', 'image_ref' => 'another_value']);
+        $node18 = new Category(['name' => 'Mixer', 'image_ref' => 'another_value']);
+        $node19 = new Category(['name' => 'Effetti chitarre', 'image_ref' => 'another_value']);
 
-        $node = new Category([
-            'name' => 'value',
-            'image_ref' => 'another_value'
-        ]);
-        
-        $model->save();
+        $root->saveAsRoot();
 
-        
+        $node1->appendToNode($root)->save();
+        $node2->appendToNode($root)->save();
+        $node3->appendToNode($node1)->save();
+        $node4->appendToNode($node1)->save();
+        $node5->appendToNode($node1)->save();
+        $node6->appendToNode($node1)->save();
+        $node7->appendToNode($node2)->save();
+        $node8->appendToNode($node2)->save();
+        $node9->appendToNode($node7)->save();
+        $node10->appendToNode($node7)->save();
+        $node11->appendToNode($node8)->save();
+        $node12->appendToNode($node8)->save();
+        $node13->appendToNode($node8)->save();
+        $node14->appendToNode($node8)->save();
+        $node15->appendToNode($node11)->save();
+        $node16->appendToNode($node11)->save();
+        $node17->appendToNode($node11)->save();
+        $node18->appendToNode($node11)->save();
+        $node19->appendToNode($node14)->save();
     }
 }

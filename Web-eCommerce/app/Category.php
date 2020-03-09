@@ -9,4 +9,10 @@ class Category extends Model
 {
     use NodeTrait;
     
+    protected $guarded = [];
+
+    public function productTypes()
+    {
+        return $this->belongsToMany('App\ProductType');
+    }
 }

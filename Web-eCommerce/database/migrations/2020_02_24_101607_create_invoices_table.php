@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->text('details');
             $table->decimal('payment',9,3);
             
+            $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('payment_method_id');
 
             $table->timestamps();

@@ -14,13 +14,13 @@ class PopulateSeeder extends Seeder
         factory('App\Nation', 50)->create();
         factory('App\Town', 200)->create();
         factory('App\Address', 1500)->create();
-        factory('App\CreditCard', 1000)->create();
         factory('App\ProductType', 66)->create();
         factory('App\Product', 66)->create();
         factory('App\User', 500)->create();
-        factory('App\Invoice', 2000)->create();
-        factory('App\Shipment', 2000)->create();
+        factory('App\CreditCard', 200)->create();
         factory('App\Order', 500)->create();
+        factory('App\Invoice', 500)->create();
+        factory('App\Shipment', 500)->create();
         factory('App\Review', 3000)->create();
         factory('App\OrderDetail', 4000)->create();
 

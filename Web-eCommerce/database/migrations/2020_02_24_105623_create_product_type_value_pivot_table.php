@@ -13,7 +13,7 @@ class CreateProductTypeValuePivotTable extends Migration
     public function up()
     {
         Schema::create('product_type_value', function (Blueprint $table) {
-            $table->unsignedBigInteger('product_type_id')->unsigned()->index();
+            $table->unsignedBigInteger('product_type_id')->index();
             $table->foreign('product_type_id')->references('id')->on('product_types')->onDelete('cascade');
             $table->unsignedBigInteger('value_id')->unsigned()->index();
             $table->foreign('value_id')->references('id')->on('values')->onDelete('cascade');

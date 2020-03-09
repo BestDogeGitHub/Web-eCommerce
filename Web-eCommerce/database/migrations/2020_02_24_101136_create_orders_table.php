@@ -17,8 +17,6 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('PO_Number',15); // PO Number
             
-            $table->unsignedBigInteger('invoice_id');
-            $table->unsignedBigInteger('shipment_id');
             $table->unsignedBigInteger('user_id');
             
             $table->timestamps();

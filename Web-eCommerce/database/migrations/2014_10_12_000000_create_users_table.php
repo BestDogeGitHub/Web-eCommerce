@@ -25,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('password',60);
             
             $table->unsignedBigInteger('address_id')->nullable();
-            $table->unsignedBigInteger('credit_card_id')->nullable();
             
             $table->timestamps();
         });
