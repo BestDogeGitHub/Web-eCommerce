@@ -208,6 +208,20 @@ class StaticTableSeeder extends Seeder
             DB::table('payment_methods')->insert($method);
         }
 
+        $root = new Category([
+            'id' => 1,
+            'name' => 'root',
+        ]);
+        
+        $model-saveAsRoot();
 
+        $node = new Category([
+            'name' => 'value',
+            'image_ref' => 'another_value'
+        ]);
+        
+        $model->save();
+
+        
     }
 }
