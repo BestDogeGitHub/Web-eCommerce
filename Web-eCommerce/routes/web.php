@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('frontoffice.pages.home');
 });
 
 Auth::routes();
@@ -30,3 +30,8 @@ Route::get('/products/{id}', 'FrontEnd\ProductDetailController@show')->name('pro
 Route::get('template', function () {
     return view('layouts/layout');
 });
+
+Route::get('admin', function () {
+    return view('backoffice.pages.home');
+});
+
