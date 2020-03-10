@@ -3,13 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\NodeTrait;
 
-class Producer extends Model
+class Category extends Model
 {
+    use NodeTrait;
+    
     protected $guarded = [];
 
     public function productTypes()
     {
-        return $this->hasMany('App\ProductType');
+        return $this->belongsToMany('App\ProductType');
     }
 }

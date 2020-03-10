@@ -13,11 +13,11 @@ class CreateWishlistPivotTable extends Migration
     public function up()
     {
         Schema::create('wishlist', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id')->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->primary(['product_id', 'user_id']);
         });
     }
 

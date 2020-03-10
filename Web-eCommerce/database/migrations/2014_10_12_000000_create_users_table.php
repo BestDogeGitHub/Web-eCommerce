@@ -15,7 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('username',45);
             $table->string('name',45);
+            $table->string('surname',45);
             $table->string('phone',15);
             $table->string('email',254)->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -23,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('password',60);
             
             $table->unsignedBigInteger('address_id')->nullable();
-            $table->unsignedBigInteger('credit_card_id')->nullable();
             
             $table->timestamps();
         });

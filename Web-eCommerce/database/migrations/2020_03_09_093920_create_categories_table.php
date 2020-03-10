@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Kalnoy\Nestedset\NestedSet;
 
-class CreateInvoicesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +14,13 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('details');
-            $table->decimal('payment',9,3);
+            $table->string('name',45);
+            $table->string('image_ref',255)->nullable();
             
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('payment_method_id');
-
             $table->timestamps();
+            $table->nestedSet();
         });
     }
 
@@ -32,6 +31,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('categories');
     }
 }

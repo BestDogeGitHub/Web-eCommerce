@@ -19,6 +19,7 @@ class CreateCreditCardsTable extends Migration
             $table->string('number',20);
             $table->string('expiration_date',6);
 
+            $table->unsignedBigInteger('user_id')->unique()->nullable();
             $table->timestamps();
         });
     }
