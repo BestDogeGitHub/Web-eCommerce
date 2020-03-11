@@ -2,3 +2,11 @@
     padding-top: 5%;
     padding-bottom: 5%;
 }
+
+.page-link {
+    padding: unset;
+}
+
+.pag{
+    border: unset !important;
+}

@@ -212,25 +212,25 @@ class StaticTableSeeder extends Seeder
 
         $root = new Category(['id' => 1,'name' => 'root',]);
         
-        $node1 = new Category(['name' => 'Strumenti', 'image_ref' => 'another_value']);
-        $node2 = new Category(['name' => 'Accessori e impianti', 'image_ref' => 'another_value']);
-        $node3 = new Category(['name' => 'Chitarre', 'image_ref' => 'another_value']);
-        $node4 = new Category(['name' => 'Batterie', 'image_ref' => 'another_value']);
-        $node5 = new Category(['name' => 'Tastiere', 'image_ref' => 'another_value']);
-        $node6 = new Category(['name' => 'Bassi', 'image_ref' => 'another_value']);
-        $node7 = new Category(['name' => 'Alimentazione e cavi', 'image_ref' => 'another_value']);
-        $node8 = new Category(['name' => 'Impianti e attrezzatura', 'image_ref' => 'another_value']);
-        $node9 = new Category(['name' => 'Alimentatori', 'image_ref' => 'another_value']);
-        $node10 = new Category(['name' => 'Cavi', 'image_ref' => 'another_value']);
-        $node11 = new Category(['name' => 'Impianti', 'image_ref' => 'another_value']);
-        $node12 = new Category(['name' => 'Luci', 'image_ref' => 'another_value']);
-        $node13 = new Category(['name' => 'Microfoni', 'image_ref' => 'another_value']);
-        $node14 = new Category(['name' => 'Effetti', 'image_ref' => 'another_value']);
-        $node15 = new Category(['name' => 'Sub', 'image_ref' => 'another_value']);
-        $node16 = new Category(['name' => 'Casse', 'image_ref' => 'another_value']);
-        $node17 = new Category(['name' => 'Satelliti', 'image_ref' => 'another_value']);
-        $node18 = new Category(['name' => 'Mixer', 'image_ref' => 'another_value']);
-        $node19 = new Category(['name' => 'Effetti chitarre', 'image_ref' => 'another_value']);
+        $node1 = new Category(['name' => 'Strumenti', 'image_ref' => 'https://www.musicpool.it/web/images/img2.jpg']);
+        $node2 = new Category(['name' => 'Accessori e impianti', 'image_ref' => 'https://cdn.chv.me/images/nvXv7BEa.jpeg']);
+        $node3 = new Category(['name' => 'Chitarre', 'image_ref' => 'https://d1t3zg51rvnesz.cloudfront.net/p/images/cms2/715/sa-leo-abrahams_product_lkp_2021_small.jpg']);
+        $node4 = new Category(['name' => 'Batterie', 'image_ref' => 'https://i.udemycdn.com/course/750x422/195576_d3b9_3.jpg']);
+        $node5 = new Category(['name' => 'Tastiere', 'image_ref' => 'https://cdn.schoolofrock.com/img/hero-large-750w/piano-lessons1527267213.jpg']);
+        $node6 = new Category(['name' => 'Bassi', 'image_ref' => 'https://www.ibanez.com/common/product_artist_file/file/pc_main_electric_basses_eu_sp.jpg']);
+        $node7 = new Category(['name' => 'Alimentazione e cavi', 'image_ref' => 'https://shop.scavino.it/files/scavino2_Files/Foto/643172_2.PNG']);
+        $node8 = new Category(['name' => 'Impianti e attrezzatura', 'image_ref' => 'https://d287ku8w5owj51.cloudfront.net/images/products/hero/others/hero-creative-t30-wireless.jpg?width=800&height=800']);
+        $node9 = new Category(['name' => 'Alimentatori', 'image_ref' => 'https://muzikercdn.com/uploads/products/2413/241367/thumb_d_gallery_base_bfe274af.jpg']);
+        $node10 = new Category(['name' => 'Cavi', 'image_ref' => 'https://www.thomann.de/pics/bdb/457748/13896741_800.jpg']);
+        $node11 = new Category(['name' => 'Impianti', 'image_ref' => 'https://rukminim1.flixcart.com/image/352/352/jz4g3gw0/speaker/laptop-desktop-speaker/h/z/y/philips-in-mms4545b-94-mms4545b-9-original-imafj7ztr2cjfgny.jpeg?q=70']);
+        $node12 = new Category(['name' => 'Luci', 'image_ref' => 'https://www.strumentimusicali.net/imagesbig/B_PROEL_plledrb4.jpg']);
+        $node13 = new Category(['name' => 'Microfoni', 'image_ref' => 'https://www.artskool.it/blog/wp-content/uploads/2018/08/I-tipi-di-microfono1.jpg']);
+        $node14 = new Category(['name' => 'Effetti', 'image_ref' => 'https://guitar.com/wp-content/uploads/2018/09/best-multi-effects-pedals-2019@1400x1050.jpg']);
+        $node15 = new Category(['name' => 'Sub', 'image_ref' => 'https://i.ebayimg.com/images/g/17UAAOSwFytaGZDP/s-l300.jpg']);
+        $node16 = new Category(['name' => 'Casse', 'image_ref' => 'https://d287ku8w5owj51.cloudfront.net/images/products/hero/creative-t15-wireless/hero-creative-t15-wireless.jpg?width=750']);
+        $node17 = new Category(['name' => 'Satelliti', 'image_ref' => 'https://www.gato-audio.com/pub/media/catalog/product/cache/c74f88fe0f1c29dd462a9db2ee6962ce/f/m/fm-30_persp_black_grey.jpg']);
+        $node18 = new Category(['name' => 'Mixer', 'image_ref' => 'https://images-na.ssl-images-amazon.com/images/I/51J4j6-WvKL._SX425_.jpg']);
+        $node19 = new Category(['name' => 'Effetti chitarre', 'image_ref' => 'https://www.thomann.de/blog/wp-content/uploads/2018/01/Header_pedals1_770x425.png']);
 
         $root->saveAsRoot();
 
