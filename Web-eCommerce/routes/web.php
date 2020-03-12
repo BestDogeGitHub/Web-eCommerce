@@ -35,3 +35,28 @@ Route::get('admin', function () {
     return view('backoffice.pages.home');
 });
 
+// queste route si gestiscono tutte le chiamate delle varie risorse ref: 
+// https://laravel.com/docs/master/controllers#resource-controllers
+Route::resources([
+    'addresses' => 'AddressController',
+    'attributes' => 'AttributeController',
+    'carriers' => 'CarrierController',
+    'categories' => 'CategoryController',
+    'creditCards' => 'CreditCardController',
+    'deliveryStatuses' => 'DeliveryStatusController',
+    'invoices' => 'InvoiceController',
+    'ivaCategories' => 'IvaCategoryController',
+    'Nations' => 'NationController',
+    'orders' => 'OrderController',
+    'orderDetails' => 'OrderDetailController',
+    'paymentMethods' => 'PaymentMethodController',
+    'producers' => 'ProducerController',
+    'products' => 'Productontroller',
+    'productImages' => 'ProductImageController',
+    'productTypes' => 'ProductTypeController',
+    'reviews' => 'ReviewController',
+    'shipments' => 'ShipmentController',
+    'towns' => 'TownController',
+    'users' => 'UserController',
+    'values' => 'ValueController'
+]);
