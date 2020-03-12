@@ -34,3 +34,73 @@
     {
         return $this->belongsTo('App\Lesson');
     }
+	
+	
+	
+Next, you may register a resourceful route to the controller:
+
+Route::resource('photos', 'PhotoController');
+
+This single route declaration creates multiple routes to handle a variety of actions on the resource.
+
+
+Nested Resources
+Sometimes you may need to define routes to a nested resource. For example, a photo resource may have multiple comments that may be attached to the photo. 
+To nest the resource controllers, use "dot" notation in your route declaration:
+
+Route::resource('photos.comments', 'PhotoCommentController');
+
+This route will register a nested resource that may be accessed with URIs like the following:
+
+/photos/{photo}/comments/{comment}
+
+Shallow Nesting
+Often, it is not entirely necessary to have both the parent and the child IDs within a URI since the child ID is already a unique identifier. 
+When using unique identifier such as auto-incrementing primary keys to identify your models in URI segments, you may choose to use "shallow nesting":
+
+Route::resource('photos.comments', 'CommentController')->shallow();
+
+If your application is exclusively using controller based routes, you should take advantage of Laravel's route cache. Using the route cache will drastically decrease 
+the amount of time it takes to register all of your application's routes. In some cases, your route registration may even be up to 100x faster.
+To generate a route cache, just execute the route:cache Artisan command:
+
+php artisan route:cache
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
