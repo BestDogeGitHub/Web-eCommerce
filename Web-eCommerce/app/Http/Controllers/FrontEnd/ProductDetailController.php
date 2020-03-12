@@ -13,8 +13,8 @@ class ProductDetailController extends Controller
      */
     public function show($id) {
 
-        $product = Product::where('id', 1)->first();
+        $product = Product::where('id', $id)->first();
 
-        return View('pages.product_details', ['product' => $product]);
+        return View('frontoffice.pages.product_details', ['product' => $product]);
     }
 }

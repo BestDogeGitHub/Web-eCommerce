@@ -24,5 +24,8 @@
     
 <link rel="stylesheet" href="{{ asset('css/template/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('css/template/icomoon.css') }}">
+
 <link rel="stylesheet" href="{{ asset('css/template/style.css') }}">
 <link rel="stylesheet" href="{{ asset('css/custom/front.css') }}">
+
+<link rel="stylesheet" href="{{ asset('css/fonts/fontawesome/css/font-awesome.min.css') }}">
