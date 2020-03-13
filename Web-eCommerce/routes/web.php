@@ -35,3 +35,10 @@ Route::get('admin', function () {
     return view('backoffice.pages.home');
 });
 
+Route::get('auth/roles', 'FrontEnd\AdminDashboardController@manageRoles')->name('manageRoles');
+Route::get('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@editUserRoles')->name('editUserRoles');
+Route::post('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles');
+Route::get('auth/users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');
+Route::get('auth/products', 'ProductController@index');
+Route::post('auth/products', 'ProductController@store')->name('products.store');
+Route::delete('auth/products/{id}', 'ProductController@destroy')->name('products.store');

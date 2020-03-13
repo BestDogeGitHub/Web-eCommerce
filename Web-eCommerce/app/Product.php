@@ -40,6 +40,6 @@ class Product extends Model
 
     public function ivaCategory()
     {
-        return $this->belongsTo('App\IvaCategories');
+        return $this->belongsTo('App\IvaCategory');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\Controller;
-use App\Product;
+use App\Http\Controllers\ProductController;
 
 class ProductDetailController extends Controller
 {
@@ -13,7 +13,7 @@ class ProductDetailController extends Controller
      */
     public function show($id) {
 
-        $product = Product::where('id', $id)->first();
+        $product = ProductController::getById($id);
 
         return View('frontoffice.pages.product_details', ['product' => $product]);
     }
