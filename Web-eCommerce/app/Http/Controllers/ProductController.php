@@ -86,7 +86,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return $product;
+        $frontController = new \App\Http\Controllers\FrontEnd\ProductDetailController();
+        
+        return $frontController->show($product->id);
     }
 
     /**
@@ -97,7 +99,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        if(request()->ajax())
+        {
+            return response()->json(['data' => $product]);
+        }
     }
 
     /**
@@ -109,7 +114,37 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $rules = array(
+            'productType' => 'required',
+            'ivaCategory' => 'required',
+            'payment' => 'required|numeric|between:0,99999.999',
+            'sale' => 'required|numeric|max:100',
+            'stock' => 'required|numeric',
+            'info' => 'required|max:500',
+            'available' => 'required|numeric|between:0,1'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'payment' => $request->payment,
+            'sale' => $request->sale,
+            'stock' => $request->stock,
+            'buy_counter' => $product->buy_counter,
+            'available' => $request->available,
+            'info' => $request->info,
+            'product_type_id' => $request->productType,
+            'iva_category_id' => $request->ivaCategory,
+        ); 
+
+        $product->update($data);
+        
+        return response()->json(['success' => 'Procut Updated successfully.']);
     }
 
     /**
@@ -118,10 +153,9 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $data = Product::findOrFail($id);
-        $data->delete();
+        $product->delete();
     }
 
     /**

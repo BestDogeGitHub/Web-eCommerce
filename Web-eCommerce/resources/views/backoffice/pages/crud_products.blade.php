@@ -69,7 +69,8 @@
                         <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
                         <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
                         <td>
-                            <a href="#addProductModal" class="edit" data-toggle="modal" id="{{ $product->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+						    <a href="{{ route('products.show', $product->id) }}" class="edit" target="_blank"><i class="fa fa-plus" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                            <a href="#" class="edit" id="{{ $product->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
                             <a href="#" class="delete" id="{{ $product->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
                         </td>
                     </tr>
@@ -135,34 +136,60 @@
 	</div>
 	<!-- Edit Modal HTML -->
 	<div id="editProductModal" class="modal fade">
-		<div class="modal-dialog">
+	<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+                <form id="editProductForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                @csrf
 					<div class="modal-header">						
-						<h4 class="modal-title">Edit Employee</h4>
+						<h4 class="modal-title">Edit Product</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
-						<div class="form-group">
-							<label>Name</label>
-							<input type="text" class="form-control" required>
+					<div class="modal-body">	
+						<!-- METHOD SPOOFING -->
+						<input type="hidden" name="_method" value="PUT" />				
+                        <div class="form-group">
+							<label>Prduct Type</label>
+							<select class="custom-select text-uppercase" name="productType" id="editType">
+                                @foreach($productTypes as $type)
+                                <option class="text-uppercase" value="{{ $type->id }}">{{ $type->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+							<label>Iva Category</label>
+							<select class="custom-select" name="ivaCategory" id="editIva">
+                                @foreach($ivas as $iva)
+                                <option value="{{ $iva->id }}">{{ $iva->category }}</option>
+                                @endforeach
+                            </select>
+						</div>
+                        <div class="form-group">
+							<label>Payment</label>
+							<input type="text" class="form-control" required="required" name="payment" id="editPayment"/>
 						</div>
 						<div class="form-group">
-							<label>Email</label>
-							<input type="email" class="form-control" required>
+							<label>Sale</label>
+							<input type="number" class="form-control" required="required" name="sale" id="editSale"/>
 						</div>
 						<div class="form-group">
-							<label>Address</label>
-							<textarea class="form-control" required></textarea>
+							<label>Stock</label>
+							<input type="number" class="form-control" required="required" name="stock" id="editStock"/>
 						</div>
 						<div class="form-group">
-							<label>Phone</label>
-							<input type="text" class="form-control" required>
-						</div>					
-					</div>
+							<label>Info</label>
+							<textarea class="form-control" required="required" name="info" id="editInfo"></textarea>
+                        </div>
+						<div class="form-group">
+							<label>Available</label>
+							<input type="number" class="form-control" required="required" name="available" id="editAvailable"/>
+                        </div>
+						<input type="hidden" id="hidden_id"/>
+                        <div id="forErrorsEdit"></div>					
+                    </div>
+                    
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-info" value="Save">
+						<input type="submit" class="btn btn-success" value="Edit">
 					</div>
 				</form>
 			</div>
