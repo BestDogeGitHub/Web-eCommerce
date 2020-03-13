@@ -42,3 +42,30 @@ Route::get('auth/users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')
 Route::get('auth/products', 'ProductController@index');
 Route::post('auth/products', 'ProductController@store')->name('products.store');
 Route::delete('auth/products/{id}', 'ProductController@destroy')->name('products.store');
+
+
+// queste route si gestiscono tutte le chiamate delle varie risorse ref: 
+// https://laravel.com/docs/master/controllers#resource-controllers
+Route::resources([
+    'addresses' => 'AddressController',
+    'attributes' => 'AttributeController',
+    'carriers' => 'CarrierController',
+    'categories' => 'CategoryController',
+    'creditCards' => 'CreditCardController',
+    'deliveryStatuses' => 'DeliveryStatusController',
+    'invoices' => 'InvoiceController',
+    'ivaCategories' => 'IvaCategoryController',
+    'Nations' => 'NationController',
+    'orders' => 'OrderController',
+    'orderDetails' => 'OrderDetailController',
+    'paymentMethods' => 'PaymentMethodController',
+    'producers' => 'ProducerController',
+    'products' => 'Productontroller',
+    'productImages' => 'ProductImageController',
+    'productTypes' => 'ProductTypeController',
+    'reviews' => 'ReviewController',
+    'shipments' => 'ShipmentController',
+    'towns' => 'TownController',
+    'users' => 'UserController',
+    'values' => 'ValueController'
+]);
