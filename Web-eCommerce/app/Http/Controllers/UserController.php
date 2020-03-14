@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Address;
 use Illuminate\Http\Request;
+use Validator;
 
 class UserController extends Controller
 {
@@ -66,7 +67,14 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        if(request()->ajax())
+        {
+            $roles = $user->roles;
+            return response()->json([
+                'data' => $user,
+                'roles' => $roles
+            ]);
+        }
     }
 
     /**
@@ -78,7 +86,31 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $rules = array(
+            'name' => 'required|max:200',
+            'surname' => 'required|max:200',
+            'email' => 'required',
+            'phone' => 'required'
+        );
+        
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        
+        $data = array(
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'phone' => $request->phone
+        );
+
+        $user->update($data);
+        
+        return response()->json(['success' => 'User Updated successfully.']);
     }
 
     /**
@@ -89,6 +121,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
     }
 }

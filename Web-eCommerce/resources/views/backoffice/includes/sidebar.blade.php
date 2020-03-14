@@ -4,7 +4,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('/images/backoffice/management.png') }}" alt="AdminLTE Logo" class="brand-image img-circle"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Management</span>
+      <span class="brand-text font-weight-light">BackOffice</span>
     </a>
 
     <!-- Sidebar -->
@@ -21,31 +21,59 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-wrench"></i>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-list"></i>
               <p>
-                CRUD Operations
+                Catalog
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('productTypes.index')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('productTypes.index')}}" class="nav-link">
+                  <i class="fa fa-list nav-icon"></i>
                   <p>Proudct Types</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('products.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-barcode nav-icon"></i>
                   <p>Products</p>
                 </a>
               </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-id-card"></i>
+              <p>
+                Administration
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('users.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fa fa-users nav-icon"></i>
                   <p>Users</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-wrench"></i>
+              <p>
+                Properties
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('addresses.index')}}" class="nav-link">
+                  <i class="fa fa-globe nav-icon"></i>
+                  <p>Addresses</p>
                 </a>
               </li>
             </ul>

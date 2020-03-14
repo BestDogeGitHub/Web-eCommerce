@@ -3,11 +3,6 @@
 @section('content')
 
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-
-
         <!-- Content Header (Page header) -->
         <section class="content-header">
         <div class="container-fluid">
@@ -43,7 +38,7 @@
             <table class="table table-striped table-hover" id="productsTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th><i class="fa fa-barcode"></i></th>
                         <th>Name</th>
 						<th>Image</th>
                         <th>Av.</th>
@@ -51,8 +46,8 @@
                         <th>Rev.</th>
                         <th>Producer</th>
                         <th>Creation</th>
-                        <th>Last Update</th>
-                        <th>Edit</th>
+                        <th>Update</th>
+                        <th>Edit Item</th>
                     </tr>
                 </thead>
                 <tbody>

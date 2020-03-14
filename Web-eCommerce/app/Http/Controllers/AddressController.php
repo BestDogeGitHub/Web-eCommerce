@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Town;
+use App\Nation;
 use Illuminate\Http\Request;
+use Validator;
 
 class AddressController extends Controller
 {
@@ -14,7 +17,10 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $addresses = Address::all();
+        $towns = Town::all();
+
+        return View('backoffice.pages.edit_addresses', ['addresses' => $addresses, 'towns' => $towns]);
     }
 
     /**
@@ -35,7 +41,40 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $rules = array(
+            'building_number' => 'required|numeric|min:0',
+            'street_number' => 'required|numeric|min:0',
+            'postcode' => 'required|string',
+            'country_code' => 'required|string|min:2|max:2',
+            'town_id' => 'required|numeric'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        // CHECK TOWN
+        $producer = Town::findOrFail($request->town_id);
+
+        $data = array(
+            'building_number' => $request->building_number,
+            'street_number' => $request->street_number,
+            'postcode' => $request->postcode,
+            'country_code' => $request->country_code,
+            'town_id' => $request->town_id
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        Address::create($data);
+        
+
+        return response()->json(['success' => 'Address Added successfully.']);
     }
 
     /**
@@ -57,7 +96,16 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+        if(request()->ajax())
+        {
+            $town = Town::where('id', $address->town_id)->first();
+            $nation = Nation::where('id', $town->nation_id)->first();
+            return response()->json([
+                'data' => $address, 
+                'town_info' => $town,
+                'nation_info' => $nation
+            ]);
+        }
     }
 
     /**
@@ -69,7 +117,38 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $rules = array(
+            'building_number' => 'required|numeric|min:0',
+            'street_number' => 'required|numeric|min:0',
+            'postcode' => 'required|string',
+            'country_code' => 'required|string|min:2|max:2',
+            'town_id' => 'required|numeric'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        // CHECK TOWN
+        $producer = Town::findOrFail($request->town_id);
+
+        $data = array(
+            'building_number' => $request->building_number,
+            'street_number' => $request->street_number,
+            'postcode' => $request->postcode,
+            'country_code' => $request->country_code,
+            'town_id' => $request->town_id
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        $address->update($data);
+        
+        return response()->json(['success' => 'Procut Updated successfully.']);
     }
 
     /**
@@ -80,6 +159,6 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        $address->delete();
     }
 }

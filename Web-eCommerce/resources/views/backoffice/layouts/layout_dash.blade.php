@@ -41,8 +41,13 @@
                     
             @include('backoffice.includes.sidebar')
 
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">   
+
             @yield('content')
 
+            </div>
+            
             @include('backoffice.includes.footer')
 
         </div>    
