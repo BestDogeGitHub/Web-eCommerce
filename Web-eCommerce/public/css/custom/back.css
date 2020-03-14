@@ -1,3 +1,13 @@
 tr.selected{
     background-color: #b9bcbf !important;
 }
+
+img.crud {
+    width: 100px !important;
+    height: 100px !important;
+    margin: 20px 20px 20px 20px;
+}
+
+.padded10 {
+    padding: 10% 10% 10% 10%;
+}

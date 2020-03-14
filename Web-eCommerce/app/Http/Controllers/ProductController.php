@@ -21,7 +21,7 @@ class ProductController extends Controller
         $productTypes = ProductType::all();
         $ivas = IvaCategory::all();
 
-        return View('backoffice.pages.crud_products', ['products' => $products, 'productTypes' => $productTypes, 'ivas' => $ivas]);
+        return View('backoffice.pages.edit_products', ['products' => $products, 'productTypes' => $productTypes, 'ivas' => $ivas]);
     }
 
     /**

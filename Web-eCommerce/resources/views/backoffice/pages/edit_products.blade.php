@@ -1,14 +1,19 @@
 @extends('backoffice.layouts.layout_dash')
 
 @section('content')
+
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+
+
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Edit Products</h1>
+                <h1>Manage <b>Products</b></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -21,18 +26,20 @@
         </section>
 
 
+
+
+
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-6">
-						<h2>Manage <b>Products</b></h2>
-					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-12">
 						<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Product</span></a>				
 					</div>
                 </div>
             </div>
+
+            <!-- TABLE OF PRODUCTS-->
             <table class="table table-striped table-hover" id="productsTable">
                 <thead>
                     <tr>
@@ -69,7 +76,7 @@
                         <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
                         <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
                         <td>
-						    <a href="{{ route('products.show', $product->id) }}" class="edit" target="_blank"><i class="fa fa-plus" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+						    <a href="{{ route('products.show', $product->id) }}" class="show" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
                             <a href="#" class="edit" id="{{ $product->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
                             <a href="#" class="delete" id="{{ $product->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
                         </td>
@@ -80,6 +87,11 @@
             </table>
         </div>
     </div>
+
+
+
+    <!-- !!! MODALS !!! -->
+
 	<!-- Add Modal HTML -->
 	<div id="addProductModal" class="modal fade">
 		<div class="modal-dialog">
@@ -92,7 +104,7 @@
 					</div>
 					<div class="modal-body">					
                         <div class="form-group">
-							<label>Prduct Type</label>
+							<label>Prdouct Type</label>
 							<select class="custom-select text-uppercase" name="productType">
                                 @foreach($productTypes as $type)
                                 <option class="text-uppercase" value="{{ $type->id }}">{{ $type->name }}</option>
@@ -148,7 +160,8 @@
 						<!-- METHOD SPOOFING -->
 						<input type="hidden" name="_method" value="PUT" />				
                         <div class="form-group">
-							<label>Prduct Type</label>
+							<label>Prdouct Type</label> <br/>
+                            <small>The default product-type value in the selectbox is not the same of original</small>
 							<select class="custom-select text-uppercase" name="productType" id="editType">
                                 @foreach($productTypes as $type)
                                 <option class="text-uppercase" value="{{ $type->id }}">{{ $type->name }}</option>
@@ -157,6 +170,8 @@
                         </div>
                         <div class="form-group">
 							<label>Iva Category</label>
+                            <br/>
+                            <small>The default iva-category value in the selectbox is not the same of original</small>
 							<select class="custom-select" name="ivaCategory" id="editIva">
                                 @foreach($ivas as $iva)
                                 <option value="{{ $iva->id }}">{{ $iva->category }}</option>
@@ -218,4 +233,6 @@
     </div>       
     
 </div>
+
+<script src="{{ asset('dist/js/pages/products.js') }}"></script>
 @endsection('content')

@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontoffice.pages.home');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -24,11 +20,12 @@ Route::get('/product/{id}', function ($id) {
     return view('pages.product_details', ['id' => $id]);
 });
 */
+Route::get('/', 'FrontEnd\ShopController@index')->name('nome');
 Route::get('products/{type}', 'FrontEnd\ShopController@getProductsFromType')->name('products');
 Route::get('products/details/{id}', 'FrontEnd\ProductDetailController@show')->name('product_detail');
 Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('categories')->defaults('parent', 0);
 Route::get('shop/categories/{parent}', 'FrontEnd\ShopController@getCategoriesView')->name('categories_par');
-Route::get('shop', 'FrontEnd\ShopController@index')->name('shop');
+Route::get('shop', 'FrontEnd\ShopController@getShop')->name('shop');
 Route::get('shop/{category}', 'FrontEnd\ShopController@getCatalogoCategory')->name('products_category');
 
 Route::get('admin', function () {
@@ -44,30 +41,31 @@ Route::get('auth/products', 'ProductController@index');
 
 // queste route si gestiscono tutte le chiamate delle varie risorse ref: 
 // https://laravel.com/docs/master/controllers#resource-controllers
-
-Route::prefix('auth')->group(function() {
-    Route::resources([
-        'addresses' => 'AddressController',
-        'attributes' => 'AttributeController',
-        'carriers' => 'CarrierController',
-        'categories' => 'CategoryController',
-        'creditCards' => 'CreditCardController',
-        'deliveryStatuses' => 'DeliveryStatusController',
-        'invoices' => 'InvoiceController',
-        'ivaCategories' => 'IvaCategoryController',
-        'Nations' => 'NationController',
-        'orders' => 'OrderController',
-        'orderDetails' => 'OrderDetailController',
-        'paymentMethods' => 'PaymentMethodController',
-        'producers' => 'ProducerController',
-        'products' => 'ProductController',
-        'productImages' => 'ProductImageController',
-        'productTypes' => 'ProductTypeController',
-        'reviews' => 'ReviewController',
-        'shipments' => 'ShipmentController',
-        'towns' => 'TownController',
-        'users' => 'UserController',
-        'values' => 'ValueController'
-    ]);
-    
+Route::prefix('auth')->group(function () {
+    Route::group(['middleware' => ['role:Administrator']], function () {
+        Route::resources([
+            'addresses' => 'AddressController',
+            'attributes' => 'AttributeController',
+            'carriers' => 'CarrierController',
+            'categories' => 'CategoryController',
+            'creditCards' => 'CreditCardController',
+            'deliveryStatuses' => 'DeliveryStatusController',
+            'invoices' => 'InvoiceController',
+            'ivaCategories' => 'IvaCategoryController',
+            'Nations' => 'NationController',
+            'orders' => 'OrderController',
+            'orderDetails' => 'OrderDetailController',
+            'paymentMethods' => 'PaymentMethodController',
+            'producers' => 'ProducerController',
+            'products' => 'ProductController',
+            'productImages' => 'ProductImageController',
+            'productTypes' => 'ProductTypeController',
+            'reviews' => 'ReviewController',
+            'shipments' => 'ShipmentController',
+            'towns' => 'TownController',
+            'users' => 'UserController',
+            'values' => 'ValueController'
+        ]);
+        
+    });
 });

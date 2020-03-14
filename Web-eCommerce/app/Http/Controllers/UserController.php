@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Address;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        $users = User::all();
+        $addresses = Address::all();
+
+        return View('backoffice.pages.edit_users', ['users' => $users, 'addresses' => $addresses]);
     }
 
     public function getById($id) {

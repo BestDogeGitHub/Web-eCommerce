@@ -3,8 +3,9 @@
   
   <head>
   
-      @include('backoffice.includes.head')
-  
+        @include('backoffice.includes.head')
+
+        @include('backoffice.includes.scripts')
   </head>
   
     <body class="goto-here">
@@ -43,8 +44,6 @@
             @yield('content')
 
             @include('backoffice.includes.footer')
-
-            @include('backoffice.includes.scripts')
 
         </div>    
 

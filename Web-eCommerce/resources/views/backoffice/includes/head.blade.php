@@ -1,4 +1,4 @@
-<meta charset="utf-8">
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 3 | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -7,7 +7,8 @@
   <!-- CSFR TOKEN-->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
+  <!-- ADMIN FAVICON -->
+  <link rel="shortcut icon" href="{{ asset('images/backoffice/favicon.ico') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
