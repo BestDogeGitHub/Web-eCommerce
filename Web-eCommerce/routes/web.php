@@ -15,15 +15,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-/*  OLD FUNCTION
-Route::get('/product/{id}', function ($id) {
-    return view('pages.product_details', ['id' => $id]);
-});
-*/
 Route::get('/', 'FrontEnd\ShopController@index')->name('nome');
 Route::get('products/{type}', 'FrontEnd\ShopController@getProductsFromType')->name('products');
 Route::get('products/details/{id}', 'FrontEnd\ProductDetailController@show')->name('product_detail');
-Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('categories')->defaults('parent', 0);
+Route::get('carriers/{id}', 'FrontEnd\ProductDetailController@showCarrier')->name('carrier_detail');
+Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('shop_categories')->defaults('parent', 0);
 Route::get('shop/categories/{parent}', 'FrontEnd\ShopController@getCategoriesView')->name('categories_par');
 Route::get('shop', 'FrontEnd\ShopController@getShop')->name('shop');
 Route::get('shop/{category}', 'FrontEnd\ShopController@getCatalogoCategory')->name('products_category');
@@ -33,6 +29,8 @@ Route::get('admin', function () {
 });
 
 Route::get('auth/roles', 'FrontEnd\AdminDashboardController@manageRoles')->name('manageRoles');
+Route::get('auth/home', 'FrontEnd\AdminDashboardController@index')->name('dashboard');
+Route::get('auth/categories/properties', 'FrontEnd\AdminDashboardController@editProperties')->name('dashboard.properties');
 Route::get('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@editUserRoles')->name('editUserRoles');
 Route::post('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles');
 Route::get('auth/users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');

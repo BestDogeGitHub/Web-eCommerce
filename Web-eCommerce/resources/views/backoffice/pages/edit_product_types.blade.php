@@ -102,7 +102,6 @@
 							<input type="text" class="form-control" required="required" name="name"/>
 						</div>	
                         
-                        <img class="img-responsive crud" src="{{ asset($product->image_ref) }}" >
                         <div class="form-group">
                             <label>Immagine</label>
                             <div class="custom-file">

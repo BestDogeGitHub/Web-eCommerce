@@ -12,8 +12,20 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block">User: {{ Auth::user()->username }}</a>
+        <div class="card text-center">
+          <div class="card-body">
+            <p class="d-block"><i class="nav-icon fas fa-user"></i> &nbsp;&nbsp;&nbsp;{{ Auth::user()->username }}</p>
+          </div>
+          <div class="card-footer text-muted">
+              @foreach(Auth::user()->roles as $role)
+                {{ $role->name }} <br/>
+              @endforeach
+          </div>
         </div>
+          
+          
+          
+          </div>
       </div>
 
       <!-- Sidebar Menu -->
@@ -40,6 +52,12 @@
                 <a href="{{route('products.index')}}" class="nav-link">
                   <i class="fa fa-barcode nav-icon"></i>
                   <p>Products</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('categories.index')}}" class="nav-link">
+                  <i class="fa fa-th nav-icon"></i>
+                  <p>Categories</p>
                 </a>
               </li>
             </ul>
@@ -76,6 +94,19 @@
                   <p>Addresses</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('attributes.index')}}" class="nav-link">
+                  <i class="fa fa-list-alt nav-icon"></i>
+                  <p>Attributes</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('carriers.index')}}" class="nav-link">
+                  <i class="fa fa-bus nav-icon"></i>
+                  <p>Carriers</p>
+                </a>
+              </li>
+              
             </ul>
           </li>
           <!-- 

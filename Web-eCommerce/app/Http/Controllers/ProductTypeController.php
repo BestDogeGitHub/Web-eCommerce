@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ProductType;
 use App\Producer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Validator;
 
 class ProductTypeController extends Controller
@@ -157,6 +158,11 @@ class ProductTypeController extends Controller
     
             $image->move(public_path('images/product_types'), $new_name);
 
+            $old_image_path = $productType->image_ref;
+            if(File::exists(public_path() . $old_image_path)) {
+                File::delete(public_path() . $old_image_path);
+            }
+
             $data = array(
                 'name' => $request->name,
                 'image_ref' => '/images/product_types/' . $new_name,
@@ -169,7 +175,7 @@ class ProductTypeController extends Controller
         
         $productType->update($data);
         
-        return response()->json(['success' => 'Procut Updated successfully.']);
+        return response()->json(['success' => 'Product Type Updated successfully.']);
     }
 
     /**
@@ -180,6 +186,11 @@ class ProductTypeController extends Controller
      */
     public function destroy(ProductType $productType)
     {
-        $productType->delete();
+        $image_path = $productType->image_ref;
+        if($productType->delete()){
+            if(File::exists(public_path() . $image_path)) {
+                File::delete(public_path() . $image_path);
+            }
+        }
     }
 }

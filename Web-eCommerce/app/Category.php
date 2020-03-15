@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->belongsToMany('App\ProductType');
     }
+
+    public function childs()
+    {
+        return $this->children();
+    }
 }

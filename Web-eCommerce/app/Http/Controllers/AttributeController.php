@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Attribute;
 use Illuminate\Http\Request;
+use Validator;
 
 class AttributeController extends Controller
 {
@@ -14,7 +15,9 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        //
+        $attributes = Attribute::all();
+
+        return View('backoffice.pages.edit_attributes', ['attributes' => $attributes]);
     }
 
     /**
@@ -35,7 +38,31 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $rules = array(
+            'name' => 'required|string|min:1'
+        );
+        
+        
+
+        $error = Validator::make($request->all(), $rules);
+        
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'name' => $request->name
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        Attribute::create($data);
+        
+
+        return response()->json(['success' => 'Attribute Added successfully.']);
     }
 
     /**
@@ -57,7 +84,12 @@ class AttributeController extends Controller
      */
     public function edit(Attribute $attribute)
     {
-        //
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $attribute
+            ]);
+        }
     }
 
     /**
@@ -69,7 +101,30 @@ class AttributeController extends Controller
      */
     public function update(Request $request, Attribute $attribute)
     {
-        //
+        $rules = array(
+            'name' => 'required|string|min:1'
+        );
+        
+        
+
+        $error = Validator::make($request->all(), $rules);
+        
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'name' => $request->name
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        $attribute->update($data);
+        
+
+        return response()->json(['success' => 'Attribute Updated successfully.']);
     }
 
     /**
@@ -80,6 +135,6 @@ class AttributeController extends Controller
      */
     public function destroy(Attribute $attribute)
     {
-        //
+        $attribute->delete();
     }
 }
