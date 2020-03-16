@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Attribute;
 use Illuminate\Http\Request;
+use Validator;
 
 class AttributeController extends Controller
 {
@@ -14,9 +15,15 @@ class AttributeController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $attributes = Attribute::paginate(20);
 
         return View::make('attributes.index')->with('attributes', $attributes);
+=======
+        $attributes = Attribute::all();
+
+        return View('backoffice.pages.edit_attributes', ['attributes' => $attributes]);
+>>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -37,6 +44,7 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         // validate
         $request->validate
         ([
@@ -51,6 +59,33 @@ class AttributeController extends Controller
         Session::flash('message', 'Successfully created attribute!');
         return Redirect::to('attributes');
         
+=======
+        
+        $rules = array(
+            'name' => 'required|string|min:1'
+        );
+        
+        
+
+        $error = Validator::make($request->all(), $rules);
+        
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'name' => $request->name
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        Attribute::create($data);
+        
+
+        return response()->json(['success' => 'Attribute Added successfully.']);
+>>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -72,9 +107,18 @@ class AttributeController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $attribute = Attribute::find($id);
 
         return View::make('attributes.edit')->with('attribute', $attribute);
+=======
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $attribute
+            ]);
+        }
+>>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -83,6 +127,7 @@ class AttributeController extends Controller
      */
     public function update( Request $request, $id )
     {
+<<<<<<< HEAD
         // validate
         // read more on validation at http://laravel.com/docs/validation
         $request->validate
@@ -97,6 +142,32 @@ class AttributeController extends Controller
         Session::flash('message', 'Successfully updated attribute!');
         return Redirect::to('attributes');
         
+=======
+        $rules = array(
+            'name' => 'required|string|min:1'
+        );
+        
+        
+
+        $error = Validator::make($request->all(), $rules);
+        
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'name' => $request->name
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        $attribute->update($data);
+        
+
+        return response()->json(['success' => 'Attribute Updated successfully.']);
+>>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -105,11 +176,15 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         // delete
         $attribute = Attribute::find($id);
         $attribute->delete();
         // redirect
         Session::flash('message', 'Successfully deleted!');
         return Redirect::to('attributes');
+=======
+        $attribute->delete();
+>>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 }
