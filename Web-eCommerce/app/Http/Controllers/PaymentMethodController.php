@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PaymentMethod;
 use Illuminate\Http\Request;
+use Validator;
 
 class PaymentMethodController extends Controller
 {
@@ -14,7 +15,9 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        $payments = PaymentMethod::all();
+
+        return View('backoffice.pages.edit_payment_methods', ['paymentMethods' => $payments]);
     }
 
     /**
@@ -35,7 +38,30 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'method' => 'required|string|min:1'
+        );
+        
+        
+
+        $error = Validator::make($request->all(), $rules);
+        
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'method' => $request->method
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        PaymentMethod::create($data);
+        
+
+        return response()->json(['success' => 'Payment Method Added successfully.']);
     }
 
     /**
@@ -57,7 +83,12 @@ class PaymentMethodController extends Controller
      */
     public function edit(PaymentMethod $paymentMethod)
     {
-        //
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $paymentMethod
+            ]);
+        }
     }
 
     /**
@@ -69,7 +100,30 @@ class PaymentMethodController extends Controller
      */
     public function update(Request $request, PaymentMethod $paymentMethod)
     {
-        //
+        $rules = array(
+            'method' => 'required|string|min:1'
+        );
+        
+        
+
+        $error = Validator::make($request->all(), $rules);
+        
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'method' => $request->method
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        $paymentMethod->update($data);
+        
+
+        return response()->json(['success' => 'Payment Method Updated successfully.']);
     }
 
     /**
@@ -80,6 +134,6 @@ class PaymentMethodController extends Controller
      */
     public function destroy(PaymentMethod $paymentMethod)
     {
-        //
+        $paymentMethod->delete();
     }
 }

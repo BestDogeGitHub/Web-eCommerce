@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
+use App\Order;
+use App\PaymentMethod;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -14,7 +16,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::all();
+
+        return View('backoffice.pages.edit_invoices', ['invoices' => $invoices]);
     }
 
     /**

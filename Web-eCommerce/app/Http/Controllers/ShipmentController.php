@@ -57,7 +57,12 @@ class ShipmentController extends Controller
      */
     public function edit(Shipment $shipment)
     {
-        //
+        return response()->json([
+            'shipment' => $shipment, 
+            'carrier' => $shipment->carrier,
+            'order' => $shipment->order,
+            'delivery_status' => $shipment->deliveryStatus
+        ]);
     }
 
     /**

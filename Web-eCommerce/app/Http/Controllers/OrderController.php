@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderDetail;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+
+        return View('backoffice.pages.edit_orders', ['orders' => $orders]);
     }
 
     /**
@@ -57,7 +61,15 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        if(request()->ajax())
+        {
+            return response()->json([
+                'order' => $order, 
+                'orderDetails' => $order->orderDetails,
+                'shipment' => $order->shipment,
+                'invoice' => $order->invoice,
+            ]);
+        }
     }
 
     /**

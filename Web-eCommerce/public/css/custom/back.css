@@ -107,3 +107,7 @@ img.category {
 .cardExp {
     font-weight: lighter;
 }
+
+#price {
+    font-size: 20pt;
+}

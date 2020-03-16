@@ -57,7 +57,14 @@ class OrderDetailController extends Controller
      */
     public function edit(OrderDetail $orderDetail)
     {
-        //
+        if(request()->ajax())
+        {
+            return response()->json([
+                'orderDetail' => $orderDetail, 
+                'product' => $orderDetail->product,
+                'product_type' => $orderDetail->product->productType
+            ]);
+        }
     }
 
     /**
