@@ -1,8 +1,14 @@
-<meta charset="utf-8">
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Music Store | BackOffice</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- CSFR TOKEN-->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <!-- ADMIN FAVICON -->
+  <link rel="shortcut icon" href="{{ asset('images/backoffice/favicon.ico') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -23,3 +29,9 @@
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <!-- CUSTOM -->
+  <link rel="stylesheet" href="{{ asset('css/custom/back.css') }}">
+
+  <!-- SPINNER -->
+  <link rel="stylesheet" href="{{ asset('css/custom/spinner.css') }}">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Category as Category;
 use App\ProductType as ProductType;
@@ -16,6 +17,16 @@ class ShopController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
+    {
+        return view('frontoffice.pages.home');
+    }
+
+    /**
+     * Show the list of products.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getShop()
     {
         return view('frontoffice.pages.shop');
     }
