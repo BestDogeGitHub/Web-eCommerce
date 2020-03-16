@@ -27,7 +27,7 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('payment_methods.create');
     }
 
     /**
@@ -67,21 +67,20 @@ class PaymentMethodController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PaymentMethod  $paymentMethod
      * @return \Illuminate\Http\Response
      */
-    public function show(PaymentMethod $paymentMethod)
+    public function show(PaymentMethod $payment_method)
     {
-        //
+
+        return View::make('payment_methods.show')->with('payment_method', $paymentMethod);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PaymentMethod  $paymentMethod
      * @return \Illuminate\Http\Response
      */
-    public function edit(PaymentMethod $paymentMethod)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -93,12 +92,9 @@ class PaymentMethodController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PaymentMethod  $paymentMethod
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PaymentMethod $paymentMethod)
+    public function update( Request $request, PaymentMethod $paymentMethod )
     {
         $rules = array(
             'method' => 'required|string|min:1'
@@ -128,8 +124,6 @@ class PaymentMethodController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\PaymentMethod  $paymentMethod
      * @return \Illuminate\Http\Response
      */
     public function destroy(PaymentMethod $paymentMethod)

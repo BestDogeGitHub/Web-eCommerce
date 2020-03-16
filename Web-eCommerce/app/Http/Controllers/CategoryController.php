@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('categories.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'name' => 'required|string|min:1',
+            'name' => 'required|string|min:1|max:45',
             'image' => 'required|image|max:4096',
             'parent_id' => 'required'
         );
@@ -77,21 +77,21 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $category = Category::find($id);
+
+        return View::make('categories.show')->with('category', $category);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -105,15 +105,13 @@ class CategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update( Request $request, $id )
     {
         $rules = array(
-            'name' => 'required|string|min:1',
+            'name' => 'required|string|min:1|max:45',
+            'image_ref' => 'required|max:255',
             'parent_id' => 'required'
         );
         
@@ -175,11 +173,9 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
         $image_path = $category->image_ref;
         if($category->delete()){

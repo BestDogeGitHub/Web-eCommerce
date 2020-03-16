@@ -14,7 +14,9 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+        $order_details = OrderDetail::paginate(20);
+
+        return View::make('order_details.index')->with('order_details', $order_details);
     }
 
     /**
@@ -24,7 +26,7 @@ class OrderDetailController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('order_details.create');
     }
 
     /**
@@ -35,27 +37,34 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order_detail = new OrderDetail();
+        $order_detail->fill( $request->all() );
+        $order_detail->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created order_detail!');
+        return Redirect::to('order_details');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderDetail $orderDetail)
+    public function show($id)
     {
-        //
+        $order_detail = OrderDetail::find($id);
+
+        return View::make('order_details.show')->with('order_detail', $order_detail);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderDetail $orderDetail)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -69,24 +78,31 @@ class OrderDetailController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderDetail $orderDetail)
+    public function update( Request $request, $id )
     {
-        //
+        // store
+        $order_detail = OrderDetail::find($id);
+        $order_detail->fill( $request->all() );
+        $order_detail->save();
+        // redirect
+        Session::flash('message', 'Successfully updated order_detail!');
+        return Redirect::to('order_details');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderDetail $orderDetail)
+    public function destroy($id)
     {
-        //
+        // delete
+        $order_detail = OrderDetail::find($id);
+        $order_detail->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('order_details');
     }
 }

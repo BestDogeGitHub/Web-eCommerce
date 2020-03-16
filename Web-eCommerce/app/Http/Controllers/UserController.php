@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('users.create');
     }
 
     /**
@@ -45,16 +45,33 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'username' => 'required|max:45',
+            'name' => 'required|max:45',
+            'surname' => 'required|max:45',
+            'phone' => 'required|integer|max:999999999999999',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:3|max:60'
+        ]);
+        
+        $user = new User();
+        $user->fill( $request->all() );
+        $user->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created user!');
+        return Redirect::to('users');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
         return View('backoffice.pages.edit_user', ['user' => $user]);
     }
@@ -62,10 +79,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -79,18 +95,17 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update( Request $request, $id )
     {
         $rules = array(
-            'name' => 'required|max:200',
-            'surname' => 'required|max:200',
-            'email' => 'required',
-            'phone' => 'required'
+            'username' => 'required|max:45',
+            'name' => 'required|max:45',
+            'surname' => 'required|max:45',
+            'phone' => 'required|integer|max:999999999999999',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:3|max:60'
         );
         
         $error = Validator::make($request->all(), $rules);
@@ -115,12 +130,15 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        // delete
+        $user = User::find($id);
         $user->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('users');
     }
 }

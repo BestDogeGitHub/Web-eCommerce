@@ -27,7 +27,7 @@ class DeliveryStatusController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('delivery_statuses.create');
     }
 
     /**
@@ -67,21 +67,21 @@ class DeliveryStatusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\DeliveryStatus  $deliveryStatus
      * @return \Illuminate\Http\Response
      */
-    public function show(DeliveryStatus $deliveryStatus)
+    public function show($id)
     {
-        //
+        $delivery_statuse = DeliveryStatus::find($id);
+
+        return View::make('delivery_statuses.show')->with('delivery_statuse', $delivery_statuse);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\DeliveryStatus  $deliveryStatus
      * @return \Illuminate\Http\Response
      */
-    public function edit(DeliveryStatus $deliveryStatus)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -93,12 +93,9 @@ class DeliveryStatusController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\DeliveryStatus  $deliveryStatus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeliveryStatus $deliveryStatus)
+    public function update( Request $request, DeliveryStatus $deliveryStatus )
     {
         $rules = array(
             'status' => 'required|string|min:1'
@@ -128,8 +125,6 @@ class DeliveryStatusController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\DeliveryStatus  $deliveryStatus
      * @return \Illuminate\Http\Response
      */
     public function destroy(DeliveryStatus $deliveryStatus)

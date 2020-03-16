@@ -30,7 +30,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('addresses.create');
     }
 
     /**
@@ -43,8 +43,8 @@ class AddressController extends Controller
     {
         
         $rules = array(
-            'building_number' => 'required|numeric|min:0',
-            'street_number' => 'required|numeric|min:0',
+            'building_number' => 'required|numeric|min:0|max:1500',
+            'street_number' => 'required|numeric|min:0|max:1500',
             'postcode' => 'required|string',
             'country_code' => 'required|string|min:2|max:2',
             'town_id' => 'required|numeric'
@@ -80,21 +80,21 @@ class AddressController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function show(Address $address)
+    public function show($id)
     {
-        //
+        $address = Address::find($id);
+
+        return View::make('addresses.show')->with('address', $address);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(Address $address)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -110,16 +110,13 @@ class AddressController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $address)
+    public function update( Request $request, $id )
     {
         $rules = array(
-            'building_number' => 'required|numeric|min:0',
-            'street_number' => 'required|numeric|min:0',
+            'building_number' => 'required|numeric|min:0||max:1500',
+            'street_number' => 'required|numeric|min:0||max:1500',
             'postcode' => 'required|string',
             'country_code' => 'required|string|min:2|max:2',
             'town_id' => 'required|numeric'
@@ -153,12 +150,15 @@ class AddressController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Address $address)
+    public function destroy($id)
     {
+        // delete
+        $address = Address::find($id);
         $address->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('addresses');
     }
 }

@@ -66,11 +66,33 @@ To generate a route cache, just execute the route:cache Artisan command:
 
 php artisan route:cache
 
+CHIAVE DI CRIPTAZIONE:
 
+.env :
+1 APP_NAME=Laravel
+2 APP_ENV=local
+3 APP_KEY=base64:kqMUM6VPWlTFv32wUVfbIQNWtL+azzwYxwvogLBawzk= // ecco la chiave
+4 APP_DEBUG=true
 
+config/app.php
 
+112    /*
+113    |--------------------------------------------------------------------------
+114    | Encryption Key
+115    |--------------------------------------------------------------------------
+116    |
+117    | This key is used by the Illuminate encrypter service and should be set         
+118    | to a random, 32 character string, otherwise these encrypted strings
+119    | will not be safe. Please do this before deploying an application!
+120    |
+121    */
+122
+123    'key' => env('APP_KEY'),
+124
+125    'cipher' => 'AES-256-CBC',
 
-
+inserimento :  'secret' => encrypt($request->secret);
+estrazione : $decrypted = decrypt($encryptedValue);
 
 
 

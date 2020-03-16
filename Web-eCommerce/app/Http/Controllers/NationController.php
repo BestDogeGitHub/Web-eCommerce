@@ -14,7 +14,9 @@ class NationController extends Controller
      */
     public function index()
     {
-        //
+        $nations = Nation::paginate(20);
+
+        return View::make('nations.index')->with('nations', $nations);
     }
 
     /**
@@ -24,7 +26,7 @@ class NationController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('nations.create');
     }
 
     /**
@@ -35,51 +37,79 @@ class NationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'name' => 'required|max:70|alpha'
+        ]);
+        
+        $nation = new Nation();
+        $nation->fill( $request->all() );
+        $nation->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created nation!');
+        return Redirect::to('nations');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Nation  $nation
      * @return \Illuminate\Http\Response
      */
-    public function show(Nation $nation)
+    public function show($id)
     {
-        //
+        $nation = Nation::find($id);
+
+        return View::make('nations.show')->with('nation', $nation);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Nation  $nation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nation $nation)
+    public function edit($id)
     {
-        //
+        $nation = Nation::find($id);
+
+        return View::make('nations.edit')->with('nation', $nation);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Nation  $nation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nation $nation)
+    public function update( Request $request, $id )
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $request->validate
+        ([
+            'name' => 'required|max:70|alpha'
+        ]);
+            // store
+        $nation = Nation::find($id);
+        $nation->fill( $request->all() );
+        $nation->save();
+        // redirect
+        Session::flash('message', 'Successfully updated nation!');
+        return Redirect::to('nations');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Nation  $nation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nation $nation)
+    public function destroy($id)
     {
-        //
+        // delete
+        $nation = Nation::find($id);
+        $nation->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('nations');
     }
 }

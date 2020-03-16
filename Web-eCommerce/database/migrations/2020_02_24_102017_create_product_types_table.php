@@ -18,8 +18,8 @@ class CreateProductTypesTable extends Migration
             $table->string('name',45);
             $table->string('image_ref',255);
             $table->boolean('available'); // 1 for true
-            $table->tinyInteger('star_rate');
-            $table->mediumInteger('n_reviews'); // number of reviews, user to calculate the mean rate
+            $table->tinyInteger('star_rate')->default(0);
+            $table->mediumInteger('n_reviews')->default(0); // number of reviews, user to calculate the mean rate
 
             $table->unsignedBigInteger('producer_id')->nullable();
 

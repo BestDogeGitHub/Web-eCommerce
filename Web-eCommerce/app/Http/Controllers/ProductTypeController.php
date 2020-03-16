@@ -30,7 +30,7 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('product_types.create');
     }
 
     /**
@@ -42,8 +42,9 @@ class ProductTypeController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'name' => 'required',
-            'image' => 'required|image|max:4096',
+            'name' => 'required|max:45',
+            'image_ref' => 'required|image|max:4096',
+            'available' => 'required|boolean',
             'producer' => 'required|numeric',
         );
 
@@ -83,21 +84,21 @@ class ProductTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductType $productType)
+    public function show($id)
     {
-        //
+        $product_type = ProductType::find($id);
+
+        return View::make('product_types.show')->with('product_type', $product_type);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductType $productType)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -107,12 +108,9 @@ class ProductTypeController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductType $productType)
+    public function update( Request $request, $id )
     {
         
         $rules = array(
@@ -180,11 +178,9 @@ class ProductTypeController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductType $productType)
+    public function destroy($id)
     {
         $image_path = $productType->image_ref;
         if($productType->delete()){

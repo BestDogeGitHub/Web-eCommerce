@@ -27,7 +27,7 @@ class AttributeController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('attributes.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class AttributeController extends Controller
     {
         
         $rules = array(
-            'name' => 'required|string|min:1'
+            'name' => 'required|string|min:1|max:100'
         );
         
         
@@ -68,21 +68,21 @@ class AttributeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function show(Attribute $attribute)
+    public function show($id)
     {
-        //
+        $attribute = Attribute::find($id);
+
+        return View::make('attributes.show')->with('attribute', $attribute);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attribute $attribute)
+    public function edit($id)
     {
         if(request()->ajax())
         {
@@ -94,15 +94,12 @@ class AttributeController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attribute $attribute)
+    public function update( Request $request, $id )
     {
         $rules = array(
-            'name' => 'required|string|min:1'
+            'name' => 'required|string|min:1|max:100'
         );
         
         
@@ -129,12 +126,15 @@ class AttributeController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Attribute  $attribute
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attribute $attribute)
+    public function destroy($id)
     {
+        // delete
+        $attribute = Attribute::find($id);
         $attribute->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('attributes');
     }
 }
