@@ -14,7 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::paginate(20);
+
+        return View::make('orders.index')->with('orders', $orders);
     }
 
     /**
@@ -24,7 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('orders.create');
     }
 
     /**
@@ -34,52 +36,68 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $order = new Order();
+        $order->fill( $request->all() );
+        $order->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created order!');
+        return Redirect::to('orders');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::find($id);
+
+        return View::make('orders.show')->with('order', $order);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        $order = Order::find($id);
+
+        return View::make('orders.edit')->with('order', $order);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update( Request $request, $id )
     {
-        //
+        // store
+        $order = Order::find($id);
+        $order->fill( $request->all() );
+        $order->save();
+        // redirect
+        Session::flash('message', 'Successfully updated order!');
+        return Redirect::to('orders');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        // delete
+        $order = Order::find($id);
+        $order->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('orders');
     }
 }

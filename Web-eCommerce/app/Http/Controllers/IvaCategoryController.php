@@ -14,7 +14,9 @@ class IvaCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $iva_categories = IvaCategory::paginate(20);
+
+        return View::make('iva_categories.index')->with('iva_categories', $iva_categories);
     }
 
     /**
@@ -24,7 +26,7 @@ class IvaCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('iva_categories.create');
     }
 
     /**
@@ -35,51 +37,81 @@ class IvaCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'category' => 'required|max:45',
+            'value' => 'required|integer|max:100',
+        ]);
+        
+        $iva_category = new IvaCategory();
+        $iva_category->fill( $request->all() );
+        $iva_category->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created iva_category!');
+        return Redirect::to('iva_categories');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\IvaCategory  $ivaCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(IvaCategory $ivaCategory)
+    public function show($id)
     {
-        //
+        $iva_category = IvaCategory::find($id);
+
+        return View::make('iva_categories.show')->with('iva_category', $iva_category);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\IvaCategory  $ivaCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(IvaCategory $ivaCategory)
+    public function edit($id)
     {
-        //
+        $iva_category = IvaCategory::find($id);
+
+        return View::make('iva_categories.edit')->with('iva_category', $iva_category);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\IvaCategory  $ivaCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IvaCategory $ivaCategory)
+    public function update( Request $request, $id )
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $request->validate
+        ([
+            'category' => 'required|max:45',
+            'value' => 'required|integer|max:100',
+        ]);
+            // store
+        $iva_category = IvaCategory::find($id);
+        $iva_category->fill( $request->all() );
+        $iva_category->save();
+        // redirect
+        Session::flash('message', 'Successfully updated iva_category!');
+        return Redirect::to('iva_categories');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\IvaCategory  $ivaCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(IvaCategory $ivaCategory)
+    public function destroy($id)
     {
-        //
+        // delete
+        $iva_category = IvaCategory::find($id);
+        $iva_category->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('iva_categories');
     }
 }

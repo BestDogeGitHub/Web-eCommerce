@@ -14,7 +14,9 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $addresses = Address::paginate(20);
+
+        return View::make('addresses.index')->with('addresses', $addresses);
     }
 
     /**
@@ -24,7 +26,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('addresses.create');
     }
 
     /**
@@ -35,51 +37,87 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'building_number' => 'required|integer|max:1500',
+            'street_number' => 'required|integer|max:1500',
+            'postcode' => 'required|integer',
+            'country_code' => 'required|size:2|alpha',
+            'town_id' => 'required|integer',
+        ]);
+        
+        $address = new Address();
+        $address->fill( $request->all() );
+        $address->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created address!');
+        return Redirect::to('addresses');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function show(Address $address)
+    public function show($id)
     {
-        //
+        $address = Address::find($id);
+
+        return View::make('addresses.show')->with('address', $address);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(Address $address)
+    public function edit($id)
     {
-        //
+        $address = Address::find($id);
+
+        return View::make('addresses.edit')->with('address', $address);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $address)
+    public function update( Request $request, $id )
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $request->validate
+        ([
+            'building_number' => 'required|integer|max:1500',
+            'street_number' => 'required|integer|max:1500',
+            'postcode' => 'required|integer',
+            'country_code' => 'required|size:2|alpha',
+            'town_id' => 'required|integer',
+        ]);
+            // store
+        $address = Address::find($id);
+        $address->fill( $request->all() );
+        $address->save();
+        // redirect
+        Session::flash('message', 'Successfully updated address!');
+        return Redirect::to('addresses');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Address $address)
+    public function destroy($id)
     {
-        //
+        // delete
+        $address = Address::find($id);
+        $address->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('addresses');
     }
 }

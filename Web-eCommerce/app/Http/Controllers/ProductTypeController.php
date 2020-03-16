@@ -14,7 +14,9 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        //
+        $product_types = ProductType::paginate(20);
+
+        return View::make('product_types.index')->with('product_types', $product_types);
     }
 
     /**
@@ -24,7 +26,7 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('product_types.create');
     }
 
     /**
@@ -35,51 +37,83 @@ class ProductTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'name' => 'required|max:45',
+            'image_ref' => 'required|max:255',
+            'available' => 'required|boolean'
+        ]);
+        
+        $product_type = new ProductType();
+        $product_type->fill( $request->all() );
+        $product_type->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created product_type!');
+        return Redirect::to('product_types');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductType $productType)
+    public function show($id)
     {
-        //
+        $product_type = ProductType::find($id);
+
+        return View::make('product_types.show')->with('product_type', $product_type);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductType $productType)
+    public function edit($id)
     {
-        //
+        $product_type = ProductType::find($id);
+
+        return View::make('product_types.edit')->with('product_type', $product_type);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductType $productType)
+    public function update( Request $request, $id )
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $request->validate
+        ([
+            'name' => 'required|max:45',
+            'image_ref' => 'required|max:255',
+            'available' => 'required|boolean'
+        ]);
+        // store
+        $product_type = ProductType::find($id);
+        $product_type->fill( $request->all() );
+        $product_type->save();
+        // redirect
+        Session::flash('message', 'Successfully updated product_type!');
+        return Redirect::to('product_types');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\ProductType  $productType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductType $productType)
+    public function destroy($id)
     {
-        //
+        // delete
+        $product_type = ProductType::find($id);
+        $product_type->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('product_types');
     }
 }

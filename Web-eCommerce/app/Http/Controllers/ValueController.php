@@ -14,7 +14,9 @@ class ValueController extends Controller
      */
     public function index()
     {
-        //
+        $values = Value::paginate(20);
+
+        return View::make('values.index')->with('values', $values);
     }
 
     /**
@@ -24,7 +26,7 @@ class ValueController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('values.create');
     }
 
     /**
@@ -35,51 +37,79 @@ class ValueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'name' => 'required|max:50'
+        ]);
+        
+        $value = new Value();
+        $value->fill( $request->all() );
+        $value->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created value!');
+        return Redirect::to('values');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Value  $value
      * @return \Illuminate\Http\Response
      */
-    public function show(Value $value)
+    public function show($id)
     {
-        //
+        $value = Value::find($id);
+
+        return View::make('values.show')->with('value', $value);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Value  $value
      * @return \Illuminate\Http\Response
      */
-    public function edit(Value $value)
+    public function edit($id)
     {
-        //
+        $value = Value::find($id);
+
+        return View::make('values.edit')->with('value', $value);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Value  $value
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Value $value)
+    public function update( Request $request, $id )
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $request->validate
+        ([
+            'name' => 'required|max:50'
+        ]);
+            // store
+        $value = Value::find($id);
+        $value->fill( $request->all() );
+        $value->save();
+        // redirect
+        Session::flash('message', 'Successfully updated value!');
+        return Redirect::to('values');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Value  $value
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Value $value)
+    public function destroy($id)
     {
-        //
+        // delete
+        $value = Value::find($id);
+        $value->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('values');
     }
 }

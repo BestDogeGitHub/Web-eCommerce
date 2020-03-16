@@ -14,7 +14,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::paginate(20);
+
+        return View::make('invoices.index')->with('invoices', $invoices);
     }
 
     /**
@@ -24,7 +26,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('invoices.create');
     }
 
     /**
@@ -35,51 +37,51 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $invoice = new Invoice();
+        $invoice->fill( $request->all() );
+        $invoice->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created invoice!');
+        return Redirect::to('invoices');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice $invoice)
+    public function show($id)
     {
-        //
+        $invoice = Invoice::find($id);
+
+        return View::make('invoices.show')->with('invoice', $invoice);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invoice $invoice)
+    public function edit($id)
     {
-        //
-    }
+        $invoice = Invoice::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Invoice $invoice)
-    {
-        //
+        return View::make('invoices.edit')->with('invoice', $invoice);
     }
-
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $invoice)
+    public function destroy($id)
     {
-        //
+        // delete
+        $invoice = Invoice::find($id);
+        $invoice->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('invoices');
     }
 }

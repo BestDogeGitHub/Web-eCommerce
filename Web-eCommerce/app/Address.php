@@ -22,4 +22,6 @@ class Address extends Model
     {
         return $this->hasMany('App\Shipment');
     }
+
+    
 }

@@ -14,7 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::paginate(20);
+
+        return View::make('products.index')->with('products', $products);
     }
 
     /**
@@ -24,7 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('products.create');
     }
 
     /**
@@ -35,51 +37,87 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'payment' => 'required|numeric',
+            'sale' => 'required|integer|max:100',
+            'stock' => 'required|integer|max:10000000',
+            'available' => 'required|boolean',
+            'info' => 'required|max:1500',
+        ]);
+        
+        $product = new Product();
+        $product->fill( $request->all() );
+        $product->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created product!');
+        return Redirect::to('products');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::find($id);
+
+        return View::make('products.show')->with('product', $product);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+
+        return View::make('products.edit')->with('product', $product);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update( Request $request, $id )
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $request->validate
+        ([
+            'payment' => 'required|numeric',
+            'sale' => 'required|integer|max:100',
+            'stock' => 'required|integer|max:10000000',
+            'available' => 'required|boolean',
+            'info' => 'required|max:1500',
+        ]);
+            // store
+        $product = Product::find($id);
+        $product->fill( $request->all() );
+        $product->save();
+        // redirect
+        Session::flash('message', 'Successfully updated product!');
+        return Redirect::to('products');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        // delete
+        $product = Product::find($id);
+        $product->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('products');
     }
 }

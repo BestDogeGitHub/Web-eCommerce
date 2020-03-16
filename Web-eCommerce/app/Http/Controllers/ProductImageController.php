@@ -14,7 +14,9 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        //
+        $product_images = ProductImage::paginate(20);
+
+        return View::make('product_images.index')->with('product_images', $product_images);
     }
 
     /**
@@ -24,7 +26,7 @@ class ProductImageController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('product_images.create');
     }
 
     /**
@@ -35,51 +37,66 @@ class ProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product_image = new ProductImage();
+        $product_image->fill( $request->all() );
+        $product_image->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created product_image!');
+        return Redirect::to('product_images');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductImage  $productImage
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductImage $productImage)
+    public function show($id)
     {
-        //
+        $product_image = ProductImage::find($id);
+
+        return View::make('product_images.show')->with('product_image', $product_image);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductImage  $productImage
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductImage $productImage)
+    public function edit($id)
     {
-        //
+        $product_image = ProductImage::find($id);
+
+        return View::make('product_images.edit')->with('product_image', $product_image);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductImage  $productImage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductImage $productImage)
+    public function update( Request $request, $id )
     {
-        //
+        $product_image = ProductImage::find($id);
+        $product_image->fill( $request->all() );
+        $product_image->save();
+        // redirect
+        Session::flash('message', 'Successfully updated product_image!');
+        return Redirect::to('product_images');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\ProductImage  $productImage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductImage $productImage)
+    public function destroy($id)
     {
-        //
+        // delete
+        $product_image = ProductImage::find($id);
+        $product_image->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('product_images');
     }
 }

@@ -14,7 +14,9 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        //
+        $shipments = Shipment::paginate(20);
+
+        return View::make('shipments.index')->with('shipments', $shipments);
     }
 
     /**
@@ -24,7 +26,7 @@ class ShipmentController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('shipments.create');
     }
 
     /**
@@ -35,51 +37,81 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate
+        ([
+            'tracking_number' => 'required|integer|max:999999999999999',
+            'delivery_date' => 'required|date',
+        ]);
+        
+        $shipment = new Shipment();
+        $shipment->fill( $request->all() );
+        $shipment->save();
+    
+        // redirect
+        Session::flash('message', 'Successfully created shipment!');
+        return Redirect::to('shipments');
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function show(Shipment $shipment)
+    public function show($id)
     {
-        //
+        $shipment = Shipment::find($id);
+
+        return View::make('shipments.show')->with('shipment', $shipment);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shipment $shipment)
+    public function edit($id)
     {
-        //
+        $shipment = Shipment::find($id);
+
+        return View::make('shipments.edit')->with('shipment', $shipment);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shipment $shipment)
+    public function update( Request $request, $id )
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        $request->validate
+        ([
+            'tracking_number' => 'required|integer|max:999999999999999',
+            'delivery_date' => 'required|date',
+        ]);
+            // store
+        $shipment = Shipment::find($id);
+        $shipment->fill( $request->all() );
+        $shipment->save();
+        // redirect
+        Session::flash('message', 'Successfully updated shipment!');
+        return Redirect::to('shipments');
+        
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Shipment  $shipment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shipment $shipment)
+    public function destroy($id)
     {
-        //
+        // delete
+        $shipment = Shipment::find($id);
+        $shipment->delete();
+        // redirect
+        Session::flash('message', 'Successfully deleted!');
+        return Redirect::to('shipments');
     }
 }
