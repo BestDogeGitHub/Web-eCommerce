@@ -16,11 +16,6 @@ class UserController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $users = User::paginate(20);
-
-        return View::make('users.index')->with('users', $users);
-=======
         $users = User::all();
         $addresses = Address::all();
 
@@ -29,7 +24,6 @@ class UserController extends Controller
 
     public function getById($id) {
         return User::where('id', $id)->first();
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     
@@ -79,13 +73,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
-        $user = User::find($id);
-
-        return View::make('users.show')->with('user', $user);
-=======
         return View('backoffice.pages.edit_user', ['user' => $user]);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -95,11 +83,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        $user = User::find($id);
-
-        return View::make('users.edit')->with('user', $user);
-=======
         if(request()->ajax())
         {
             $roles = $user->roles;
@@ -108,7 +91,6 @@ class UserController extends Controller
                 'roles' => $roles
             ]);
         }
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -117,32 +99,13 @@ class UserController extends Controller
      */
     public function update( Request $request, $id )
     {
-<<<<<<< HEAD
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
+        $rules = array(
             'username' => 'required|max:45',
             'name' => 'required|max:45',
             'surname' => 'required|max:45',
             'phone' => 'required|integer|max:999999999999999',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:3|max:60'
-        ]);
-            // store
-        $user = User::find($id);
-        $user->fill( $request->all() );
-        $user->save();
-        // redirect
-        Session::flash('message', 'Successfully updated user!');
-        return Redirect::to('users');
-        
-=======
-        $rules = array(
-            'name' => 'required|max:200',
-            'surname' => 'required|max:200',
-            'email' => 'required',
-            'phone' => 'required'
         );
         
         $error = Validator::make($request->all(), $rules);
@@ -163,7 +126,6 @@ class UserController extends Controller
         $user->update($data);
         
         return response()->json(['success' => 'User Updated successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -172,15 +134,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
         // delete
         $user = User::find($id);
         $user->delete();
         // redirect
         Session::flash('message', 'Successfully deleted!');
         return Redirect::to('users');
-=======
-        $user->delete();
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 }

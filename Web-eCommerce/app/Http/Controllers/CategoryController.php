@@ -16,15 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $categories = Category::paginate(20);
-
-        return View::make('categories.index')->with('categories', $categories);
-=======
         $categories = Category::all();
 
         return View('backoffice.pages.edit_categories', ['categories' => $categories]);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -45,25 +39,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        // validate
-        $request->validate
-        ([
-            'name' => 'required|max:45',
-            'image_ref' => 'required|max:255',
-        ]);
-        
-        $category = new Category();
-        $category->fill( $request->all() );
-        $category->save();
-    
-        // redirect
-        Session::flash('message', 'Successfully created category!');
-        return Redirect::to('categories');
-        
-=======
         $rules = array(
-            'name' => 'required|string|min:1',
+            'name' => 'required|string|min:1|max:45',
             'image' => 'required|image|max:4096',
             'parent_id' => 'required'
         );
@@ -95,7 +72,6 @@ class CategoryController extends Controller
         
 
         return response()->json(['success' => 'Category Added successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -117,11 +93,6 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        $category = Category::find($id);
-
-        return View::make('categories.edit')->with('category', $category);
-=======
         if(request()->ajax())
         {
             $numberProducts = $category->productTypes->count();
@@ -130,7 +101,6 @@ class CategoryController extends Controller
                 'products' => $numberProducts
             ]);
         }
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -139,24 +109,9 @@ class CategoryController extends Controller
      */
     public function update( Request $request, $id )
     {
-<<<<<<< HEAD
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'name' => 'required|max:45',
-            'image_ref' => 'required|max:255',
-        ]);
-            // store
-        $category = Category::find($id);
-        $category->fill( $request->all() );
-        $category->save();
-        // redirect
-        Session::flash('message', 'Successfully updated category!');
-        return Redirect::to('categories');
-=======
         $rules = array(
-            'name' => 'required|string|min:1',
+            'name' => 'required|string|min:1|max:45',
+            'image_ref' => 'required|max:255',
             'parent_id' => 'required'
         );
         
@@ -213,7 +168,6 @@ class CategoryController extends Controller
         
         
         
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
         
     }
 
@@ -223,20 +177,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-        // delete
-        $category = Category::find($id);
-        $category->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('categories');
-=======
         $image_path = $category->image_ref;
         if($category->delete()){
             if(File::exists(public_path() . $image_path)) {
                 File::delete(public_path() . $image_path);
             }
         }
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 }

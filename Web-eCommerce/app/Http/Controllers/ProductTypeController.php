@@ -17,16 +17,10 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $product_types = ProductType::paginate(20);
-
-        return View::make('product_types.index')->with('product_types', $product_types);
-=======
         $productTypes = ProductType::all();
         $producers = Producer::all();
 
         return View('backoffice.pages.edit_product_types', ['productTypes' => $productTypes, 'producers' => $producers]);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -47,27 +41,10 @@ class ProductTypeController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        // validate
-        $request->validate
-        ([
-            'name' => 'required|max:45',
-            'image_ref' => 'required|max:255',
-            'available' => 'required|boolean'
-        ]);
-        
-        $product_type = new ProductType();
-        $product_type->fill( $request->all() );
-        $product_type->save();
-    
-        // redirect
-        Session::flash('message', 'Successfully created product_type!');
-        return Redirect::to('product_types');
-        
-=======
         $rules = array(
-            'name' => 'required',
-            'image' => 'required|image|max:4096',
+            'name' => 'required|max:45',
+            'image_ref' => 'required|image|max:4096',
+            'available' => 'required|boolean',
             'producer' => 'required|numeric',
         );
 
@@ -102,7 +79,6 @@ class ProductTypeController extends Controller
         ProductType::create($data);
         
         return response()->json(['success' => 'Product Type added successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -124,16 +100,10 @@ class ProductTypeController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        $product_type = ProductType::find($id);
-
-        return View::make('product_types.edit')->with('product_type', $product_type);
-=======
         if(request()->ajax())
         {
             return response()->json(['data' => $productType]);
         }
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -142,24 +112,6 @@ class ProductTypeController extends Controller
      */
     public function update( Request $request, $id )
     {
-<<<<<<< HEAD
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'name' => 'required|max:45',
-            'image_ref' => 'required|max:255',
-            'available' => 'required|boolean'
-        ]);
-        // store
-        $product_type = ProductType::find($id);
-        $product_type->fill( $request->all() );
-        $product_type->save();
-        // redirect
-        Session::flash('message', 'Successfully updated product_type!');
-        return Redirect::to('product_types');
-        
-=======
         
         $rules = array(
             'producer' => 'required|numeric',
@@ -222,7 +174,6 @@ class ProductTypeController extends Controller
         $productType->update($data);
         
         return response()->json(['success' => 'Product Type Updated successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -231,20 +182,11 @@ class ProductTypeController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-        // delete
-        $product_type = ProductType::find($id);
-        $product_type->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('product_types');
-=======
         $image_path = $productType->image_ref;
         if($productType->delete()){
             if(File::exists(public_path() . $image_path)) {
                 File::delete(public_path() . $image_path);
             }
         }
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 }

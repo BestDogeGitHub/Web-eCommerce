@@ -16,11 +16,6 @@ class CreditCardController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $credit_cards = CreditCard::paginate(20);
-
-        return View::make('credit_cards.index')->with('credit_cards', $credit_cards);
-=======
         $credit_cards = CreditCard::all()->map(function ($card) {
             $card->number = str_replace($card->number, $this->hideNumber($card->number), $card->number);
     
@@ -59,7 +54,6 @@ class CreditCardController extends Controller
             'Wells Fargo'
         );
         return $companies;
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -80,25 +74,6 @@ class CreditCardController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        // validate
-        $request->validate
-        ([
-            'type' => 'required|max:20',
-            'number' => 'required|integer|max:20',
-            'expiration_date' => 'required|regex:^([0-1][1-9])\/([0-9]{2})$|max:6',
-            'user_id' => 'required|integer',
-        ]);
-        
-        $credit_card = new CreditCard();
-        $credit_card->fill( $request->all() );
-        $credit_card->save();
-    
-        // redirect
-        Session::flash('message', 'Successfully created credit_card!');
-        return Redirect::to('credit_cards');
-        
-=======
 
         $rules = array(
             'type' => 'required|in:' . implode(',', $this->getCompanies()),
@@ -147,7 +122,6 @@ class CreditCardController extends Controller
         
 
         return response()->json(['success' => 'Credit Card Added successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -169,11 +143,6 @@ class CreditCardController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        $credit_card = CreditCard::find($id);
-
-        return View::make('credit_cards.edit')->with('credit_card', $credit_card);
-=======
         if(request()->ajax())
         {
             $exp_date = explode('/', $creditCard->expiration_date);
@@ -189,7 +158,6 @@ class CreditCardController extends Controller
                 'year' => $year 
                 ]);
         }
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -198,25 +166,6 @@ class CreditCardController extends Controller
      */
     public function update( Request $request, $id )
     {
-<<<<<<< HEAD
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'type' => 'required|max:20',
-            'number' => 'required|integer|max:20',
-            'expiration_date' => 'required|regex:^([0-1][1-9])\/([0-9]{2})$|max:6',
-            'user_id' => 'required|integer',
-        ]);
-            // store
-        $credit_card = CreditCard::find($id);
-        $credit_card->fill( $request->all() );
-        $credit_card->save();
-        // redirect
-        Session::flash('message', 'Successfully updated credit_card!');
-        return Redirect::to('credit_cards');
-        
-=======
         $rules = array(
             'type' => 'required|in:' . implode(',', $this->getCompanies()),
             'number' => 'required|digits_between:10,20',
@@ -257,7 +206,6 @@ class CreditCardController extends Controller
         
 
         return response()->json(['success' => 'Credit Card Updated successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -266,15 +214,6 @@ class CreditCardController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-        // delete
-        $credit_card = CreditCard::find($id);
-        $credit_card->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('credit_cards');
-=======
         $creditCard->delete();
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 }

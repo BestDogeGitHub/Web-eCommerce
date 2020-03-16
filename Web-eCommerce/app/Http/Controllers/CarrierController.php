@@ -16,15 +16,9 @@ class CarrierController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $carriers = Carrier::paginate(20);
-
-        return View::make('carriers.index')->with('carriers', $carriers);
-=======
         $carriers = Carrier::all();
 
         return View('backoffice.pages.edit_carriers', ['carriers' => $carriers]);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -45,29 +39,10 @@ class CarrierController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        // validate
-        $request->validate
-        ([
-            'name' => 'required|max:45|unique:carriers,name',
-            'image_ref' => 'required|max:255',
-            'link' => 'required|max:2048',
-            'details' => 'required',
-        ]);
-        
-        $carrier = new Carrier();
-        $carrier->fill( $request->all() );
-        $carrier->save();
-    
-        // redirect
-        Session::flash('message', 'Successfully created carrier!');
-        return Redirect::to('carriers');
-        
-=======
         $rules = array(
-            'name' => 'required',
-            'image' => 'required|image|max:4096',
-            'link' => 'required|string|max:1000',
+            'name' => 'required|max:45|unique:carriers,name',
+            'image' => 'required|max:255',
+            'link' => 'required|max:2048',
             'details' => 'required|string|max:3000'
         );
 
@@ -98,7 +73,6 @@ class CarrierController extends Controller
         Carrier::create($data);
         
         return response()->json(['success' => 'Carrier added successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -120,18 +94,12 @@ class CarrierController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        $carrier = Carrier::find($id);
-
-        return View::make('carriers.edit')->with('carrier', $carrier);
-=======
         if(request()->ajax())
         {
             return response()->json([
                 'data' => $carrier
             ]);
         }
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -140,28 +108,10 @@ class CarrierController extends Controller
      */
     public function update( Request $request, $id )
     {
-<<<<<<< HEAD
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
+        $rules = array(
             'name' => 'required|max:45',
             'image_ref' => 'required|max:255',
-            'link' => 'required|max:2048',
-            'details' => 'required',
-        ]);
-            // store
-        $carrier = Carrier::find($id);
-        $carrier->fill( $request->all() );
-        $carrier->save();
-        // redirect
-        Session::flash('message', 'Successfully updated carrier!');
-        return Redirect::to('carriers');
-        
-=======
-        $rules = array(
-            'name' => 'required',
-            'link' => 'required|string|max:1000',
+            'link' => 'required|string|max:2048',
             'details' => 'required|string|max:3000'
         );
         
@@ -215,7 +165,6 @@ class CarrierController extends Controller
         $carrier->update($data);
         
         return response()->json(['success' => 'Carrier Updated successfully.']);
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 
     /**
@@ -224,14 +173,6 @@ class CarrierController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-        // delete
-        $carrier = Carrier::find($id);
-        $carrier->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('carriers');
-=======
         $image_path = $carrier->image_ref;
         if($carrier->delete()){
             if(File::exists(public_path() . $image_path)) {
@@ -249,6 +190,5 @@ class CarrierController extends Controller
     public static function getById($id)
     {
         return Carrier::where('id', $id)->first();
->>>>>>> 06d9a2a0e316e574eb97b9305e682be87c78c6ba
     }
 }
