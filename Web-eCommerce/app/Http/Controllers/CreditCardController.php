@@ -129,11 +129,10 @@ class CreditCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CreditCard $creditCard)
     {
-        $credit_card = CreditCard::find($id);
 
-        return View::make('credit_cards.show')->with('credit_card', $credit_card);
+        return View::make('credit_cards.show')->with('credit_card', $creditCard);
     }
 
     /**
@@ -141,7 +140,7 @@ class CreditCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CreditCard $creditCard)
     {
         if(request()->ajax())
         {
@@ -164,7 +163,7 @@ class CreditCardController extends Controller
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, CreditCard $creditCard )
     {
         $rules = array(
             'type' => 'required|in:' . implode(',', $this->getCompanies()),
@@ -212,7 +211,7 @@ class CreditCardController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CreditCard $creditCard)
     {
         $creditCard->delete();
     }

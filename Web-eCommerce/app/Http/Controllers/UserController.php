@@ -71,7 +71,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         return View('backoffice.pages.edit_user', ['user' => $user]);
     }
@@ -81,7 +81,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         if(request()->ajax())
         {
@@ -97,7 +97,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, User $user )
     {
         $rules = array(
             'username' => 'required|max:45',
@@ -132,7 +132,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         // delete
         $user = User::find($id);

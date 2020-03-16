@@ -70,9 +70,8 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Attribute $attribute)
     {
-        $attribute = Attribute::find($id);
 
         return View::make('attributes.show')->with('attribute', $attribute);
     }
@@ -82,7 +81,7 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Attribute $attribute)
     {
         if(request()->ajax())
         {
@@ -96,7 +95,7 @@ class AttributeController extends Controller
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, Attribute $attribute )
     {
         $rules = array(
             'name' => 'required|string|min:1|max:100'
@@ -128,13 +127,8 @@ class AttributeController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Attribute $attribute)
     {
-        // delete
-        $attribute = Attribute::find($id);
         $attribute->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('attributes');
     }
 }

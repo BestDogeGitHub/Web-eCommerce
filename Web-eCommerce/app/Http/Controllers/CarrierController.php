@@ -80,9 +80,8 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Carrier $carrier)
     {
-        $carrier = Carrier::find($id);
 
         return View::make('carriers.show')->with('carrier', $carrier);
     }
@@ -92,7 +91,7 @@ class CarrierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Carrier $carrier)
     {
         if(request()->ajax())
         {
@@ -106,7 +105,7 @@ class CarrierController extends Controller
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, Carrier $carrier )
     {
         $rules = array(
             'name' => 'required|max:45',
@@ -171,7 +170,7 @@ class CarrierController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Carrier $carrier)
     {
         $image_path = $carrier->image_ref;
         if($carrier->delete()){

@@ -79,9 +79,8 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::find($id);
 
         return View::make('categories.show')->with('category', $category);
     }
@@ -91,7 +90,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
         if(request()->ajax())
         {
@@ -107,7 +106,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, Category $category )
     {
         $rules = array(
             'name' => 'required|string|min:1|max:45',
@@ -175,7 +174,7 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         $image_path = $category->image_ref;
         if($category->delete()){
