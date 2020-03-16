@@ -94,3 +94,16 @@ img.category {
 .confirm {
     display: none;
 }
+
+.card-icon {
+    margin-right: 10px;
+    font-size: 15pt;
+}
+
+.cardNumber {
+    font-weight: bold;
+}
+
+.cardExp {
+    font-weight: lighter;
+}

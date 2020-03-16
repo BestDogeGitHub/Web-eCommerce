@@ -26,7 +26,7 @@
 
 
     <div class="container">
-        <div class="table-wrapper">
+        <div class="table-wrapper table-responsive">
             <div class="table-title">
                 <div class="row">
 					<div class="col-sm-12">

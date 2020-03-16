@@ -29,7 +29,7 @@
 
 
     <div class="container">
-        <div class="table-wrapper">
+        <div class="table-wrapper table-responsive">
 
             <table class="table table-striped table-hover" id="usersTable">
                 <thead>

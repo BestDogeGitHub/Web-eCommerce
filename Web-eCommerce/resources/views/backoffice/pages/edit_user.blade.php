@@ -2,8 +2,6 @@
 
 @section('content')
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -31,7 +29,7 @@
                 <div class="col-12">
                  <div class="card card-primary">
                     <div class="card-header">
-                    <h3 class="card-title">Edit user fields</h3>
+                    <h3 class="card-title">User details</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -101,8 +99,6 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
 
 @endsection('content')

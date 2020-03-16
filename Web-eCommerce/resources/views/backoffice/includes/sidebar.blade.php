@@ -106,7 +106,12 @@
                   <p>Carriers</p>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a href="{{route('creditCards.index')}}" class="nav-link">
+                  <i class="fa fa-credit-card nav-icon"></i>
+                  <p>Credit Cards</p>
+                </a>
+              </li>
             </ul>
           </li>
           <!-- 

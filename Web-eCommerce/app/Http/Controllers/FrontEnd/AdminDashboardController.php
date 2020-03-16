@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
 {
+
+    public function index()
+    {
+        return view('backoffice.pages.home');
+    }
+
     /**
      * Restituisce la pagina di gestione ruoli
      */

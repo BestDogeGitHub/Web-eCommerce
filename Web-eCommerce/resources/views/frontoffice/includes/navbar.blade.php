@@ -31,7 +31,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
+                    @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -49,6 +49,12 @@
                                     </form>
                                 </div>
                             </li>
+                            @hasanyrole('Administrator|Shipment Representative|Inventory Representative')
+                              <li class="nav-item">
+                                  <a class="nav-link" href="{{ route('dashboard') }}" target="_blank">BackOffice</a>
+                              </li>
+                            @else
+                            @endhasanyrole
                         @endguest
 	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
