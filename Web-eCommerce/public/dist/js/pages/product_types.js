@@ -4,7 +4,7 @@ $(document).ready(function() {
         "order": [[ 0, "desc" ]]
     });
 
-    $('#addImage').on('change',function(){
+    $('.custom-file input').on('change',function(){
         //get the file name
         var fileName = $(this).val();
         //replace the "Choose a file" label

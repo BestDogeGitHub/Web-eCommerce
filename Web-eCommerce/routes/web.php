@@ -36,6 +36,8 @@ Route::post('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUse
 Route::get('auth/users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');
 Route::get('auth/products', 'ProductController@index');
 
+Route::get('invoices/{id}/print', 'InvoiceController@getPDF')->name('getInvoicePDF');
+
 
 // queste route si gestiscono tutte le chiamate delle varie risorse ref: 
 // https://laravel.com/docs/master/controllers#resource-controllers
@@ -48,13 +50,13 @@ Route::prefix('auth')->group(function () {
             'categories' => 'CategoryController',   //Implemented
             'creditCards' => 'CreditCardController',    //Implemented
             'deliveryStatuses' => 'DeliveryStatusController', //Implemented
-            'invoices' => 'InvoiceController',  
-            'ivaCategories' => 'IvaCategoryController',
-            'Nations' => 'NationController',
-            'orders' => 'OrderController',
-            'orderDetails' => 'OrderDetailController',
+            'invoices' => 'InvoiceController',      //Implemented
+            'ivaCategories' => 'IvaCategoryController', //Implemented
+            'nations' => 'NationController',    //Implemented
+            'orders' => 'OrderController',  //Implemented
+            'orderDetails' => 'OrderDetailController',  //Implemented
             'paymentMethods' => 'PaymentMethodController', //Implemented
-            'producers' => 'ProducerController',
+            'producers' => 'ProducerController',    //Implemented
             'products' => 'ProductController',  //Implemented
             'productImages' => 'ProductImageController',
             'productTypes' => 'ProductTypeController',  //Implemented

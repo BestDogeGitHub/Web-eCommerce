@@ -12,13 +12,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Manage <b>Addresses</b></h1>
+                    <h1>Manage <b>Invoices</b></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Properties</a></li>
-                    <li class="breadcrumb-item active">Addresses</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Orders</a></li>
+                    <li class="breadcrumb-item active">Invoices</li>
                     </ol>
                 </div>
                 </div>
@@ -34,7 +34,7 @@
             <div class="table-title">
                 <div class="row">
 					<div class="col-sm-12">
-						<a href="#addInvoiceModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Address</span></a>				
+						<a href="#addInvoiceModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Invoice</span></a>				
 					</div>
                 </div>
             </div>
@@ -184,6 +184,6 @@
 		</div>
     </div>       
 
-
-<script src="{{ asset('dist/js/pages/addresses.js') }}"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script src="{{ asset('dist/js/pages/invoices.js') }}"></script>
 @endsection('content')

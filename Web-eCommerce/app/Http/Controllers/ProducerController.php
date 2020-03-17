@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Producer;
 use Illuminate\Http\Request;
+use Validator;
+use Illuminate\Support\Facades\File;
 
 class ProducerController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
         {
-            $rules = array(
+            $this->rules = array(
                 'name' => 'required|max:45',
-                'image_ref' => 'required|max:255',
+                'image' => 'required|image|max:4096', // devo validare la dimensione dell'immagine
                 'link' => 'required|max:2048',
                 'details' => 'required'
             );
@@ -24,6 +29,7 @@ class ProducerController extends Controller
     public function index()
     {
         $producers = Producer::all();
+
         
         return View('backoffice.pages.edit_producers', ['producers' => $producers]);
     }
@@ -46,14 +52,31 @@ class ProducerController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
-        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+        $error = Validator::make($request->all(), $this->rules);
         
-        $producer = new Producer();
-        $producer->fill( $request->all() );
-        $producer->save();
-    
-        return response()->json(['success' => 'success!']);
+        if($error->fails()){ 
+            return response()->json(['errors' => $error->errors()->all()]); 
+        }
+
+        // UPLOAD IMAGE
+        $image = $request->file('image');
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+
+        $image->move(public_path('images/producers'), $new_name);
+
+        $data = array(
+            'name' => $request->name,
+            'image_ref' => '/images/producers/' . $new_name,
+            'link' => $request->link,
+            'details' => $request->details
+        ); 
+
+        // FOR DEBUGGING
+        // return response()->json(['errors' => array_values($data)]);
+
+        Producer::create($data);
+        
+        return response()->json(['success' => 'Product Type added successfully.']);
     }
 
     /**
@@ -73,39 +96,93 @@ class ProducerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Producer $producer)
     {
-        $producer = Producer::find($id);
-
-        return View::make('producers.edit')->with('producer', $producer);
+        if(request()->ajax())
+        {
+            return response()->json(['data' => $producer]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, Producer $producer )
     {
-        $error = Validator::make($request->all(), $rules);
-        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
-            // store
-        $producer = Producer::find($id);
-        $producer->fill( $request->all() );
-        $producer->save();
 
-        return response()->json(['success' => 'success!']);
+        if(!$request->hasFile('image')) {
+
+            // Smart copy of array
+            $custom_rules = array_merge(array(), $this->rules);
+
+            $custom_rules['image'] = 'image|max:4096';
+
+            $error = Validator::make($request->all(), $custom_rules);
+
+            if($error->fails()){ 
+                return response()->json(['errors' => $error->errors()->all()]); 
+            }
+
+            $data = array(
+                'name' => $request->name,
+                'link' => $request->link,
+                'details' => $request->details
+            ); 
+
+        } else {
+
+            $error = Validator::make($request->all(), $this->rules);
+            if($error->fails()){ 
+                return response()->json(['errors' => $error->errors()->all()]); 
+            }
+
+            $data = array(
+                'name' => $request->name,
+                'link' => $request->link,
+                'details' => $request->details
+            ); 
+            
+            // IMAGE CHANGED
+            
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+    
+            $image->move(public_path('images/producers'), $new_name);
+
+            
+
+            
+
+            $old_image_path = $producer->image_ref;
+            if(File::exists(public_path() . $old_image_path)) {
+                File::delete(public_path() . $old_image_path);
+            }
+
+            
+
+            $data['image_ref'] = '/images/producers/' . $new_name;
+
+            
+        }
+        
+        $producer->update($data);
+        
+        return response()->json(['success' => 'Producer Updated successfully.']);
     }
 
     /**
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Producer $producer)
     {
-        // delete
-        $producer = Producer::find($id);
-        $producer->delete();
 
-        return response()->json(['success' => 'success!']);
+        $image_path = $producer->image_ref;
+        if($producer->delete()){
+            if(File::exists(public_path() . $image_path)) {
+                File::delete(public_path() . $image_path);
+            }
+        }
     }
 }

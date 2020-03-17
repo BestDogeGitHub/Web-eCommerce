@@ -81,4 +81,15 @@ class InvoiceController extends Controller
         
         return response()->json(['success' => 'success!']);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     * @return \Illuminate\Http\Response
+     */
+    public function getPDF($id)
+    {
+        $invoice = Invoice::find($id);
+        return View('backoffice.partials._partial_invoice_to_pdf', ['invoice' => $invoice]);
+       
+    }
 }

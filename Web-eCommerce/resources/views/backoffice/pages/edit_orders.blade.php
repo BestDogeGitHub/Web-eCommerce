@@ -51,7 +51,7 @@
                         <td><span class="badge badge-danger">&euro; {{$order->invoice->payment}}</span></td>
                         <td><a href="{{ route('users.show', $order->user->id) }}" target="_blank">{{$order->user->username}}</a></td>
                         <td>
-						    <a href="{{ route('invoices.show', $order->invoice->id) }}" ><i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="Show Invoice"></i></a>
+						    <a href="{{ route('getInvoicePDF', $order->invoice->id) }}" target="_blank"><i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="Show Invoice"></i></a>
                         </td>
                         <td>
 						     {{$order->shipment->deliveryStatus->status}}
@@ -100,17 +100,21 @@
 
                         <h5>Products</h5>
                         
-                        <div class="d-none">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" id="product_info_template" target="_blank">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"></h5>
+                        <template>
+                            <div class="d-none">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" id="product_info_template" target="_blank">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1"></h5>
+                                        <small></small>
+                                    </div>
+                                    <img class="img-responsive crud"/>
+                                    <p class="mb-1"></p>
                                     <small></small>
-                                </div>
-                                <img class="img-responsive crud"/>
-                                <p class="mb-1"></p>
-                                <small></small>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
+                        </template>
+
+                        
                         <div class="list-group" id="order_products">
 
                         </div>
@@ -118,8 +122,9 @@
                         <h5>Shipment details</h5>
                         <div class="card border-primary">
                             <div class="card-header">
+                                <h6 id="carrierName"></h6>
                                 <img class="img-responsive crud" id="carrierLogo"/>
-                                <p id="carrierName"></p>
+                                    
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="trackNumber"></h5>
@@ -138,8 +143,8 @@
                     </div>
                     
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-warning" value="Edit">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Close">
+						<!-- <input type="submit" class="btn btn-warning" value="Edit"> -->
 					</div>
 				</form>
 			</div>
@@ -168,6 +173,6 @@
 		</div>
     </div>       
 
-
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <script src="{{ asset('dist/js/pages/orders.js') }}"></script>
 @endsection('content')

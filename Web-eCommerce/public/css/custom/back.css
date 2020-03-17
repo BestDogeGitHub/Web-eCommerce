@@ -111,3 +111,29 @@ img.category {
 #price {
     font-size: 20pt;
 }
+
+.brand-link {
+    text-align: center;
+}
+
+.img-circle {
+    width: 30px !important;
+    height: 30px !important;
+    margin-right: 10px !important;
+}
+
+.edit {
+    color: #ffc107;
+}
+
+.delete {
+    color: #dc3545;
+}
+
+._edit {
+    color: #ffc107;
+}
+
+.delete {
+    color: #dc3545;
+}
