@@ -1,7 +1,6 @@
 // SCRIPT FOR PRODUCT TYPES
 $(document).ready(function() {
-    var table = $("#productsTable").DataTable({
-        "order": [[ 0, "desc" ]]
+    var table = $("#producersTable").DataTable({
     });
 
     $('.custom-file input').on('change',function(){
@@ -13,11 +12,11 @@ $(document).ready(function() {
     /**
      * CREATE
      */
-    $('#addProductTypeForm').on('submit', function(event) {
+    $('#addProducerForm').on('submit', function(event) {
         event.preventDefault();
         
         $.ajax({
-            url: "/auth/productTypes",
+            url: "/auth/producers",
             method: "POST",
             data: new FormData(this),
             contentType: false,
@@ -42,7 +41,8 @@ $(document).ready(function() {
                     html += data.success;
                     html += '</p></div>';
                     $('#forErrors').html(html); 
-                    setTimeout(location.reload(), 2000);
+                    location.reload();
+                    $('#spinner').fadeIn();
                 }
             }
         });
@@ -57,14 +57,14 @@ $(document).ready(function() {
 
     $(document).on('click', '.delete', function(){
         product_id = $(this).attr('id');
-        $('#deleteProductTypeModal').modal('show');
+        $('#deleteProducerModal').modal('show');
     });
 
-    $('#deleteProductTypeForm').on('submit', function(event) {
+    $('#deleteProducerForm').on('submit', function(event) {
         event.preventDefault();
         
         $.ajax({
-            url: "/auth/productTypes/" + product_id,
+            url: "/auth/producers/" + product_id,
             method: "delete",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -81,37 +81,36 @@ $(document).ready(function() {
      * UPDATE
      */
     
-    var product_id_ed;
+    var producer_id;
 
     $(document).on('click', '.edit', function(){
-        product_id_ed = $(this).attr('id');
+        
+        producer_id = $(this).attr('id');
         var button = $(this);
-        $('#form_result').html('');
+        $('#forEditErrors').html(' '); 
         $.ajax({
-            url: '/auth/productTypes/' + product_id_ed + '/edit',
+            url: '/auth/producers/' + producer_id + '/edit',
             dataType: 'json',
             success: function(html){
                 //button.parent().parent().find('td:eq(6)').html());
                 $('#editName').val(html.data.name);
                 $('#actualImage').attr('src', html.data.image_ref);
-                $('#editAvailable').val(html.data.available);
-                $('#editStarRate').val(html.data.star_rate);
-                $('#editNReviews').val(html.data.n_reviews);
-                $('#hidden_id').val(html.data.id);
+                $('#editLink').val(html.data.link);
+                $('#editDetails').val(html.data.details);
             }
         });
         
 
-        $('#editProductTypeModal').modal('show');
+        $('#editProducerModal').modal('show');
 
 
     });
 
-    $('#editProductTypeForm').on('submit', function(event) {
+    $('#editProducerForm').on('submit', function(event) {
         event.preventDefault();
 
         $.ajax({
-            url: "/auth/productTypes/" + product_id_ed,
+            url: "/auth/producers/" + producer_id,
             method: "POST",
             data: new FormData(this),
             contentType: false,
@@ -140,7 +139,12 @@ $(document).ready(function() {
                     html += '</p></div>';
                     $('#forEditErrors').html(html); 
                     location.reload();
+                    $('#spinner').fadeIn();
                 }
+            },
+            error: function(xhr){
+                //$('#forEditErrors').html('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                //console.log('error');
             }
         });
 

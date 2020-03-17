@@ -51,12 +51,12 @@ Route::prefix('auth')->group(function () {
             'creditCards' => 'CreditCardController',    //Implemented
             'deliveryStatuses' => 'DeliveryStatusController', //Implemented
             'invoices' => 'InvoiceController',      //Implemented
-            'ivaCategories' => 'IvaCategoryController',
-            'Nations' => 'NationController',
+            'ivaCategories' => 'IvaCategoryController', //Implemented
+            'nations' => 'NationController',    //Implemented
             'orders' => 'OrderController',  //Implemented
-            'orderDetails' => 'OrderDetailController',
+            'orderDetails' => 'OrderDetailController',  //Implemented
             'paymentMethods' => 'PaymentMethodController', //Implemented
-            'producers' => 'ProducerController',
+            'producers' => 'ProducerController',    //Implemented
             'products' => 'ProductController',  //Implemented
             'productImages' => 'ProductImageController',
             'productTypes' => 'ProductTypeController',  //Implemented
