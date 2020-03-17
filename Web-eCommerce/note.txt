@@ -96,10 +96,33 @@ estrazione : $decrypted = decrypt($encryptedValue);
 
 
 
+public function __construct()
+    {
+        $rules = array(
+            ffffffffffffff
+        );
+    }
 
 
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
 
+        $address = new Address();
+        $address->fill( $request->all() );
+        $address->save();
 
+        return response()->json(['success' => 'success!']);
+
+----------------------------------------------------------------------------------------------------
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        $address = Address::find($id);
+        $address->fill( $request->all() );
+        $address->save();
 
 
 

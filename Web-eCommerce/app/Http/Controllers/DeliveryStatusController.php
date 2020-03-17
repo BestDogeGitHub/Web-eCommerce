@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class DeliveryStatusController extends Controller
 {
+    public function __construct()
+    {
+        $rules = array(
+            'status' => 'required|max:30|unique:delivery_statuses,status'
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class DeliveryStatusController extends Controller
      */
     public function index()
     {
-        $delivery_statuses = DeliveryStatus::paginate(20);
+        $delivery_statuses = DeliveryStatus::all();
 
         return View::make('delivery_statuses.index')->with('delivery_statuses', $delivery_statuses);
     }
@@ -37,20 +43,17 @@ class DeliveryStatusController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'status' => 'required|max:30|unique:delivery_statuses,status'
-        ]);
-        
-        $delivery_statuse = new DeliveryStatus();
-        $delivery_statuse->fill( $request->all() );
-        $delivery_statuse->save();
-    
-        // redirect
-        Session::flash('message', 'Successfully created delivery_statuse!');
-        return Redirect::to('delivery_statuses');
-        
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        $delivery_status = new DeliveryStatus();
+        $delivery_status->fill( $request->all() );
+        $delivery_status->save();
+
+        return response()->json(['success' => 'delivery_status added successfully.']);
     }
 
     /**
@@ -60,9 +63,9 @@ class DeliveryStatusController extends Controller
      */
     public function show($id)
     {
-        $delivery_statuse = DeliveryStatus::find($id);
+        $delivery_status = DeliveryStatus::find($id);
 
-        return View::make('delivery_statuses.show')->with('delivery_statuse', $delivery_statuse);
+        return View::make('delivery_statuses.show')->with('delivery_statuse', $delivery_status);
     }
 
     /**
@@ -72,9 +75,9 @@ class DeliveryStatusController extends Controller
      */
     public function edit($id)
     {
-        $delivery_statuse = DeliveryStatus::find($id);
+        $delivery_status = DeliveryStatus::find($id);
 
-        return View::make('delivery_statuses.edit')->with('delivery_statuse', $delivery_statuse);
+        return View::make('delivery_statuses.edit')->with('delivery_statuse', $delivery_status);
     }
 
     /**
@@ -83,24 +86,18 @@ class DeliveryStatusController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'building_number' => 'required|integer|max:1500',
-            'street_number' => 'required|integer|max:1500',
-            'postcode' => 'required|integer',
-            'country_code' => 'required|size:2|alpha',
-            'town_id' => 'required|integer',
-        ]);
-            // store
-        $delivery_statuse = DeliveryStatus::find($id);
-        $delivery_statuse->fill( $request->all() );
-        $delivery_statuse->save();
-        // redirect
-        Session::flash('message', 'Successfully updated delivery_statuse!');
-        return Redirect::to('delivery_statuses');
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $delivery_status = DeliveryStatus::find($id);
+        $delivery_status->fill( $request->all() );
+        $delivery_status->save();
         
+        return response()->json(['success' => 'delivery_status updated successfully.']);
     }
 
     /**
@@ -110,8 +107,8 @@ class DeliveryStatusController extends Controller
     public function destroy($id)
     {
         // delete
-        $delivery_statuse = DeliveryStatus::find($id);
-        $delivery_statuse->delete();
+        $delivery_status = DeliveryStatus::find($id);
+        $delivery_status->delete();
         // redirect
         Session::flash('message', 'Successfully deleted!');
         return Redirect::to('delivery_statuses');

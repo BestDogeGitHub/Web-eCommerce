@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
+    public function __construct()
+    {
+        $rules = array(
+            'details' => 'required|max:1500',
+            'payment' => 'required|numeric|between:0,99999.999',
+            'order_id' => 'required|integer|min:0|exists:orders,id',
+            'payment_method_id' => 'required|integer|min:0|exists:payment_methods,id'
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +23,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::paginate(20);
+        $invoices = Invoice::all();
 
-        return View::make('invoices.index')->with('invoices', $invoices);
+        return View('backoffice.pages.edit_invoices', ['invoices' => $invoices]);
     }
 
     /**
@@ -37,15 +46,14 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $invoice = new Invoice();
         $invoice->fill( $request->all() );
         $invoice->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created invoice!');
-        return Redirect::to('invoices');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -59,18 +67,6 @@ class InvoiceController extends Controller
 
         return View::make('invoices.show')->with('invoice', $invoice);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $invoice = Invoice::find($id);
-
-        return View::make('invoices.edit')->with('invoice', $invoice);
-    }
     /**
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
@@ -80,8 +76,7 @@ class InvoiceController extends Controller
         // delete
         $invoice = Invoice::find($id);
         $invoice->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('invoices');
+        
+        return response()->json(['success' => 'success!']);
     }
 }

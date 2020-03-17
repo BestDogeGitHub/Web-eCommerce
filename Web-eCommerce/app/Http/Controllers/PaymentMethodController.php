@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller
 {
+    public function __construct()
+        {
+            $rules = array(
+                'method' => 'required|max:30|unique:payment_methods,method'
+            );
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +20,9 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        $payment_methods = PaymentMethod::paginate(20);
+        $payment_methods = PaymentMethod::all();
 
-        return View::make('payment_methods.index')->with('payment_methods', $payment_methods);
+        return View('backoffice.pages.edit_payment_methods', ['payment_methods' => $payment_methods]);
     }
 
     /**
@@ -37,20 +43,14 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'method' => 'required|max:30|unique:payment_methods,method'
-        ]);
-        
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+
         $payment_method = new PaymentMethod();
         $payment_method->fill( $request->all() );
         $payment_method->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created payment_method!');
-        return Redirect::to('payment_methods');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -83,20 +83,14 @@ class PaymentMethodController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'method' => 'required|max:30|unique:payment_methods,method'
-        ]);
-            // store
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+
         $payment_method = PaymentMethod::find($id);
         $payment_method->fill( $request->all() );
         $payment_method->save();
-        // redirect
-        Session::flash('message', 'Successfully updated payment_method!');
-        return Redirect::to('payment_methods');
-        
+
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -108,8 +102,7 @@ class PaymentMethodController extends Controller
         // delete
         $payment_method = PaymentMethod::find($id);
         $payment_method->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('payment_methods');
+
+        return response()->json(['success' => 'success!']);
     }
 }

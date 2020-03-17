@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class ProducerController extends Controller
 {
+    public function __construct()
+        {
+            $rules = array(
+                'name' => 'required|max:45',
+                'image_ref' => 'required|max:255',
+                'link' => 'required|max:2048',
+                'details' => 'required'
+            );
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +23,9 @@ class ProducerController extends Controller
      */
     public function index()
     {
-        $producers = Producer::paginate(20);
-
-        return View::make('producers.index')->with('producers', $producers);
+        $producers = Producer::all();
+        
+        return View('backoffice.pages.edit_producers', ['producers' => $producers]);
     }
 
     /**
@@ -37,23 +46,14 @@ class ProducerController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'name' => 'required|max:45',
-            'image_ref' => 'required|max:255',
-            'link' => 'required|max:2048',
-            'details' => 'required',
-        ]);
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $producer = new Producer();
         $producer->fill( $request->all() );
         $producer->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created producer!');
-        return Redirect::to('producers');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -86,23 +86,14 @@ class ProducerController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'name' => 'required|max:45|unique:producers,name',
-            'image_ref' => 'required|max:255',
-            'link' => 'required|max:2048',
-            'details' => 'required',
-        ]);
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
             // store
         $producer = Producer::find($id);
         $producer->fill( $request->all() );
         $producer->save();
-        // redirect
-        Session::flash('message', 'Successfully updated producer!');
-        return Redirect::to('producers');
-        
+
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -114,8 +105,7 @@ class ProducerController extends Controller
         // delete
         $producer = Producer::find($id);
         $producer->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('producers');
+
+        return response()->json(['success' => 'success!']);
     }
 }

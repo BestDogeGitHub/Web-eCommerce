@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ValueController extends Controller
 {
+    public function __construct()
+        {
+            $rules = array(
+                'name' => 'required|max:50',
+                'attribute_id' => 'required|integer|min:0|exists:attributes,id'
+            );
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +21,9 @@ class ValueController extends Controller
      */
     public function index()
     {
-        $values = Value::paginate(20);
+        $values = Value::all();
 
-        return View::make('values.index')->with('values', $values);
+        return View('backoffice.pages.edit_values', ['values' => $values]);
     }
 
     /**
@@ -37,20 +44,14 @@ class ValueController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'name' => 'required|max:50'
-        ]);
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $value = new Value();
         $value->fill( $request->all() );
         $value->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created value!');
-        return Redirect::to('values');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -83,20 +84,14 @@ class ValueController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'name' => 'required|max:50'
-        ]);
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
             // store
         $value = Value::find($id);
         $value->fill( $request->all() );
         $value->save();
-        // redirect
-        Session::flash('message', 'Successfully updated value!');
-        return Redirect::to('values');
-        
+
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -108,8 +103,7 @@ class ValueController extends Controller
         // delete
         $value = Value::find($id);
         $value->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('values');
+
+        return response()->json(['success' => 'success!']);
     }
 }

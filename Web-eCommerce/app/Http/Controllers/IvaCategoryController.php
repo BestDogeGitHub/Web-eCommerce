@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class IvaCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $rules = array(
+            'category' => 'required|max:45',
+            'value' => 'required|integer|max:100|min:0',
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +21,10 @@ class IvaCategoryController extends Controller
      */
     public function index()
     {
-        $iva_categories = IvaCategory::paginate(20);
+        $iva_categories = IvaCategory::all();
 
-        return View::make('iva_categories.index')->with('iva_categories', $iva_categories);
+        return View('backoffice.pages.edit_iva_categories', ['iva_categories' => $iva_categories]);
+        
     }
 
     /**
@@ -37,20 +45,17 @@ class IvaCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'category' => 'required|max:45',
-            'value' => 'required|integer|max:100',
-        ]);
-        
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
         $iva_category = new IvaCategory();
         $iva_category->fill( $request->all() );
         $iva_category->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created iva_category!');
-        return Redirect::to('iva_categories');
+        return response()->json(['success' => 'success']);
         
     }
 
@@ -84,20 +89,16 @@ class IvaCategoryController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'category' => 'required|max:45',
-            'value' => 'required|integer|max:100',
-        ]);
-            // store
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
         $iva_category = IvaCategory::find($id);
         $iva_category->fill( $request->all() );
         $iva_category->save();
-        // redirect
-        Session::flash('message', 'Successfully updated iva_category!');
-        return Redirect::to('iva_categories');
+        
+        return response()->json(['success' => 'success']);
         
     }
 
@@ -110,8 +111,7 @@ class IvaCategoryController extends Controller
         // delete
         $iva_category = IvaCategory::find($id);
         $iva_category->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('iva_categories');
+
+        return response()->json(['success' => 'success!']);
     }
 }

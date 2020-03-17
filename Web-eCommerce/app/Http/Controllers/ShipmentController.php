@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
+    public function __construct()
+        {
+            $rules = array(
+                'tracking_number' => 'required|integer|max:999999999999999',
+                'delivery_date' => 'required|date',
+                'order_id' => 'required|integer|min:0|exists:orders,id',
+                'address_id' => 'required|integer|min:0|exists:addresses,id',
+                'carrier_id' => 'required|integer|min:0|exists:carriers,id',
+                'delivery_status_id' => 'required|integer|min:0|exists:delivery_statuses,id'
+            );
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +25,9 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::paginate(20);
+        $shipments = Shipment::all();
 
-        return View::make('shipments.index')->with('shipments', $shipments);
+        return View('backoffice.pages.edit_shipments', ['shipments' => $shipments]);
     }
 
     /**
@@ -37,21 +48,14 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'tracking_number' => 'required|integer|max:999999999999999',
-            'delivery_date' => 'required|date',
-        ]);
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $shipment = new Shipment();
         $shipment->fill( $request->all() );
         $shipment->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created shipment!');
-        return Redirect::to('shipments');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -84,20 +88,14 @@ class ShipmentController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'tracking_number' => 'required|integer|max:999999999999999',
-            'delivery_date' => 'required|date',
-        ]);
-            // store
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+        // store
         $shipment = Shipment::find($id);
         $shipment->fill( $request->all() );
         $shipment->save();
-        // redirect
-        Session::flash('message', 'Successfully updated shipment!');
-        return Redirect::to('shipments');
+
+        return response()->json(['success' => 'success!']);
         
     }
 
@@ -110,8 +108,7 @@ class ShipmentController extends Controller
         // delete
         $shipment = Shipment::find($id);
         $shipment->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('shipments');
+
+        return response()->json(['success' => 'success!']);
     }
 }

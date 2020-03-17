@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
 {
+    public function __construct()
+    {
+        $rules = array(
+            'quantity' => 'required|integer|min:1|max:1000000',
+            'order_id' => 'required|integer|min:0|exists:orders,id',
+            'product_id' => 'required|integer|min:0|exists:products,id'
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +22,9 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        $order_details = OrderDetail::paginate(20);
+        $order_details = OrderDetail::all();
 
-        return View::make('order_details.index')->with('order_details', $order_details);
+        return View('backoffice.pages.edit_order_details', ['order_details' => $order_details]);
     }
 
     /**
@@ -37,13 +45,14 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+
         $order_detail = new OrderDetail();
         $order_detail->fill( $request->all() );
         $order_detail->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created order_detail!');
-        return Redirect::to('order_details');
+        return response()->json(['success' => 'success!']);
         
     }
 
@@ -77,13 +86,14 @@ class OrderDetailController extends Controller
      */
     public function update( Request $request, $id )
     {
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         // store
         $order_detail = OrderDetail::find($id);
         $order_detail->fill( $request->all() );
         $order_detail->save();
-        // redirect
-        Session::flash('message', 'Successfully updated order_detail!');
-        return Redirect::to('order_details');
+
+        return response()->json(['success' => 'success!']);
         
     }
 
@@ -96,8 +106,7 @@ class OrderDetailController extends Controller
         // delete
         $order_detail = OrderDetail::find($id);
         $order_detail->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('order_details');
+
+        return response()->json(['success' => 'success!']);
     }
 }

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ProductImageController extends Controller
 {
+    public function __construct()
+    {
+        $rules = array(
+            'image_ref' => 'required|max:255',
+            'product_id' => 'required|integer|min:0|exists:products,id'
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +21,9 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        $product_images = ProductImage::paginate(20);
+        $product_images = ProductImage::all();
 
-        return View::make('product_images.index')->with('product_images', $product_images);
+        return View('backoffice.pages.edit_product_images', ['product_images' => $product_images]);
     }
 
     /**
@@ -37,14 +44,14 @@ class ProductImageController extends Controller
      */
     public function store(Request $request)
     {
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+
         $product_image = new ProductImage();
         $product_image->fill( $request->all() );
         $product_image->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created product_image!');
-        return Redirect::to('product_images');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -77,12 +84,14 @@ class ProductImageController extends Controller
      */
     public function update( Request $request, $id )
     {
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+        
         $product_image = ProductImage::find($id);
         $product_image->fill( $request->all() );
         $product_image->save();
-        // redirect
-        Session::flash('message', 'Successfully updated product_image!');
-        return Redirect::to('product_images');
+
+        return response()->json(['success' => 'success!']);
         
     }
 
@@ -95,8 +104,7 @@ class ProductImageController extends Controller
         // delete
         $product_image = ProductImage::find($id);
         $product_image->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('product_images');
+
+        return response()->json(['success' => 'success!']);
     }
 }

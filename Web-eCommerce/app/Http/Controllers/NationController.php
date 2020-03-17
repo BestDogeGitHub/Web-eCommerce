@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class NationController extends Controller
 {
+    public function __construct()
+        {
+            $rules = array(
+                'name' => 'required|max:70|alpha'
+            );
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +20,9 @@ class NationController extends Controller
      */
     public function index()
     {
-        $nations = Nation::paginate(20);
+        $nations = Nation::all();
 
-        return View::make('nations.index')->with('nations', $nations);
+        return View('backoffice.pages.edit_nations', ['nations' => $nations]);
     }
 
     /**
@@ -37,20 +43,17 @@ class NationController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'name' => 'required|max:70|alpha'
-        ]);
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
         
         $nation = new Nation();
         $nation->fill( $request->all() );
         $nation->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created nation!');
-        return Redirect::to('nations');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -83,20 +86,17 @@ class NationController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'name' => 'required|max:70|alpha'
-        ]);
-            // store
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        
         $nation = Nation::find($id);
         $nation->fill( $request->all() );
         $nation->save();
-        // redirect
-        Session::flash('message', 'Successfully updated nation!');
-        return Redirect::to('nations');
-        
+
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -108,8 +108,7 @@ class NationController extends Controller
         // delete
         $nation = Nation::find($id);
         $nation->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('nations');
+
+        return response()->json(['success' => 'success!']);
     }
 }

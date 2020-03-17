@@ -145,7 +145,7 @@ class AddressController extends Controller
 
         $address->update($data);
         
-        return response()->json(['success' => 'Procut Updated successfully.']);
+        return response()->json(['success' => 'address updated successfully.']);
     }
 
     /**

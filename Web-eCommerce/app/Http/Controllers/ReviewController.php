@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+    public function __construct()
+        {
+            $rules = array(
+                'stars' => 'required|integer|max:5',
+                'text' => 'required|max:1500',
+                'user_id' => 'required|integer|min:0|exists:users,id',
+                'product_type_id' => 'required|integer|min:0|exists:product_types,id'
+            );
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +23,9 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::paginate(20);
+        $reviews = Review::all();
 
-        return View::make('reviews.index')->with('reviews', $reviews);
+        return View('backoffice.pages.edit_reviews', ['reviews' => $reviews]);
     }
 
     /**
@@ -37,21 +46,14 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'stars' => 'required|integer|max:5',
-            'text' => 'required|max:1500',
-        ]);
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $review = new Review();
         $review->fill( $request->all() );
         $review->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created review!');
-        return Redirect::to('reviews');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -84,21 +86,14 @@ class ReviewController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'stars' => 'required|integer|max:5',
-            'text' => 'required|max:1500',
-        ]);
-            // store
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+        // store
         $review = Review::find($id);
         $review->fill( $request->all() );
         $review->save();
-        // redirect
-        Session::flash('message', 'Successfully updated review!');
-        return Redirect::to('reviews');
-        
+
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -110,8 +105,7 @@ class ReviewController extends Controller
         // delete
         $review = Review::find($id);
         $review->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('reviews');
+
+        return response()->json(['success' => 'success!']);
     }
 }

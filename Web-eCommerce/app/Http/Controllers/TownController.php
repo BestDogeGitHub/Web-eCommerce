@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class TownController extends Controller
 {
+    public function __construct()
+        {
+            $rules = array(
+                'name' => 'required|alpha|max:50',
+                'nation_id' => 'required|integer|min:0|exists:nations,id'
+            );
+        }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +21,9 @@ class TownController extends Controller
      */
     public function index()
     {
-        $towns = Town::paginate(20);
+        $towns = Town::all();
 
-        return View::make('towns.index')->with('towns', $towns);
+        return View('backoffice.pages.edit_towns', ['towns' => $towns]);
     }
 
     /**
@@ -37,20 +44,14 @@ class TownController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate
-        ([
-            'name' => 'required|alpha|max:50'
-        ]);
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $town = new Town();
         $town->fill( $request->all() );
         $town->save();
-    
-        // redirect
-        Session::flash('message', 'Successfully created town!');
-        return Redirect::to('towns');
-        
+
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -83,19 +84,14 @@ class TownController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // validate
-        // read more on validation at http://laravel.com/docs/validation
-        $request->validate
-        ([
-            'name' => 'required|alpha|max:50'
-        ]);
-            // store
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+        // store
         $town = Town::find($id);
         $town->fill( $request->all() );
         $town->save();
-        // redirect
-        Session::flash('message', 'Successfully updated town!');
-        return Redirect::to('towns');
+
+        return response()->json(['success' => 'success!']);
         
     }
 
@@ -108,8 +104,7 @@ class TownController extends Controller
         // delete
         $town = Town::find($id);
         $town->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('towns');
+
+        return response()->json(['success' => 'success!']);
     }
 }

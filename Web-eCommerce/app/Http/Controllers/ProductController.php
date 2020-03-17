@@ -47,8 +47,11 @@ class ProductController extends Controller
             'ivaCategory' => 'required',
             'payment' => 'required|numeric|between:0,99999.999',
             'sale' => 'required|numeric|max:100',
-            'stock' => 'required|numeric',
-            'info' => 'required|max:500'
+            'stock' => 'required|numeric|max:10000000',
+            'info' => 'required|max:500',
+            'available' => 'required|numeric|between:0,1',
+            'product_type_id' => 'required|integer|min:0|exists:product_types,id',
+            'iva_category_id' => 'required|integer|min:0|exists:iva_categories,id'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -116,7 +119,9 @@ class ProductController extends Controller
             'sale' => 'required|numeric|max:100',
             'stock' => 'required|numeric',
             'info' => 'required|max:500',
-            'available' => 'required|numeric|between:0,1'
+            'available' => 'required|numeric|between:0,1',
+            'product_type_id' => 'required|integer|min:0|exists:product_types,id',
+            'iva_category_id' => 'required|integer|min:0|exists:iva_categories,id'
         );
 
         $error = Validator::make($request->all(), $rules);

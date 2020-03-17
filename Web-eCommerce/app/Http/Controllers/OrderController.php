@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $rules = array(
+            'PO_Number' => 'required|integer|min:1|max:999999999999999',
+            'user_id' => 'required|integer|min:0|exists:users,id'
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +21,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(20);
+        $orders = Order::all();
 
-        return View::make('orders.index')->with('orders', $orders);
+        return View('backoffice.pages.edit_orders', ['orders' => $orders]);
     }
 
     /**
@@ -37,14 +44,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {   
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+
         $order = new Order();
         $order->fill( $request->all() );
         $order->save();
     
-        // redirect
-        Session::flash('message', 'Successfully created order!');
-        return Redirect::to('orders');
-        
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -77,14 +84,14 @@ class OrderController extends Controller
      */
     public function update( Request $request, $id )
     {
-        // store
+        $error = Validator::make($request->all(), $rules);
+        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+        
         $order = Order::find($id);
         $order->fill( $request->all() );
         $order->save();
-        // redirect
-        Session::flash('message', 'Successfully updated order!');
-        return Redirect::to('orders');
-        
+
+        return response()->json(['success' => 'success!']);
     }
 
     /**
@@ -96,8 +103,7 @@ class OrderController extends Controller
         // delete
         $order = Order::find($id);
         $order->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('orders');
+
+        return response()->json(['success' => 'success!']);
     }
 }
