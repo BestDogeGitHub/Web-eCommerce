@@ -100,17 +100,21 @@
 
                         <h5>Products</h5>
                         
-                        <div class="d-none">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" id="product_info_template" target="_blank">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"></h5>
+                        <template>
+                            <div class="d-none">
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" id="product_info_template" target="_blank">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1"></h5>
+                                        <small></small>
+                                    </div>
+                                    <img class="img-responsive crud"/>
+                                    <p class="mb-1"></p>
                                     <small></small>
-                                </div>
-                                <img class="img-responsive crud"/>
-                                <p class="mb-1"></p>
-                                <small></small>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
+                        </template>
+
+                        
                         <div class="list-group" id="order_products">
 
                         </div>
