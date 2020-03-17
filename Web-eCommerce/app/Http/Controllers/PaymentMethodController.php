@@ -100,12 +100,9 @@ class PaymentMethodController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PaymentMethod $item)
     {
-        // delete
-        $payment_method = PaymentMethod::find($id);
-        $payment_method->delete();
-
+        $item->delete();
         return response()->json(['success' => 'success!']);
     }
 }
