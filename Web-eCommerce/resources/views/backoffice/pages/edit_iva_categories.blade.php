@@ -12,13 +12,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Manage <b>Invoices</b></h1>
+                    <h1>Manage <b>Iva Categories</b></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Orders</a></li>
-                    <li class="breadcrumb-item active">Invoices</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Properties</a></li>
+                    <li class="breadcrumb-item active">Iva Categories</li>
                     </ol>
                 </div>
                 </div>
@@ -34,28 +34,30 @@
             <div class="table-title">
                 <div class="row">
 					<div class="col-sm-12">
-						<a href="#addInvoiceModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Invoice</span></a>				
+						<a href="#addIvaCategoryModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Category</span></a>				
 					</div>
                 </div>
             </div>
 
-            <table class="table table-striped table-hover" id="invocesTable">
+            <table class="table table-striped table-hover" id="ivaCategoriesTable">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Purchase Order Number</th>
-                        <th>Edit Items</th>
+                        <th>Name</th>
+                        <th>Value in %</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($invoices as $invoice)
+
+                    @foreach($ivaCategories as $category)
                     <tr>
-                        <td>{{$invoice->id}}</td>
-                        <td>{{$invoice->order->PO_Number}}</td>
+                        <td>{{$category->id}}</td>
+                        <td>{{$category->category}}</td>
+                        <td>{{$category->value}}</td>
                         <td>
-                            <a href="#" class="_edit" id="{{ $invoice->id }}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                            <a href="#" class="_edit" id="{{ $invoice->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                            <a href="#" class="_delete" id="{{ $invoice->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            <a href="#" class="_edit" id="{{ $category->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                            <a href="#" class="_delete" id="{{ $category->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -69,37 +71,26 @@
 
     <!-- !!! MODALS !!! -->
     <!-- Add Modal HTML -->
-    <div id="addAddressModal" class="modal fade">
+    <div id="addIvaCategoryModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-                <form id="addAddressForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form id="addIvaCategoryForm" method="post" class="form-horizontal" enctype="multipart/form-data">
                 @csrf
 					<div class="modal-header">						
-						<h4 class="modal-title">Add Product Type</h4>
+						<h4 class="modal-title">Add IvaCategory</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
                         
                         <div class="form-group">
-							<label>Building Number</label>
-							<input type="numeric" class="form-control" required="required" name="building_number"/>
-						</div>	
-                        
-                        <div class="form-group">
-							<label>Street Number</label>
-							<input type="numeric" class="form-control" required="required" name="street_number"/>
-                        </div>	
-                        
-                        <div class="form-group">
-							<label>Postcode</label>
-							<input type="text" class="form-control" required="required" name="postcode"/>
-                        </div>	
-                        
-                        <div class="form-group">
-							<label>Country Code</label>
-							<input type="text" class="form-control" required="required" name="country_code"/>
+							<label>Category</label>
+							<input type="text" class="form-control" required="required" name="category"/>
 						</div>	
 
+                        <div class="form-group">
+							<label>Value</label>
+							<input type="numeric" class="form-control" required="required" name="value"/>
+						</div>	
 
                         <div id="forErrors"></div>					
                     </div>
@@ -114,13 +105,13 @@
 	</div>
     <!-- FOR SHOW AND EDIT -->
 
-    <div id="editAddressModal" class="modal fade">
+    <div id="editIvaCategoryModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-                <form id="editAddressForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form id="editIvaCategoryForm" method="post" class="form-horizontal" enctype="multipart/form-data">
                 @csrf
 					<div class="modal-header">						
-						<h4 class="modal-title">Edit Address</h4>
+						<h4 class="modal-title">Edit IvaCategory</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -130,25 +121,14 @@
 
                         
                         <div class="form-group">
-							<label>Building Number</label>
-							<input type="numeric" class="form-control" required="required" name="building_number" id="editBuilding"/>
-						</div>	
-                        
-                        <div class="form-group">
-							<label>Street Number</label>
-							<input type="numeric" class="form-control" required="required" name="street_number" id="editStreet"/>
-                        </div>	
-                        
-                        <div class="form-group">
-							<label>Postcode</label>
-							<input type="text" class="form-control" required="required" name="postcode" id="editPostcode"/>
-                        </div>	
-                        
-                        <div class="form-group">
-							<label>Country Code</label>
-							<input type="text" class="form-control" required="required" name="country_code" id="editCountrycode"/>
+							<label>Category</label>
+							<input type="text" class="form-control" required="required" name="category" id="editCategory"/>
 						</div>	
 
+                        <div class="form-group">
+							<label>Value</label>
+							<input type="numeric" class="form-control" required="required" name="value" id="editValue"/>
+						</div>	
 
                         <div id="forEditErrors"></div>					
                     </div>
@@ -163,16 +143,16 @@
 	</div>
     
     <!-- Delete Modal HTML -->
-	<div id="deleteAddressModal" class="modal fade">
+	<div id="deleteIvaCategoryModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-                <form id="deleteAddressForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form id="deleteIvaCategoryForm" method="post" class="form-horizontal" enctype="multipart/form-data">
 					<div class="modal-header">						
-						<h4 class="modal-title">Delete Address</h4>
+						<h4 class="modal-title">Delete IvaCategory</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>Are you sure you want to delete this Address?</p>
+						<p>Are you sure you want to delete this IvaCategory?</p>
 						<p class="text-warning"><small>!!! This action cannot be undone !!!</small></p>
 					</div>
 					<div class="modal-footer">
@@ -184,6 +164,6 @@
 		</div>
     </div>       
 
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-<script src="{{ asset('dist/js/pages/invoices.js') }}"></script>
+
+<script src="{{ asset('dist/js/pages/iva_categories.js') }}"></script>
 @endsection('content')

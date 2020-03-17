@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\IvaCategory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Validator;
 
 class IvaCategoryController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
     {
-        $rules = array(
+        $this->rules = array(
             'category' => 'required|max:45',
             'value' => 'required|integer|max:100|min:0',
         );
@@ -21,9 +26,9 @@ class IvaCategoryController extends Controller
      */
     public function index()
     {
-        $iva_categories = IvaCategory::all();
+        $ivaCategories = IvaCategory::all();
 
-        return View('backoffice.pages.edit_iva_categories', ['iva_categories' => $iva_categories]);
+        return View('backoffice.pages.edit_iva_categories', ['ivaCategories' => $ivaCategories]);
         
     }
 
@@ -45,17 +50,28 @@ class IvaCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails()){
+        $error = Validator::make($request->all(), $this->rules);
+        
+        
+        if($error->fails())
+        {
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        $iva_category = new IvaCategory();
-        $iva_category->fill( $request->all() );
-        $iva_category->save();
-    
-        return response()->json(['success' => 'success']);
+        $data = array(
+            'category' => $request->category,
+            'value' => $request->value
+        ); 
+
+        
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        IvaCategory::create($data);
+        
+
+        return response()->json(['success' => 'Category Added successfully.']);
         
     }
 
@@ -76,29 +92,40 @@ class IvaCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(IvaCategory $ivaCategory)
     {
-        $iva_category = IvaCategory::find($id);
-
-        return View::make('iva_categories.edit')->with('iva_category', $iva_category);
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $ivaCategory
+            ]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, IvaCategory $ivaCategory )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
 
         if($error->fails()){
             return response()->json(['errors' => $error->errors()->all()]);
         }
-        $iva_category = IvaCategory::find($id);
-        $iva_category->fill( $request->all() );
-        $iva_category->save();
+
+        $data = array(
+            'category' => $request->category,
+            'value' => $request->value
+        ); 
+
+        // FOR DEBUGGING
+        //return response()->json(['errors' => array_values($data)]);
+
+        $ivaCategory->update($data);
         
-        return response()->json(['success' => 'success']);
+
+        return response()->json(['success' => 'Category Updated successfully.']);
         
     }
 
@@ -106,12 +133,8 @@ class IvaCategoryController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(IvaCategory $ivaCategory)
     {
-        // delete
-        $iva_category = IvaCategory::find($id);
-        $iva_category->delete();
-
-        return response()->json(['success' => 'success!']);
+        $ivaCategory->delete();
     }
 }

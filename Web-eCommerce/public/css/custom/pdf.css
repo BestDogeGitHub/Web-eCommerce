@@ -1,0 +1,86 @@
+
+.invoice-container {
+    width: 800px;
+    color: black !important;
+}
+
+.invoice-container * p{
+    font-size: 10pt;
+}
+
+.table-container {
+    line-height: 1.2;
+}
+
+.table-invoices {
+    min-width: unset !important;
+}
+
+.invoice_int_dx {
+    text-align: right;
+    margin-bottom: 0 !important;
+}
+
+.invoice_int_dx h3{
+    font-size: 12pt;
+}
+
+.logo_invoice {
+    width: 40px !important;
+    height: 40px !important;
+    margin-right: 20px;
+}
+
+.info-box {
+    font-size:6pt !important;
+}
+
+.table-invoices {
+    font-size: 9pt;
+}
+
+.table-invoices * p{
+    font-size: 8pt;
+}
+
+.table-invoices * td{
+    text-align:center;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -7.5px;
+    margin-left: -7.5px;
+}
+
+.col {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.container{
+    padding-right: 7.5px;
+    padding-left: 7.5px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.w-25 {
+    width: 25%!important;
+}
+
+.w-15 {
+    width: 15%!important;
+}
+
+.total {
+    margin-left: 20px;
+}

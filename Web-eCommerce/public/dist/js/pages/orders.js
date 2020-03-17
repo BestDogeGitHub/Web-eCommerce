@@ -84,7 +84,7 @@ $(document).ready(function() {
                             }
                         });
                         $('#status').html('Status: <span class="badge badge-light">' + add.delivery_status.status + '</span>');
-                        $('#price').html('<span class="badge badge-danger">Total &euro; ' + obj.invoice.payment + '</span>')
+                        $('#price').html('<span class="badge badge-danger">Total &euro; ' + obj.invoice.payment + '</span>');
                         $('#spinner').fadeOut();
                     }
                 });

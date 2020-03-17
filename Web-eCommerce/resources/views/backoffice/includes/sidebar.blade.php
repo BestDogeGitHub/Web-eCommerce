@@ -13,14 +13,17 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
         <div class="card text-center">
+        @auth
           <div class="card-body">
             <p class="d-block"><i class="nav-icon fas fa-user"></i> &nbsp;&nbsp;&nbsp;{{ Auth::user()->username }}</p>
           </div>
+          
           <div class="card-footer text-muted">
               @foreach(Auth::user()->roles as $role)
                 {{ $role->name }} <br/>
               @endforeach
           </div>
+          @endauth
         </div>
           
           
@@ -122,6 +125,12 @@
                   <p>Payment Methods</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('ivaCategories.index')}}" class="nav-link">
+                  <i class="fa fa-th nav-icon"></i>
+                  <p>Iva Categories</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -136,12 +145,6 @@
                 <a href="{{route('orders.index')}}" class="nav-link">
                   <i class="fa fa-cart-plus nav-icon"></i>
                   <p>Orders</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('invoices.index')}}" class="nav-link">
-                  <i class="fa fa-sticky-note nav-icon"></i>
-                  <p>Invoices</p>
                 </a>
               </li>
             </ul>

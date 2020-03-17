@@ -22,6 +22,8 @@ class UserController extends Controller
         return View('backoffice.pages.edit_users', ['users' => $users, 'addresses' => $addresses]);
     }
 
+    
+
     public function getById($id) {
         return User::where('id', $id)->first();
     }
