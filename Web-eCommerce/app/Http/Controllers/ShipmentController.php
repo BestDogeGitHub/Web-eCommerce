@@ -75,11 +75,14 @@ class ShipmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Shipment $shipment)
     {
-        $shipment = Shipment::find($id);
-
-        return View::make('shipments.edit')->with('shipment', $shipment);
+        return response()->json([
+            'shipment' => $shipment, 
+            'carrier' => $shipment->carrier,
+            'order' => $shipment->order,
+            'delivery_status' => $shipment->deliveryStatus
+        ]);
     }
 
     /**

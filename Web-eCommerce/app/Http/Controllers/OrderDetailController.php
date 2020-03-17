@@ -73,11 +73,16 @@ class OrderDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(OrderDetail $orderDetail)
     {
-        $order_detail = OrderDetail::find($id);
-
-        return View::make('order_details.edit')->with('order_detail', $order_detail);
+        if(request()->ajax())
+        {
+            return response()->json([
+                'orderDetail' => $orderDetail, 
+                'product' => $orderDetail->product,
+                'product_type' => $orderDetail->product->productType
+            ]);
+        }
     }
 
     /**

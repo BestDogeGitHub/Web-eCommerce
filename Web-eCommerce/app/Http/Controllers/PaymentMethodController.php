@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PaymentMethod;
 use Illuminate\Http\Request;
+use Validator;
 
 class PaymentMethodController extends Controller
 {
@@ -20,9 +21,9 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        $payment_methods = PaymentMethod::all();
+        $payments = PaymentMethod::all();
 
-        return View('backoffice.pages.edit_payment_methods', ['payment_methods' => $payment_methods]);
+        return View('backoffice.pages.edit_payment_methods', ['paymentMethods' => $payments]);
     }
 
     /**
@@ -58,11 +59,10 @@ class PaymentMethodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PaymentMethod $payment_method)
     {
-        $payment_method = PaymentMethod::find($id);
 
-        return View::make('payment_methods.show')->with('payment_method', $payment_method);
+        return View::make('payment_methods.show')->with('payment_method', $paymentMethod);
     }
 
     /**
@@ -72,16 +72,19 @@ class PaymentMethodController extends Controller
      */
     public function edit($id)
     {
-        $payment_method = PaymentMethod::find($id);
-
-        return View::make('payment_methods.edit')->with('payment_method', $payment_method);
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $paymentMethod
+            ]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, PaymentMethod $paymentMethod )
     {
         $error = Validator::make($request->all(), $rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }

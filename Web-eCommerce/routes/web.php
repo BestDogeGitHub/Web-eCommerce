@@ -42,22 +42,22 @@ Route::get('auth/products', 'ProductController@index');
 Route::prefix('auth')->group(function () {
     Route::group(['middleware' => ['role:Administrator']], function () {
         Route::resources([
-            'addresses' => 'AddressController',
-            'attributes' => 'AttributeController',
-            'carriers' => 'CarrierController',
-            'categories' => 'CategoryController',
-            'creditCards' => 'CreditCardController',
-            'deliveryStatuses' => 'DeliveryStatusController',
-            'invoices' => 'InvoiceController',
+            'addresses' => 'AddressController', //Implemented         
+            'attributes' => 'AttributeController',   //Implemented
+            'carriers' => 'CarrierController',  //Implemented
+            'categories' => 'CategoryController',   //Implemented
+            'creditCards' => 'CreditCardController',    //Implemented
+            'deliveryStatuses' => 'DeliveryStatusController', //Implemented
+            'invoices' => 'InvoiceController',  
             'ivaCategories' => 'IvaCategoryController',
             'Nations' => 'NationController',
             'orders' => 'OrderController',
             'orderDetails' => 'OrderDetailController',
-            'paymentMethods' => 'PaymentMethodController',
+            'paymentMethods' => 'PaymentMethodController', //Implemented
             'producers' => 'ProducerController',
-            'products' => 'ProductController',
+            'products' => 'ProductController',  //Implemented
             'productImages' => 'ProductImageController',
-            'productTypes' => 'ProductTypeController',
+            'productTypes' => 'ProductTypeController',  //Implemented
             'reviews' => 'ReviewController',
             'shipments' => 'ShipmentController',
             'towns' => 'TownController',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DeliveryStatus;
 use Illuminate\Http\Request;
+use Validator;
 
 class DeliveryStatusController extends Controller
 {
@@ -20,9 +21,9 @@ class DeliveryStatusController extends Controller
      */
     public function index()
     {
-        $delivery_statuses = DeliveryStatus::all();
+        $deliveryStatuses = DeliveryStatus::all();
 
-        return View::make('delivery_statuses.index')->with('delivery_statuses', $delivery_statuses);
+        return View('backoffice.pages.edit_delivery_statuses', ['deliveryStatuses' => $deliveryStatuses]);
     }
 
     /**
@@ -73,18 +74,21 @@ class DeliveryStatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(DeliveryStatus $deliveryStatus)
     {
-        $delivery_status = DeliveryStatus::find($id);
-
-        return View::make('delivery_statuses.edit')->with('delivery_statuse', $delivery_status);
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $deliveryStatus
+            ]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, DeliveryStatus $deliveryStatus )
     {
         $error = Validator::make($request->all(), $rules);
 
@@ -104,13 +108,8 @@ class DeliveryStatusController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeliveryStatus $deliveryStatus)
     {
-        // delete
-        $delivery_status = DeliveryStatus::find($id);
-        $delivery_status->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('delivery_statuses');
+        $deliveryStatus->delete();
     }
 }

@@ -33,9 +33,9 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-header text-uppercase"><i class="nav-icon fa fa-wrench card-icon"></i>&nbsp;Administration Tools</li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
               <p>
                 Catalog
                 <i class="right fas fa-angle-left"></i>
@@ -43,15 +43,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('productTypes.index')}}" class="nav-link">
-                  <i class="fa fa-list nav-icon"></i>
-                  <p>Proudct Types</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{route('products.index')}}" class="nav-link">
                   <i class="fa fa-barcode nav-icon"></i>
                   <p>Products</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('productTypes.index')}}" class="nav-link">
+                  <i class="fa fa-list nav-icon"></i>
+                  <p>Proudct Types</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -64,9 +64,8 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-id-card"></i>
               <p>
-                Administration
+                Accounts
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -81,7 +80,6 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-wrench"></i>
               <p>
                 Properties
                 <i class="right fas fa-angle-left"></i>
@@ -102,7 +100,7 @@
               </li>
               <li class="nav-item">
                 <a href="{{route('carriers.index')}}" class="nav-link">
-                  <i class="fa fa-bus nav-icon"></i>
+                  <i class="fa fa-truck nav-icon"></i>
                   <p>Carriers</p>
                 </a>
               </li>
@@ -110,6 +108,40 @@
                 <a href="{{route('creditCards.index')}}" class="nav-link">
                   <i class="fa fa-credit-card nav-icon"></i>
                   <p>Credit Cards</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('deliveryStatuses.index')}}" class="nav-link">
+                  <i class="fa fa-archive nav-icon"></i>
+                  <p>Delivery Statuses</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('paymentMethods.index')}}" class="nav-link">
+                  <i class="fa fa-tag nav-icon"></i>
+                  <p>Payment Methods</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <p>
+                Orders
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('orders.index')}}" class="nav-link">
+                  <i class="fa fa-cart-plus nav-icon"></i>
+                  <p>Orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('invoices.index')}}" class="nav-link">
+                  <i class="fa fa-sticky-note nav-icon"></i>
+                  <p>Invoices</p>
                 </a>
               </li>
             </ul>

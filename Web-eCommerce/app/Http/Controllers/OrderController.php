@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderDetail;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -71,11 +73,17 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        $order = Order::find($id);
-
-        return View::make('orders.edit')->with('order', $order);
+        if(request()->ajax())
+        {
+            return response()->json([
+                'order' => $order, 
+                'orderDetails' => $order->orderDetails,
+                'shipment' => $order->shipment,
+                'invoice' => $order->invoice,
+            ]);
+        }
     }
 
     /**

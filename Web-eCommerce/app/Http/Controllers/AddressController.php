@@ -94,7 +94,7 @@ class AddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Address $address)
     {
         if(request()->ajax())
         {
@@ -112,7 +112,7 @@ class AddressController extends Controller
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, Address $address )
     {
         $rules = array(
             'building_number' => 'required|numeric|min:0||max:1500',
@@ -152,13 +152,8 @@ class AddressController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Address $address)
     {
-        // delete
-        $address = Address::find($id);
         $address->delete();
-        // redirect
-        Session::flash('message', 'Successfully deleted!');
-        return Redirect::to('addresses');
     }
 }
