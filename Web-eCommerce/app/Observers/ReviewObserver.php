@@ -29,9 +29,20 @@ class ReviewObserver
      * @param  \App\Review  $review
      * @return void
      */
-    public function updated(Review $review)
+    public function updating(Review $review)
     {
-        //
+        if($review->isDirty('stars')) // stars has changed
+        {
+            $new_stars = $review->stars; 
+            $old_stars = $review->getOriginal('stars');
+            $diff = $new_stars - $old_stars;
+
+            $productTypeId = $review->product_type_id;
+            
+            $PT = ProductType::find($productTypeId);
+            $PT->star_tot_number += $diff;
+            $PT->save();
+        }
     }
 
     /**
@@ -42,6 +53,11 @@ class ReviewObserver
      */
     public function deleted(Review $review)
     {
-        //
+        $productTypeId = $review->product_type_id;
+
+        $PT = ProductType::find($productTypeId);
+        $PT->star_tot_number -= $review->stars;
+        $PT->n_reviews--;
+        $PT->save();
     }
 }

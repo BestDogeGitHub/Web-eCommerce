@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->decimal('payment',9,3);
+            $table->decimal('payment',9,3); // without sale
             $table->tinyInteger('sale')->default(0); // you have to give the % of sale
             $table->mediumInteger('stock')->default(0);
             $table->mediumInteger('buy_counter')->default(0); // for statistic purpose
