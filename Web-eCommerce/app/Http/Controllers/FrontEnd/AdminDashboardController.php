@@ -5,12 +5,16 @@ namespace App\Http\Controllers\FrontEnd;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminDashboardController extends Controller
 {
 
     public function index()
     {
+        $user = Auth::user();
+        $user->assignRole('User');
+
         return view('backoffice.pages.home');
     }
 

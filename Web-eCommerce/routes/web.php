@@ -58,7 +58,7 @@ Route::prefix('auth')->group(function () {
             'paymentMethods' => 'PaymentMethodController', //Implemented
             'producers' => 'ProducerController',    //Implemented
             'products' => 'ProductController',  //Implemented
-            'productImages' => 'ProductImageController',
+            'productImages' => 'ProductImageController', 
             'productTypes' => 'ProductTypeController',  //Implemented
             'reviews' => 'ReviewController',
             'shipments' => 'ShipmentController',

@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
         {
-            $rules = array(
+            $this->rules = array(
                 'stars' => 'required|integer|max:5',
                 'text' => 'required|max:1500',
                 'user_id' => 'required|integer|min:0|exists:users,id',
@@ -46,7 +49,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $review = new Review();
@@ -86,7 +89,7 @@ class ReviewController extends Controller
      */
     public function update( Request $request, $id )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         // store
         $review = Review::find($id);

@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class TownController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
         {
-            $rules = array(
+            $this->rules = array(
                 'name' => 'required|alpha|max:50',
                 'nation_id' => 'required|integer|min:0|exists:nations,id'
             );
@@ -44,7 +47,7 @@ class TownController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $town = new Town();
@@ -84,7 +87,7 @@ class TownController extends Controller
      */
     public function update( Request $request, $id )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         // store
         $town = Town::find($id);

@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class ProductImageController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
     {
-        $rules = array(
+        $this->rules = array(
             'image_ref' => 'required|max:255',
             'product_id' => 'required|integer|min:0|exists:products,id'
         );
@@ -44,7 +47,7 @@ class ProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
 
         $product_image = new ProductImage();
@@ -84,7 +87,7 @@ class ProductImageController extends Controller
      */
     public function update( Request $request, $id )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $product_image = ProductImage::find($id);
