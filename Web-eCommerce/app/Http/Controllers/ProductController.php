@@ -166,4 +166,39 @@ class ProductController extends Controller
     {
         return Product::where('id', $id)->first();
     }
+
+    /**
+     * Get Images
+     */
+    public function getImages($id) {
+
+        
+
+        if(request()->ajax())
+        {
+            $product = Product::findOrFail($id);
+            $productType = $product->productType->name;
+
+            $productImages = $product->productImages;
+
+            if (!count($productImages))
+            {
+                $productImages = '';
+            }
+
+            return response()->json([
+                'images' => $productImages,
+                'product' => $product,
+                'product_type' => $productType
+            ]);
+        }
+
+        
+
+    }
+
+    public function redirectToProductImages($id) {
+        $product = Product::findOrFail($id);
+        return View('backoffice.pages.edit_product_images', ['product' => $product]);
+    }
 }

@@ -8,9 +8,12 @@ use Validator;
 
 class PaymentMethodController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
         {
-            $rules = array(
+            $this->rules = array(
                 'method' => 'required|max:30|unique:payment_methods,method'
             );
         }
@@ -44,7 +47,7 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
 
         $payment_method = new PaymentMethod();
@@ -86,7 +89,7 @@ class PaymentMethodController extends Controller
      */
     public function update( Request $request, PaymentMethod $paymentMethod )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
 
         $payment_method = PaymentMethod::find($id);

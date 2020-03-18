@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class ShipmentController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
         {
-            $rules = array(
+            $this->rules = array(
                 'tracking_number' => 'required|integer|max:999999999999999',
                 'delivery_date' => 'required|date',
                 'order_id' => 'required|integer|min:0|exists:orders,id',
@@ -48,7 +51,7 @@ class ShipmentController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $shipment = new Shipment();
@@ -91,7 +94,7 @@ class ShipmentController extends Controller
      */
     public function update( Request $request, $id )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         // store
         $shipment = Shipment::find($id);

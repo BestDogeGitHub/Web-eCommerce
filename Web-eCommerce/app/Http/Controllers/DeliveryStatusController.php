@@ -8,6 +8,9 @@ use Validator;
 
 class DeliveryStatusController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
     {
         $rules = array(

@@ -10,6 +10,9 @@ use Validator;
 
 class AddressController extends Controller
 {
+
+    protected $rules;
+
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +45,7 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         
-        $rules = array(
+        $this->rules = array(
             'building_number' => 'required|numeric|min:0|max:1500',
             'street_number' => 'required|numeric|min:0|max:1500',
             'postcode' => 'required|string',
@@ -50,7 +53,7 @@ class AddressController extends Controller
             'town_id' => 'required|numeric'
         );
 
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
 
         if($error->fails())
         {
@@ -114,7 +117,7 @@ class AddressController extends Controller
      */
     public function update( Request $request, Address $address )
     {
-        $rules = array(
+        $this->rules = array(
             'building_number' => 'required|numeric|min:0||max:1500',
             'street_number' => 'required|numeric|min:0||max:1500',
             'postcode' => 'required|string',
@@ -122,7 +125,7 @@ class AddressController extends Controller
             'town_id' => 'required|numeric'
         );
 
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
 
         if($error->fails())
         {

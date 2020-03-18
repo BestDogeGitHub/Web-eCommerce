@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
     {
-        $rules = array(
+        $this->rules = array(
             'quantity' => 'required|integer|min:1|max:1000000',
             'order_id' => 'required|integer|min:0|exists:orders,id',
             'product_id' => 'required|integer|min:0|exists:products,id'
@@ -45,7 +48,7 @@ class OrderDetailController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
 
         $order_detail = new OrderDetail();
@@ -91,7 +94,7 @@ class OrderDetailController extends Controller
      */
     public function update( Request $request, $id )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         // store
         $order_detail = OrderDetail::find($id);

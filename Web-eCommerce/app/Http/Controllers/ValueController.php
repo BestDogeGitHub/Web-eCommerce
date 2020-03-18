@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class ValueController extends Controller
 {
+
+    protected $rules;
+
     public function __construct()
         {
-            $rules = array(
+            $this->rules = array(
                 'name' => 'required|max:50',
                 'attribute_id' => 'required|integer|min:0|exists:attributes,id'
             );
@@ -44,7 +47,7 @@ class ValueController extends Controller
      */
     public function store(Request $request)
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
         
         $value = new Value();
@@ -84,7 +87,7 @@ class ValueController extends Controller
      */
     public function update( Request $request, $id )
     {
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
             // store
         $value = Value::find($id);

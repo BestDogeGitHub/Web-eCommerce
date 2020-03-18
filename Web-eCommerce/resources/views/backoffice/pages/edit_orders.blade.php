@@ -100,7 +100,6 @@
 
                         <h5>Products</h5>
                         
-                        <template>
                             <div class="d-none">
                                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" id="product_info_template" target="_blank">
                                     <div class="d-flex w-100 justify-content-between">
@@ -112,7 +111,6 @@
                                     <small></small>
                                 </a>
                             </div>
-                        </template>
 
                         
                         <div class="list-group" id="order_products">
