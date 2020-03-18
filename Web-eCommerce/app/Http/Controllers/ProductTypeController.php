@@ -189,4 +189,37 @@ class ProductTypeController extends Controller
             }
         }
     }
+
+    public function search($string)
+    {
+        $words = explode(' ',$string);
+
+        $productTypes = ProductType::all();
+
+        $productTypes->map(function ($productType)
+        {
+            $productType['count'] = 0;
+        });
+
+        foreach ($productTypes as $productType) 
+        {
+            foreach ($words as $word) 
+            {
+                if (strpos($productType->name, $word) !== false) 
+                {
+                    $productType->count++ ;
+                }
+            }
+        }
+
+        $ordered = $productTypes->sortByDesc('count');
+
+        $orderedNice = $ordered->map(function ($post)
+        {
+            unset($post['count']);
+            return $post;
+        });
+
+        return $orderedNice;
+    }
 }
