@@ -33,6 +33,8 @@ Route::get('auth/home', 'FrontEnd\AdminDashboardController@index')->name('dashbo
 Route::get('auth/categories/properties', 'FrontEnd\AdminDashboardController@editProperties')->name('dashboard.properties');
 Route::get('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@editUserRoles')->name('editUserRoles');
 Route::post('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles');
+Route::post('auth/products/{id}/images', 'ProductController@getImages')->name('getProductImages');
+Route::get('auth/products/{id}/images', 'ProductController@redirectToProductImages')->name('redirectToProductImages');
 Route::get('auth/users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');
 Route::get('auth/products', 'ProductController@index');
 

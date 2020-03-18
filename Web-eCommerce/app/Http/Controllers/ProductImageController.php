@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ProductImage;
 use Illuminate\Http\Request;
+use Validator;
 
 class ProductImageController extends Controller
 {
@@ -13,7 +14,7 @@ class ProductImageController extends Controller
     public function __construct()
     {
         $this->rules = array(
-            'image_ref' => 'required|max:255',
+            'image' => 'required|image|max:4096',
             'product_id' => 'required|integer|min:0|exists:products,id'
         );
     }
@@ -49,12 +50,21 @@ class ProductImageController extends Controller
     {
         $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+        
+        // UPLOAD IMAGE
+        $image = $request->file('image');
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
 
-        $product_image = new ProductImage();
-        $product_image->fill( $request->all() );
-        $product_image->save();
-    
-        return response()->json(['success' => 'success!']);
+        $image->move(public_path('images/products'), $new_name);
+
+        $data = array(
+            'image_ref' => '/images/products/' . $new_name,
+            'product_id' => $request->product_id
+        ); 
+
+        ProductImage::create($data);
+
+        return response()->json(['success' => 'Image added succesfully!']);
     }
 
     /**
@@ -74,18 +84,19 @@ class ProductImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductImage $productImage)
     {
-        $product_image = ProductImage::find($id);
-
-        return View::make('product_images.edit')->with('product_image', $product_image);
+        if(request()->ajax())
+        {
+            return response()->json(['data' => $productImage]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, ProductImage $productImage )
     {
         $error = Validator::make($request->all(), $this->rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }

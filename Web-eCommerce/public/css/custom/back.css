@@ -137,3 +137,13 @@ img.category {
 .delete {
     color: #dc3545;
 }
+
+.prodImg{
+    width: 200px !important;
+    height: 200px !important;
+    margin: 20px 20px 20px 20px !important;
+}
+
+.disabledFile {
+    display: none;
+}
