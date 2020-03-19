@@ -57,7 +57,7 @@
                         @foreach($productTypes as $product)
                         <tr>
                             <td>{{$product->id}}</td>
-                            <td class="text-uppercase">{{$product->name}}</td>
+                            <td class="text-uppercase">{{$product->name}}</a></td>
                             <td><img class="img-responsive crud" src="{{ asset($product->image_ref) }}" ></td>
                             <td>
                                 @if($product->available)
@@ -181,7 +181,7 @@
                         
                         <div class="form-group">
                             <label>Category</label>
-                                <select class="custom-select text-uppercase select2" id="categories" name="categories[]" multiple="multiple" data-placeholder="Select category" data-dropdown-css-class="select2-indigo">
+                                <select class="custom-select text-uppercase select2 select2-indigo" id="categories" name="categories[]" multiple="multiple" data-placeholder="Select category" data-dropdown-css-class="select2-indigo">
                                     @foreach($categories as $category)
                                     <option class="text-uppercase" value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -199,13 +199,12 @@
 
                         <div class="form-group">
 							<label>Producer</label>
-							<select class="custom-select text-uppercase" name="producer">
+							<select class="custom-select text-uppercase" name="producer" id="editProducer">
                             
                                 @foreach($producers as $producer)
                                 <option class="text-uppercase" value="{{ $producer->id }}">{{ $producer->name }}</option>
                                 @endforeach
                             </select>
-                            <small>*The default Producer value in the selectbox is not the same of original, re-select it</small>
                         </div>
 
                         <div id="forEditErrors"></div>					

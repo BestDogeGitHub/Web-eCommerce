@@ -108,14 +108,14 @@ $(document).ready(function() {
                 $('#editStarRate').val(html.data.star_rate);
                 $('#editNReviews').val(html.data.n_reviews);
                 $('#hidden_id').val(html.data.id);
+                $("#editProducer option[value=" + html.data.producer_id +"]").attr("selected", "selected");
+                var $values = new Array();
                 $.each(html.categories, function(index, item) {
-                    console.log($("#categories option[value=" + item.id +"]").html());
-                    $("#categories option[value=" + item.id +"]").attr("selected", "selected");
-                    if($('.select2-results__options li').val() === item.name) {
-                        console.log('val: ' + $('.select2-results__options li').val());
-                        $('.select2-results__options li').click();
-                    }
+                    //console.log($("#categories option[value=" + item.id +"]").html());
+                    //$("#categories option[value=" + item.id +"]").attr("selected", "selected");
+                    $values[index] = item.id;
                 });
+                $('.select2').val($values).trigger("change"); ;
                 
             }
         });
@@ -158,6 +158,7 @@ $(document).ready(function() {
                     html += data.success;
                     html += '</p></div>';
                     $('#forEditErrors').html(html); 
+                    $('#spinner').fadeIn();
                     location.reload();
                 }
             }

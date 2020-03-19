@@ -31,7 +31,11 @@ $(document).ready(function() {
                 }
                 if(data.success)
                 {
-                    alert(data.success);
+                    html = '<div class="alert alert-success" role="alert"><h4 class="alert-heading">Done!</h4><p>';
+                    html += data.success;
+                    html += '</p></div>';
+                    $('#forErrors').html(html); 
+                    $('#spinner').fadeIn();
                     location.reload();
                 }
             }
@@ -45,7 +49,7 @@ $(document).ready(function() {
      */
     var product_id;
 
-    $(document).on('click', '.delete', function(){
+    $(document).on('click', '._delete', function(){
         product_id = $(this).attr('id');
         $('#deleteProductModal').modal('show');
     });
@@ -60,6 +64,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+                
                 location.reload();
             }
         });
@@ -73,7 +78,7 @@ $(document).ready(function() {
     
     var product_id_ed;
 
-    $(document).on('click', '.edit', function(){
+    $(document).on('click', '._edit', function(){
         product_id_ed = $(this).attr('id');
         var button = $(this);
         $('#form_result').html('');
@@ -125,7 +130,11 @@ $(document).ready(function() {
                 }
                 if(data.success)
                 {
-                    alert(data.success);
+                    html = '<div class="alert alert-success" role="alert"><h4 class="alert-heading">Done!</h4><p>';
+                    html += data.success;
+                    html += '</p></div>';
+                    $('#forErrorsEdit').html(html); 
+                    $('#spinner').fadeIn();
                     location.reload();
                 }
             }

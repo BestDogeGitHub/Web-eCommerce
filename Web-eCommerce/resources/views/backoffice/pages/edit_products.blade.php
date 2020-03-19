@@ -50,8 +50,7 @@
                                         <th>Av.</th>
                                         <th>Product Type</th>
                                         <th>Iva</th>
-                                        <th>Creation</th>
-                                        <th>Last Update</th>
+                                        <th>Properties</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
@@ -72,8 +71,7 @@
                                         </td>
                                         <td class="text-uppercase">{{$product->productType->name}}</td>
                                         <td>{{$product->ivaCategory->category}}</td>
-                                        <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
+                                        <td><a href="{{ route('getProductProperties', $product->id) }}">Edit Properties</a></td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <a href="{{ route('products.show', $product->id) }}" class="btn btn-info _show" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>

@@ -180,7 +180,7 @@ class ProductTypeController extends Controller
         
 
         if(isset($request->categories)) {
-            $productType->categories()->syncWithoutDetaching($request->categories);
+            $productType->categories()->sync($request->categories);
             //foreach($request->categories as $category_id) {
                 //$productType Category::findOrFail($category_id);
                 

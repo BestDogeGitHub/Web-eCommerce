@@ -131,4 +131,14 @@ class AttributeController extends Controller
     {
         $attribute->delete();
     }
+
+    public function getValues($id) {
+        $attribute = Attribute::findOrFail($id);
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $attribute->values
+            ]);
+        }
+    }
 }
