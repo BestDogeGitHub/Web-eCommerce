@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ProductType;
 use App\Producer;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Validator;
@@ -19,8 +20,9 @@ class ProductTypeController extends Controller
     {
         $productTypes = ProductType::all();
         $producers = Producer::all();
+        $categories = Category::where('id', '!=', 1)->get();
 
-        return View('backoffice.pages.edit_product_types', ['productTypes' => $productTypes, 'producers' => $producers]);
+        return View('backoffice.pages.edit_product_types', ['productTypes' => $productTypes, 'producers' => $producers, 'categories' => $categories]);
     }
 
     /**
@@ -43,8 +45,8 @@ class ProductTypeController extends Controller
     {
         $rules = array(
             'name' => 'required|max:45',
-            'image_ref' => 'required|image|max:4096',
-            'available' => 'required|boolean',
+            'image' => 'required|image|max:4096', 
+            // 'available' => 'required|boolean', // AL MOMENTO DELLO STORE è A 0
             'producer' => 'required|numeric',
         );
 
@@ -102,7 +104,10 @@ class ProductTypeController extends Controller
     {
         if(request()->ajax())
         {
-            return response()->json(['data' => $productType]);
+            return response()->json([
+                'data' => $productType,
+                'categories' => $productType->categories
+            ]);
         }
     }
 
@@ -128,6 +133,7 @@ class ProductTypeController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
+        
 
         // CHECK PRODUCER
         $producer = Producer::findOrFail($request->producer);
@@ -171,6 +177,16 @@ class ProductTypeController extends Controller
             ); 
         }
         
+        
+
+        if(isset($request->categories)) {
+            $productType->categories()->syncWithoutDetaching($request->categories);
+            //foreach($request->categories as $category_id) {
+                //$productType Category::findOrFail($category_id);
+                
+            //}
+        }
+
         $productType->update($data);
         
         return response()->json(['success' => 'Product Type Updated successfully.']);

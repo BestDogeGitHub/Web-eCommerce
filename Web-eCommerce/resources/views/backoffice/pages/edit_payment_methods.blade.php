@@ -54,8 +54,10 @@
                         <td>{{$method->id}}</td>
                         <td>{{$method->method}}</td>
                         <td>
-                            <a href="#" class="_edit" id="{{ $method->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                            <a href="#" class="_delete" id="{{ $method->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            <div class="btn-group btn-group-sm">
+                                <a href="#" class="btn btn-warning _edit" id="{{ $method->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                <a href="#" class="btn btn-danger _delete" id="{{ $method->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

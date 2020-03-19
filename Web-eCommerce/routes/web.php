@@ -60,10 +60,10 @@ Route::prefix('auth')->group(function () {
             'paymentMethods' => 'PaymentMethodController', //Implemented
             'producers' => 'ProducerController',    //Implemented
             'products' => 'ProductController',  //Implemented
-            'productImages' => 'ProductImageController', 
+            'productImages' => 'ProductImageController', //Implemented
             'productTypes' => 'ProductTypeController',  //Implemented
             'reviews' => 'ReviewController',
-            'shipments' => 'ShipmentController',
+            'shipments' => 'ShipmentController',   //Implemented
             'towns' => 'TownController',
             'users' => 'UserController',
             'values' => 'ValueController'

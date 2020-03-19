@@ -17,8 +17,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Properties</a></li>
-                    <li class="breadcrumb-item active">Attributes</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Catalog</a></li>
+                    <li class="breadcrumb-item active">Product Images</li>
                     </ol>
                 </div>
                 </div>
@@ -42,14 +42,21 @@
                             @endisset
                         id="imageID"/>
                       </div>	
-
                       <input type="submit" class="btn btn-warning" value="Edit Images">
                 </form>
                 <hr/>
                 
                 
                   <div class="jumbotron container">
-                    <div id="imgContainer">
+                    <div> 
+
+                    <div class="card-body">
+                        <div class="filter-container p-0 row" id="imgContainer">
+                          
+                        </div>
+
+                    </div>
+
                     </div>
                     
                     <div id="uploadImg" class="disabledFile">
@@ -68,6 +75,10 @@
                         </div>
                       </form>
                     </div>
+
+                    
+
+
                   </div>
                 
               </div>
@@ -105,6 +116,7 @@
             
             </div>
         </main>
+    
 
 
 

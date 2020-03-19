@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Shipment;
+use App\DeliveryStatus;
+use App\Carrier;
 use Illuminate\Http\Request;
+use Validator;
 
 class ShipmentController extends Controller
 {
 
     protected $rules;
+    protected $_uprules;
 
     public function __construct()
         {
@@ -20,6 +24,11 @@ class ShipmentController extends Controller
                 'carrier_id' => 'required|integer|min:0|exists:carriers,id',
                 'delivery_status_id' => 'required|integer|min:0|exists:delivery_statuses,id'
             );
+
+            // Per l'update servono regole diverse, non sono obbligatori tutti i campi
+            $this->_uprules = array_merge( array(), $this->rules);
+            unset($this->_uprules['tracking_number']);
+            unset($this->_uprules['order_id']);
         }
     /**
      * Display a listing of the resource.
@@ -28,9 +37,11 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::all();
+        $shipments = Shipment::whereNotIn("delivery_status_id", [1, 7])->get();
+        $statuses = DeliveryStatus::all();
+        $carriers = Carrier::all();
 
-        return View('backoffice.pages.edit_shipments', ['shipments' => $shipments]);
+        return View('backoffice.pages.edit_shipments', ['shipments' => $shipments, 'statuses' => $statuses, 'carriers' => $carriers]);
     }
 
     /**
@@ -92,16 +103,24 @@ class ShipmentController extends Controller
      * Update the specified resource in storage.
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, $id )
+    public function update( Request $request, Shipment $shipment )
     {
-        $error = Validator::make($request->all(), $this->rules);
-        if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
-        // store
-        $shipment = Shipment::find($id);
-        $shipment->fill( $request->all() );
-        $shipment->save();
 
-        return response()->json(['success' => 'success!']);
+        $error = Validator::make($request->all(), $this->_uprules);
+        if($error->fails()){ 
+            return response()->json(['errors' => $error->errors()->all()]); 
+        }
+
+        $data = array(
+            'delivery_date' => $request->delivery_date,
+            'address_id' => $request->address_id,
+            'carrier_id' => $request->carrier_id,
+            'delivery_status_id' => $request->delivery_status_id
+        ); 
+
+        $shipment->update($data);
+
+        return response()->json(['success' => 'Shipment updated successfully!']);
         
     }
 

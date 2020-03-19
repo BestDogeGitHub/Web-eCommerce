@@ -4,6 +4,15 @@ $(document).ready(function() {
         "order": [[ 0, "desc" ]]
     });
 
+     //Initialize Select2 Elements
+     $('.select2').select2();
+
+     //Initialize Select2 Elements
+     $('.select2bs4').select2({
+       theme: 'bootstrap4'
+     });
+ 
+
     $('.custom-file input').on('change',function(){
         //get the file name
         var fileName = $(this).val();
@@ -42,7 +51,8 @@ $(document).ready(function() {
                     html += data.success;
                     html += '</p></div>';
                     $('#forErrors').html(html); 
-                    setTimeout(location.reload(), 2000);
+                    $('#spinner').fadeIn();
+                    location.reload();
                 }
             }
         });
@@ -55,7 +65,7 @@ $(document).ready(function() {
      */
     var product_id;
 
-    $(document).on('click', '.delete', function(){
+    $(document).on('click', '._delete', function(){
         product_id = $(this).attr('id');
         $('#deleteProductTypeModal').modal('show');
     });
@@ -83,7 +93,7 @@ $(document).ready(function() {
     
     var product_id_ed;
 
-    $(document).on('click', '.edit', function(){
+    $(document).on('click', '._edit', function(){
         product_id_ed = $(this).attr('id');
         var button = $(this);
         $('#form_result').html('');
@@ -98,6 +108,15 @@ $(document).ready(function() {
                 $('#editStarRate').val(html.data.star_rate);
                 $('#editNReviews').val(html.data.n_reviews);
                 $('#hidden_id').val(html.data.id);
+                $.each(html.categories, function(index, item) {
+                    console.log($("#categories option[value=" + item.id +"]").html());
+                    $("#categories option[value=" + item.id +"]").attr("selected", "selected");
+                    if($('.select2-results__options li').val() === item.name) {
+                        console.log('val: ' + $('.select2-results__options li').val());
+                        $('.select2-results__options li').click();
+                    }
+                });
+                
             }
         });
         

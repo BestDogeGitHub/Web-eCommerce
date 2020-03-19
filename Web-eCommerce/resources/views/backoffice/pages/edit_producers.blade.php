@@ -55,8 +55,10 @@
                         <td><a href="http:\\{{ $producer->link }}" target="_blank">Visit link</a></td>
                         <td>{{$producer->details}}</td>
                         <td>
-						    <a href="#" class="edit" id="{{ $producer->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                            <a href="#" class="delete" id="{{ $producer->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            <div class="btn-group btn-group-sm">
+                                <a href="#" class="btn btn-warning edit" id="{{ $producer->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                <a href="#" class="btn btn-danger delete" id="{{ $producer->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

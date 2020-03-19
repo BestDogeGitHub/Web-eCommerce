@@ -3,8 +3,8 @@ tr.selected{
 }
 
 img.crud {
-    width: auto !important;
-    height: 30px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
     margin: 20px 20px 20px 20px;
 }
 
@@ -122,24 +122,9 @@ img.category {
     margin-right: 10px !important;
 }
 
-.edit {
-    color: #ffc107;
-}
-
-.delete {
-    color: #dc3545;
-}
-
-._edit {
-    color: #ffc107;
-}
-
-.delete {
-    color: #dc3545;
-}
 
 .prodImg{
-    width: 200px !important;
+    max-width: 200px !important;
     height: 200px !important;
     margin: 20px 20px 20px 20px !important;
 }
@@ -147,3 +132,25 @@ img.category {
 .disabledFile {
     display: none;
 }
+
+#imgContainer {
+    height: unset !important;
+}
+
+/* DELIVERY STATUSES BAR */
+.delivered {
+    width: 100%;
+}
+
+.transit {
+    width: 50%;
+}
+
+.other_ds {
+    width: 50%;
+}
+
+.pick_up {
+    width: 20%;
+}
+/* END DS BAR */

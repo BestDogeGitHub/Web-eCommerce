@@ -54,6 +54,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('productImages.index')}}" class="nav-link">
+                  <i class="fa fa-file-image nav-icon"></i>
+                  <p>Product Images</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{route('categories.index')}}" class="nav-link">
                   <i class="fa fa-th nav-icon"></i>
                   <p>Categories</p>
@@ -153,6 +159,12 @@
                 <a href="{{route('orders.index')}}" class="nav-link">
                   <i class="fa fa-cart-plus nav-icon"></i>
                   <p>Orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('shipments.index')}}" class="nav-link">
+                  <i class="fa fa-paper-plane nav-icon"></i>
+                  <p>Shipments</p>
                 </a>
               </li>
             </ul>
