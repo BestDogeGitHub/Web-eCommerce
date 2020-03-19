@@ -5,24 +5,24 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Manage <b>Product Types</b></h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Product Types</li>
-                </ol>
-            </div>
-            </div>
-        </div><!-- /.container-fluid -->
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Manage <b>Product Types</b></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Product Types</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
         </section>
 
 
-<div class="card">
-    <div class="card-body">
+    <div class="card">
+        <div class="card-body">
 
 
 
@@ -74,8 +74,8 @@
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <a href="{{ route('products', $product->id) }}" class="btn btn-info _show" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                                    <a href="#" class="btn btn-warning _edit" id="{{ $product->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                    <a href="#" class="btn btn-danger _delete" id="{{ $product->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                    <a href="#" class="btn btn-warning _edit" data-id="{{ $product->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                    <a href="#" class="btn btn-danger _delete" data-id="{{ $product->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -193,7 +193,7 @@
                         <div class="form-group">
 							<label>N Reviews</label>
 							<input type="numeric" class="form-control" required="required" name="n_reviews" id="editNReviews"/>
-
+                        </div>
                         <!-- METHOD SPOOFING -->
 						<input type="hidden" name="_method" value="PUT" />		
 
@@ -217,7 +217,8 @@
 				</form>
 			</div>
 		</div>
-	</div>
+    </div>
+    
 	<!-- Delete Modal HTML -->
 	<div id="deleteProductTypeModal" class="modal fade">
 		<div class="modal-dialog">
@@ -239,8 +240,6 @@
 			</div>
 		</div>
     </div>       
-    
-</div>
 
 <script src="{{ asset('dist/js/pages/product_types.js') }}"></script>
 @endsection('content')

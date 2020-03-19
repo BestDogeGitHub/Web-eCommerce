@@ -27,6 +27,9 @@ $(document).ready(function() {
         
         $.ajax({
             url: "/auth/productTypes",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             method: "POST",
             data: new FormData(this),
             contentType: false,
@@ -66,7 +69,7 @@ $(document).ready(function() {
     var product_id;
 
     $(document).on('click', '._delete', function(){
-        product_id = $(this).attr('id');
+        product_id = $(this).attr('data-id');
         $('#deleteProductTypeModal').modal('show');
     });
 
@@ -80,6 +83,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+                $('#spinner').fadeIn();
                 location.reload();
             }
         });
@@ -94,7 +98,7 @@ $(document).ready(function() {
     var product_id_ed;
 
     $(document).on('click', '._edit', function(){
-        product_id_ed = $(this).attr('id');
+        product_id_ed = $(this).attr('data-id');
         var button = $(this);
         $('#form_result').html('');
         $.ajax({

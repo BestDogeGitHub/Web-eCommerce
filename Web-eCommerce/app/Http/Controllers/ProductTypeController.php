@@ -8,6 +8,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Validator;
+use Image;
 
 class ProductTypeController extends Controller
 {
@@ -62,9 +63,38 @@ class ProductTypeController extends Controller
 
         // UPLOAD IMAGE
         $image = $request->file('image');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+        $destination_path = "/images/product_types";
 
-        $image->move(public_path('images/product_types'), $new_name);
+
+        
+        $resize_image = Image::make($image->getRealPath());
+
+        
+        $dimension = max($resize_image->width(), $resize_image->height());
+
+        // we need to resize image, otherwise it will be cropped 
+
+        if ($resize_image->width() > $dimension) { 
+            $resize_image->resize($dimension, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+
+        if ($resize_image->height() > $dimension) {
+            $resize_image->resize(null, $dimension, function ($constraint) {
+                $constraint->aspectRatio();
+            }); 
+        }
+
+        
+
+        $resize_image->resizeCanvas($dimension, $dimension, 'center', false, '#ffffff');
+
+        //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+        $resize_image->save(public_path($destination_path . '/' . $new_name));
+
+        
 
         $data = array(
             'name' => $request->name,
@@ -157,10 +187,39 @@ class ProductTypeController extends Controller
             
             // IMAGE CHANGED
             
+            // UPLOAD IMAGE
             $image = $request->file('image');
-            $new_name = rand() . '.' . $image->getClientOriginalExtension();
-    
-            $image->move(public_path('images/product_types'), $new_name);
+            $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+            $destination_path = "/images/product_types";
+
+
+            
+            $resize_image = Image::make($image->getRealPath());
+
+            
+            $dimension = max($resize_image->width(), $resize_image->height());
+
+            // we need to resize image, otherwise it will be cropped 
+
+            if ($resize_image->width() > $dimension) { 
+                $resize_image->resize($dimension, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+
+            if ($resize_image->height() > $dimension) {
+                $resize_image->resize(null, $dimension, function ($constraint) {
+                    $constraint->aspectRatio();
+                }); 
+            }
+
+            
+
+            $resize_image->resizeCanvas($dimension, $dimension, 'center', false, '#ffffff');
+
+            //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+            $resize_image->save(public_path($destination_path . '/' . $new_name));
+
 
             $old_image_path = $productType->image_ref;
             if(File::exists(public_path() . $old_image_path)) {

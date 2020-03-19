@@ -1,4 +1,4 @@
-<title>Music Store</title>
+<title>Music Store | Online Shop for best Music Instruments and Accessories</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 

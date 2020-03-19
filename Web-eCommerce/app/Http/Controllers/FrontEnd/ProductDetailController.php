@@ -15,8 +15,9 @@ class ProductDetailController extends Controller
     public function show($id) {
 
         $product = ProductController::getById($id);
+        $related = ProductController::getRelatedById($id);
 
-        return View('frontoffice.pages.product_details', ['product' => $product]);
+        return View('frontoffice.pages.product_details', ['product' => $product, 'related' => $related]);
     }
 
     public function showCarrier($idCarrier) {

@@ -20,3 +20,5 @@
   <script src="{{ asset('js/main.js') }}"></script>
 
   <script src="{{ asset('js/single_prod.js') }}"></script>
+
+  <script src="{{ asset('js/front/wishlist.js') }}"></script>

@@ -5,6 +5,7 @@
   
       @include('frontoffice.includes.head')
   
+      
   </head>
   
   <body class="goto-here">
@@ -12,9 +13,9 @@
   @include('frontoffice.includes.topbar')
 		
   @include('frontoffice.includes.navbar')
-  <div class="container" style="padding-top: 5%; padding-bottom: 5%;">
+  
+  
 	  @yield('content')
-  </div>
 
   <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
     <div class="container py-4">

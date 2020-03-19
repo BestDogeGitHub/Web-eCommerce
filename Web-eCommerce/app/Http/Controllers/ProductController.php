@@ -166,6 +166,15 @@ class ProductController extends Controller
         return Product::where('id', $id)->first();
     }
 
+    public static function getRelatedById($id)
+    {
+        $product = ProductController::getById($id);
+        return Product::where([
+            ['product_type_id', '=' , $product->productType->id],
+            ['id', '!=' , $id]
+            ])->take(4)->get();
+    }
+
     /**
      * Get Images
      */
@@ -243,4 +252,6 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return View('backoffice.pages.edit_product_images', ['product' => $product]);
     }
+
+    
 }

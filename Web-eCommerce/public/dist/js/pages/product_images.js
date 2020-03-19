@@ -23,6 +23,7 @@ $(document).ready(function() {
   });
 
   $('#getProductImagesForm').on('submit', function(event) {
+      $('#spinner').fadeIn();
       event.preventDefault();
       $('#uploadImg').addClass('disabledFile');
       $('#imgContainer').html(' ');
@@ -51,8 +52,9 @@ $(document).ready(function() {
               else {
                 html.images.forEach( function(element) {
                   html_to_add += '<div class="filtr-item" data-category="1" data-sort="white sample">';
-                  html_to_add += '<a href="' + element.image_ref + '" data-toggle="lightbox" data-title="' + element.image_ref + '">';
-                  html_to_add += '<img src="' + element.image_ref + '" class="img-fluid mb-2 img-thumbnail prodImg" alt="' + element.image_ref + '"/></a></div>';
+                  html_to_add += '<a href="#" class="btn btn-danger _delete" data-id="' + element.id + '">x</a><a href="' + element.image_ref + '" data-toggle="lightbox" data-title="' + element.image_ref + '">';
+                  html_to_add += '<img src="' + element.image_ref + '" class="img-fluid mb-2 img-thumbnail prodImg" alt="' + element.image_ref + '"/>';
+                  html_to_add += '</a></div>';
                   //html_to_add += '<img src="' + element.image_ref + '" class="img-thumbnail prodImg">'
                 });
               }
@@ -128,6 +130,33 @@ $(document).ready(function() {
   if($('#imageID').val()) {
     $('#getProductImagesForm').submit();
   }
+
+  /**
+     * DELETE
+     */
+    var image_id;
+
+    $(document).on('click', '._delete', function(){
+        image_id = $(this).attr('data-id');
+        $('#deleteImageModal').modal('show');
+    });
+
+    $('#deleteImageForm').on('submit', function(event) {
+        event.preventDefault();
+        
+        $.ajax({
+            url: '/auth/productImages/' + image_id,
+            method: "delete",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+                $('#spinner').fadeIn();
+                location.reload();
+            }
+        });
+
+    });
 
 
 });

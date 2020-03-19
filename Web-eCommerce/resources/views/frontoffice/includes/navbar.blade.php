@@ -12,17 +12,20 @@
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item" href="{{ asset('shop/categories') }}">Cataglog</a>
-              	<a class="dropdown-item" href="wishlist">Wishlist</a>
+                <a class="dropdown-item" href="{{ route('categories_par', 1) }}">Cataglog</a>
+                @auth
+                <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist</a>
                 <a class="dropdown-item" href="cart">Cart</a>
                 <a class="dropdown-item" href="checkout">Checkout</a>
+                @endauth
+              	
               </div>
             </li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-			  <!-- Authentication Links -->
-			  @guest
+            <!-- Authentication Links -->
+            @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>

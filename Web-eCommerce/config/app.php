@@ -177,6 +177,8 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        Intervention\Image\ImageServiceProvider::class
+
     ],
 
     /*
@@ -231,6 +233,8 @@ return [
         // PDF GENERATOR
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
+        // IMAGE MANIPULATOR
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

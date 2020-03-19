@@ -22,7 +22,9 @@ Route::get('carriers/{id}', 'FrontEnd\ProductDetailController@showCarrier')->nam
 Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('shop_categories')->defaults('parent', 0);
 Route::get('shop/categories/{parent}', 'FrontEnd\ShopController@getCategoriesView')->name('categories_par');
 Route::get('shop', 'FrontEnd\ShopController@getShop')->name('shop');
+Route::get('shop/wishlist', 'FrontEnd\ShopController@getWishlist')->name('wishlist');
 Route::get('shop/{category}', 'FrontEnd\ShopController@getCatalogoCategory')->name('products_category');
+
 
 Route::get('admin', function () {
     return view('backoffice.pages.home');
