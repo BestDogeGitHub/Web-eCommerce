@@ -3,10 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Searchable\Searchable;
-use Spatie\Searchable\SearchResult;
 
-class ProductType extends Model implements Searchable
+class ProductType extends Model
 {
     protected $guarded = [];
 
@@ -34,16 +32,4 @@ class ProductType extends Model implements Searchable
     {
         return $this->hasMany('App\Product');
     }
-
-    public function getSearchResult(): SearchResult
-    {
-        $url = route('productType.show', $this->id);
-    
-        return new \Spatie\Searchable\SearchResult(
-            $this,
-            $this->name,
-            $url
-        );
-    }
-
 }
