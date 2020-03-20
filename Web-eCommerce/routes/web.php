@@ -15,14 +15,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', 'FrontEnd\ShopController@index')->name('nome');
+Route::get('/', 'FrontEnd\ShopController@index')->name('/');
 Route::get('products/{type}', 'FrontEnd\ShopController@getProductsFromType')->name('products');
 Route::get('products/details/{id}', 'FrontEnd\ProductDetailController@show')->name('product_detail');
 Route::get('carriers/{id}', 'FrontEnd\ProductDetailController@showCarrier')->name('carrier_detail');
 Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('shop_categories')->defaults('parent', 0);
 Route::get('shop/categories/{parent}', 'FrontEnd\ShopController@getCategoriesView')->name('categories_par');
 Route::get('shop', 'FrontEnd\ShopController@getShop')->name('shop');
-Route::get('shop/wishlist', 'FrontEnd\ShopController@getWishlist')->name('wishlist');
+Route::get('shop/wishlist', 'FrontEnd\ShopUserController@getWishlist')->name('wishlist');
+Route::get('shop/cart', 'FrontEnd\ShopUserController@getCart')->name('cart');
+Route::delete('shop/cart/{id}', 'FrontEnd\ShopUserController@removeFromCart')->name('remove_from_cart');
+Route::post('shop/cart', 'FrontEnd\ShopUserController@addToCart')->name('add_to_cart');
 Route::get('shop/{category}', 'FrontEnd\ShopController@getCatalogoCategory')->name('products_category');
 
 

@@ -45,6 +45,10 @@ span.price-dc {
     background-image: url(/images/static/Systems.jpg);
 }
 
+.accessories {
+    background-image: url(/images/static/Accessories.jpg);
+}
+
 .start {
     max-width: 100%;
 }
@@ -53,3 +57,7 @@ span.price-dc {
 .black {
     color: black !important;
 } 
+
+.back3 {
+    background-image: url('/images/bg_1.jpg');
+}

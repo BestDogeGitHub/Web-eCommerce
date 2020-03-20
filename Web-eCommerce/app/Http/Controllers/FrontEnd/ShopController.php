@@ -56,8 +56,10 @@ class ShopController extends Controller
         if(!$categories->count()) {
             return $this->getCatalogoCategory($parent);
         }
+
+        $cat_par = Category::findOrFail($parent);
         
-        return view('frontoffice.pages.categories', ['categories' => $categories]);
+        return view('frontoffice.pages.categories', ['categories' => $categories, 'parent' => $cat_par]);
     }
 
     /**
@@ -67,10 +69,16 @@ class ShopController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getCatalogoCategory($category) {
-        $cat = Category::where('id', $category)->first();
+        $cat = Category::findOrFail($category);
         $prods = $cat->productTypes->pluck('id');
         $products = ProductType::whereIn('id', $prods)->paginate(12);
-        return view('frontoffice.pages.shop', ['products' => $products]);
+
+        // Manipolazione dei prodotti !!!
+        $products->map(function ($product) {
+
+        });;
+
+        return view('frontoffice.pages.shop', ['products' => $products, 'parent' => $cat]);
     }
 
     /**
@@ -79,22 +87,30 @@ class ShopController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getProductsFromType($type) {
-        $productType = ProductType::where('id', $type)->first();
-        $products = $productType->products;
-        return view('frontoffice.pages.products', ['products' => $products]);
+
+        // Get product Type
+        $productType = ProductType::findOrFail($type);
+        
+        // Get product from type
+        $products = $productType->products()->paginate(12);
+
+        // Get first category of product
+        $category = $productType->categories->first();
+
+        // Manipulate product
+        $products->map(function ($product) {
+            $product->payment = number_format((float)$product->payment, 2, '.', '');
+    
+            return $product;
+        });;
+
+
+        
+
+        return view('frontoffice.pages.products', ['products' => $products, 'type' => $productType->name, 'category' => $category]);
     }
 
-    /**
-     * Restituisce al wishlist dell'utente
-     * 
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function getWishlist() {
-        $user = Auth::user();
-        $wishlist = $user->productInWishlist;
-
-        return view('frontoffice.pages.wishlist', ['wishlist' => $wishlist]);
-    }
+    
 
     /**
      * Restituisce i prodotti più venduti

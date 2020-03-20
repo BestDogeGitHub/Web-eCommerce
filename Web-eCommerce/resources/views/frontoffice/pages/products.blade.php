@@ -6,8 +6,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{ asset('/') }}">Home</a></span> <span>Products</span></p>
-            <h1 class="mb-0 bread"></h1>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{{ asset('/') }}">Home</a></span> <span><a href="{{ route('categories_par', $category->id) }}">{{ $category->name }}</a></span></p>
+            <h1 class="mb-0 bread">{{ $type }} Products</h1>
           </div>
         </div>
       </div>
@@ -15,81 +15,54 @@
 
     <section class="ftco-section ftco-cart">
 			<div class="container">
-				<div class="row">
-                @if($products->count())
-    			<div class="col-md-12 ftco-animate">
-    				<div class="cart-list">
-                     
-	    				<table class="table">
-						    <thead class="thead-primary">
-						      <tr class="text-center">
-						        <th class="text-uppercase">{{ $products->first()->productType->name }} List</th>
-						        <th>&nbsp;</th>
-						        <th>Sale</th>
-						        <th>Stock</th>
-						        <th>Available</th>
-						      </tr>
-						    </thead>
-						    <tbody>
 
-                                
 
-                                    @foreach($products as $prod)
-                                        <tr class="text-center">
-                                        
-                                        <td class="image-prod">
-                                            <div class="img">
-                                            <!-- <img src=" $prod->productImages->image_ref "/> -->
-                                            @if(!$prod->productImages->count())
-                                            <a href="{{ asset('products/details/' . $prod->id) }}" class="img-prod"><img class="img-fluid" src="{{ asset($prod->productType->image_ref) }}" alt="Product image">
-                                                <div class="overlay"></div>
-                                            </a>
-                                            @else
-                                            <a href="{{ asset('products/details/' . $prod->id) }}" class="img-prod"><img class="img-fluid" src="{{ asset($prod->productImages->first()->image_ref) }}" alt="Product image">
-                                                <div class="overlay"></div>
-                                            </a>
-                                            @endif    
-                                            
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="product-name">
-                                            <h3>Properties</h3>
-                                            @foreach($prod->values as $value)
-                                            <p>{{ $value->attribute->name }} : {{ $value->name }}</p>
-                                            @endforeach
-                                            
-                                        </td>
-                                        
-                                        <td class="price">{{ $prod->sale }}</td>
-                                        
-                                        <td class="price">{{ $prod->stock }}</td>
-                                        
-                                        <td class="total">
-                                        @if($prod->available)
-                                        <span class="badge badge-success">AVAILABLE</span>
-                                        @else
-                                        <span class="badge badge-danger">NOT AVAILABLE</span>
-                                        @endif
 
-                                        </td>
-                                    </tr><!-- END TR-->
-                                    @endforeach
+              <div class="row">
+              @forelse ($products as $prod)
+                @include('frontoffice.partials._partial_show_product', ['product' => $prod])
+              @empty
+                <p>There are no products at this moment...</p>
+              @endforelse
+    			
+            </div>
 
-                               
-						    </tbody>
-                          </table>
-                          @else
-                            <div class="container-fluid">
-                            <div class="alert alert-danger" role="alert">
-                            There are no products for the selected type
-                            </div>
-                            </div>
+          	
+            <div class="col text-center">
+                  <div class="block-27">
+                    <ul>
+              
+                        <!-- 
+                          Logica della visualizzazione della paginazione
                           
-                            
-					  </div>
-                </div>
-                @endif  
+                          Se mi trovo nella prima pagina nascondo il link prev
+                          Se mi trovo nell'ultima nascondo il link succ
+
+                          Ciclo fino alla current - 1 per le precedenti
+                          setto la current come attiva
+                          Ciclo fino alla lastPage per visualizzare le successive
+                        --> 
+
+                          @if($products->currentPage() != 1)
+                          <li><a class="pag" href="{{ $products->previousPageUrl() }}">&lt;</a></li>
+                        @endif
+
+                        @for ($i = 1; $i <= $products->currentPage() - 1; $i++)
+                        <li><span>{{ $i }}</span></li>
+                        @endfor
+                        <li class="active"><span>{{ $products->currentPage() }}</span></li>
+                        @for ($i = $products->currentPage() + 1; $i <= $products->lastPage(); $i++)
+                        <li><span>{{ $i }}</span></li>
+                        @endfor
+
+                        @if($products->currentPage() != $products->lastPage())
+                        <li><a class="pag" href="{{ $products->nextPageUrl() }}">&gt;</a></li>
+                        @endif
+
+                    </ul>
+                  </div>
+            </div>
+
     		</div>
 			</div>
         </section>
