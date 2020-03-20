@@ -22,21 +22,15 @@ Route::get('carriers/{id}', 'FrontEnd\ProductDetailController@showCarrier')->nam
 Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('shop_categories')->defaults('parent', 0);
 Route::get('shop/categories/{parent}', 'FrontEnd\ShopController@getCategoriesView')->name('categories_par');
 Route::get('shop', 'FrontEnd\ShopController@getShop')->name('shop');
+Route::get('shop/wishlist', 'FrontEnd\ShopController@getWishlist')->name('wishlist');
 Route::get('shop/{category}', 'FrontEnd\ShopController@getCatalogoCategory')->name('products_category');
+
 
 Route::get('admin', function () {
     return view('backoffice.pages.home');
 });
 
-Route::get('auth/roles', 'FrontEnd\AdminDashboardController@manageRoles')->name('manageRoles');
-Route::get('auth/home', 'FrontEnd\AdminDashboardController@index')->name('dashboard');
-Route::get('auth/categories/properties', 'FrontEnd\AdminDashboardController@editProperties')->name('dashboard.properties');
-Route::get('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@editUserRoles')->name('editUserRoles');
-Route::post('auth/roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles');
-Route::post('auth/products/{id}/images', 'ProductController@getImages')->name('getProductImages');
-Route::get('auth/products/{id}/images', 'ProductController@redirectToProductImages')->name('redirectToProductImages');
-Route::get('auth/users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');
-Route::get('auth/products', 'ProductController@index');
+
 
 Route::get('invoices/{id}/print', 'InvoiceController@getPDF')->name('getInvoicePDF');
 
@@ -60,14 +54,27 @@ Route::prefix('auth')->group(function () {
             'paymentMethods' => 'PaymentMethodController', //Implemented
             'producers' => 'ProducerController',    //Implemented
             'products' => 'ProductController',  //Implemented
-            'productImages' => 'ProductImageController', 
+            'productImages' => 'ProductImageController', //Implemented
             'productTypes' => 'ProductTypeController',  //Implemented
             'reviews' => 'ReviewController',
-            'shipments' => 'ShipmentController',
+            'shipments' => 'ShipmentController',   //Implemented
             'towns' => 'TownController',
             'users' => 'UserController',
             'values' => 'ValueController'
         ]);
+
+        Route::get('roles', 'FrontEnd\AdminDashboardController@manageRoles')->name('manageRoles');
+        Route::get('home', 'FrontEnd\AdminDashboardController@index')->name('dashboard');
+        Route::get('categories/properties', 'FrontEnd\AdminDashboardController@editProperties')->name('dashboard.properties');
+        Route::get('roles/edit/{id}', 'FrontEnd\AdminDashboardController@editUserRoles')->name('editUserRoles');
+        Route::post('roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles');
+        Route::post('products/{id}/images', 'ProductController@getImages')->name('getProductImages');
+        Route::get('products/{id}/properties', 'ProductController@getProperties')->name('getProductProperties');
+        Route::post('products/{id}/properties', 'ProductController@addValue')->name('addProperty');
+        Route::delete('products/{id}/properties/{value}', 'ProductController@removeValue')->name('removeProperty');
+        Route::get('attributes/{id}/values', 'AttributeController@getValues')->name('getValuesByAttribute');
+        Route::get('products/{id}/images', 'ProductController@redirectToProductImages')->name('redirectToProductImages');
+        Route::get('users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');
         
     });
 });

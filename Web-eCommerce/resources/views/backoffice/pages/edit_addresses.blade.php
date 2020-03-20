@@ -62,9 +62,12 @@
                         <td>{{$address->postcode}}</td>
                         <td>{{$address->street_number}}</td>
                         <td>{{$address->building_number}}</td>
+                        
                         <td>
-                            <a href="#" class="_edit" id="{{ $address->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                            <a href="#" class="_delete" id="{{ $address->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            <div class="btn-group btn-group-sm">
+                                <a href="#" class="btn btn-warning _edit" id="{{ $address->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                <a href="#" class="btn btn-danger _delete" id="{{ $address->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
@@ -169,6 +172,7 @@
                         <div class="form-group">
 							<label>Town</label>
 							<select class="custom-select text-uppercase" name="town_id" id="editTown">
+                                
                                 @foreach($towns as $town)
                                 <option class="text-uppercase" value="{{ $town->id }}">{{ $town->name }} ({{ $town->nation->name }})</option>
                                 @endforeach

@@ -4,6 +4,15 @@ $(document).ready(function() {
         "order": [[ 0, "desc" ]]
     });
 
+     //Initialize Select2 Elements
+     $('.select2').select2();
+
+     //Initialize Select2 Elements
+     $('.select2bs4').select2({
+       theme: 'bootstrap4'
+     });
+ 
+
     $('.custom-file input').on('change',function(){
         //get the file name
         var fileName = $(this).val();
@@ -18,6 +27,9 @@ $(document).ready(function() {
         
         $.ajax({
             url: "/auth/productTypes",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             method: "POST",
             data: new FormData(this),
             contentType: false,
@@ -42,7 +54,8 @@ $(document).ready(function() {
                     html += data.success;
                     html += '</p></div>';
                     $('#forErrors').html(html); 
-                    setTimeout(location.reload(), 2000);
+                    $('#spinner').fadeIn();
+                    location.reload();
                 }
             }
         });
@@ -55,8 +68,8 @@ $(document).ready(function() {
      */
     var product_id;
 
-    $(document).on('click', '.delete', function(){
-        product_id = $(this).attr('id');
+    $(document).on('click', '._delete', function(){
+        product_id = $(this).attr('data-id');
         $('#deleteProductTypeModal').modal('show');
     });
 
@@ -70,6 +83,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+                $('#spinner').fadeIn();
                 location.reload();
             }
         });
@@ -83,8 +97,8 @@ $(document).ready(function() {
     
     var product_id_ed;
 
-    $(document).on('click', '.edit', function(){
-        product_id_ed = $(this).attr('id');
+    $(document).on('click', '._edit', function(){
+        product_id_ed = $(this).attr('data-id');
         var button = $(this);
         $('#form_result').html('');
         $.ajax({
@@ -98,6 +112,15 @@ $(document).ready(function() {
                 $('#editStarRate').val(html.data.star_rate);
                 $('#editNReviews').val(html.data.n_reviews);
                 $('#hidden_id').val(html.data.id);
+                $("#editProducer option[value=" + html.data.producer_id +"]").attr("selected", "selected");
+                var $values = new Array();
+                $.each(html.categories, function(index, item) {
+                    //console.log($("#categories option[value=" + item.id +"]").html());
+                    //$("#categories option[value=" + item.id +"]").attr("selected", "selected");
+                    $values[index] = item.id;
+                });
+                $('.select2').val($values).trigger("change"); ;
+                
             }
         });
         
@@ -139,6 +162,7 @@ $(document).ready(function() {
                     html += data.success;
                     html += '</p></div>';
                     $('#forEditErrors').html(html); 
+                    $('#spinner').fadeIn();
                     location.reload();
                 }
             }

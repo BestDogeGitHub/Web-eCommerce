@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\ProductType;
 use App\Producer;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Validator;
+use Image;
 
 class ProductTypeController extends Controller
 {
@@ -19,8 +21,9 @@ class ProductTypeController extends Controller
     {
         $productTypes = ProductType::all();
         $producers = Producer::all();
+        $categories = Category::where('id', '!=', 1)->get();
 
-        return View('backoffice.pages.edit_product_types', ['productTypes' => $productTypes, 'producers' => $producers]);
+        return View('backoffice.pages.edit_product_types', ['productTypes' => $productTypes, 'producers' => $producers, 'categories' => $categories]);
     }
 
     /**
@@ -43,8 +46,8 @@ class ProductTypeController extends Controller
     {
         $rules = array(
             'name' => 'required|max:45',
-            'image_ref' => 'required|image|max:4096',
-            'available' => 'required|boolean',
+            'image' => 'required|image|max:4096', 
+            // 'available' => 'required|boolean', // AL MOMENTO DELLO STORE è A 0
             'producer' => 'required|numeric',
         );
 
@@ -60,9 +63,38 @@ class ProductTypeController extends Controller
 
         // UPLOAD IMAGE
         $image = $request->file('image');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+        $destination_path = "/images/product_types";
 
-        $image->move(public_path('images/product_types'), $new_name);
+
+        
+        $resize_image = Image::make($image->getRealPath());
+
+        
+        $dimension = max($resize_image->width(), $resize_image->height());
+
+        // we need to resize image, otherwise it will be cropped 
+
+        if ($resize_image->width() > $dimension) { 
+            $resize_image->resize($dimension, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+
+        if ($resize_image->height() > $dimension) {
+            $resize_image->resize(null, $dimension, function ($constraint) {
+                $constraint->aspectRatio();
+            }); 
+        }
+
+        
+
+        $resize_image->resizeCanvas($dimension, $dimension, 'center', false, '#ffffff');
+
+        //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+        $resize_image->save(public_path($destination_path . '/' . $new_name));
+
+        
 
         $data = array(
             'name' => $request->name,
@@ -102,7 +134,10 @@ class ProductTypeController extends Controller
     {
         if(request()->ajax())
         {
-            return response()->json(['data' => $productType]);
+            return response()->json([
+                'data' => $productType,
+                'categories' => $productType->categories
+            ]);
         }
     }
 
@@ -128,6 +163,7 @@ class ProductTypeController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
+        
 
         // CHECK PRODUCER
         $producer = Producer::findOrFail($request->producer);
@@ -151,10 +187,39 @@ class ProductTypeController extends Controller
             
             // IMAGE CHANGED
             
+            // UPLOAD IMAGE
             $image = $request->file('image');
-            $new_name = rand() . '.' . $image->getClientOriginalExtension();
-    
-            $image->move(public_path('images/product_types'), $new_name);
+            $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+            $destination_path = "/images/product_types";
+
+
+            
+            $resize_image = Image::make($image->getRealPath());
+
+            
+            $dimension = max($resize_image->width(), $resize_image->height());
+
+            // we need to resize image, otherwise it will be cropped 
+
+            if ($resize_image->width() > $dimension) { 
+                $resize_image->resize($dimension, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            }
+
+            if ($resize_image->height() > $dimension) {
+                $resize_image->resize(null, $dimension, function ($constraint) {
+                    $constraint->aspectRatio();
+                }); 
+            }
+
+            
+
+            $resize_image->resizeCanvas($dimension, $dimension, 'center', false, '#ffffff');
+
+            //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+            $resize_image->save(public_path($destination_path . '/' . $new_name));
+
 
             $old_image_path = $productType->image_ref;
             if(File::exists(public_path() . $old_image_path)) {
@@ -171,6 +236,16 @@ class ProductTypeController extends Controller
             ); 
         }
         
+        
+
+        if(isset($request->categories)) {
+            $productType->categories()->sync($request->categories);
+            //foreach($request->categories as $category_id) {
+                //$productType Category::findOrFail($category_id);
+                
+            //}
+        }
+
         $productType->update($data);
         
         return response()->json(['success' => 'Product Type Updated successfully.']);

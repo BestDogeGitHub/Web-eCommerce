@@ -65,11 +65,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        $order = Order::find($id);
+        $ord = Order::where('id', '=', $order->id)->get();
 
-        return View::make('orders.show')->with('order', $order);
+        return View('backoffice.pages.edit_orders', ['orders' => $ord]);
     }
 
     /**

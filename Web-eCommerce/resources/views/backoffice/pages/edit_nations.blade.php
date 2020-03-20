@@ -54,8 +54,10 @@
                         <td>{{$nation->id}}</td>
                         <td>{{$nation->name}}</td>
                         <td>
-                            <a href="#" class="_edit" id="{{ $nation->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                            <a href="#" class="_delete" id="{{ $nation->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            <div class="btn-group btn-group-sm">
+                                <a href="#" class="btn btn-warning _edit" id="{{ $nation->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                <a href="#" class="btn btn-danger _delete" id="{{ $nation->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

@@ -18,7 +18,10 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('frontoffice.pages.home');
+        $rankProducts = $this->getTopProductTypes();
+        //$topCategories = $this->getTopCategories();
+ 
+        return view('frontoffice.pages.home', ['rankProducts' => $rankProducts]);
     }
 
     /**
@@ -79,5 +82,35 @@ class ShopController extends Controller
         $productType = ProductType::where('id', $type)->first();
         $products = $productType->products;
         return view('frontoffice.pages.products', ['products' => $products]);
+    }
+
+    /**
+     * Restituisce al wishlist dell'utente
+     * 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getWishlist() {
+        $user = Auth::user();
+        $wishlist = $user->productInWishlist;
+
+        return view('frontoffice.pages.wishlist', ['wishlist' => $wishlist]);
+    }
+
+    /**
+     * Restituisce i prodotti più venduti
+     * 
+     * @return 
+     */
+    private function getTopProductTypes() {
+        return Product::where('id', '!=', 1)->has('productImages')->take(8)->get();
+    }
+
+    /**
+     * Restituisce le categorie più cliccate
+     * 
+     * @return 
+     */
+    private function getTopCategories() {
+        return Category::take(4)->get();
     }
 }

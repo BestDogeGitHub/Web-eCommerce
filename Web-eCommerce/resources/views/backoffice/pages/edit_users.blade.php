@@ -51,9 +51,11 @@
                         <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                         <td>{{ date('d-m-Y', strtotime($user->updated_at)) }}</td>
                         <td>
-						    <a href="#" class="_show" id="{{ $user->id }}"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                            <a href="#" class="_edit" id="{{ $user->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                            <a href="#" class="_delete" id="{{ $user->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            <div class="btn-group btn-group-sm">
+                                <a href="#" class="btn btn-info _show" id="{{ $user->id }}" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                                <a href="#" class="btn btn-warning _edit" id="{{ $user->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                <a href="#" class="btn btn-danger _delete" id="{{ $user->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
@@ -110,7 +112,7 @@
 						</div>
 
                         <div class="form-group">
-                            <label><i class="fa fa-globe" aria-hidden="true"></i> &nbsp;&nbsp;Address</label>
+                            <label><i class="fa fa-map-pin" aria-hidden="true"></i> &nbsp;&nbsp;Address</label>
                             <div class="card">
                                 <div class="card-body">
                                     <p class="card-text" id="addressText"></p>

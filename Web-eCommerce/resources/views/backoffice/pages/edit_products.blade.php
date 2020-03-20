@@ -23,67 +23,71 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
-            <div class="table-title">
-                <div class="row">
-					<div class="col-sm-12">
-						<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Product</span></a>				
-					</div>
-                </div>
+                    <div class="container">
+                        <div class="table-wrapper table-responsive">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Product</span></a>				
+                                    </div>
+                                </div>
+                                <hr/>
+                            </div>
+
+                            <!-- TABLE OF PRODUCTS-->
+                            <table class="table table-striped table-hover" id="productsTable">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fa fa-barcode"></i></th>
+                                        <th>Payment</th>
+                                        <th>Sale</th>
+                                        <th>Stock</th>
+                                        <th>Buys</th>
+                                        <th>Av.</th>
+                                        <th>Product Type</th>
+                                        <th>Iva</th>
+                                        <th>Properties</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($products as $product)
+                                    <tr>
+                                        <td>{{$product->id}}</td>
+                                        <td>{{$product->payment}}</td>
+                                        <td>{{$product->sale}}</td>
+                                        <td>{{$product->stock}}</td>
+                                        <td>{{$product->buy_counter}}</td>
+                                        <td>
+                                            @if($product->available)
+                                            <span class="badge badge-pill badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                            @else
+                                            <span class="badge badge-pill badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                            @endif
+                                        </td>
+                                        <td class="text-uppercase">{{$product->productType->name}}</td>
+                                        <td>{{$product->ivaCategory->category}}</td>
+                                        <td><a href="{{ route('getProductProperties', $product->id) }}">Edit Properties</a></td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-info _show" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                                                <a href="#" class="btn btn-warning _edit" id="{{ $product->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                                <a href="#" class="btn btn-danger _delete" id="{{ $product->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>  
             </div>
-
-            <!-- TABLE OF PRODUCTS-->
-            <table class="table table-striped table-hover" id="productsTable">
-                <thead>
-                    <tr>
-                        <th><i class="fa fa-barcode"></i></th>
-                        <th>Payment</th>
-						<th>Sale</th>
-                        <th>Stock</th>
-                        <th>Buys</th>
-                        <th>Av.</th>
-                        <th>Product Type</th>
-                        <th>Iva</th>
-                        <th>Creation</th>
-                        <th>Last Update</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($products as $product)
-                    <tr>
-                        <td>{{$product->id}}</td>
-                        <td>{{$product->payment}}</td>
-                        <td>{{$product->sale}}</td>
-                        <td>{{$product->stock}}</td>
-                        <td>{{$product->buy_counter}}</td>
-                        <td>
-                            @if($product->available)
-                            <span class="badge badge-pill badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
-                            @else
-                            <span class="badge badge-pill badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
-                            @endif
-                        </td>
-                        <td class="text-uppercase">{{$product->productType->name}}</td>
-                        <td>{{$product->ivaCategory->category}}</td>
-                        <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
-                        <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
-                        <td>
-						    <a href="{{ route('products.show', $product->id) }}" class="show" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                            <a href="#" class="edit" id="{{ $product->id }}"><i class="fa fa-edit" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                            <a href="#" class="delete" id="{{ $product->id }}"><i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
-
 
 
     <!-- !!! MODALS !!! -->

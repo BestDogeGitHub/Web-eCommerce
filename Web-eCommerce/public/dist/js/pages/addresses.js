@@ -49,7 +49,6 @@ $(document).ready(function() {
     /**
      * UPDATE
      */
-    
 
     $(document).on('click', '._edit', function(){
         address_id = $(this).attr('id');

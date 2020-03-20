@@ -17,8 +17,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Properties</a></li>
-                    <li class="breadcrumb-item active">Attributes</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Catalog</a></li>
+                    <li class="breadcrumb-item active">Product Images</li>
                     </ol>
                 </div>
                 </div>
@@ -42,14 +42,21 @@
                             @endisset
                         id="imageID"/>
                       </div>	
-
                       <input type="submit" class="btn btn-warning" value="Edit Images">
                 </form>
                 <hr/>
                 
                 
                   <div class="jumbotron container">
-                    <div id="imgContainer">
+                    <div> 
+
+                    <div class="card-body">
+                        <div class="filter-container p-0 row" id="imgContainer">
+                          
+                        </div>
+
+                    </div>
+
                     </div>
                     
                     <div id="uploadImg" class="disabledFile">
@@ -68,6 +75,10 @@
                         </div>
                       </form>
                     </div>
+
+                    
+
+
                   </div>
                 
               </div>
@@ -105,6 +116,29 @@
             
             </div>
         </main>
+
+        <!-- Delete Modal HTML -->
+      <div id="deleteImageModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+                    <form id="deleteImageForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+              <div class="modal-header">						
+                <h4 class="modal-title">Delete Image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">					
+                <p>Are you sure you want to delete this Record?</p>
+                <p class="text-warning"><small>This action cannot be undone.</small></p>
+              </div>
+              <div class="modal-footer">
+                <input id="delButton" type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-danger" value="Delete">
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>       
+    
 
 
 

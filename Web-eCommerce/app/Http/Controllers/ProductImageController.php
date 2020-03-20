@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ProductImage;
 use Illuminate\Http\Request;
 use Validator;
+use Image;
+use Illuminate\Support\Facades\File;
 
 class ProductImageController extends Controller
 {
@@ -53,9 +55,47 @@ class ProductImageController extends Controller
         
         // UPLOAD IMAGE
         $image = $request->file('image');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+        $destination_path = "/images/products";
 
-        $image->move(public_path('images/products'), $new_name);
+
+        
+        $resize_image = Image::make($image->getRealPath());
+
+        
+        $dimension = max($resize_image->width(), $resize_image->height());
+
+        // we need to resize image, otherwise it will be cropped 
+
+        if ($resize_image->width() > $dimension) { 
+            $resize_image->resize($dimension, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+        }
+
+        if ($resize_image->height() > $dimension) {
+            $resize_image->resize(null, $dimension, function ($constraint) {
+                $constraint->aspectRatio();
+            }); 
+        }
+
+        
+
+        $resize_image->resizeCanvas($dimension, $dimension, 'center', false, '#ffffff');
+
+        //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+        $resize_image->save(public_path($destination_path . '/' . $new_name));
+
+        
+
+        
+
+        //$resize_image->resizeCanvas($dimension, $dimension, 'center', false, '#ffffff');
+
+
+        //$image->move(public_path('images/products'), $new_name);
+
+        
 
         $data = array(
             'image_ref' => '/images/products/' . $new_name,
@@ -113,12 +153,13 @@ class ProductImageController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ProductImage $productImage)
     {
-        // delete
-        $product_image = ProductImage::find($id);
-        $product_image->delete();
-
-        return response()->json(['success' => 'success!']);
+        $image_path = $productImage->image_ref;
+        if($productImage->delete()){
+            if(File::exists(public_path() . $image_path)) {
+                File::delete(public_path() . $image_path);
+            }
+        }
     }
 }

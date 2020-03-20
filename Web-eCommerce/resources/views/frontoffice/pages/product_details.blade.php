@@ -12,6 +12,11 @@
 					<div id="carouselProductImages" class="carousel slide" data-ride="carousel">
 
 						<div class="carousel-inner">
+							@if(!count($product->productImages))
+								<div class="carousel-item active img_prod">
+									<a href="{{ asset('products/' . $product->id) }}" class="image-popup"><img src="{{ asset('/images/products/no-image.png') }}" class="img-fluid" alt="Image of product"></a>
+								</div>
+							@endif
 							@foreach ($product->productImages as $index=>$image)
 								@if ($index == 0 )
 									<div class="carousel-item active img_prod">
@@ -46,7 +51,11 @@
 								<a href="#" class="mr-2" style="color: #000;">{{ $product->buy_counter }} <span style="color: #bbb;">Sold</span></a>
 							</p>
 						</div>
-    				<p class="price"><span>$ {{ $product->payment }} </span></p>
+						@if($product->sale != 0)
+							<p class="price"><span class="mr-2 price-dc">&euro; {{$product->payment + ($product->payment * $product->sale / 100)}}</span><span class="price-sale">&euro; {{$product->payment}}</span></p>
+							@else
+							<p class="price"><span>&euro; {{$product->payment}}</span></p>
+							@endif
 					<p>Info:  {{ $product->info }} </p>
 					<h3>Properties</h3>
 					@foreach($product->values as $value)
@@ -105,23 +114,36 @@
           <div class="col-md-12 heading-section text-center ftco-animate">
           	<span class="subheading">Products</span>
             <h2 class="mb-4">Related Products</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+            <p>Products of the same type</p>
           </div>
         </div>   		
     	</div>
     	<div class="container">
     		<div class="row">
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+			@forelse ($related as $prod)
+			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="" alt="Colorlib Template">
-    						<span class="status">30%</span>
-    						<div class="overlay"></div>
+						@php
+							if(count($prod->productImages))
+								$image = $prod->productImages->first()->image_ref;
+							else $image = "/images/products/no-image.png";
+						@endphp
+						<a href="{{ route('products.show', $prod->id) }}" class="img-prod"><img class="img-fluid" src='{{ asset("$image") }}' alt="Product Image">
+						
+							@if($prod->sale != 0)
+    						<span class="status">{{$prod->sale}}%</span>
+							@endif
+							<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Bell Pepper</a></h3>
+    						<h3><a href="#">{{$prod->productType->name}}</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
-		    						<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+								@if($prod->sale != 0)
+								<p class="price"><span class="mr-2 price-dc">&euro; {{$prod->payment + ($prod->payment * $prod->sale / 100)}}</span><span class="price-sale">&euro; {{$prod->payment}}</span></p>
+								@else
+								<p class="price"><span>&euro; {{$prod->payment}}</span></p>
+								@endif
 		    					</div>
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
@@ -140,90 +162,10 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="" alt="Colorlib Template">
-    						<div class="overlay"></div>
-    					</a>
-    					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Strawberry</a></h3>
-    						<div class="d-flex">
-    							<div class="pricing">
-		    						<p class="price"><span>$120.00</span></p>
-		    					</div>
-	    					</div>
-    						<div class="bottom-area d-flex px-3">
-	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-	    								<span><i class="ion-ios-menu"></i></span>
-	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
-	    								<span><i class="ion-ios-heart"></i></span>
-	    							</a>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="" alt="Colorlib Template">
-	    					<div class="overlay"></div>
-	    				</a>
-    					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Green Beans</a></h3>
-    						<div class="d-flex">
-    							<div class="pricing">
-		    						<p class="price"><span>$120.00</span></p>
-		    					</div>
-	    					</div>
-    						<div class="bottom-area d-flex px-3">
-	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-	    								<span><i class="ion-ios-menu"></i></span>
-	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
-	    								<span><i class="ion-ios-heart"></i></span>
-	    							</a>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
-    				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="" alt="Colorlib Template">
-    						<div class="overlay"></div>
-    					</a>
-    					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Purple Cabbage</a></h3>
-    						<div class="d-flex">
-    							<div class="pricing">
-		    						<p class="price"><span>$120.00</span></p>
-		    					</div>
-	    					</div>
-    						<div class="bottom-area d-flex px-3">
-	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-	    								<span><i class="ion-ios-menu"></i></span>
-	    							</a>
-	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-	    								<span><i class="ion-ios-cart"></i></span>
-	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
-	    								<span><i class="ion-ios-heart"></i></span>
-	    							</a>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
+			@empty
+				<p>No related Products</p>
+			@endforelse
+    			
     		</div>
     	</div>
     </section>

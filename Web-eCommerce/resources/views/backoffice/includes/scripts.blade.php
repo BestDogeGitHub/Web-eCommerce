@@ -8,10 +8,11 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- Select2 -->
-<script src="../../plugins/select2/js/select2.full.min.js"></script>
+<script src="{{ asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
 <!-- ChartJS -->
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
@@ -34,12 +35,24 @@
 <!-- DataTables -->
 <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+
+<!-- Ekko Lightbox -->
+<script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+
+<!-- SweetAlert2 -->
+<script src="{{asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{asset('plugins/toastr/toastr.min.js') }}"></script>
+
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+<!-- Filterizr-->
+<script src="{{asset('plugins/filterizr/jquery.filterizr.min.js')}}"></script>
 
 <!-- CUSTOM ADMIN SCRIPTS -->
 <script src="{{ asset('dist/js/custom_admin.js') }}"></script>

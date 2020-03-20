@@ -23,3 +23,33 @@
     text-align: -webkit-center;
 }
 
+/* PRICING */
+span.price-dc {
+    text-decoration: line-through;
+    color: #b3b3b3 !important;
+}
+
+.effects {
+    background-image: url(/images/static/effects.jpg);
+}
+
+.console {
+    background-image: url(/images/static/console.webp);
+}
+
+.instruments {
+    background-image: url(/images/static/Instruments.jpg);
+}
+
+.systems {
+    background-image: url(/images/static/Systems.jpg);
+}
+
+.start {
+    max-width: 100%;
+}
+
+    
+.black {
+    color: black !important;
+} 

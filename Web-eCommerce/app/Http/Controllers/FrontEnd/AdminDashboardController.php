@@ -12,9 +12,6 @@ class AdminDashboardController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        $user->assignRole('User');
-
         return view('backoffice.pages.home');
     }
 
