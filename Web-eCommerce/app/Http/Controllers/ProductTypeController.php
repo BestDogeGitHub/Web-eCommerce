@@ -193,33 +193,26 @@ class ProductTypeController extends Controller
     public function search($string)
     {
         $words = explode(' ',$string);
-
         $productTypes = ProductType::all();
 
-        $productTypes->map(function ($productType)
-        {
-            $productType['count'] = 0;
-        });
+        $productTypes->map(function ($productType) { $productType['count'] = 0; });
 
         foreach ($productTypes as $productType) 
         {
             foreach ($words as $word) 
             {
-                if (strpos($productType->name, $word) !== false) 
-                {
-                    $productType->count++ ;
-                }
+                if( strlen($word) > 3 ) { if (strpos($productType->name, $word) !== false) $productType->count++ ; }
+                else { if (preg_match("/\b{$word}\b/",$productType)) $productType->count++; }
             }
         }
-
-        $ordered = $productTypes->sortByDesc('count');
-
-        $orderedNice = $ordered->map(function ($post)
+        $filtered = $productTypes->whereNotIn('count', [0]);
+        $ordered = $filtered->sortByDesc('count');
+        
+        $orderedWithoutCount = $ordered->map(function ($post)
         {
             unset($post['count']);
             return $post;
         });
-
-        return $orderedNice;
+        return $orderedWithoutCount;
     }
 }

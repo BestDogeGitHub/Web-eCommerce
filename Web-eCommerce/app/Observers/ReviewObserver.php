@@ -22,7 +22,6 @@ class ReviewObserver
         $PT->n_reviews++;
         $PT->save();
     }
-
     /**
      * Handle the review "updated" event.
      *
@@ -44,7 +43,6 @@ class ReviewObserver
             $PT->save();
         }
     }
-
     /**
      * Handle the review "deleted" event.
      *

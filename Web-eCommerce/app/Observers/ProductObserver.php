@@ -17,14 +17,13 @@ class ProductObserver
     {
         if($product->isDirty('stock')) // stock has changed
         {
-            if( $product->stock = 0 )
+            if( $product->stock == 0 )
             {
                 $item = Product::find( $product->id );
                 $item->available = 0;
                 $item->save();
             }
         }
-
         if($product->isDirty('iva_category_id')) // iva_category_id has changed
         {
             $new_iva_category_id = $product->iva_category_id; 

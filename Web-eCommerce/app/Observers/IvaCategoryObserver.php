@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\IvaCategory;
+use Illuminate\Support\Facades\DB;
 use App\Product;
 
 class IvaCategoryObserver
@@ -17,8 +18,8 @@ class IvaCategoryObserver
     {
         if($ivaCategory->isDirty('value'))// value has changed
         {
-            $new_value = $ivaCategory->value; 
-            $old_value = $ivaCategory->getOriginal('value');
+            $newIva = $ivaCategory->value; 
+            $oldIva = $ivaCategory->getOriginal('value');
 
             $products = DB::table('products')->where('iva_category_id', '=', $ivaCategory->id)->get();
 

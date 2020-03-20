@@ -57,6 +57,7 @@ class StaticTableSeeder extends Seeder
         }
 
         DB::table('iva_categories')->insert(['id' => 1,'category' => 'beni di lusso','value' => 22]);
+        DB::table('iva_categories')->insert(['id' => 2,'category' => 'beni di prima necessità','value' => 10]);
 
         $producers = [
             [ 'id' => 1, 'name' => 'Gibson', 'image_ref' => '/images/producers/Gibson_logo.jpg', 

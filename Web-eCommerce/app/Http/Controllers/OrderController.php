@@ -118,4 +118,14 @@ class OrderController extends Controller
 
         return response()->json(['success' => 'success!']);
     }
+
+    public function makeOrder( Request $request ) // la richiesta deve contenere il metodo di pagamento e l'utente
+    {
+        $user = $request->user();
+        $paymentMethod = $request->paymentMethod;
+
+        $products = $user->productsInCart();
+
+        return $products;
+    }
 }

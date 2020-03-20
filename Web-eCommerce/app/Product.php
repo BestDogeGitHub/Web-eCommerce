@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\ProductObserver;
 
 class Product extends Model
 {
+    protected $dispatchesEvents = [
+        'updating' => ProductObserver::class
+    ];
+
     protected $guarded = [];
 
     public function usersCart()
