@@ -107,7 +107,10 @@
 	              </div>
 	            </form>
     				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+					<p><a href="#" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+				</div>
+				<div class="col-lg-6 mt-5 cart-wrap ftco-animate">
+					<a href="{{ route('checkout') }}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a>
                 </div>
                 <!--    ESTIMATE SHIPMENT COST
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
@@ -131,29 +134,6 @@
     				</div>
     				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
     			</div> -->
-    			<div class="col-lg-6 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3>Cart Totals</h3>
-    					<p class="d-flex">
-    						<span>Subtotal</span>
-    						<span>&euro; {{ $subtotal }}</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Delivery</span>
-    						<span>&euro; {{ $delivery }}</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Discount</span>
-    						<span>&euro; {{ $discount }}</span>
-    					</p>
-    					<hr>
-    					<p class="d-flex total-price">
-    						<span>Total</span>
-    						<span>&euro;  {{number_format((float) $subtotal - $discount + $delivery, 2, '.', '') }}</span>
-    					</p>
-    				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
-    			</div>
     		</div>
 			</div>
         </section>

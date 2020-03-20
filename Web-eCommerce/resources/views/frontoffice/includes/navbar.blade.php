@@ -16,7 +16,7 @@
                 @auth
                 <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist</a>
                 <a class="dropdown-item" href="{{ route('cart') }}">Cart</a>
-                <a class="dropdown-item" href="checkout">Checkout</a>
+                <a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a>
                 @endauth
               	
               </div>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Category as Category;
 use App\ProductType as ProductType;
 use App\Product as Product;
+use App\Producer;
 
 class ShopController extends Controller
 {
@@ -19,9 +20,10 @@ class ShopController extends Controller
     public function index()
     {
         $rankProducts = $this->getTopProductTypes();
+        $partners = Producer::all()->random(6);
         //$topCategories = $this->getTopCategories();
  
-        return view('frontoffice.pages.home', ['rankProducts' => $rankProducts]);
+        return view('frontoffice.pages.home', ['rankProducts' => $rankProducts, 'partners' => $partners]);
     }
 
     /**

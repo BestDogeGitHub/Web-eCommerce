@@ -61,3 +61,7 @@ span.price-dc {
 .back3 {
     background-image: url('/images/bg_1.jpg');
 }
+
+.billing-form .form-control {
+    color: black !important;
+}

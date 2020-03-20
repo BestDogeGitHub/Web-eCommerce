@@ -279,22 +279,12 @@
 					<section class="ftco-section ftco-partner">
 					<div class="container">
 						<div class="row">
+							@foreach($partners as $partner)
 							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-1.png" class="img-fluid" alt="Colorlib Template"></a>
+								<a href="https://{{ $partner->link }}" class="partner"><img src="{{ asset($partner->image_ref) }}" class="img-fluid" alt="{{$partner->name}} logo"></a>
 							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-2.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-3.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-4.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-5.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-						</div>
+							@endforeach
+						</div>	
 					</div>
 				</section>
 

@@ -30,8 +30,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach($wishlist as $product)
-                                    <tr class="text-center">
-                                        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                    <tr class="text-center" id="wish_prod_{{$product->id}}">
+                                        <td class="product-remove"><a href="#" class="removeFromWishlist" data-id="{{ $product->id }}"><span class="ion-ios-close"></span></a></td>
                                         @php
                                             if(count($product->productImages))
                                                 $image = $product->productImages->first()->image_ref;
