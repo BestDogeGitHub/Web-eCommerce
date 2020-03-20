@@ -11,6 +11,6 @@ $factory->define(Review::class, function (Faker $faker) {
         'text' => $faker->text($maxNbChars = 200) ,
         
         'user_id' => $faker->numberBetween($min = 1, $max = 500) ,
-        'product_type_id' => $faker->numberBetween($min = 1, $max = 66) ,
+        'product_type_id' => $faker->numberBetween($min = 1, $max = 64) ,
     ];
 });

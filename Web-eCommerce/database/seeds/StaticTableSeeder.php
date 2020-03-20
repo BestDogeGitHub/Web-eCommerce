@@ -61,19 +61,33 @@ class StaticTableSeeder extends Seeder
 
         $producers = [
             [ 'id' => 1, 'name' => 'Gibson', 'image_ref' => '/images/producers/Gibson_logo.jpg', 
-            'link' => 'gibson.com', 'details' => 'Gibson Brands, Inc. (formerly Gibson Guitar Corporation) is an American manufacturer of guitars, other musical instruments, and professional audio equipment from Kalamazoo, Michigan, and now based in Nashville, Tennessee. The company was formerly known as Gibson Guitar Corporation and renamed Gibson Brands, Inc. on June 11, 2013.' ],
+            'link' => 'https://www.gibson.com/', 'details' => 'Gibson Brands, Inc. (formerly Gibson Guitar Corporation) is an American manufacturer of guitars, other musical instruments, and professional audio equipment from Kalamazoo, Michigan, and now based in Nashville, Tennessee. The company was formerly known as Gibson Guitar Corporation and renamed Gibson Brands, Inc. on June 11, 2013.' ],
             [ 'id' => 2, 'name' => 'Shure', 'image_ref' => '/images/producers/Shure_logo.png', 
-            'link' => 'www.shure.com', 'details' => 'Shure Incorporated is an American audio products corporation. It was founded by Sidney N. Shure in Chicago, Illinois in 1925 as a supplier of radio parts kits. The company became a consumer and professional audio-electronics manufacturer of microphones, wireless microphone systems, phonograph cartridges, discussion systems, mixers, and digital signal processing. The company also manufactures listening products, including headphones, high-end earphones, and personal monitor systems.' ],
+            'link' => 'https://www.www.shure.com/', 'details' => 'Shure Incorporated is an American audio products corporation. It was founded by Sidney N. Shure in Chicago, Illinois in 1925 as a supplier of radio parts kits. The company became a consumer and professional audio-electronics manufacturer of microphones, wireless microphone systems, phonograph cartridges, discussion systems, mixers, and digital signal processing. The company also manufactures listening products, including headphones, high-end earphones, and personal monitor systems.' ],
             [ 'id' => 3, 'name' => 'Yamaha Corporation', 'image_ref' => '/images/producers/Yamaha_logo.jpg', 
-            'link' => 'yamaha.com', 'details' => 'Yamaha Corporation (ヤマハ株式会社, Yamaha Kabushiki Gaisha) (/ˈjæməˌhɑː/; Japanese pronunciation: [jamaha]) is a Japanese multinational corporation and conglomerate with a very wide range of products and services. It is one of the constituents of Nikkei 225 and is the world\'s largest piano manufacturing company. The former motorcycle division was established in 1955 as Yamaha Motor Co., Ltd., which started as an affiliated company but later became independent, although Yamaha Corporation is still a major shareholder.' ],
+            'link' => 'https://www.yamaha.com/', 'details' => 'Yamaha Corporation (ヤマハ株式会社, Yamaha Kabushiki Gaisha) (/ˈjæməˌhɑː/; Japanese pronunciation: [jamaha]) is a Japanese multinational corporation and conglomerate with a very wide range of products and services. It is one of the constituents of Nikkei 225 and is the world\'s largest piano manufacturing company. The former motorcycle division was established in 1955 as Yamaha Motor Co., Ltd., which started as an affiliated company but later became independent, although Yamaha Corporation is still a major shareholder.' ],
             [ 'id' => 4, 'name' => 'Fender Musical Instruments Corporation', 'image_ref' => '/images/producers/Fender_guitars_logo.svg.png', 
-            'link' => 'fender.com', 'details' => 'Fender Musical Instruments Corporation (FMIC, or simply Fender) is an American manufacturer of stringed instruments and amplifiers. Fender produces acoustic guitars, bass amplifiers and public address equipment, but is best known for its solid-body electric guitars and bass guitars, particularly the Stratocaster, Telecaster, Precision Bass, and the Jazz Bass. The company was founded in Fullerton, California, by Clarence Leonidas "Leo" Fender in 1946. Its headquarters are in Scottsdale, Arizona.' ],
+            'link' => 'https://www.fender.com/', 'details' => 'Fender Musical Instruments Corporation (FMIC, or simply Fender) is an American manufacturer of stringed instruments and amplifiers. Fender produces acoustic guitars, bass amplifiers and public address equipment, but is best known for its solid-body electric guitars and bass guitars, particularly the Stratocaster, Telecaster, Precision Bass, and the Jazz Bass. The company was founded in Fullerton, California, by Clarence Leonidas "Leo" Fender in 1946. Its headquarters are in Scottsdale, Arizona.' ],
             [ 'id' => 5, 'name' => 'Steinway Musical Instruments', 'image_ref' => '/images/producers/Steinway_logo.svg.png', 
-            'link' => 'steinway.com', 'details' => 'Steinway Musical Instruments, Inc. is a worldwide musical instrument manufacturing and marketing conglomerate, based in Waltham, Massachusetts, the United States. It was formed in a 1995 merger between the Selmer Industries and Steinway Musical Properties, the parent company of Steinway & Sons piano manufacturers. From 1996 to 2013, Steinway Musical Instruments was traded at the New York Stock Exchange (NYSE) under the abbreviation LVB, for Ludwig van Beethoven.[1][2] It was acquired by the Paulson & Co. private capital firm in 2013.' ],
+            'link' => 'https://www.steinway.com/', 'details' => 'Steinway Musical Instruments, Inc. is a worldwide musical instrument manufacturing and marketing conglomerate, based in Waltham, Massachusetts, the United States. It was formed in a 1995 merger between the Selmer Industries and Steinway Musical Properties, the parent company of Steinway & Sons piano manufacturers. From 1996 to 2013, Steinway Musical Instruments was traded at the New York Stock Exchange (NYSE) under the abbreviation LVB, for Ludwig van Beethoven.[1][2] It was acquired by the Paulson & Co. private capital firm in 2013.' ],
             [ 'id' => 6, 'name' => 'Sennheiser', 'image_ref' => '/images/producers/Sennheiser_logo.jpg', 
-            'link' => 'sennheiser.com', 'details' => 'Sennheiser electronic GmbH & Co. KG (/ˈzɛnhaɪzər/) is a German privately held audio company specializing in the design and production of a wide range of high fidelity products, including microphones, headphones, telephone accessories and aviation headsets for personal, professional and business applications.' ],
+            'link' => 'https://www.sennheiser.com/', 'details' => 'Sennheiser electronic GmbH & Co. KG (/ˈzɛnhaɪzər/) is a German privately held audio company specializing in the design and production of a wide range of high fidelity products, including microphones, headphones, telephone accessories and aviation headsets for personal, professional and business applications.' ],
             [ 'id' => 7, 'name' => 'Roland Corporation', 'image_ref' => '/images/producers/Roland_logo.svg.png', 
-            'link' => 'roland.com', 'details' => 'Roland Corporation (ローランド株式会社, Rōrando Kabushiki Kaisha) is a Japanese manufacturer of electronic musical instruments, electronic equipment and software. It was founded by Ikutaro Kakehashi in Osaka on April 18, 1972. In 2005, Roland\'s headquarters relocated to Hamamatsu in Shizuoka Prefecture. It has factories in Taiwan, Japan, and the USA. As of March 31, 2010, it employed 2,699 employees. In 2014, Roland was subject to a management buyout by Roland\'s CEO Junichi Miki, supported by Taiyo Pacific Partners.' ],
+            'link' => 'https://www.roland.com/', 'details' => 'Roland Corporation (ローランド株式会社, Rōrando Kabushiki Kaisha) is a Japanese manufacturer of electronic musical instruments, electronic equipment and software. It was founded by Ikutaro Kakehashi in Osaka on April 18, 1972. In 2005, Roland\'s headquarters relocated to Hamamatsu in Shizuoka Prefecture. It has factories in Taiwan, Japan, and the USA. As of March 31, 2010, it employed 2,699 employees. In 2014, Roland was subject to a management buyout by Roland\'s CEO Junichi Miki, supported by Taiyo Pacific Partners.' ],
+            [ 'id' => 8, 'name' => 'Takamine ', 'image_ref' => 'da mettere', 
+            'link' => 'https://www.takamine.com/', 'details' => 'Takamine Co., Ltd. (株式会社 高峰楽器製作所, Kabushiki-gaisha Takamine Gakki Seisakusho) is a Japanese guitar manufacturer based in Nakatsugawa, Gifu, Japan. Takamine is known for its steel-string acoustic guitars.
+            The company was founded in May 1962; in 1978 they were one of the first companies to introduce acoustic-electric models, where they pioneered the design of the preamplifier-equalizer component.
+            The company name is pronounced /tɑːkɑːˈmiːneɪ/ ("ta - ka - mee - nay") in Japanese; it is often pronounced /ˈtækəmaɪn/ ("ta - ka - mine") in English.[citation needed] The name comes from Mount Takamine located in Nakatsugawa.' ],
+            [ 'id' => 9, 'name' => 'DigiTech ', 'image_ref' => 'da mettere', 
+            'link' => 'https://www.digitech.com/', 'details' => 'DigiTech is an American company which manufactures digital effects units.' ],
+            [ 'id' => 10, 'name' => 'TC Electronic', 'image_ref' => 'da mettere', 
+            'link' => 'https://www.tcelectronic.com/', 'details' => 'TC Electronic is a Danish audio equipment company that designs and imports guitar effects, bass amplification, computer audio interfaces, audio plug-in software, live sound equalisers, studio and post production equipment, studio effect processors, and broadcast loudness processors and meters.' ],
+            [ 'id' => 11, 'name' => 'Proel', 'image_ref' => 'da mettere', 
+            'link' => 'https://www.proel.com/', 'details' => 'In 1997, PROEL was already a well-organised company and decided that a key step to be taken was to create a “Made in Italy” Research, Design and Prototyping department. What was puIn 1998, the drummers arrived and everything became a bit more lively. PROEL acquires the historic Tamburo Drums brand.'],
+            [ 'id' => 12, 'name' => 'Sagitter', 'image_ref' => 'da mettere', 
+            'link' => 'https://www.sagitter.com/', 'details' => 'Founded in 1992, Sagitter was created by one of the original founders of Clay Paky Lighting company.
+            In 2009 Proel Group acquired the Sagitter brand as part of the plan for strengthening its position in the professional lighting field.
+            The Abruzzo based multinational began by opening a new Research and Development department, focused on reinvigorating the Sagitter product line through innovation and design to re-establish the legendary brand as a market leader.'],
         ];
     
         foreach ($producers as $producer) {
@@ -137,7 +151,7 @@ class StaticTableSeeder extends Seeder
             [ 'id' => 7, 'name' => 'green', 'attribute_id' => 2 ],
             [ 'id' => 8, 'name' => 'white', 'attribute_id' => 2 ],
             [ 'id' => 9, 'name' => 'blue', 'attribute_id' => 2 ],
-            [ 'id' => 10, 'name' => 'pink', 'attribute_id' => 2 ],
+            [ 'id' => 10, 'name' => 'brown', 'attribute_id' => 2 ],
             [ 'id' => 11, 'name' => 'maple', 'attribute_id' => 3 ],
             [ 'id' => 12, 'name' => 'rosewood', 'attribute_id' => 3 ],
             [ 'id' => 13, 'name' => 'fir', 'attribute_id' => 3 ],
@@ -260,5 +274,146 @@ class StaticTableSeeder extends Seeder
         $node17->appendToNode($node11)->save();
         $node18->appendToNode($node11)->save();
         $node19->appendToNode($node14)->save();
+
+        $types = [
+            [ 'name' => 'Chitarra classica Yamaha CG192C', 'image_ref' => 1, 'producer_id' => 3], // chitarre
+            [ 'name' => 'Chitarra classica Yamaha C40 II', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Chitarra classica elettrificata Takamine TSP148NC-NS', 'image_ref' => 1, 'producer_id' => 8],
+            [ 'name' => 'Chitarra elettrica Fender strato Relic', 'image_ref' => 1, 'producer_id' => 4],
+            [ 'name' => 'Chitarra elettrica Fender bullet stratocaster', 'image_ref' => 1, 'producer_id' => 4],
+            [ 'name' => 'Chitarra elettrica Gibson SG STANDARD 2015', 'image_ref' => 1, 'producer_id' => 1],
+            [ 'name' => 'Tastiera Roland BK3 BK', 'image_ref' => 1, 'producer_id' => 7], // tastiere
+            [ 'name' => 'Tastiera Yamaha PSR630', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Tastiera Roland EA7', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Pianoforte Digitale Roland F140R CB', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Pianoforte Digitale Yamaha DGX660 BLACK', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Pianoforte Digitale Roland LX17PE', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Basso Elettrico Fender MEXICO STD JAZZ BASS FRETLESS 3TS RW', 'image_ref' => 1, 'producer_id' => 4], //bassi
+            [ 'name' => 'Basso Elettrico Yamaha TRB 1006J NATURAL', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Basso Elettrico Fender AMERICAN PRO JAZZ BASS 3-Color Sunb. RW', 'image_ref' => 1, 'producer_id' => 4],
+            [ 'name' => 'Batteria Yamaha RYDEEN 20" RD02F5', 'image_ref' => 1, 'producer_id' => 3], //batterie
+            [ 'name' => 'Batteria Yamaha NUOVA STAGE CUSTOM BIRCH SBP0F5 20"', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Batteria Yamaha RECORDING CUSTOM', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Batteria Yamaha RYDEEN 20" RD02F5', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Batteria elettronica Roland TD50KV + MDS50KV', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Batteria elettronica Roland TD1DMK', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Pedali Digitech M101 PHASE 90 M 101', 'image_ref' => 1, 'producer_id' => 9], //effetti chitarre
+            [ 'name' => 'Pedali Roland V-GUITAR DISTORTION', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Pedali Digitech DONEGAN THE WEAPON', 'image_ref' => 1, 'producer_id' => 9],
+            [ 'name' => 'Pedali Digitech TONE DRIVE', 'image_ref' => 1, 'producer_id' => 9],
+            [ 'name' => 'Pedali Tc Electronic VINTAGE PRE DRIVE PEDAL', 'image_ref' => 1, 'producer_id' => 10],
+            [ 'name' => 'Pedali Tc Electronic XII PHASER', 'image_ref' => 1, 'producer_id' => 10],
+            [ 'name' => 'Microfono Shure SM58 LCE', 'image_ref' => 1, 'producer_id' => 2], //  microfoni
+            [ 'name' => 'Microfono Shure BETA58A BETA 58A', 'image_ref' => 1, 'producer_id' => 2],
+            [ 'name' => 'Microfono Shure SM57 LCE', 'image_ref' => 1, 'producer_id' => 2],
+            [ 'name' => 'Microfono Sennheiser E935', 'image_ref' => 1, 'producer_id' => 6],
+            [ 'name' => 'Microfono Shure 55SH SERIES II', 'image_ref' => 1, 'producer_id' => 2],
+            [ 'name' => 'Microfono Sennheiser E825S', 'image_ref' => 1, 'producer_id' => 6],
+            [ 'name' => 'Cavo Proel CHL120LU5', 'image_ref' => 1, 'producer_id' => 11], // Cavi
+            [ 'name' => 'Cavo Proel BULK100LU3', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Cavo Proel BULK100LU1', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Cavo Roland FPC/VC2', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Cavo Roland RCC-3-UAUB', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Cavo Roland RCC-3-UAUM', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Cavo Proel CHLP180LU3', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Cavo Roland SILOS SLFJJM300 J ST MS', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Cavo Roland RMIDI-B5 BLACK SERIES MIDI', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Cavo Proel CHL400LU5 CAVO MIDI - DIN 5P', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Cavo Proel CHL250LU10', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Cavo Proel ESO255LU10', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Cavo Roland RMC', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Cavo Alimentazione Proel SM300LU25', 'image_ref' => 1, 'producer_id' => 11], //  alimentazione
+            [ 'name' => 'Cavo Alimentazione Proel SM200LU25', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Cassa Yamaha DBR10', 'image_ref' => 1, 'producer_id' => 3], // casse
+            [ 'name' => 'Cassa Yamaha ERGO MODULE', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Cassa Yamaha DZR 315', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Sub Yamaha DXS15', 'image_ref' => 1, 'producer_id' => 3], // sub
+            [ 'name' => 'Sub Yamaha DXS15 XLF', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Mixer Proel  MQ12USB', 'image_ref' => 1, 'producer_id' => 11], // mixer
+            [ 'name' => 'Mixer Yamaha  MG12XU', 'image_ref' => 1, 'producer_id' => 3],
+            [ 'name' => 'Mixer Proel MI12', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Mixer Roland V4', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Mixer Roland DJ99', 'image_ref' => 1, 'producer_id' => 7],
+            [ 'name' => 'Luce a led Sagitter SLIMPAR 12 DL', 'image_ref' => 1, 'producer_id' => 12], // Luci
+            [ 'name' => 'Luce a led Sagitter LED KIT 7', 'image_ref' => 1, 'producer_id' => 12],
+            [ 'name' => 'Luce a led Sagitter COBETWO', 'image_ref' => 1, 'producer_id' => 12],
+            [ 'name' => 'Luce a led Sagitter SMART DOT', 'image_ref' => 1, 'producer_id' => 12],
+            [ 'name' => 'Luce a lampada Proel PLC64WS BK', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Lampada Proel PLLP200016', 'image_ref' => 1, 'producer_id' => 11],
+        ];
+        foreach ($types as $type) {
+            DB::table('product_types')->insert($type);
+        }
+
+        $products = [
+            [ 'variant_name' => 'BROWN', 'payment' => 452, 'product_type_id' => 1 ], // chitarre
+            [ 'variant_name' => 'BROWN', 'payment' => 171.11, 'product_type_id' => 2 ],
+            [ 'variant_name' => 'BLACK', 'payment' => 177.12, 'product_type_id' => 2 ],
+            [ 'variant_name' => 'light', 'payment' => 300.33, 'product_type_id' => 3 ],
+            [ 'variant_name' => 'Todd Krouse', 'payment' => 725.25, 'product_type_id' => 4 ],
+            [ 'variant_name' => 'Artic White', 'payment' => 126.00, 'product_type_id' => 5 ],
+            [ 'variant_name' => 'TRANSLUCED BLACK', 'payment' => 1.335, 'product_type_id' => 6 ],//
+            [ 'variant_name' => 'Black and White', 'payment' => 725.25, 'product_type_id' => 7 ], // tastiere
+            [ 'variant_name' => 'Black and White', 'payment' => 126.00, 'product_type_id' => 8 ],
+            [ 'variant_name' => 'Black and White', 'payment' => 725.25, 'product_type_id' => 9 ],
+            [ 'variant_name' => 'Black and White', 'payment' => 126.00, 'product_type_id' => 10 ],
+            [ 'variant_name' => 'Black and White', 'payment' => 126.00, 'product_type_id' => 11 ],
+            [ 'variant_name' => 'Black and White', 'payment' => 254.22, 'product_type_id' => 12 ],//
+            [ 'variant_name' => 'Black and Brown', 'payment' => 524.30, 'product_type_id' => 13 ], //bassi
+            [ 'variant_name' => 'Brown', 'payment' => 270, 'product_type_id' => 14 ],
+            [ 'variant_name' => 'Black and Brown', 'payment' => 199.99, 'product_type_id' => 15 ],//
+            [ 'variant_name' => 'White Glitter', 'payment' => 725.25, 'product_type_id' => 16 ], // batterie
+            [ 'variant_name' => 'Red', 'payment' => 600.40, 'product_type_id' => 17 ],
+            [ 'variant_name' => 'Black', 'payment' => 300.33, 'product_type_id' => 18 ],
+            [ 'variant_name' => 'Hot Red', 'payment' => 452, 'product_type_id' => 19 ],
+            [ 'variant_name' => 'White', 'payment' => 524.30, 'product_type_id' => 20 ],
+            [ 'variant_name' => 'Black', 'payment' => 600.65, 'product_type_id' => 21 ],//
+            [ 'variant_name' => 'Mxr', 'payment' => 27.50, 'product_type_id' => 22 ], // effetti chitarre
+            [ 'variant_name' => 'GR-D', 'payment' => 33.50, 'product_type_id' => 23 ],
+            [ 'variant_name' => 'XAS', 'payment' => 35.50, 'product_type_id' => 24 ],
+            [ 'variant_name' => 'XTD', 'payment' => 37.50, 'product_type_id' => 25 ],
+            [ 'variant_name' => 'VPD.50', 'payment' => 77.50, 'product_type_id' => 26 ],
+            [ 'variant_name' => 'CLASSIC TC', 'payment' => 52.50, 'product_type_id' => 27 ],//
+            [ 'variant_name' => 'Basic', 'payment' => 77.50, 'product_type_id' => 28 ], // microfoni
+            [ 'variant_name' => 'Basic', 'payment' => 70.50, 'product_type_id' => 29 ],
+            [ 'variant_name' => 'Basic', 'payment' => 37.50, 'product_type_id' => 30 ],
+            [ 'variant_name' => 'Basic', 'payment' => 90.50, 'product_type_id' => 31 ],
+            [ 'variant_name' => 'Basic', 'payment' => 100, 'product_type_id' => 32 ],
+            [ 'variant_name' => 'Basic', 'payment' => 46.34, 'product_type_id' => 33 ],//
+            [ 'variant_name' => 'JACK JACK PIPA 5M', 'payment' => 7.50, 'product_type_id' => 34 ],// Cavi
+            [ 'variant_name' => 'JACK JACK 3M', 'payment' => 8.50, 'product_type_id' => 35 ],
+            [ 'variant_name' => 'J-J MT.1', 'payment' => 13.50, 'product_type_id' => 36 ],
+            [ 'variant_name' => 'Basic', 'payment' => 15.50, 'product_type_id' => 37 ],
+            [ 'variant_name' => 'Basic', 'payment' => 22.50, 'product_type_id' => 38 ],
+            [ 'variant_name' => 'Basic', 'payment' => 31.50, 'product_type_id' => 39 ],
+            [ 'variant_name' => 'Basic', 'payment' => 2.50, 'product_type_id' => 40 ],
+            [ 'variant_name' => 'J ST FM 3M', 'payment' => 4.50, 'product_type_id' => 41 ],
+            [ 'variant_name' => 'CABLE 5FT/1.5M', 'payment' => 6.50, 'product_type_id' => 42 ],
+            [ 'variant_name' => 'DIN 5P - 5 MT', 'payment' => 9.50, 'product_type_id' => 43 ],
+            [ 'variant_name' => 'CAN-CAN MT10', 'payment' => 11.50, 'product_type_id' => 44 ],
+            [ 'variant_name' => 'Basic', 'payment' => 11.50, 'product_type_id' => 45 ],
+            [ 'variant_name' => 'G5 1.5mt', 'payment' => 12.50, 'product_type_id' => 46 ],
+            [ 'variant_name' => 'ALIM SHUKO 2,5M', 'payment' => 22.50, 'product_type_id' => 47 ], // cavi alimentazione
+            [ 'variant_name' => 'ALIM ITA 2,5M', 'payment' => 33.50, 'product_type_id' => 48 ],
+            [ 'variant_name' => 'Basics', 'payment' => 67.50, 'product_type_id' => 49 ], // casse
+            [ 'variant_name' => 'Basics', 'payment' => 78.50, 'product_type_id' => 50 ], 
+            [ 'variant_name' => 'Basics', 'payment' => 89.50, 'product_type_id' => 51 ], 
+            [ 'variant_name' => 'Basics', 'payment' => 66.50, 'product_type_id' => 52 ],// sub
+            [ 'variant_name' => 'Basics', 'payment' => 99.50, 'product_type_id' => 53 ],
+            [ 'variant_name' => 'Vocal', 'payment' => 223.50, 'product_type_id' => 54 ],// mixer
+            [ 'variant_name' => 'Digital', 'payment' => 250.50, 'product_type_id' => 55 ],
+            [ 'variant_name' => 'EX', 'payment' => 290.50, 'product_type_id' => 56 ],
+            [ 'variant_name' => 'Surge', 'payment' => 299.99, 'product_type_id' => 57 ],
+            [ 'variant_name' => 'Hyper', 'payment' => 267.99, 'product_type_id' => 58 ],
+            [ 'variant_name' => 'Hyper', 'payment' => 24.99, 'product_type_id' => 59 ],// luci
+            [ 'variant_name' => 'Hyper', 'payment' => 340.99, 'product_type_id' => 60 ],
+            [ 'variant_name' => 'Super', 'payment' => 450.99, 'product_type_id' => 61 ],
+            [ 'variant_name' => 'Super', 'payment' => 780.99, 'product_type_id' => 62 ],
+            [ 'variant_name' => 'Fine Series', 'payment' => 666.99, 'product_type_id' => 63 ],
+            [ 'variant_name' => 'Fine Series', 'payment' => 66.99, 'product_type_id' => 64 ],
+        ];
+        foreach ($products as $product) {
+            DB::table('products')->insert($product);
+        }
     }
 }

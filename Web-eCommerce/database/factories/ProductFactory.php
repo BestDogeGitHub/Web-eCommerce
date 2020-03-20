@@ -13,7 +13,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'buy_counter' => $faker->numberBetween($min = 1, $max = 100) ,
         'available' => 1 ,
         'info' => $faker->text,
-        'product_type_id' => $faker->numberBetween($min = 1, $max = 66),
+        'product_type_id' => $faker->numberBetween($min = 1, $max = 64),
         'iva_category_id' => 1
     ];
 });

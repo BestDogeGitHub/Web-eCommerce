@@ -133,7 +133,60 @@ public function __construct()
 
 
 
+1 Gibson
+2 Shure
+3 Yamaha
+4 Fender
+5 Steinway
+6 Sennheiser
+7 Roland
+8 Takamine
+9 DigiTech
+10 TC Electronic
+11 Proel
+12 Sagitter
 
+'4', 'Chitarre'
+'5', 'Batterie'
+'6', 'Tastiere',
+'7', 'Bassi', 
+'10', 'Alimentatori',
+'11', 'Cavi',
+'12', 'Impianti',
+'13', 'Luci'
+'14', 'Microfoni'
+'16', 'Sub
+'17', 'Casse'
+'19', 'Mixer'
+'20', 'Effetti chitarre'
+
+
+[ 'id' => 1, 'name' => 'Cord number' ],
+[ 'id' => 2, 'name' => 'Color' ],
+[ 'id' => 3, 'name' => 'Body' ],
+[ 'id' => 4, 'name' => 'Pick ups' ],
+[ 'id' => 5, 'name' => 'Lenght' ],
+[ 'id' => 6, 'name' => 'Weight' ],
+[ 'id' => 7, 'name' => 'Keys number' ], // piani
+[ 'id' => 8, 'name' => 'Sounds' ],
+[ 'id' => 9, 'name' => 'Interface' ],
+[ 'id' => 10, 'name' => 'Composition' ], // batterie
+[ 'id' => 11, 'name' => 'Woods' ],
+[ 'id' => 12, 'name' => 'Effect type' ], // effetti
+[ 'id' => 13, 'name' => 'Capsule' ], // microfoni
+[ 'id' => 14, 'name' => 'Polar pattern' ], 
+[ 'id' => 15, 'name' => 'Tension Type' ], // cavi e alimentatori
+[ 'id' => 16, 'name' => 'Connectors' ],
+[ 'id' => 17, 'name' => 'Woofer' ], // casse
+[ 'id' => 18, 'name' => 'Tweeter' ],
+[ 'id' => 19, 'name' => 'Watt RMS' ],
+[ 'id' => 20, 'name' => 'In. number' ], // mixer
+[ 'id' => 21, 'name' => 'Mic In.' ],
+[ 'id' => 22, 'name' => 'Multieffect' ], 
+[ 'id' => 23, 'name' => 'Light Type' ],// luci
+[ 'id' => 24, 'name' => 'LED' ],
+[ 'id' => 25, 'name' => 'Light Watt' ],
+[ 'id' => 26, 'name' => 'DMX' ],
 
 
 

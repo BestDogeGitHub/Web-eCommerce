@@ -15,15 +15,16 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('variant_name',100);
             $table->decimal('payment',9,3); // without sale
             $table->tinyInteger('sale')->default(0); // you have to give the % of sale
             $table->mediumInteger('stock')->default(0);
             $table->mediumInteger('buy_counter')->default(0); // for statistic purpose
-            $table->boolean('available'); // 1 for true
-            $table->text('info');
+            $table->boolean('available')->default(1); // 1 for true
+            $table->text('info')->nullable();
 
             $table->unsignedBigInteger('product_type_id');
-            $table->unsignedBigInteger('iva_category_id')->nullable();
+            $table->unsignedBigInteger('iva_category_id')->default(1);
             
             $table->timestamps();
         });
