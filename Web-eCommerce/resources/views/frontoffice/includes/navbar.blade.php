@@ -15,8 +15,8 @@
                 <a class="dropdown-item" href="{{ route('categories_par', 1) }}">Cataglog</a>
                 @auth
                 <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist</a>
-                <a class="dropdown-item" href="cart">Cart</a>
-                <a class="dropdown-item" href="checkout">Checkout</a>
+                <a class="dropdown-item" href="{{ route('cart') }}">Cart</a>
+                <a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a>
                 @endauth
               	
               </div>
@@ -59,8 +59,9 @@
                             @else
                             @endhasanyrole
                         @endguest
-	          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
+            @auth
+	          <li class="nav-item cta cta-colored"><a href="{{ route('cart') }}" class="nav-link"><span class="icon-shopping_cart"></span>[<span id="nav_cart_link">{{ Auth::user()->productsInCart->count()}}</span>]</a></li>
+            @endauth
 	        </ul>
 
 	      </div>

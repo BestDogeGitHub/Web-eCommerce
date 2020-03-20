@@ -6,6 +6,10 @@
 <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
+
+  <!-- CSFR TOKEN-->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 <link rel="stylesheet" href="{{ asset('css/template/open-iconic-bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/template/animate.css') }}">
 
@@ -26,6 +30,13 @@
 <link rel="stylesheet" href="{{ asset('css/template/icomoon.css') }}">
 
 <link rel="stylesheet" href="{{ asset('css/template/style.css') }}">
+
+
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+<!-- Toastr -->
+<link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+
 <link rel="stylesheet" href="{{ asset('css/custom/front.css') }}">
 
 <link rel="stylesheet" href="{{ asset('css/fonts/fontawesome/css/font-awesome.min.css') }}">

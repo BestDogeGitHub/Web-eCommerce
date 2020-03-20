@@ -108,12 +108,12 @@
 										<div class="col-md-6">
 											<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end instruments">
 												<div class="text px-3 py-1">
-													<h2 class="mb-0"><a href="#">Instruments</a></h2>
+													<h2 class="mb-0"><a href="{{ route('categories_par', 2) }}">Instruments</a></h2>
 												</div>
 											</div>
-											<div class="category-wrap ftco-animate img d-flex align-items-end effects">
+											<div class="category-wrap ftco-animate img d-flex align-items-end accessories">
 												<div class="text px-3 py-1">
-													<h2 class="mb-0"><a href="#">Effects</a></h2>
+													<h2 class="mb-0"><a href="{{ route('categories_par', 3) }}">Accessories</a></h2>
 												</div>
 											</div>
 										</div>
@@ -123,12 +123,12 @@
 								<div class="col-md-4">
 									<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end console">
 										<div class="text px-3 py-1">
-											<h2 class="mb-0"><a href="#">Electronic</a></h2>
+											<h2 class="mb-0"><a href="{{ route('categories_par', 19) }}">Electronic</a></h2>
 										</div>		
 									</div>
 									<div class="category-wrap ftco-animate img d-flex align-items-end systems">
 										<div class="text px-3 py-1">
-											<h2 class="mb-0"><a href="#">Sound Systems
+											<h2 class="mb-0"><a href="{{ route('categories_par', 12) }}">Sound Systems
 											</a></h2>
 										</div>
 									</div>
@@ -150,47 +150,7 @@
 					<div class="container">
 						<div class="row">
 						@forelse ($rankProducts as $prod)
-						<div class="col-md-6 col-lg-3 ftco-animate">
-								<div class="product">
-									@php
-										if(count($prod->productImages))
-											$image = $prod->productImages->first()->image_ref;
-										else $image = "/images/products/no-image.png";
-									@endphp
-									<a href="{{ route('products.show', $prod->id) }}" class="img-prod"><img class="img-fluid" src='{{ asset("$image") }}' alt="Product Image">
-									
-										@if($prod->sale != 0)
-										<span class="status">{{$prod->sale}}%</span>
-										@endif
-										<div class="overlay"></div>
-									</a>
-									<div class="text py-3 pb-4 px-3 text-center">
-										<h3><a href="#">{{$prod->productType->name}}</a></h3>
-										<div class="d-flex">
-											<div class="pricing">
-											@if($prod->sale != 0)
-											<p class="price"><span class="mr-2 price-dc">&euro; {{$prod->payment + ($prod->payment * $prod->sale / 100)}}</span><span class="price-sale">&euro; {{$prod->payment}}</span></p>
-											@else
-											<p class="price"><span>&euro; {{$prod->payment}}</span></p>
-											@endif
-											</div>
-										</div>
-										<div class="bottom-area d-flex px-3">
-											<div class="m-auto d-flex">
-												<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-													<span><i class="ion-ios-menu"></i></span>
-												</a>
-												<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-													<span><i class="ion-ios-cart"></i></span>
-												</a>
-												<a href="#" class="heart d-flex justify-content-center align-items-center ">
-													<span><i class="ion-ios-heart"></i></span>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							@include('frontoffice.partials._partial_show_product', ['product' => $prod])
 						@empty
 							<p>No rank Products</p>
 						@endforelse
@@ -319,22 +279,12 @@
 					<section class="ftco-section ftco-partner">
 					<div class="container">
 						<div class="row">
+							@foreach($partners as $partner)
 							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-1.png" class="img-fluid" alt="Colorlib Template"></a>
+								<a href="https://{{ $partner->link }}" class="partner"><img src="{{ asset($partner->image_ref) }}" class="img-fluid" alt="{{$partner->name}} logo"></a>
 							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-2.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-3.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-4.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-							<div class="col-sm ftco-animate">
-								<a href="#" class="partner"><img src="images/partner-5.png" class="img-fluid" alt="Colorlib Template"></a>
-							</div>
-						</div>
+							@endforeach
+						</div>	
 					</div>
 				</section>
 

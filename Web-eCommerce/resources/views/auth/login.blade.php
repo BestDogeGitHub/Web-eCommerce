@@ -1,6 +1,7 @@
 @extends('frontoffice.layouts.layout')
 
 @section('content')
+<div class="container" style="padding-top: 5%; padding-bottom: 5%;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -70,4 +71,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

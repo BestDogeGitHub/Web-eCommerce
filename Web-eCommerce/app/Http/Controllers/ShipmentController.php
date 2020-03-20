@@ -136,4 +136,8 @@ class ShipmentController extends Controller
 
         return response()->json(['success' => 'success!']);
     }
+
+    public static function getDeliveryCost() {
+        return 20;
+    }
 }
