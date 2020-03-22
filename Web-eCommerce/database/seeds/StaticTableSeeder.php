@@ -74,17 +74,17 @@ class StaticTableSeeder extends Seeder
             'link' => 'https://www.sennheiser.com/', 'details' => 'Sennheiser electronic GmbH & Co. KG (/ˈzɛnhaɪzər/) is a German privately held audio company specializing in the design and production of a wide range of high fidelity products, including microphones, headphones, telephone accessories and aviation headsets for personal, professional and business applications.' ],
             [ 'id' => 7, 'name' => 'Roland Corporation', 'image_ref' => '/images/producers/Roland_logo.svg.png', 
             'link' => 'https://www.roland.com/', 'details' => 'Roland Corporation (ローランド株式会社, Rōrando Kabushiki Kaisha) is a Japanese manufacturer of electronic musical instruments, electronic equipment and software. It was founded by Ikutaro Kakehashi in Osaka on April 18, 1972. In 2005, Roland\'s headquarters relocated to Hamamatsu in Shizuoka Prefecture. It has factories in Taiwan, Japan, and the USA. As of March 31, 2010, it employed 2,699 employees. In 2014, Roland was subject to a management buyout by Roland\'s CEO Junichi Miki, supported by Taiyo Pacific Partners.' ],
-            [ 'id' => 8, 'name' => 'Takamine ', 'image_ref' => 'da mettere', 
+            [ 'id' => 8, 'name' => 'Takamine ', 'image_ref' => '/images/producers/Logo_Takamine_guitar.svg.png', 
             'link' => 'https://www.takamine.com/', 'details' => 'Takamine Co., Ltd. (株式会社 高峰楽器製作所, Kabushiki-gaisha Takamine Gakki Seisakusho) is a Japanese guitar manufacturer based in Nakatsugawa, Gifu, Japan. Takamine is known for its steel-string acoustic guitars.
             The company was founded in May 1962; in 1978 they were one of the first companies to introduce acoustic-electric models, where they pioneered the design of the preamplifier-equalizer component.
             The company name is pronounced /tɑːkɑːˈmiːneɪ/ ("ta - ka - mee - nay") in Japanese; it is often pronounced /ˈtækəmaɪn/ ("ta - ka - mine") in English.[citation needed] The name comes from Mount Takamine located in Nakatsugawa.' ],
-            [ 'id' => 9, 'name' => 'DigiTech ', 'image_ref' => 'da mettere', 
+            [ 'id' => 9, 'name' => 'DigiTech ', 'image_ref' => '/images/producers/', 
             'link' => 'https://www.digitech.com/', 'details' => 'DigiTech is an American company which manufactures digital effects units.' ],
-            [ 'id' => 10, 'name' => 'TC Electronic', 'image_ref' => 'da mettere', 
+            [ 'id' => 10, 'name' => 'TC Electronic', 'image_ref' => '/images/producers/Logo-DigiTech_logo.svg.png', 
             'link' => 'https://www.tcelectronic.com/', 'details' => 'TC Electronic is a Danish audio equipment company that designs and imports guitar effects, bass amplification, computer audio interfaces, audio plug-in software, live sound equalisers, studio and post production equipment, studio effect processors, and broadcast loudness processors and meters.' ],
-            [ 'id' => 11, 'name' => 'Proel', 'image_ref' => 'da mettere', 
+            [ 'id' => 11, 'name' => 'Proel', 'image_ref' => '/images/producers/logo_proel.png', 
             'link' => 'https://www.proel.com/', 'details' => 'In 1997, PROEL was already a well-organised company and decided that a key step to be taken was to create a “Made in Italy” Research, Design and Prototyping department. What was puIn 1998, the drummers arrived and everything became a bit more lively. PROEL acquires the historic Tamburo Drums brand.'],
-            [ 'id' => 12, 'name' => 'Sagitter', 'image_ref' => 'da mettere', 
+            [ 'id' => 12, 'name' => 'Sagitter', 'image_ref' => '/images/producers/logo sagiiter.png', 
             'link' => 'https://www.sagitter.com/', 'details' => 'Founded in 1992, Sagitter was created by one of the original founders of Clay Paky Lighting company.
             In 2009 Proel Group acquired the Sagitter brand as part of the plan for strengthening its position in the professional lighting field.
             The Abruzzo based multinational began by opening a new Research and Development department, focused on reinvigorating the Sagitter product line through innovation and design to re-establish the legendary brand as a market leader.'],
@@ -276,70 +276,70 @@ class StaticTableSeeder extends Seeder
         $node19->appendToNode($node14)->save();
 
         $types = [
-            [ 'name' => 'Chitarra classica Yamaha CG192C', 'image_ref' => 1, 'producer_id' => 3], // chitarre
-            [ 'name' => 'Chitarra classica Yamaha C40 II', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Chitarra classica elettrificata Takamine TSP148NC-NS', 'image_ref' => 1, 'producer_id' => 8],
-            [ 'name' => 'Chitarra elettrica Fender strato Relic', 'image_ref' => 1, 'producer_id' => 4],
-            [ 'name' => 'Chitarra elettrica Fender bullet stratocaster', 'image_ref' => 1, 'producer_id' => 4],
-            [ 'name' => 'Chitarra elettrica Gibson SG STANDARD 2015', 'image_ref' => 1, 'producer_id' => 1],
-            [ 'name' => 'Tastiera Roland BK3 BK', 'image_ref' => 1, 'producer_id' => 7], // tastiere
-            [ 'name' => 'Tastiera Yamaha PSR630', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Tastiera Roland EA7', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Pianoforte Digitale Roland F140R CB', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Pianoforte Digitale Yamaha DGX660 BLACK', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Pianoforte Digitale Roland LX17PE', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Basso Elettrico Fender MEXICO STD JAZZ BASS FRETLESS 3TS RW', 'image_ref' => 1, 'producer_id' => 4], //bassi
-            [ 'name' => 'Basso Elettrico Yamaha TRB 1006J NATURAL', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Basso Elettrico Fender AMERICAN PRO JAZZ BASS 3-Color Sunb. RW', 'image_ref' => 1, 'producer_id' => 4],
-            [ 'name' => 'Batteria Yamaha RYDEEN 20" RD02F5', 'image_ref' => 1, 'producer_id' => 3], //batterie
-            [ 'name' => 'Batteria Yamaha NUOVA STAGE CUSTOM BIRCH SBP0F5 20"', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Batteria Yamaha RECORDING CUSTOM', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Batteria Yamaha RYDEEN 20" RD02F5', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Batteria elettronica Roland TD50KV + MDS50KV', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Batteria elettronica Roland TD1DMK', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Pedali Digitech M101 PHASE 90 M 101', 'image_ref' => 1, 'producer_id' => 9], //effetti chitarre
-            [ 'name' => 'Pedali Roland V-GUITAR DISTORTION', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Pedali Digitech DONEGAN THE WEAPON', 'image_ref' => 1, 'producer_id' => 9],
-            [ 'name' => 'Pedali Digitech TONE DRIVE', 'image_ref' => 1, 'producer_id' => 9],
-            [ 'name' => 'Pedali Tc Electronic VINTAGE PRE DRIVE PEDAL', 'image_ref' => 1, 'producer_id' => 10],
-            [ 'name' => 'Pedali Tc Electronic XII PHASER', 'image_ref' => 1, 'producer_id' => 10],
-            [ 'name' => 'Microfono Shure SM58 LCE', 'image_ref' => 1, 'producer_id' => 2], //  microfoni
-            [ 'name' => 'Microfono Shure BETA58A BETA 58A', 'image_ref' => 1, 'producer_id' => 2],
-            [ 'name' => 'Microfono Shure SM57 LCE', 'image_ref' => 1, 'producer_id' => 2],
-            [ 'name' => 'Microfono Sennheiser E935', 'image_ref' => 1, 'producer_id' => 6],
-            [ 'name' => 'Microfono Shure 55SH SERIES II', 'image_ref' => 1, 'producer_id' => 2],
-            [ 'name' => 'Microfono Sennheiser E825S', 'image_ref' => 1, 'producer_id' => 6],
-            [ 'name' => 'Cavo Proel CHL120LU5', 'image_ref' => 1, 'producer_id' => 11], // Cavi
-            [ 'name' => 'Cavo Proel BULK100LU3', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Cavo Proel BULK100LU1', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Cavo Roland FPC/VC2', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Cavo Roland RCC-3-UAUB', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Cavo Roland RCC-3-UAUM', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Cavo Proel CHLP180LU3', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Cavo Roland SILOS SLFJJM300 J ST MS', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Cavo Roland RMIDI-B5 BLACK SERIES MIDI', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Cavo Proel CHL400LU5 CAVO MIDI - DIN 5P', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Cavo Proel CHL250LU10', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Cavo Proel ESO255LU10', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Cavo Roland RMC', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Cavo Alimentazione Proel SM300LU25', 'image_ref' => 1, 'producer_id' => 11], //  alimentazione
-            [ 'name' => 'Cavo Alimentazione Proel SM200LU25', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Cassa Yamaha DBR10', 'image_ref' => 1, 'producer_id' => 3], // casse
-            [ 'name' => 'Cassa Yamaha ERGO MODULE', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Cassa Yamaha DZR 315', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Sub Yamaha DXS15', 'image_ref' => 1, 'producer_id' => 3], // sub
-            [ 'name' => 'Sub Yamaha DXS15 XLF', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Mixer Proel  MQ12USB', 'image_ref' => 1, 'producer_id' => 11], // mixer
-            [ 'name' => 'Mixer Yamaha  MG12XU', 'image_ref' => 1, 'producer_id' => 3],
-            [ 'name' => 'Mixer Proel MI12', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Mixer Roland V4', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Mixer Roland DJ99', 'image_ref' => 1, 'producer_id' => 7],
-            [ 'name' => 'Luce a led Sagitter SLIMPAR 12 DL', 'image_ref' => 1, 'producer_id' => 12], // Luci
-            [ 'name' => 'Luce a led Sagitter LED KIT 7', 'image_ref' => 1, 'producer_id' => 12],
-            [ 'name' => 'Luce a led Sagitter COBETWO', 'image_ref' => 1, 'producer_id' => 12],
-            [ 'name' => 'Luce a led Sagitter SMART DOT', 'image_ref' => 1, 'producer_id' => 12],
-            [ 'name' => 'Luce a lampada Proel PLC64WS BK', 'image_ref' => 1, 'producer_id' => 11],
-            [ 'name' => 'Lampada Proel PLLP200016', 'image_ref' => 1, 'producer_id' => 11],
+            [ 'name' => 'Classic guitar Yamaha CG192C', 'image_ref' => '/images/product_type/cg192c.jpg', 'producer_id' => 3], // chitarre
+            [ 'name' => 'Classic guitar Yamaha C40 II', 'image_ref' => '/images/product_type/c40-ii-c-40-c40ii.jpg', 'producer_id' => 3],
+            [ 'name' => 'Classic guitar elettrificata Takamine TSP148NC-NS', 'image_ref' => '/images/product_type/tsp148nc-ns.jpg', 'producer_id' => 8],
+            [ 'name' => 'Eletric guitar Fender strato Relic', 'image_ref' => '/images/product_type/fender-strato-relic-todd-krause.jpg', 'producer_id' => 4],
+            [ 'name' => 'Eletric guitar Fender bullet stratocaster', 'image_ref' => '/images/product_type/bullet-stratocaster-lrl-artic-white.jpg', 'producer_id' => 4],
+            [ 'name' => 'Eletric guitar Gibson SG STANDARD 2015', 'image_ref' => '/images/product_type/gibson-sg-standard-2015-transluced-black.jpg', 'producer_id' => 1],
+            [ 'name' => 'Keyboard Roland BK3 BK', 'image_ref' => '/images/product_type/bk3-bk.jpg', 'producer_id' => 7], // tastiere
+            [ 'name' => 'Keyboard Yamaha PSR630', 'image_ref' => '/images/product_type/psr630.jpg', 'producer_id' => 3],
+            [ 'name' => 'Keyboard Roland EA7', 'image_ref' => '/images/product_type/ea7.jpg', 'producer_id' => 7],
+            [ 'name' => 'Digital piano Roland F140R CB', 'image_ref' => '/images/product_type/f140r-cb.jpg', 'producer_id' => 7],
+            [ 'name' => 'Digital piano Yamaha DGX660 BLACK', 'image_ref' => '/images/product_type/dgx660-black.jpg', 'producer_id' => 3],
+            [ 'name' => 'Digital piano Roland LX17PE', 'image_ref' => '/images/product_type/lx17pe.jpg', 'producer_id' => 7],
+            [ 'name' => 'Eletric Bass Fender MEXICO STD JAZZ BASS FRETLESS 3TS RW', 'image_ref' => '/images/product_type/mexico-std-jazz-bass-fretless-3ts-rw.jpg', 'producer_id' => 4], //bassi
+            [ 'name' => 'Eletric Bass Yamaha TRB 1006J NATURAL', 'image_ref' => '/images/product_type/trb-1006j-natural.jpg', 'producer_id' => 3],
+            [ 'name' => 'Eletric Bass Fender AMERICAN PRO JAZZ BASS 3-Color Sunb. RW', 'image_ref' => '/images/product_type/american-pro-jazz-bass-3-color-sunb-rw.jpg', 'producer_id' => 4],
+            [ 'name' => 'Drum Yamaha RYDEEN 20" RD02F5', 'image_ref' => '/images/product_type/rydeen-20-22-silver-glitter-rd02f5.jpg', 'producer_id' => 3], //batterie
+            [ 'name' => 'Drum Yamaha NUOVA STAGE CUSTOM BIRCH SBP0F5 20"', 'image_ref' => '/images/product_type/nuova-stage-custom-birch-sbp0f5-20-22-cherry-wood.jpg', 'producer_id' => 3],
+            [ 'name' => 'Drum Yamaha RECORDING CUSTOM', 'image_ref' => '/images/product_type/nuova-recording-custom.jpg', 'producer_id' => 3],
+            [ 'name' => 'Drum Yamaha RYDEEN 20" RD02F5', 'image_ref' => '/images/product_type/rydeen-20-22-hot-red-rd02f5.jpg', 'producer_id' => 3],
+            [ 'name' => 'Drum elettronica Roland TD50KV + MDS50KV', 'image_ref' => '/images/product_type/td50kv-2B-mds50kv.jpg', 'producer_id' => 7],
+            [ 'name' => 'Drum elettronica Roland TD1DMK', 'image_ref' => '/images/product_type/td1dmk.jpg', 'producer_id' => 7],
+            [ 'name' => 'Pedals Digitech M101 PHASE 90 M 101', 'image_ref' => '/images/product_type/m101-phase-90-m-101.jpg', 'producer_id' => 9], //effetti chitarre
+            [ 'name' => 'Pedals Roland V-GUITAR DISTORTION', 'image_ref' => '/images/product_type/gr-d-v-guitar-distortion.jpg', 'producer_id' => 7],
+            [ 'name' => 'Pedals Digitech DONEGAN THE WEAPON', 'image_ref' => '/images/product_type/xas-donegan-the-weapon.jpg', 'producer_id' => 9],
+            [ 'name' => 'Pedals Digitech TONE DRIVE', 'image_ref' => '/images/product_type/xtd-tone-drive.jpg', 'producer_id' => 9],
+            [ 'name' => 'Pedals Tc Electronic VINTAGE PRE DRIVE PEDAL', 'image_ref' => '/images/product_type/vpd1-vintage-pre-drive-pedal.jpg', 'producer_id' => 10],
+            [ 'name' => 'Pedals Tc Electronic XII PHASER', 'image_ref' => '/images/product_type/classic-tc-xii-phaser.jpg', 'producer_id' => 10],
+            [ 'name' => 'Picrophone Shure SM58 LCE', 'image_ref' => '/images/product_type/sm58-lce.jpg', 'producer_id' => 2], //  microfoni
+            [ 'name' => 'Picrophone Shure BETA58A BETA 58A', 'image_ref' => '/images/product_type/beta58a-beta-58a.jpg', 'producer_id' => 2],
+            [ 'name' => 'Picrophone Shure SM57 LCE', 'image_ref' => '/images/product_type/sm57-lce.jpg', 'producer_id' => 2],
+            [ 'name' => 'Picrophone Sennheiser E935', 'image_ref' => '/images/product_type/e935.jpg', 'producer_id' => 6],
+            [ 'name' => 'Picrophone Shure 55SH SERIES II', 'image_ref' => '/images/product_type/55sh-series-ii.jpg', 'producer_id' => 2],
+            [ 'name' => 'Picrophone Sennheiser E825S', 'image_ref' => '/images/product_type/e825s.jpg', 'producer_id' => 6],
+            [ 'name' => 'Cable Proel CHL120LU5', 'image_ref' => '/images/product_type/chl120lu5-jack-jack-pipa-5m.jpg', 'producer_id' => 11], // Cavi
+            [ 'name' => 'Cable Proel BULK100LU3', 'image_ref' => '/images/product_type/bulk100lu3-jack-jack-3m.jpg', 'producer_id' => 11],
+            [ 'name' => 'Cable Proel BULK100LU1', 'image_ref' => '/images/product_type/bulk100lu1-j-j-mt-1.jpg', 'producer_id' => 11],
+            [ 'name' => 'Cable Roland FPC/VC2', 'image_ref' => '/images/product_type/fpc-vc2.jpg', 'producer_id' => 7],
+            [ 'name' => 'Cable Roland RCC-3-UAUB', 'image_ref' => '/images/product_type/rcc-3-uaub.jpg', 'producer_id' => 7],
+            [ 'name' => 'Cable Roland RCC-3-UAUM', 'image_ref' => '/images/product_type/rcc-3-uaum.jpg', 'producer_id' => 7],
+            [ 'name' => 'Cable Proel CHLP180LU3', 'image_ref' => '/images/product_type/chlp180lu3.jpg', 'producer_id' => 11],
+            [ 'name' => 'Cable Roland SILOS SLFJJM300 J ST MS', 'image_ref' => '/images/product_type/silos-slfjjm300-j-st-ms-j-st-fm-3m.jpg', 'producer_id' => 7],
+            [ 'name' => 'Cable Roland RMIDI-B5 BLACK SERIES MIDI', 'image_ref' => '/images/product_type/rmidi-b5-black-series-midi-cable-5ft-1-5m.jpg', 'producer_id' => 7],
+            [ 'name' => 'Cable Proel CHL400LU5 MIDI - DIN 5P', 'image_ref' => '/images/product_type/chl400lu5-cavo-midi-din-5p-din-5p-5-mt.jpg', 'producer_id' => 11],
+            [ 'name' => 'Cable Proel CHL250LU10', 'image_ref' => '/images/product_type/chl250lu10-can-can-mt10.jpg', 'producer_id' => 11],
+            [ 'name' => 'Cable Proel ESO255LU10', 'image_ref' => '/images/product_type/eso255lu10.jpg', 'producer_id' => 11],
+            [ 'name' => 'Cable Roland RMC', 'image_ref' => '/images/product_type/rmc-g5-1-5mt.jpg', 'producer_id' => 7],
+            [ 'name' => 'Cable Alimentazione Proel SM300LU25', 'image_ref' => '/images/product_type/sm300lu25-alim-shuko-2-2C5m.jpg', 'producer_id' => 11], //  alimentazione
+            [ 'name' => 'Cable Alimentazione Proel SM200LU25', 'image_ref' => '/images/product_type/silos-slfjjm300-j-st-ms-j-st-fm-3m.jpg', 'producer_id' => 11],
+            [ 'name' => 'Speakers Yamaha DBR10', 'image_ref' => '/images/product_type/dbr10.jpg', 'producer_id' => 3], // casse
+            [ 'name' => 'Speakers Yamaha ERGO MODULE', 'image_ref' => '/images/product_type/ergo-module.jpg', 'producer_id' => 3],
+            [ 'name' => 'Speakers Yamaha DZR 315', 'image_ref' => '/images/product_type/dzr-315.jpg', 'producer_id' => 3],
+            [ 'name' => 'Sub Yamaha DXS15', 'image_ref' => '/images/product_type/dxs15.jpg', 'producer_id' => 3], // sub
+            [ 'name' => 'Sub Yamaha DXS15 XLF', 'image_ref' => '/images/product_type/dxs15-xlf.jpg', 'producer_id' => 3],
+            [ 'name' => 'Mixer Proel  MQ12USB', 'image_ref' => '/images/product_type/mq12usb.jpg', 'producer_id' => 11], // mixer
+            [ 'name' => 'Mixer Yamaha  MG12XU', 'image_ref' => '/images/product_type/mg12xu.jpg', 'producer_id' => 3],
+            [ 'name' => 'Mixer Proel MI12', 'image_ref' => '/images/product_type/mi12.jpg', 'producer_id' => 11],
+            [ 'name' => 'Mixer Roland V4', 'image_ref' => '/images/product_type/v4-ex.jpg', 'producer_id' => 7],
+            [ 'name' => 'Mixer Roland DJ99', 'image_ref' => '/images/product_type/dj99.jpg', 'producer_id' => 7],
+            [ 'name' => 'Led Sagitter SLIMPAR 12 DL', 'image_ref' => '/images/product_type/slimpar-12-dl.jpg', 'producer_id' => 12], // Luci
+            [ 'name' => 'Led Sagitter LED KIT 7', 'image_ref' => '/images/product_type/led-kit-7.jpg', 'producer_id' => 12],
+            [ 'name' => 'Led Sagitter COBETWO', 'image_ref' => '/images/product_type/cobetwo.jpg', 'producer_id' => 12],
+            [ 'name' => 'Led Sagitter SMART DOT', 'image_ref' => '/images/product_type/smart-dot.jpg', 'producer_id' => 12],
+            [ 'name' => 'Lamp Proel PLC64WS BK', 'image_ref' => '/images/product_type/plc64ws-bk-2Blamp-pllpp64a.jpg', 'producer_id' => 11],
+            [ 'name' => 'Lamp Proel PLLP200016', 'image_ref' => '/images/product_type/pllp200016-2000w-230v-gy16.jpg', 'producer_id' => 11],
         ];
         foreach ($types as $type) {
             DB::table('product_types')->insert($type);
@@ -414,6 +414,77 @@ class StaticTableSeeder extends Seeder
         ];
         foreach ($products as $product) {
             DB::table('products')->insert($product);
+        }
+
+        $images = [
+            [ 'image_ref' => '/images/product_type/cg192c.jpg', 'product_id' => 1], // chitarre
+            [ 'image_ref' => '/images/product_type/c40-ii-c-40-c40ii.jpg', 'product_id' => 2],
+            [ 'image_ref' => '/images/product_type/c40-ii-black.jpg', 'product_id' => 3],
+            [ 'image_ref' => '/images/product_type/tsp148nc-ns.jpg', 'product_id' => 4],
+            [ 'image_ref' => '/images/product_type/fender-strato-relic-todd-krause.jpg', 'product_id' => 5],
+            [ 'image_ref' => '/images/product_type/bullet-stratocaster-lrl-artic-white.jpg', 'product_id' => 6],
+            [ 'image_ref' => '/images/product_type/gibson-sg-standard-2015-transluced-black.jpg', 'product_id' => 7],
+            [ 'image_ref' => '/images/product_type/bk3-bk.jpg', 'product_id' => 8], // tastiere
+            [ 'image_ref' => '/images/product_type/psr630.jpg', 'product_id' => 9],
+            [ 'image_ref' => '/images/product_type/ea7.jpg', 'product_id' => 10],
+            [ 'image_ref' => '/images/product_type/f140r-cb.jpg', 'product_id' => 11],
+            [ 'image_ref' => '/images/product_type/dgx660-black.jpg', 'product_id' => 12],
+            [ 'image_ref' => '/images/product_type/lx17pe.jpg', 'product_id' => 13],
+            [ 'image_ref' => '/images/product_type/mexico-std-jazz-bass-fretless-3ts-rw.jpg', 'product_id' => 14], //bassi
+            [ 'image_ref' => '/images/product_type/trb-1006j-natural.jpg', 'product_id' => 15],
+            [ 'image_ref' => '/images/product_type/american-pro-jazz-bass-3-color-sunb-rw.jpg', 'product_id' => 16],
+            [ 'image_ref' => '/images/product_type/rydeen-20-22-silver-glitter-rd02f5.jpg', 'product_id' => 17], //batterie
+            [ 'image_ref' => '/images/product_type/nuova-stage-custom-birch-sbp0f5-20-22-cherry-wood.jpg', 'product_id' => 18],
+            [ 'image_ref' => '/images/product_type/nuova-recording-custom.jpg', 'product_id' => 19],
+            [ 'image_ref' => '/images/product_type/rydeen-20-22-hot-red-rd02f5.jpg', 'product_id' => 20],
+            [ 'image_ref' => '/images/product_type/td50kv-2B-mds50kv.jpg', 'product_id' => 21],
+            [ 'image_ref' => '/images/product_type/td1dmk.jpg', 'product_id' => 22],
+            [ 'image_ref' => '/images/product_type/m101-phase-90-m-101.jpg', 'product_id' => 23], //effetti chitarre
+            [ 'image_ref' => '/images/product_type/gr-d-v-guitar-distortion.jpg', 'product_id' => 24],
+            [ 'image_ref' => '/images/product_type/xas-donegan-the-weapon.jpg', 'product_id' => 25],
+            [ 'image_ref' => '/images/product_type/xtd-tone-drive.jpg', 'product_id' => 26],
+            [ 'image_ref' => '/images/product_type/vpd1-vintage-pre-drive-pedal.jpg', 'product_id' => 27],
+            [ 'image_ref' => '/images/product_type/classic-tc-xii-phaser.jpg', 'product_id' => 28],
+            [ 'image_ref' => '/images/product_type/sm58-lce.jpg', 'product_id' => 29], //  microfoni
+            [ 'image_ref' => '/images/product_type/beta58a-beta-58a.jpg', 'product_id' => 30],
+            [ 'image_ref' => '/images/product_type/sm57-lce.jpg', 'product_id' => 31],
+            [ 'image_ref' => '/images/product_type/e935.jpg', 'product_id' => 32],
+            [ 'image_ref' => '/images/product_type/55sh-series-ii.jpg', 'product_id' => 33],
+            [ 'image_ref' => '/images/product_type/e825s.jpg', 'product_id' => 34],
+            [ 'image_ref' => '/images/product_type/chl120lu5-jack-jack-pipa-5m.jpg', 'product_id' => 35], // Cavi
+            [ 'image_ref' => '/images/product_type/bulk100lu3-jack-jack-3m.jpg', 'product_id' => 36],
+            [ 'image_ref' => '/images/product_type/bulk100lu1-j-j-mt-1.jpg', 'product_id' => 37],
+            [ 'image_ref' => '/images/product_type/fpc-vc2.jpg', 'product_id' => 38],
+            [ 'image_ref' => '/images/product_type/rcc-3-uaub.jpg', 'product_id' => 39],
+            [ 'image_ref' => '/images/product_type/rcc-3-uaum.jpg', 'product_id' => 40],
+            [ 'image_ref' => '/images/product_type/chlp180lu3.jpg', 'product_id' => 41],
+            [ 'image_ref' => '/images/product_type/silos-slfjjm300-j-st-ms-j-st-fm-3m.jpg', 'product_id' => 42],
+            [ 'image_ref' => '/images/product_type/rmidi-b5-black-series-midi-cable-5ft-1-5m.jpg', 'product_id' => 43],
+            [ 'image_ref' => '/images/product_type/chl400lu5-cavo-midi-din-5p-din-5p-5-mt.jpg', 'product_id' => 44],
+            [ 'image_ref' => '/images/product_type/chl250lu10-can-can-mt10.jpg', 'product_id' => 45],
+            [ 'image_ref' => '/images/product_type/eso255lu10.jpg', 'product_id' => 46],
+            [ 'image_ref' => '/images/product_type/rmc-g5-1-5mt.jpg', 'product_id' => 47],
+            [ 'image_ref' => '/images/product_type/sm300lu25-alim-shuko-2-2C5m.jpg', 'product_id' => 48], //  alimentazione
+            [ 'image_ref' => '/images/product_type/silos-slfjjm300-j-st-ms-j-st-fm-3m.jpg', 'product_id' => 49],
+            [ 'image_ref' => '/images/product_type/dbr10.jpg', 'product_id' => 50], // casse
+            [ 'image_ref' => '/images/product_type/ergo-module.jpg', 'product_id' => 51],
+            [ 'image_ref' => '/images/product_type/dzr-315.jpg', 'product_id' => 52],
+            [ 'image_ref' => '/images/product_type/dxs15.jpg', 'product_id' => 53], // sub
+            [ 'image_ref' => '/images/product_type/dxs15-xlf.jpg', 'product_id' => 54],
+            [ 'image_ref' => '/images/product_type/mq12usb.jpg', 'product_id' => 55], // mixer
+            [ 'image_ref' => '/images/product_type/mg12xu.jpg', 'product_id' => 56],
+            [ 'image_ref' => '/images/product_type/mi12.jpg', 'product_id' => 57],
+            [ 'image_ref' => '/images/product_type/v4-ex.jpg', 'product_id' => 58],
+            [ 'image_ref' => '/images/product_type/dj99.jpg', 'product_id' => 59],
+            [ 'image_ref' => '/images/product_type/slimpar-12-dl.jpg', 'product_id' => 60], // Luci
+            [ 'image_ref' => '/images/product_type/led-kit-7.jpg', 'product_id' => 61],
+            [ 'image_ref' => '/images/product_type/cobetwo.jpg', 'product_id' => 62],
+            [ 'image_ref' => '/images/product_type/smart-dot.jpg', 'product_id' => 63],
+            [ 'image_ref' => '/images/product_type/plc64ws-bk-2Blamp-pllpp64a.jpg', 'product_id' => 64],
+            [ 'image_ref' => '/images/product_type/pllp200016-2000w-230v-gy16.jpg', 'product_id' => 65],
+        ];
+        foreach ($images as $image) {
+            DB::table('product_images')->insert($image);
         }
     }
 }
