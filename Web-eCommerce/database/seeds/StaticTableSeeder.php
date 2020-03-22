@@ -34,6 +34,38 @@ class StaticTableSeeder extends Seeder
          * 
          * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
          */
+        $companies = [
+            [ 'name' => 'American Express' ],
+            [ 'name' => 'Bank of America' ],
+            [ 'name' => 'Barclays' ],
+            [ 'name' => 'Capital One' ],
+            [ 'name' => 'Chase' ],
+            [ 'name' => 'Citibank' ],
+            [ 'name' => 'Discover Card' ],
+            [ 'name' => 'Mastercard' ],
+            [ 'name' => 'Navy FCD' ],
+            [ 'name' => 'Pentagon FCD' ],
+            [ 'name' => 'PNC' ],
+            [ 'name' => 'USAA' ],
+            [ 'name' => 'U.S. Bank' ],
+            [ 'name' => 'Visa' ],
+            [ 'name' => 'Visa Retired' ],
+            [ 'name' => 'Wells Fargo' ],
+        ];
+        
+        foreach ($companies as $company) {
+            DB::table('credit_card_companies')->insert($company);
+        }
+
+        $coupons = [
+            [ 'code' => 'MUSIC123', 'sale' => 10 ],
+            [ 'code' => 'AMERICA2333', 'sale' => 15 ],
+            [ 'code' => 'CHRISTMAS2020', 'sale' => 20 ],
+        ];
+        
+        foreach ($coupons as $coupon) {
+            DB::table('coupons')->insert($coupon);
+        }
 
         $carriers = [            
             [ 'id' => 1, 'name' => 'United Parcel Service', 'image_ref' => '/images/carriers/UPS_logo.png', 
@@ -221,15 +253,8 @@ class StaticTableSeeder extends Seeder
             DB::table('values')->insert($value);
         }
 
-        $methods = [
-            [ 'id' => 1, 'method' => 'carta di credito' ],
-            [ 'id' => 2, 'method' => 'PayPal' ],
-            [ 'id' => 3, 'method' => 'saldo' ],
-        ];
-    
-        foreach ($methods as $method) {
-            DB::table('payment_methods')->insert($method);
-        }
+        $methods = [ [ 'id' => 1, 'method' => 'carta di credito' ], [ 'id' => 2, 'method' => 'PayPal' ] ];
+        foreach ($methods as $method) { DB::table('payment_methods')->insert($method); }
 
         $root = new Category(['id' => 1,'name' => 'root',]);
         

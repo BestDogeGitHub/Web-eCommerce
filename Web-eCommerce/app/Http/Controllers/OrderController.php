@@ -128,4 +128,10 @@ class OrderController extends Controller
 
         return $products;
     }
+
+    public function checkout( $idUser, $idCard, $idAdd, $idCoupon, $paymentMethod ) // paymentmethod = (1 carta, 2 paypal)
+    {
+
+    }
+
 }

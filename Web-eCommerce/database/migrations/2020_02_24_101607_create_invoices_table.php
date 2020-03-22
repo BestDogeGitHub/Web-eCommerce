@@ -17,9 +17,11 @@ class CreateInvoicesTable extends Migration
             $table->bigIncrements('id');
             $table->text('details');
             $table->decimal('payment',9,3);
+            $table->tinyInteger('coupon_sale')->default(0); // you have to give the % of sale
             
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('payment_method_id');
+            $table->unsignedBigInteger('credit_card_id')->nullable();
 
             $table->timestamps();
         });

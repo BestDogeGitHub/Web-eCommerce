@@ -21,6 +21,10 @@ class AddForeignKeys extends Migration
             $table1->foreign('user_id')->references('id')
             ->on('users')->onDelete('cascade'); });
 
+        Schema::table('credit_cards', function(Blueprint $tablex) {
+            $tablex->foreign('credit_card_company_id')->references('id')
+            ->on('credit_card_companies')->onDelete('cascade'); });
+
         Schema::table('towns', function(Blueprint $table2) {
             $table2->foreign('nation_id')->references('id')
             ->on('nations')->onDelete('cascade'); });
@@ -44,6 +48,11 @@ class AddForeignKeys extends Migration
         Schema::table('invoices', function(Blueprint $table7) {
             $table7->foreign('order_id')->references('id')
             ->on('orders')->onDelete('cascade'); });
+
+
+        Schema::table('invoices', function(Blueprint $table666) {
+            $table666->foreign('credit_card_id')->references('id')
+            ->on('credit_cards')->onDelete('cascade'); });
 
         Schema::table('shipments', function(Blueprint $table8) {
             $table8->foreign('order_id')->references('id')
@@ -103,12 +112,14 @@ class AddForeignKeys extends Migration
     {
         $table0->dropForeign(['address_id']);
         $table1->dropForeign(['user_id']);
+        $tablex->dropForeign(['credit_card_company_id']);
         $table2->dropForeign(['nation_id']);
         $table3->dropForeign(['product_id']);
         $table4->dropForeign(['town_id']);
         $table5->dropForeign(['carrier_id']);
         $table6->dropForeign(['delivery_status_id']);
         $table7->dropForeign(['order_id']);
+        $table666->dropForeign(['credit_card_id']);
         $table8->dropForeign(['order_id']);
         $table9->dropForeign(['user_id']);
         $table10->dropForeign(['user_id']);

@@ -15,7 +15,9 @@ class InvoiceController extends Controller
             'details' => 'required|max:1500',
             'payment' => 'required|numeric|between:0,99999.999',
             'order_id' => 'required|integer|min:0|exists:orders,id',
-            'payment_method_id' => 'required|integer|min:0|exists:payment_methods,id'
+            'coupon_sale' => 'required|integer|min:0|max:100',
+            'payment_method_id' => 'required|integer|min:0|exists:payment_methods,id',
+            'credit_card_id' => 'required|integer|min:0|exists:credit_cards,id'
         );
     }
     /**
@@ -26,10 +28,8 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::all();
-
         return View('backoffice.pages.edit_invoices', ['invoices' => $invoices]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +39,6 @@ class InvoiceController extends Controller
     {
         return View::make('invoices.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -57,7 +56,6 @@ class InvoiceController extends Controller
     
         return response()->json(['success' => 'success!']);
     }
-
     /**
      * Display the specified resource.
      *
@@ -75,13 +73,11 @@ class InvoiceController extends Controller
      */
     public function destroy($id)
     {
-        // delete
         $invoice = Invoice::find($id);
         $invoice->delete();
         
         return response()->json(['success' => 'success!']);
     }
-
     /**
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
@@ -90,6 +86,5 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::find($id);
         return View('backoffice.partials._partial_invoice_to_pdf', ['invoice' => $invoice]);
-       
     }
 }

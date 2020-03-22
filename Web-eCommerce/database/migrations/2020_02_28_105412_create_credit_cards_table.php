@@ -15,11 +15,11 @@ class CreateCreditCardsTable extends Migration
     {
         Schema::create('credit_cards', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type',20);
             $table->string('number',20);
             $table->string('expiration_date',6);
 
             $table->unsignedBigInteger('user_id')->unique()->nullable();
+            $table->unsignedBigInteger('credit_card_company_id');
             $table->timestamps();
         });
     }
