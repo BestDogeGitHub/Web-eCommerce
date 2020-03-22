@@ -78,9 +78,9 @@ class StaticTableSeeder extends Seeder
             'link' => 'https://www.takamine.com/', 'details' => 'Takamine Co., Ltd. (株式会社 高峰楽器製作所, Kabushiki-gaisha Takamine Gakki Seisakusho) is a Japanese guitar manufacturer based in Nakatsugawa, Gifu, Japan. Takamine is known for its steel-string acoustic guitars.
             The company was founded in May 1962; in 1978 they were one of the first companies to introduce acoustic-electric models, where they pioneered the design of the preamplifier-equalizer component.
             The company name is pronounced /tɑːkɑːˈmiːneɪ/ ("ta - ka - mee - nay") in Japanese; it is often pronounced /ˈtækəmaɪn/ ("ta - ka - mine") in English.[citation needed] The name comes from Mount Takamine located in Nakatsugawa.' ],
-            [ 'id' => 9, 'name' => 'DigiTech ', 'image_ref' => '/images/producers/', 
+            [ 'id' => 9, 'name' => 'DigiTech ', 'image_ref' => '/images/producers/Logo-DigiTech_logo.svg', 
             'link' => 'https://www.digitech.com/', 'details' => 'DigiTech is an American company which manufactures digital effects units.' ],
-            [ 'id' => 10, 'name' => 'TC Electronic', 'image_ref' => '/images/producers/Logo-DigiTech_logo.svg.png', 
+            [ 'id' => 10, 'name' => 'TC Electronic', 'image_ref' => '/images/producers/logo-tc-electronic.png', 
             'link' => 'https://www.tcelectronic.com/', 'details' => 'TC Electronic is a Danish audio equipment company that designs and imports guitar effects, bass amplification, computer audio interfaces, audio plug-in software, live sound equalisers, studio and post production equipment, studio effect processors, and broadcast loudness processors and meters.' ],
             [ 'id' => 11, 'name' => 'Proel', 'image_ref' => '/images/producers/logo_proel.png', 
             'link' => 'https://www.proel.com/', 'details' => 'In 1997, PROEL was already a well-organised company and decided that a key step to be taken was to create a “Made in Italy” Research, Design and Prototyping department. What was puIn 1998, the drummers arrived and everything became a bit more lively. PROEL acquires the historic Tamburo Drums brand.'],
