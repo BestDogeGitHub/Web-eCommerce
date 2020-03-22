@@ -127,7 +127,7 @@ class StaticTableSeeder extends Seeder
         }
 
         $stats = [
-            [ 'id' => 1, 'status' => 'Not Found' ],
+            [ 'id' => 1, 'status' => 'Pending' ],
             [ 'id' => 2, 'status' => 'In Transit' ],
             [ 'id' => 3, 'status' => 'Pick Up' ],
             [ 'id' => 4, 'status' => 'Undelivered ' ],

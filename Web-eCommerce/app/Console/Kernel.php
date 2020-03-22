@@ -7,6 +7,8 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Address;
 use App\User;
 use App\Shipment;
+use App\CreditCard;
+use App\Invoice;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,7 +27,7 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule) // elimino ogni settimana gli indirizzi che non hanno più un utente o uno shipment
+    protected function schedule(Schedule $schedule) // elimino ogni settimana gli indirizzi che non hanno più un utente o uno shipment, stessa cosa con le carte di credito per utenti e invoices
     {
         $schedule->call( 
             function () 
@@ -42,7 +44,20 @@ class Kernel extends ConsoleKernel
 
                 Address::destroy( $add_ids );
 
-            })->weekly()->timezone('Europe/Rome');
+
+                $invoices = Invoice::all();
+                $creditCards = CreditCard::all();
+                $cardIds = $creditCards->pluck('id');
+                $invIds = $invoices->pluck('credit_card_id');
+
+                $cardIds = $cardIds->diff($invIds);
+                
+                foreach ($cardIds as $cardId) 
+                {
+                    $card = CreditCard::find($cardId);
+                    if ( $card->user_id == NULL ) $card->delete();
+                }
+            })->weekly()->timezone('Europe/Rome');//->everyMinute();
     }
 
     /**

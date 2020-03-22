@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use App\OrderDetail;
+use App\Shipment;
+use App\Coupon;
 use App\Product;
+use App\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -129,9 +135,62 @@ class OrderController extends Controller
         return $products;
     }
 
-    public function checkout( $idUser, $idCard, $idAdd, $idCoupon, $paymentMethod ) // paymentmethod = (1 carta, 2 paypal)
+    public function checkout(  ) //$idUser, $idCard, $idAdd, $idCoupon, $paymentMethod
+    // paymentmethod = (1 carta, 2 paypal)
     {
+        // DEBUG
+        $user = User::find(1);//Auth::user();
+        $idAdd = 5;
+        $idCoupon = 1;
+        $idCard = 55;
+        $paymentMethod = 1;
+        // DEBUG
+        $payment = 0; // il prezzo da pagare
+        $products = DB::table('cart')->where('user_id', $user->id)->get();
 
+        do{
+            $PO = rand(1000000000,9999999999);
+        }
+        while(Order::where('PO_Number', '=', $PO)->exists());
+
+        $order = Order::create([
+            'PO_Number' => $PO,
+            'user_id' => $user->id,
+        ]);
+        foreach($products as $product)
+        {
+            DB::table('order_details')->insert([
+                'order_id' => $order->id,
+                'product_id' => $product->product_id,
+                'quantity' => $product->quantity
+            ]);
+            $payment += ( Product::find($product->product_id)->payment * $product->quantity );
+        }
+
+        $ship = Shipment::create([
+            'order_id' => $order->id,
+            'address_id' => $idAdd,
+        ]);
+
+        $sale = 0;
+        if(!is_null($idCoupon))
+        {
+            $coupon = Coupon::find($idCoupon);
+            
+            $sale = $coupon->sale;
+            $coupon->used_counter++;
+            $coupon->save();
+        }
+        $mytime = Carbon::now();
+        $inv = Invoice::create([
+            'details' => $mytime->toDateTimeString(),
+            'payment' => $payment,
+            'coupon_sale' => $sale,
+            'order_id' => $order->id,
+            'payment_method_id' => $paymentMethod,
+            'credit_card_id' => $idCard,
+        ]);
+
+        return response()->json(['success' => 'success!']);
     }
-
 }

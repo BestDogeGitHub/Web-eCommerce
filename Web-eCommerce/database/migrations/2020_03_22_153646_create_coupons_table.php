@@ -18,6 +18,7 @@ class CreateCouponsTable extends Migration
             $table->string('code',100);
             $table->tinyInteger('sale')->default(0); // you have to give the % of sale
             $table->boolean('available')->default(1); // 1 for true
+            $table->integer('used_counter')->default(0);
 
             $table->timestamps();
         });
