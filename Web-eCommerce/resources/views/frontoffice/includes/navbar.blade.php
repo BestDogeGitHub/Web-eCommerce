@@ -14,8 +14,8 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="{{ route('categories_par', 1) }}">Cataglog</a>
                 @auth
-                <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist</a>
-                <a class="dropdown-item" href="{{ route('cart') }}">Cart</a>
+                <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist <span class="badge badge-info right bg-primary" id="nav_wish_link">{{ Auth::user()->productInWishlist->count() }}</span></a> 
+                <a class="dropdown-item" href="{{ route('cart') }}">Cart</a> 
                 <a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a>
                 @endauth
               	

@@ -8,7 +8,7 @@
     		<div class="row">
 
 				<!-- Immagini che scorrono -->
-				<div class="col-lg-6">
+				<div class="col-lg-6 mb-5 ftco-animate">
 					<div id="carouselProductImages" class="carousel slide" data-ride="carousel">
 
 						<div class="carousel-inner">
@@ -83,26 +83,15 @@
 									</div>
 		            		</div>
 						</div>
-				<div class="w-100"></div>
-				<div class="input-group col-md-6 d-flex mb-3">
-	             	<span class="input-group-btn mr-2">
-	                	<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
-	                   <i class="ion-ios-remove"></i>
-	                	</button>
-	            	</span>
-	             	<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-	             	<span class="input-group-btn ml-2">
-	                	<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-	                     <i class="ion-ios-add"></i>
-	                 </button>
-	             	</span>
-	          	</div>
 	          	<div class="w-100"></div>
 	          	<div class="col-md-12">
 	          		<p style="color: #000;"> {{ $product->stock }} pieces available</p>
 	          	</div>
-          	</div>
-          	<p><a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a></p>
+			  </div>
+			  				@if($product->stock)
+							  <p><a href="#" class="buy-now btn btn-black py-3 px-5 @guest disabled @endguest"  data-id="{{$product->id}}">Add to Cart</a></p>
+							@endif
+							  
     			</div>
     		</div>
     	</div>

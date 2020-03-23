@@ -35,11 +35,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('shop/cart', 'FrontEnd\ShopUserController@getCart')->name('cart');
     Route::delete('shop/cart/{id}', 'FrontEnd\ShopUserController@removeFromCart')->name('remove_from_cart');
     Route::post('shop/cart', 'FrontEnd\ShopUserController@addToCart')->name('add_to_cart');
+    Route::post('shop/cart/{id}/quantity', 'FrontEnd\ShopUserController@setQuantityCart')->name('set_product_quantity_cart');
 
     /**
      * CHECKOUT
      */
     Route::get('shop/checkout', 'FrontEnd\ShopUserController@getCheckout')->name('checkout');
+
+    /**
+     * ORDER
+     */
+    Route::post('shop/make_order', 'FrontEnd\ShopUserController@makeOrder')->name('make_order');
 
 });
 
