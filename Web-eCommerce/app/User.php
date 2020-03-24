@@ -40,9 +40,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function creditCard()
+    public function creditCards()
     {
-        return $this->hasOne('App\CreditCard');
+        return $this->hasMany('App\CreditCard');
     }
 
     public function productsInCart()
