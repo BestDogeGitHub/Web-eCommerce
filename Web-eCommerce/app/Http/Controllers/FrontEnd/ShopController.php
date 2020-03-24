@@ -19,6 +19,8 @@ class ShopController extends Controller
      */
     public function index()
     {
+        //Auth::user()->assignRole('Administrator');
+
         $rankProducts = $this->getTopProductTypes();
         $partners = Producer::all()->random(6);
         //$topCategories = $this->getTopCategories();

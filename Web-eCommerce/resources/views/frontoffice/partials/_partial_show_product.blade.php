@@ -5,7 +5,7 @@
         $image = $prod->productImages->first()->image_ref;
         else $image = "/images/products/no-image.png";
     @endphp
-    <a href="{{ route('products.show', $prod->id) }}" class="img-prod"><img class="img-fluid" src='{{ asset("$image") }}' alt="Product Image">
+    <a href="{{ route('product_detail', $prod->id) }}" class="img-prod"><img class="img-fluid" src='{{ asset("$image") }}' alt="Product Image">
     
         @if($prod->sale != 0)
         <span class="status">{{$prod->sale}}%</span>

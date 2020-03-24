@@ -73,9 +73,13 @@
                                     </td>
                                     
                                     <td class="quantity">
-                                        <div class="input-group mb-3">
-                                        <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
+										<div class="d-inline product-details ftco-animate">
+											<a href="#" class="cart_quant_minus mr-2" data-id="{{$prod->id}}"><i class="ion-ios-remove"></i></a>
+
+											<label id="cart_quant_val_{{$prod->id}}">{{ $prod->pivot->quantity }}</label>
+										
+											<a href="#" class="cart_quant_plus ml-2" data-id="{{$prod->id}}"><i class="ion-ios-add"></i></a>
+										</div>
                                 </td>
                                     
                                 </tr><!-- END TR-->

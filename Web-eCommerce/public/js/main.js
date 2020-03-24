@@ -110,7 +110,7 @@
 	};
 	carousel();
 
-	$('nav .dropdown').hover(function(){
+	$('nav .dropdown').click(function(){
 		var $this = $(this);
 		// 	 timer;
 		// clearTimeout(timer);
@@ -240,7 +240,7 @@
 
 	// navigation
 	var OnePageNav = function() {
-		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#']").on('click', function(e) {
+		$(".smoothscroll[href^='#']"/*, #ftco-nav ul li a[href^='#']"*/).on('click', function(e) {
 		 	e.preventDefault();
 
 		 	var hash = this.hash,
@@ -265,7 +265,7 @@
 
 	// magnific popup
 	$('.image-popup').magnificPopup({
-    type: 'image',
+	type: 'image',
     closeOnContentClick: true,
     closeBtnInside: false,
     fixedContentPos: true,
