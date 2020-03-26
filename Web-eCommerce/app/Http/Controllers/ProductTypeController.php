@@ -267,7 +267,8 @@ class ProductTypeController extends Controller
 
     public function search($string)
     {
-        $words = explode(' ',$string);
+        $lowerString = strtolower($string);
+        $words = explode(' ',$lowerString);
         $productTypes = ProductType::all();
 
         $productTypes->map(function ($productType) { $productType['count'] = 0; });
@@ -276,8 +277,9 @@ class ProductTypeController extends Controller
         {
             foreach ($words as $word) 
             {
-                if( strlen($word) > 3 ) { if (strpos($productType->name, $word) !== false) $productType->count++ ; }
-                else { if (preg_match("/\b{$word}\b/",$productType)) $productType->count++; }
+                $lowerName = strtolower($productType->name);
+                if( strlen($word) > 3 ) { if (strpos($lowerName, $word) !== false) $productType->count++ ; }
+                else { if (preg_match("/\b{$word}\b/",$lowerName)) $productType->count++; }
             }
         }
         $filtered = $productTypes->whereNotIn('count', [0]);
