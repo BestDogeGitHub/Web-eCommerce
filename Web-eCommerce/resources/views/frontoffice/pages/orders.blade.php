@@ -31,12 +31,12 @@
                                     <th>Details</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
+                                    <th>Invoice</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($orders as $order)
                                     <tr class="text-center">
-                                        
                                         <td class="data">
                                             <h3>{{ $order->PO_Number }}</h3>
                                         </td>
@@ -60,17 +60,16 @@
                                                 <p class="black">{{$order->shipment->deliveryStatus->status}}</p>
                                             </div>
                                         </td>
-                                        
+
+                                        <td class="data">
+                                            <p class="price"><a href="#"></a></p>
+                                        </td>
+
                                     </tr><!-- END TR-->
                                     @endforeach
-
-
-
-
-
                                 </tbody>
-                                </table>
-                            </div>
+                            </table>
+                        </div>
                     </div>
                     @else
                     <h3>No Orders</h3>

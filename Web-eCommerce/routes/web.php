@@ -77,6 +77,16 @@ Route::get('invoices/{id}/print', 'InvoiceController@getPDF')->name('getInvoiceP
  */
 
 Route::prefix('auth')->group(function () {
+
+    /**
+     * USER ROUTES
+     */
+    Route::get('/profile', 'FrontEnd\AuthUserController@getProfile')->name('edit_profile');
+
+    /**
+     * ADMINISTRATION ROUTES
+     */
+
     Route::group(['middleware' => ['role:Administrator']], function () {
         Route::resources([
             'addresses' => 'AddressController', //Implemented         

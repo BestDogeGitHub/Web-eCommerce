@@ -293,7 +293,7 @@ class ShopUserController extends Controller
             /**
              * Validation Rules for Coupon
              */
-            'coupon' => 'string|max:50',
+            'coupon' => 'nullable|string|max:50',
 
             /**
              * Validation Rules for Credit Card
@@ -395,7 +395,9 @@ class ShopUserController extends Controller
          * Create Order
          */
 
-        return OrderController::checkout(Auth::user()->id, $card_id, $address_id, $coupon_id, $paymentMethod);
+        OrderController::checkout(Auth::user()->id, $card_id, $address_id, $coupon_id, $paymentMethod);
+
+        $this->showOrders();
 
     }
 

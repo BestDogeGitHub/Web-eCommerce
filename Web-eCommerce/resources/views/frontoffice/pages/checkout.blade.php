@@ -292,6 +292,7 @@
                                             </div>
                                             <p><a href="#" class="btn btn-primary py-3 px-4" id="check_coupon">Check Coupon</a></p>
                                             <br/><div id="forErrors"></div>
+
                                         </div>
                                     </div>
 
@@ -455,6 +456,12 @@
                                                     <br/>
                                                     <span class="invalid-feedback du" role="alert">
                                                         <strong>Insert a valid card expiration date to place an order.</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('coupon')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                                 @error('customError')

@@ -272,3 +272,22 @@ input.search_input {
 span.page {
     border: unset !important;
 }
+
+label.input_label {
+    font-weight: 300;
+    padding-right: 40px;
+    padding-left: 15px;
+    font-size: 14px;
+    border-radius: 0px;
+    height: 54px !important;
+    text-align: center;
+    bordeR: 1px solid rgba(0, 0, 0, 0.1) !important;
+    padding: 0;
+    display: block;
+    width: 100%;
+    line-height: 3.5em;
+}
+
+.billing-form .form-control {
+    bordeR: 1px solid rgba(0, 0, 0, 0.1) !important;
+}

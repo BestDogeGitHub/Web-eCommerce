@@ -207,7 +207,7 @@ class OrderController extends Controller
             'credit_card_id' => $idCard,
         ]);
 
-        DB::table('cart')->where('user_id', '=', $user->id)->delete();
+        DB::table('cart')->where('user_id', '=', $idUser)->delete();
 
         return $order->id;
     }
