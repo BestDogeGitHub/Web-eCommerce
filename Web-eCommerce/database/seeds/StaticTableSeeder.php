@@ -120,6 +120,12 @@ class StaticTableSeeder extends Seeder
             'link' => 'https://www.sagitter.com/', 'details' => 'Founded in 1992, Sagitter was created by one of the original founders of Clay Paky Lighting company.
             In 2009 Proel Group acquired the Sagitter brand as part of the plan for strengthening its position in the professional lighting field.
             The Abruzzo based multinational began by opening a new Research and Development department, focused on reinvigorating the Sagitter product line through innovation and design to re-establish the legendary brand as a market leader.'],
+            [ 'id' => 13, 'name' => 'Paul Reed Smith', 'image_ref' => '/images/producers/logo-prs.png', 
+            'link' => 'https://www.prsguitars.com/', 'details' => "La Paul Reed Smith Guitars (spesso abbreviata in PRS Guitars) è un''azienda statunitense con sede in Stevensville, nel Maryland, fondata nel 1985 dal famoso liutaio e chitarrista Paul Reed Smith. La PRS Guitars è costruttrice di chitarre elettriche e acustiche. Sebbene inizialmente queste fossero prodotte solo per musicisti locali, oggi le chitarre PRS sono apprezzate e usate da molti artisti di fama mondiale."],
+            [ 'id' => 14, 'name' => 'Ibanez', 'image_ref' => '/images/producers/partner-4.png', 
+            'link' => 'https://www.ibanez.com/eu/', 'details' => "Ibanez è un marchio sotto cui l'azienda giapponese Hoshino Gakki Co.LTD. produce chitarre e bassi, sia elettrici che acustici. Produce anche amplificatori, effetti e altri dispositivi elettronici per chitarre e bassi.
+            Hoshino Gakki produce anche batterie e percussioni sotto il marchio Tama. Ibanez e Tama non esistono sotto forma di stabilimenti di produzione veri e propri, sono solo marchi con cui la Hoshino produce strumenti musicali. Attualmente la produzione Ibanez è interamente dislocata nel continente asiatico."],
+            
         ];
     
         foreach ($producers as $producer) {

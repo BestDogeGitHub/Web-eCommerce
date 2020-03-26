@@ -46,9 +46,10 @@ class ProductController extends Controller
     {
         $rules = array(
             'payment' => 'required|numeric|between:0,99999.999',
-            'sale' => 'required|numeric|max:100',
+            'name' => 'required|string|max:100',
+            'sale' => 'required|numeric|min:0|max:100',
             'stock' => 'required|numeric|max:10000000',
-            'info' => 'required|max:500',
+            'info' => 'required|max:3000',
             'productType' => 'required|integer|min:0|exists:product_types,id',
             'ivaCategory' => 'required|integer|min:0|exists:iva_categories,id'
         );
@@ -61,6 +62,7 @@ class ProductController extends Controller
         }
 
         $data = array(
+            'variant_name' => $request->name,
             'payment' => $request->payment,
             'sale' => $request->sale,
             'stock' => $request->stock,
@@ -113,14 +115,13 @@ class ProductController extends Controller
     {
         $rules = array(
             'productType' => 'required',
+            'name' => 'required|string|max:100',
             'ivaCategory' => 'required',
             'payment' => 'required|numeric|between:0,99999.999',
             'sale' => 'required|numeric|max:100',
             'stock' => 'required|numeric',
-            'info' => 'required|max:500',
+            'info' => 'required|max:3000',
             'available' => 'required|numeric|between:0,1',
-            'product_type_id' => 'required|integer|min:0|exists:product_types,id',
-            'iva_category_id' => 'required|integer|min:0|exists:iva_categories,id'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -132,6 +133,7 @@ class ProductController extends Controller
 
         $data = array(
             'payment' => $request->payment,
+            'variant_name' => $request->name,
             'sale' => $request->sale,
             'stock' => $request->stock,
             'buy_counter' => $product->buy_counter,
@@ -166,13 +168,29 @@ class ProductController extends Controller
         return Product::where('id', $id)->first();
     }
 
+
+    /**
+     * Get Related products.
+     *
+     * @param  $id
+     * @return $related
+     */
     public static function getRelatedById($id)
     {
         $product = ProductController::getById($id);
-        return Product::where([
+        $related = Product::where([
             ['product_type_id', '=' , $product->productType->id],
             ['id', '!=' , $id]
             ])->take(4)->get();
+        if(!count($related)){
+            $productTypesIds = ProductType::where('producer_id', '=', $product->productType->producer->id)->pluck('id');
+            $products = Product::whereIn('product_type_id', $productTypesIds)->get();
+            if(count($products) >= 4) 
+                return $products->random(4);
+            else 
+                return $products;
+        }
+        else return $related;
     }
 
     /**

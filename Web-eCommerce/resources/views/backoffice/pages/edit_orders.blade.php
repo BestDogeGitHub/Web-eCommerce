@@ -58,7 +58,7 @@
                         </td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <a href="#" class="btn btn-info _show" id="{{ $carrier->id }}" target="_blank"><i class="fa fa-plus-circle" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                                <a href="#" class="btn btn-info _show" id="{{ $order->id }}" ><i class="fa fa-plus-circle" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
                             </div>
                         </td>
                     </tr>

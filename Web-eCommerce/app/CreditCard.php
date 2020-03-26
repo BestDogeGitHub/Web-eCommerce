@@ -17,4 +17,18 @@ class CreditCard extends Model
     {
         return $this->belongsTo('App\CreditCardCompany','credit_card_company_id');
     }
+
+    /**
+     * Accessor Method to retrieve hide number
+     */
+    public function getHideNumber()
+    {
+        $number = $this->number;
+        if(strlen($number) <= 3) return $number;
+        $newstring = $number[0] . $number[1] . $number[2];
+        for ($i = 3; $i < strlen($number); $i++){
+            $newstring .= '*';
+        }
+        return $newstring;
+    }
 }

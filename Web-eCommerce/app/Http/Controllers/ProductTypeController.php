@@ -58,6 +58,8 @@ class ProductTypeController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
+
+        
         // CHECK PRODUCER
         $producer = Producer::findOrFail($request->producer);
 
@@ -66,7 +68,7 @@ class ProductTypeController extends Controller
         $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
         $destination_path = "/images/product_types";
 
-
+        
         
         $resize_image = Image::make($image->getRealPath());
 
@@ -100,7 +102,7 @@ class ProductTypeController extends Controller
             'name' => $request->name,
             'image_ref' => '/images/product_types/' . $new_name,
             'available' => 0,
-            'star_rate' => 3,
+            'star_tot_number' => 3,
             'n_reviews' => 0,
             'producer_id' => $producer->id
         ); 
@@ -176,7 +178,7 @@ class ProductTypeController extends Controller
                 'name' => $request->name,
                 'image_ref' => $productType->image_ref,
                 'available' => $request->available,
-                'star_rate' => $request->star_rate,
+                'star_tot_number' => $request->star_rate,
                 'n_reviews' => $request->n_reviews,
                 'producer_id' => $producer->id
             );
@@ -265,7 +267,7 @@ class ProductTypeController extends Controller
         }
     }
 
-    public function search($string)
+    public static function search($string)
     {
         $words = explode(' ',$string);
         $productTypes = ProductType::all();
@@ -280,6 +282,7 @@ class ProductTypeController extends Controller
                 else { if (preg_match("/\b{$word}\b/",$productType)) $productType->count++; }
             }
         }
+
         $filtered = $productTypes->whereNotIn('count', [0]);
         $ordered = $filtered->sortByDesc('count');
         

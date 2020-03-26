@@ -41,11 +41,13 @@ Route::group(['middleware' => ['auth']], function () {
      * CHECKOUT
      */
     Route::get('shop/checkout', 'FrontEnd\ShopUserController@getCheckout')->name('checkout');
+    Route::post('shop/coupons/check', 'FrontEnd\ShopUserController@checkCoupon')->name('check_coupon');
 
     /**
-     * ORDER
+     * ORDERS
      */
     Route::post('shop/make_order', 'FrontEnd\ShopUserController@makeOrder')->name('make_order');
+    Route::get('shop/orders/', 'FrontEnd\ShopUserController@showOrders')->name('orders');
 
 });
 
@@ -55,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('shop_categories')->defaults('parent', 0);
 Route::get('shop/categories/{parent}', 'FrontEnd\ShopController@getCategoriesView')->name('categories_par');
 Route::get('shop/{category}', 'FrontEnd\ShopController@getCatalogoCategory')->name('products_category');
+Route::post('shop/search/', 'FrontEnd\ShopController@searchProductTypes')->name('search_product_types');
 Route::get('shop', 'FrontEnd\ShopController@getShop')->name('shop');
 
 

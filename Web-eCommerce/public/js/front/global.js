@@ -383,6 +383,125 @@ $(document).ready(function(){
 
     });
 
+    /**
+     * Checkout scripts
+     */
 
+    // DISABLE CARD INPUTS
+    $('input[name=associated]').click( function() {
+
+      var val = false;
+      if(parseInt($(this).val())) val = true;
+      
+      $('#short_comp_1').prop('disabled', val);
+      $('#short_comp_2').prop('disabled', val);
+      $('#short_comp_3').prop('disabled', val);
+      $('#short_comp_4').prop('disabled', val);
+      $('#short_comp_5').prop('disabled', val);
+      
+      $('#company').prop('disabled', val);
+      $('#card_number').prop('disabled', val);
+      $('#editMonth').prop('disabled', val);
+      $('#editYear').prop('disabled', val);
+
+      if($('#card_id').length) {
+        $('#card_id').prop('disabled', !val);
+      }
+      
+    });
+
+    $('#company').change(function(){
+      $('input[name=short_comp][value=5]').click();
+    });
+
+    if($('#card_id').length) {
+      $('input[name=associated][value=1]').click();
+    }
+    else {
+      $('input[name=associated][value=0]').click();
+    }
+
+    // Coupon Check
+    $('#check_coupon').click( function(event) {
+      event.preventDefault();
+
+      var code = $('#coupon_code').val();
+
+      var form_data = new FormData();
+      form_data.append("code", code);
+
+      $.ajax({
+          url: "/shop/coupons/check",
+          method: "POST",
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          dataType: "json",
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(data){
+            var html = '';
+            if(data.errors)
+            {
+                html = '<div class="alert alert-danger">';
+                for(var count = 0; count < data.errors.length; count++)
+                {
+                    html += '<p>' + data.errors[count] + '</p>';
+                }
+                html += '</div>';
+                $('#forErrors').html(html); 
+            }
+            if(data.coupon)
+            {
+                html = '<div class="alert alert-coupon" role="alert">';
+                html += '<p>The coupon will be applied to the order.<br/><strong>' + data.coupon.sale + ' % discount on all products<strong></p>';
+                html += '</div>';
+                $('#forErrors').html(html); 
+            }
+          },
+          error:function (xhr, ajaxOptions, thrownError){
+              if(xhr.status == 404) {
+                Toast.fire({
+                  type: 'error',
+                  title: 'Coupon not found'
+                });
+              }else if(xhr.status == 409) {
+                  Toast.fire({
+                    type: 'warning',
+                    title: 'Conflict alert (409).'
+                  });
+              }else if(xhr.status == 500) {
+                Toast.fire({
+                  type: 'error',
+                  title: 'Oops... something went wrong (500). Server error: contact your wesite administrator'
+                });
+              }
+          }
+      });
+
+      return false;
+
+    });
+
+    $('#show_all_rec').click( function(event) {
+      event.preventDefault();
+
+      status = parseInt($(this).attr('data-status'));
+      
+      if(status == 1) {
+        $('.more').fadeOut();
+        $(this).attr('data-status', "0");
+        $(this).text('Show All');
+      } else {
+        $('.more').fadeIn();
+        $(this).attr('data-status', "1");
+        $(this).text('Show Less');
+      }
+
+      
+      
+    });
 
 });

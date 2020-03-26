@@ -21,6 +21,7 @@
                     <form action="{{ route('make_order') }}" method="POST" class="billing-form">
                         <div class="row justify-content-center">
                             <div class="col-xl-7 ftco-animate">
+                                @csrf
                                    
                                 <h3 class="mb-4 billing-heading">Billing Details</h3>
 
@@ -45,7 +46,7 @@
                                     <div class="w-100"></div>
 
                                     <!-- NATION INPUT -->
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="country">Nation *</label>
                                             <div class="select-wrap">
@@ -62,8 +63,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="w-100"></div>
                             
 
                                     <!-- CITY INPUT -->
@@ -73,7 +72,7 @@
                                             <label for="country">Town / City *</label>
                                             <div class="select-wrap">
                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                <select name="" id="billing_town" class="form-control" required="required">
+                                                <select name="town_id" class="form-control @error('town_id') is-invalid @enderror" required="required">
                                                     @foreach($towns as $town)
                                                     <option value="{{ $town->id }}" data-nation-id="{{ $town->nation->id }}" 
                                                     @if (Auth::user()->address && $town->id == Auth::user()->address->town->id)
@@ -83,28 +82,64 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- PHONE INPUT -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="phone">Phone *</label>
-                                            <input type="text" class="form-control" placeholder="" required="required" value="{{ Auth::user()->phone }}">
+                                            @error('town_id')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
                                         </div>
                                     </div>
 
                                     <div class="w-100"></div>
 
+                                    <!-- PHONE INPUT -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone">Phone *</label>
+                                            <input type="text" class="form-control" placeholder="" required="required" 
+                                            @if(!$errors->first('phone'))
+                                            value="{{ Auth::user()->phone }}"
+                                            @endif
+                                            @error('phone')
+                                            value="{{ old('phone') }}"
+                                            @enderror
+                                            >
+                                        </div>
+                                    </div>
+
                                     <!-- STREET NUMBER INPUT -->
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="streetaddress">Street Number *</label>
-                                            <input type="text" class="form-control" required="required" placeholder="House number and street name" 
-                                            @if (Auth::user()->address)
+                                            <input type="text" name="street_number" class="form-control @error('street_number') is-invalid @enderror" required="required" placeholder="House number and street name" 
+                                            @if (Auth::user()->address && !$errors->first('street_number'))
                                                 value="{{Auth::user()->address->street_number}}"
                                             @endif
+                                            @error('street_number')
+                                            value="{{ old('street_number') }}"
+                                            @enderror
                                             >
+                                        </div>
+                                    </div>
+
+
+                                    <div class="w-100 row col-md-12">
+                                        <div class="col-md-6">
+                                        @error('phone')
+                                            <span class="invalid-feedback du" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        </div>
+                                    
+                                        <div class="col-md-6">
+                                        @error('street_number')
+                                            <span class="invalid-feedback du" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                         </div>
                                     </div>
 
@@ -112,24 +147,64 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="postcodezip">Postcode / ZIP *</label>
-                                            <input type="text" class="form-control" required="required" placeholder=""
-                                            @if (Auth::user()->address)
+                                            <input id="postcode" type="text" name="postcode" class="form-control @error('postcode') is-invalid @enderror" required="required" placeholder=""
+                                            @if (Auth::user()->address && !$errors->first('postcode'))
                                                 value="{{Auth::user()->address->postcode}}"
                                             @endif
+                                            @error('postcode')
+                                            value="{{ old('postcode') }}"
+                                            @enderror
                                             >
                                         </div>
                                     </div>
-
-                                    <div class="w-100"></div>
 
                                     <!-- BUILDING INPUT -->
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="building">Building Number *</label>
-                                            <input type="text" class="form-control" required="required" placeholder="Appartment, suite, unit etc..."
-                                            @if (Auth::user()->address)
+                                            <input type="text" class="form-control @error('building_number') is-invalid @enderror" name="building_number" required="required" placeholder="Appartment, suite, unit etc..."
+                                            @if (Auth::user()->address && !$errors->first('building_number'))
                                                 value="{{Auth::user()->address->building_number}}"
-                                            @endif>
+                                            @endif
+                                            @error('building_number')
+                                            value="{{ old('building_number') }}"
+                                            @enderror
+                                            >
+                                        </div>
+                                    </div>
+                                    
+                                    
+
+                                    <div class="w-100 row col-md-12">
+                                        <div class="col-md-6">
+                                        @error('postcode')
+                                            <span class="invalid-feedback du" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        </div>
+                                    
+                                        <div class="col-md-6">
+                                        @error('building_number')
+                                            <span class="invalid-feedback du" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        </div>
+                                    </div>
+
+                                    <!-- COUNTRY CODE INPUT -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="building">Country Code *</label>
+                                            <input type="text" class="form-control @error('country_code') is-invalid @enderror" name="country_code" required="required" placeholder="US, IT..."
+                                            @if (Auth::user()->address && !$errors->first('country_code'))
+                                                value="{{Auth::user()->address->country_code}}"
+                                            @endif
+                                            @error('country_code')
+                                            value="{{ old('country_code') }}"
+                                            @enderror
+                                            >
                                         </div>
                                     </div>
 
@@ -137,12 +212,35 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="emailaddress">Email Address</label>
-                                            <input type="text" class="form-control" placeholder="your.email@example.it" value="{{Auth::user()->email}}" required="required">
+                                            <input type="text" class="form-control" name="email" placeholder="your.email@example.it" 
+                                            @if (!$errors->first('email'))
+                                            value="{{Auth::user()->email}}" 
+                                            @endif
+                                            @error('email')
+                                            value="{{ old('email') }}"
+                                            @enderror
+                                            required="required">
                                         </div>
                                     </div>
 
 
-                                    <div class="w-100"></div>
+                                    <div class="w-100 row col-md-12">
+                                        <div class="col-md-6">
+                                        @error('country_code')
+                                            <span class="invalid-feedback du" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        </div>
+                                    
+                                        <div class="col-md-6">
+                                        @error('email')
+                                            <span class="invalid-feedback du" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        </div>
+                                    </div>
 
                                     <!-- OTHER INFO INPUT -->
                                     <div class="col-md-12">
@@ -154,8 +252,7 @@
 
                                 </div>
                             </div>
-                        
-                        
+
                             <!-- RIGHT PART OF FORM -->
 
                             <div class="col-xl-5">
@@ -185,54 +282,200 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-12 cart-wrap ftco-animate">
+                                        <div class="cart-total mb-3">
+                                            <h3>Coupon Code</h3>
+                                            <p>Enter your coupon code if you have one</p>
+                                            <div class="form-group">
+                                                <label for="">Coupon code</label>
+                                                <input type="text" id="coupon_code" name="coupon" class="form-control text-left px-3" placeholder="">
+                                            </div>
+                                            <p><a href="#" class="btn btn-primary py-3 px-4" id="check_coupon">Check Coupon</a></p>
+                                            <br/><div id="forErrors"></div>
+                                        </div>
+                                    </div>
 
+
+
+                                    <!-- Payment Method Card -->
                                     <div class="col-md-12">
                                         <div class="cart-detail p-3 p-md-4">
                                             <h3 class="billing-heading mb-4">Payment Method</h3>
                                             
-                                            <label>
-                                                <input class="radio_p" type="radio" name="test" value="small">
-                                                <img src="{{asset('dist/img/credit/visa.png') }}" alt="Visa">
-                                            </label>
-
-                                            <label>
-                                                <input class="radio_p" type="radio" name="test" value="big">
-                                                <img src="{{asset('dist/img/credit/mastercard.png') }}" alt="Mastercard">
-                                            </label>
-
-                                            <label>
-                                                <input class="radio_p" type="radio" name="test" value="big">
-                                                <img src="{{asset('dist/img/credit/american-express.png') }}" alt="American Express">
-                                            </label>
-
-                                            <label>
-                                                <input class="radio_p" type="radio" name="test" value="big">
-                                                <img src="{{asset('dist/img/credit/paypal2.png') }}" alt="Paypal">
-                                            </label>
-                                            <br/>
+                                            <!-- USE MY CARD -->
                                             
-                                            <label>
+                                            
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="test" value="big">
-                                                <label class="form-check-label">
-                                                    Other Methods
+                                                <input class="form-check-input" type="radio" name="associated" value="1" @if(count(Auth::user()->creditCards)) checked="checked" @endif>
+                                                <label class="form-check-label mb-2 text-uppercase">
+                                                    <b>Use an associated Credit Card</b>
                                                 </label>
-                                                </div>
-                                            </label>
+                                            </div>
+                                            @if(count(Auth::user()->creditCards))
                                             <div class="select-wrap">
                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                <select name="" id="billing_town" class="form-control" required="required">
-                                                    @foreach($companies as $company)
-                                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                                <select id="card_id" name="card_id" class="form-control" required="required">
+                                                    @foreach(Auth::user()->creditCards as $card)
+                                                    <option value="{{ $card->id }}">{{ $card->company->name }} / {{ $card->getHideNumber() }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @else
+                                            <p>No Credit Cards Associated</p>
+                                            @endif
+                                            <hr/>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="associated" value="0" @if(!count(Auth::user()->creditCards)) checked="checked" @endif>
+                                                <label class="form-check-label mb-2 text-uppercase">
+                                                   <b>Add new Card</b>
+                                                </label>
+                                            </div>
+
+                                                <!-- Add new card -->
+
+                                                <div class="col-md-12 mb-2">
+
+                                                    <label>Select Credit Card Company</label><br/>
+
+                                                    <label>
+                                                        <input class="radio_p" type="radio" id="short_comp_1" name="short_comp" value="1" 
+                                                        @if(old('short_comp') == 1) checked="checked" @endif
+                                                        >
+                                                        <img src="{{asset('dist/img/credit/visa.png') }}" alt="Visa">
+                                                    </label>
+
+                                                    <label>
+                                                        <input class="radio_p" type="radio" id="short_comp_2" name="short_comp" value="2"
+                                                        @if(old('short_comp') == 2) checked="checked" @endif
+                                                        >
+                                                        <img src="{{asset('dist/img/credit/mastercard.png') }}" alt="Mastercard">
+                                                    </label>
+
+                                                    <label>
+                                                        <input class="radio_p" type="radio" id="short_comp_3" name="short_comp" value="3"
+                                                        @if(old('short_comp') == 3) checked="checked" @endif
+                                                        >
+                                                        <img src="{{asset('dist/img/credit/american-express.png') }}" alt="American Express">
+                                                    </label>
+
+                                                    <label>
+                                                        <input class="radio_p" type="radio" id="short_comp_4" name="short_comp" value="4"
+                                                        @if(old('short_comp') == 4) checked="checked" @endif
+                                                        >
+                                                        <img src="{{asset('dist/img/credit/paypal2.png') }}" alt="Paypal">
+                                                    </label>
+                                                    <br/>
+                                                    
+                                                    <label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" id="short_comp_5" name="short_comp" value="5"
+                                                        @if(old('short_comp') == 5) checked="checked" @endif
+                                                        >
+                                                        <label class="form-check-label">
+                                                            Others
+                                                        </label>
+                                                        </div>
+                                                    </label>
+                                                    <div class="select-wrap">
+                                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                                        <select name="company" id="company" class="form-control">
+                                                            @foreach($companies as $company)
+                                                            <option value="{{ $company->id }}"
+                                                            @if(old('short_comp') == 1 && old('company') == $company->id) 
+                                                            selected="selected"
+                                                            @endif
+                                                            >{{ $company->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                
+                                                </div>
+
+                                                <!--  NEW CARD INFO INPUT -->
+                                                <div class="col-md-12 mt-2">
+                                                    <div class="form-group">
+                                                        <label for="card_number">Card Number</label>
+                                                        <input type="text" class="form-control" placeholder="352************" name="number" id="card_number" value="{{ old('number') }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 mt-2">
+                                                    <div class="form-group">
+                                                        <label>Expiration</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control text-center" maxlength="2" placeholder="MM" name="exp_month" id="editMonth" value="{{ old('exp_month') }}">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">/</span>
+                                                            </div>
+                                                            <input type="text" class="form-control text-center" maxlength="2" placeholder="YY" name="exp_year" id="editYear" value="{{ old('exp_year') }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- DISPLAY ERRORS OF CARD FORM -->
+
+                                                @error('associated')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>Select or insert card to place an order. <br/>- {{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('card_id')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>Insert a valid card to place an order. <br/>- {{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('short_comp')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>Select a company.</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('company')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>Error in company select.</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('number')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>Insert a valid card number to place an order.</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('exp_month')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>Insert a valid card expiration date to place an order.</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('exp_year')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>Insert a valid card expiration date to place an order.</strong>
+                                                    </span>
+                                                @enderror
+                                                @error('customError')
+                                                    <br/>
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                
+
                                             <hr/>            
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <div class="checkbox">
-                                                    <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
+                                                    <label><input type="checkbox" id="conditions" name="conditions" value="1" class="mr-2" required="required"> I have read and accept the terms and conditions</label>
                                                     </div>
+                                                    @error('conditions')
+                                                    <span class="invalid-feedback du" role="alert">
+                                                        <strong>You must accept our terms and conditions to continue. <br/>- {{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <p><button type="submit" class="btn btn-primary py-3 px-4">Place an order</button></p>

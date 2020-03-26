@@ -42,6 +42,7 @@
                                 <hr/>
                             </div>
 
+
                             <!-- TABLE OF PRODUCTS-->
                             <table class="table table-striped table-hover" id="shipmentsTable">
                                 <thead>
@@ -60,13 +61,13 @@
                                     @foreach($shipments as $shipment)
                                     <tr>
                                         <td>{{$shipment->id}}</td>
-                                        <td>{{$shipment->tracking_number}}</td>
-                                        <td>{{$shipment->delivery_date}}</td>
+                                        <td>{{$shipment->tracking_number ?? 'Not Defined'}}</td>
+                                        <td>{{$shipment->delivery_date  ?? 'Not Defined'}}</td>
                                         <td><a href="{{ route('orders.show', $shipment->order_id) }}" target="_blank">{{$shipment->order_id}}</a></td>
                                         <td>
-                                            <p>Town: <b>{{$shipment->address->town->name}}</b> <i>(POSTCODE {{$shipment->address->postcode}})</i><br/>Nation: <b>{{$shipment->address->town->nation->name}}</b>.<br/>
-                                            Street <b>{{$shipment->address->street_number}}</b>, Building <b>{{$shipment->address->building_number}}</b> ({{$shipment->address->country_code}}).</p></td>
-                                        <td>{{$shipment->carrier->name}}</td>
+                                            <p>Town: <b>{{$shipment->address->town->name ?? 'Not Defined'}}</b> <i>(POSTCODE {{$shipment->address->postcode ?? 'Not Defined'}})</i><br/>Nation: <b>{{$shipment->address->town->nation->name ?? 'Not Defined'}}</b>.<br/>
+                                            Street <b>{{$shipment->address->street_number ?? 'Not Defined'}}</b>, Building <b>{{$shipment->address->building_number ?? 'Not Defined'}}</b> ({{$shipment->address->country_code ?? 'Not Defined'}}).</p></td>
+                                        <td>{{$shipment->carrier->name  ?? 'Not Defined'}}</td>
                                         <td class="text-uppercase">
                                             @if($shipment->delivery_status_id == 5)
                                             <div class="progress progress-sm active">
@@ -141,7 +142,12 @@
 					<div class="modal-body">
 
                         <!-- METHOD SPOOFING -->
-						<input type="hidden" name="_method" value="PUT" />		
+                        <input type="hidden" name="_method" value="PUT" />		
+                        
+                        <div class="form-group">
+							<label>Tracking Number</label>
+							<input type="text" class="form-control" required="required" name="tracking_number" id="editTracking"/>
+						</div>	
 
                         <div class="form-group">
                                 <label>Delivery Date</label>

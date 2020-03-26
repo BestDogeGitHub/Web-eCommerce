@@ -1,6 +1,5 @@
 
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>-->
-  <script src="{{ asset('js/google-map.js') }}"></script>
+
   
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/jquery-migrate-3.0.1.min.js') }}"></script>
@@ -16,6 +15,8 @@
   <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
   <script src="{{ asset('js/scrollax.min.js') }}"></script>
 
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>-->
+  <script src="{{ asset('js/google-map.js') }}"></script>
 
   <!-- SweetAlert2 -->
   <script src="{{asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
@@ -28,5 +29,5 @@
 
   <script src="{{ asset('js/front/global.js') }}"></script>
 
-  <script src="{{ asset('js/front/wishlist.js') }}"></script>
+  <script src="{{ asset('js/front/wishlist.js') }}"></script> 
   

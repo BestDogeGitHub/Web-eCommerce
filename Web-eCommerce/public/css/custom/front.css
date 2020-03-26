@@ -125,3 +125,150 @@ span.price-dc {
     
     transition: 1s;
   }
+
+  .radio_p:disabled + img {
+    /*
+    -webkit-box-shadow: 0px 1px 4px 3px #82AE46; 
+    box-shadow: 0px 1px 4px 3px #82AE46;
+    */
+    opacity: 0.6;
+  }
+
+  input.text-center {
+    text-align: center; 
+  }
+
+  .du {
+    display: unset;
+  }
+
+  .alert-coupon {
+    color: white;
+    background-color: #82ae46;
+    border-color: #b2d681;
+  }
+
+  .data h3 {
+    font-size: 16px;
+    }
+    
+   div.hide {
+       display:none;
+   }
+
+   /** ADMIN LTE COMMENTS STYLE */
+   
+    .profile-user-img {
+    border: 3px solid #adb5bd;
+    margin: 0 auto;
+    padding: 3px;
+    width: 100px;
+  }
+  
+  .profile-username {
+    font-size: 21px;
+    margin-top: 5px;
+  }
+  
+  .post {
+    border-bottom: 1px solid #adb5bd;
+    color: #666;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+  }
+  
+  .post:last-of-type {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .post .user-block {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .post .row {
+    width: 100%;
+  }
+  
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+  }
+  
+.user-block {
+    float: left;
+  }
+  
+  .user-block img {
+    float: left;
+    height: 40px;
+    width: 40px;
+  }
+  
+.img-circle {
+    border-radius: 50%;
+  }
+
+  
+.img-bordered {
+    border: 3px solid #adb5bd;
+    padding: 3px;
+  }
+  
+  .img-bordered-sm {
+    border: 2px solid #adb5bd;
+    padding: 2px;
+  }
+
+  
+.user-block .username,
+.user-block .description,
+.user-block .comment {
+  display: block;
+  margin-left: 50px;
+}
+
+.user-block .username {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: -1px;
+}
+
+.user-block .username, .user-block .description, .user-block .comment {
+    display: block;
+    margin-left: 50px;
+}
+.user-block .description {
+    color: #6c757d;
+    font-size: 13px;
+    margin-top: -3px;
+}
+
+/** SEARCH FORM ADMIN LTE STYLE */
+input.search_input {
+    height: calc(1.8125rem + 2px) !important;
+    background-color: #f2f4f6 !important;
+    border: 0 !important;
+    width: auto !important;
+}
+
+/** CAROUSEL PRODUCT DETAILS */
+.carousel-control-next-icon {
+    background-image: url("/images/static/left.png");
+    transform: rotate(180deg);
+}
+
+.carousel-control-prev-icon {
+    background-image: url("/images/static/left.png");
+}
+
+.bg-color-5 {
+    background-color: #b10e03;
+}
+
+span.page {
+    border: unset !important;
+}

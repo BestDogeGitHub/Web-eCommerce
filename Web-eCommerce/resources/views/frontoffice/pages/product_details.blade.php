@@ -6,7 +6,6 @@
     <section class="ftco-section">
     	<div class="container">
     		<div class="row">
-
 				<!-- Immagini che scorrono -->
 				<div class="col-lg-6 mb-5 ftco-animate">
 					<div id="carouselProductImages" class="carousel slide" data-ride="carousel">
@@ -42,7 +41,8 @@
 				</div>
 				<!-- Dettagli prodotto -->
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-    				<h3 class="text-uppercase" >{{ $product->productType->name }}</h3>
+					<h3 class="text-uppercase" >{{ $product->productType->name }}</h3> 
+					<h4><strong>{{ $product->variant_name }}</strong></h4>
     				<div class="rating d-flex">
 							<p class="text-left mr-4">
 								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
@@ -52,12 +52,11 @@
 							</p>
 						</div>
 						@if($product->sale != 0)
-							<p class="price"><span class="mr-2 price-dc">&euro;  {{number_format((float)$prod->payment / (1 - $prod->sale / 100), 2, '.', '') }}</span><span class="price-sale">&euro; {{$product->payment}}</span></p>
+							<p class="price"><span class="mr-2 price-dc">&euro; {{number_format((float)$product->payment, 2, '.', '') }}</span><span class="price-sale">&euro; {{$product->getRealPrice()}}</span></p>
 							@else
 							<p class="price"><span>&euro; {{$product->payment}}</span></p>
 							@endif
-					<p>Info:  {{ $product->info }} </p>
-					<h3>Properties</h3>
+					<h4>Properties</h4>
 					@foreach($product->values as $value)
 					<p>{{ $value->attribute->name }} : {{ $value->name }}</p>
 					@endforeach
@@ -93,7 +92,42 @@
 							@endif
 							  
     			</div>
-    		</div>
+			</div>
+			<div class="row mt-4">
+				<nav class="w-100">
+					<div class="nav nav-tabs" id="product-tab" role="tablist">
+						<a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+						<a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
+					</div>
+				</nav>
+					<div class="tab-content p-3" id="nav-tabContent">
+
+						<!-- INFO DIV -->
+						<div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> 
+							Info:  {{ $product->info }}
+						</div>
+						
+
+						<!-- REVIEWS DIV -->
+						<div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab"> 
+							@forelse ($reviews as $index=>$review)
+								@if($index > 3) 
+									@include('frontoffice.partials._partial_show_review', ['review' => $review, 'more' => 1])
+								@else 
+									@include('frontoffice.partials._partial_show_review', ['review' => $review, 'more' => 0])
+								@endif
+							@empty
+								<p>There are no reviews</p>
+							@endforelse
+
+							<!-- SHOW MORE DIV -->
+							<div class="row text-center">
+								<p><a href="#" id="show_all_rec" data-status="0" class="btn btn-primary py-3 px-4">Show All</a></p>
+							</div>
+
+						</div>
+					</div>
+			</div>
     	</div>
     </section>
 
@@ -109,12 +143,13 @@
     	</div>
     	<div class="container">
     		<div class="row">
-			@forelse ($related as $prod)
-                @include('frontoffice.partials._partial_show_product', ['product' => $prod])
-              @empty
-                <p>There are no related products</p>
-              @endforelse
-    		</div>
+				@forelse ($related as $prod)
+            		@include('frontoffice.partials._partial_show_product', ['product' => $prod])
+              	@empty
+                	<p>There are no related products</p>
+              	@endforelse
+			</div>
+			
     	</div>
     </section>
 

@@ -37,7 +37,8 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::whereNotIn("delivery_status_id", [1, 7])->get();
+        //$shipments = Shipment::whereNotIn("delivery_status_id", [1, 7])->get();
+        $shipments = Shipment::orderBy('id', 'DESC')->take(20)->get();
         $statuses = DeliveryStatus::all();
         $carriers = Carrier::all();
 
@@ -112,6 +113,7 @@ class ShipmentController extends Controller
         }
 
         $data = array(
+            'tracking_number' => $request->tracking_number,
             'delivery_date' => $request->delivery_date,
             'address_id' => $request->address_id,
             'carrier_id' => $request->carrier_id,

@@ -87,6 +87,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(html){
                 //button.parent().parent().find('td:eq(6)').html());
+                $('#editName').val(html.data.variant_name);
                 $('#editPayment').val(html.data.payment);
                 $('#editSale').val(html.data.sale);
                 $('#editStock').val(html.data.stock);

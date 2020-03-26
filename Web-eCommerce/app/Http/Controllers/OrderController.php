@@ -33,7 +33,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::orderBy('created_at', 'DESC')->get();
 
         return View('backoffice.pages.edit_orders', ['orders' => $orders]);
     }
@@ -135,18 +135,33 @@ class OrderController extends Controller
         return $products;
     }
 
-    public function checkout(  ) //$idUser, $idCard, $idAdd, $idCoupon, $paymentMethod
-    // paymentmethod = (1 carta, 2 paypal)
+
+    /**
+     * Metodo che materializza l'ordine in backend
+     * 
+     * @param $idUser
+     * @param $idCard
+     * @param $idAdd
+     * @param $idCoupon
+     * @param $paymentMethod (1 carta, 2 paypal)
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public static function checkout($idUser, $idCard, $idAdd, $idCoupon, $paymentMethod)
     {
-        // DEBUG
-        $user = User::find(1);//Auth::user();
-        $idAdd = 5;
-        $idCoupon = 1;
-        $idCard = 55;
-        $paymentMethod = 1;
+        /*
+         *  DEBUG Parameters
+         *
+            $user = User::find(1);//Auth::user();
+            $idAdd = 5;
+            $idCoupon = 1;
+            $idCard = 55;
+            $paymentMethod = 1;
+        */
+        
         // DEBUG
         $payment = 0; // il prezzo da pagare
-        $products = DB::table('cart')->where('user_id', $user->id)->get();
+        $products = DB::table('cart')->where('user_id', $idUser)->get();
 
         do{
             $PO = rand(1000000000,9999999999);
@@ -155,8 +170,9 @@ class OrderController extends Controller
 
         $order = Order::create([
             'PO_Number' => $PO,
-            'user_id' => $user->id,
+            'user_id' => $idUser,
         ]);
+
         foreach($products as $product)
         {
             DB::table('order_details')->insert([
@@ -191,6 +207,6 @@ class OrderController extends Controller
             'credit_card_id' => $idCard,
         ]);
 
-        return response()->json(['success' => 'success!']);
+        return $order->id;
     }
 }

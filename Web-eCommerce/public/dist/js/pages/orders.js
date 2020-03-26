@@ -68,8 +68,14 @@ $(document).ready(function() {
                     url: '/auth/shipments/' + obj.shipment.id + '/edit',
                     dataType: 'json',
                     success: function(add){
-                        $('#carrierLogo').attr('src', add.carrier.image_ref);
-                        $('#carrierName').text('Carrier: ' + add.carrier.name);
+                        if(add.carrier != null) {
+                            $('#carrierLogo').attr('src', add.carrier.image_ref);
+                            $('#carrierName').text('Carrier: ' + add.carrier.name);
+                        }
+                        else {
+                            $('#carrierLogo').prop('src', false);
+                            $('#carrierName').text('No Carrier defined');
+                        }
                         $('#trackNumber').text('TR No. ' + add.shipment.tracking_number);
                         $('#deliveryDate').html('Delivery Date <b>' + add.shipment.delivery_date + '</b>');
                         $.ajax({

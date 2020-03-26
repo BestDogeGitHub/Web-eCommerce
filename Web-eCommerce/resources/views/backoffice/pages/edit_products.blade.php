@@ -43,12 +43,13 @@
                                 <thead>
                                     <tr>
                                         <th><i class="fa fa-barcode"></i></th>
+                                        <th>Name</th>
+                                        <th>Type</th>
                                         <th>Payment</th>
                                         <th>Sale</th>
                                         <th>Stock</th>
                                         <th>Buys</th>
                                         <th>Av.</th>
-                                        <th>Product Type</th>
                                         <th>Iva</th>
                                         <th>Properties</th>
                                         <th>Edit</th>
@@ -58,6 +59,8 @@
                                     @foreach($products as $product)
                                     <tr>
                                         <td>{{$product->id}}</td>
+                                        <td class="text-uppercase">{{$product->variant_name}}</td>
+                                        <td class="text-uppercase">{{$product->productType->name}}</td>
                                         <td>{{$product->payment}}</td>
                                         <td>{{$product->sale}}</td>
                                         <td>{{$product->stock}}</td>
@@ -69,7 +72,6 @@
                                             <span class="badge badge-pill badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
                                             @endif
                                         </td>
-                                        <td class="text-uppercase">{{$product->productType->name}}</td>
                                         <td>{{$product->ivaCategory->category}}</td>
                                         <td><a href="{{ route('getProductProperties', $product->id) }}">Edit Properties</a></td>
                                         <td>
@@ -118,6 +120,10 @@
                                 <option value="{{ $iva->id }}">{{ $iva->category }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+							<label>Variant Name</label>
+							<input type="text" class="form-control" required="required" name="name"/>
 						</div>
                         <div class="form-group">
 							<label>Payment</label>
@@ -177,6 +183,10 @@
                                 <option value="{{ $iva->id }}">{{ $iva->category }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+							<label>Variant Name</label>
+							<input type="text" class="form-control" required="required" name="name" id="editName"/>
 						</div>
                         <div class="form-group">
 							<label>Payment</label>

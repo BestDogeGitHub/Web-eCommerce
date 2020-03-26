@@ -7,23 +7,40 @@
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
+          <!-- SEARCH FORM -->
+          <form class="form-inline ml-3" action=" {{ route('search_product_types') }} " method="POST">
+            @csrf
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar search_input" name="search" type="search" placeholder="Search products" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+            <!-- <li class="nav-item active"><a href="/" class="nav-link">Home</a></li> -->
+            <li class="nav-item">
+              
+            </li>
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="{{ route('shop') }}">Shop</a>
                 <a class="dropdown-item" href="{{ route('categories_par', 1) }}">Cataglog</a>
                 @auth
                 <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist <span class="badge badge-info right bg-primary" id="nav_wish_link">{{ Auth::user()->productInWishlist->count() }}</span></a> 
                 <a class="dropdown-item" href="{{ route('cart') }}">Cart</a> 
                 <a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a>
+                <a class="dropdown-item" href="{{ route('orders') }}">Orders</a>
                 @endauth
               	
               </div>
             </li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	          <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
+	          <!-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
             <!-- Authentication Links -->
             @guest
                             <li class="nav-item">

@@ -47,4 +47,9 @@ class Product extends Model
     {
         return $this->belongsTo('App\IvaCategory');
     }
+
+    public function getRealPrice()
+    {
+        return $this->payment - ($this->payment * $this->sale / 100);
+    }
 }

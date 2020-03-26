@@ -30,6 +30,13 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(html){
                 //button.parent().parent().find('td:eq(6)').html());
+                $('#editCarrier option').each(function(){
+                    $(this).removeAttr('selected');
+                });
+                $('#editStatus option').each(function(){
+                    $(this).removeAttr('selected');
+                });
+                $('#editTracking').val(html.shipment.tracking_number);
                 $("#editStatus option[value=" + html.delivery_status.id +"]").attr("selected", "selected");
                 $("#editCarrier option[value=" + html.carrier.id +"]").attr("selected", "selected");
                 $('#editDeliveryDate').datetimepicker('date', html.shipment.delivery_date);

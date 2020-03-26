@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductTypeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Category as Category;
@@ -35,7 +36,9 @@ class ShopController extends Controller
      */
     public function getShop()
     {
-        return view('frontoffice.pages.shop');
+        $products = ProductType::paginate(12);
+
+        return view('frontoffice.pages.shop', ['products' => $products]);
     }
 
     /**
@@ -75,7 +78,7 @@ class ShopController extends Controller
     public function getCatalogoCategory($category) {
         $cat = Category::findOrFail($category);
         $prods = $cat->productTypes->pluck('id');
-        $products = ProductType::whereIn('id', $prods)->paginate(12);
+        $products = ProductType::whereIn('id', $prods)->paginate(8);
 
         // Manipolazione dei prodotti !!!
         $products->map(function ($product) {
@@ -96,7 +99,7 @@ class ShopController extends Controller
         $productType = ProductType::findOrFail($type);
         
         // Get product from type
-        $products = $productType->products()->paginate(12);
+        $products = $productType->products()->paginate(8);
 
         // Get first category of product
         $category = $productType->categories->first();
@@ -122,7 +125,7 @@ class ShopController extends Controller
      * @return 
      */
     private function getTopProductTypes() {
-        return Product::where('id', '!=', 1)->has('productImages')->take(8)->get();
+        return Product::all()->random(8);
     }
 
     /**
@@ -131,6 +134,19 @@ class ShopController extends Controller
      * @return 
      */
     private function getTopCategories() {
-        return Category::take(4)->get();
+        return Category::all()->random(4);
+    }
+
+    /**
+     * Effettua la ricerca di un product type
+     * 
+     * @param \Illuminate\Http\Request
+     */
+    public function searchProductTypes(Request $request)
+    {
+        $products = ProductTypeController::search($request->search);
+
+        return view('frontoffice.pages.search', ['products' => $products, 'search' => $request->search]);
+
     }
 }

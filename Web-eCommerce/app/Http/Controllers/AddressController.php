@@ -159,4 +159,40 @@ class AddressController extends Controller
     {
         $address->delete();
     }
+
+    /**
+     * Check if the address exists or not, and create it if not exitsts
+     * 
+     * @param $building_number
+     * @param $street_number
+     * @param $postcode
+     * @param $town_id
+     *  
+     * @return $address_id (INTEGER)
+     */
+    public static function addressChecker($building_number, $street_number, $postcode, $town_id, $country_code)
+    {
+        $id = Address::where([
+            ['building_number', '=', $building_number],
+            ['street_number', '=', $street_number],
+            ['postcode', '=', $postcode],
+            ['town_id', '=', $town_id],
+            ['country_code', '=', $country_code]
+            ])->pluck('id')->first();
+
+        if(!$id) {
+
+            $data = array(
+                'building_number' => $building_number,
+                'postcode' => $postcode,
+                'street_number' => $street_number,
+                'country_code' => $country_code,
+                'town_id' => $town_id
+            );
+
+            $id = Address::create($data)->id;
+        }
+
+        return $id;
+    }
 }
