@@ -191,6 +191,8 @@ class OrderController extends Controller
             'credit_card_id' => $idCard,
         ]);
 
+        DB::table('cart')->where('user_id', '=', $user->id)->delete();
+
         return response()->json(['success' => 'success!']);
     }
 }
