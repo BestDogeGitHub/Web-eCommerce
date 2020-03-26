@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->mediumInteger('buy_counter')->default(0); // for statistic purpose
             $table->boolean('available')->default(1); // 1 for true
             $table->text('info')->nullable();
+            $table->integer('star_tot_number')->default(0);
+            $table->mediumInteger('n_reviews')->default(0); // number of reviews, user to calculate the mean rate
 
             $table->unsignedBigInteger('product_type_id');
             $table->unsignedBigInteger('iva_category_id')->default(1);

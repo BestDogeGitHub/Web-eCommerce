@@ -19,7 +19,7 @@ class CreateReviewsTable extends Migration
             $table->text('text');
             
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_type_id');
+            $table->unsignedBigInteger('product_id');
             
             $table->timestamps();
         });

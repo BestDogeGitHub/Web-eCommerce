@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Review;
-use App\ProductType;
+use App\Product;
 
 class ReviewObserver
 {
@@ -15,9 +15,9 @@ class ReviewObserver
      */
     public function created(Review $review)
     {
-        $productTypeId = $review->product_type_id;
+        $productId = $review->product_id;
 
-        $PT = ProductType::find($productTypeId);
+        $PT = Product::find($productId);
         $PT->star_tot_number += $review->stars;
         $PT->n_reviews++;
         $PT->save();
@@ -36,9 +36,9 @@ class ReviewObserver
             $old_stars = $review->getOriginal('stars');
             $diff = $new_stars - $old_stars;
 
-            $productTypeId = $review->product_type_id;
+            $productId = $review->product_id;
             
-            $PT = ProductType::find($productTypeId);
+            $PT = Product::find($productId);
             $PT->star_tot_number += $diff;
             $PT->save();
         }
@@ -51,9 +51,9 @@ class ReviewObserver
      */
     public function deleted(Review $review)
     {
-        $productTypeId = $review->product_type_id;
+        $productId = $review->product_id;
 
-        $PT = ProductType::find($productTypeId);
+        $PT = Product::find($productId);
         $PT->star_tot_number -= $review->stars;
         $PT->n_reviews--;
         $PT->save();
