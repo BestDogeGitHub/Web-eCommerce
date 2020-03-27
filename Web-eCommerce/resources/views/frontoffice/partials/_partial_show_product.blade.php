@@ -16,11 +16,20 @@
         <h3><a href="#">{{$prod->productType->name}} - {{$prod->variant_name}}</a></h3>
         <div class="d-flex">
             <div class="pricing">
-        @if($prod->sale != 0)
-        <p class="price"><span class="mr-2 price-dc">&euro; {{number_format((float)$product->payment, 2, '.', '') }}</span><span class="price-sale">&euro; {{$product->getRealPrice()}}</span></p>
-        @else
-        <p class="price"><span>&euro; {{$prod->payment}}</span></p>
-        @endif
+                @if($prod->sale != 0)
+                <p class="price"><span class="mr-2 price-dc">&euro; {{number_format((float)$product->payment, 2, '.', '') }}</span><span class="price-sale">&euro; {{$product->getRealPrice()}}</span></p>
+                @else
+                <p class="price"><span>&euro; {{$prod->payment}}</span></p>
+                @endif
+                <p >
+                @for($i = 1; $i <= 5; $i++)
+                    @if($prod->n_reviews && $i <= intval($prod->star_tot_number / $prod->n_reviews)) 
+                    <a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                    @else
+                    <a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+                    @endif
+                @endfor
+                </p>
             </div>
         </div>
         <div class="bottom-area d-flex px-3">

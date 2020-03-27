@@ -5,8 +5,12 @@ namespace App\Http\Controllers\FrontEnd;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 use App\Nation;
 use App\Town;
+use App\Review;
+use App\Product;
+
 use Validator;
 
 class AuthUserController extends Controller
@@ -22,6 +26,36 @@ class AuthUserController extends Controller
         $towns = Town::all();
 
         return view('frontoffice.pages.profile', ['user' => $user, 'nations' => $nations, 'towns' => $towns, 'changed' => $changed]);
+    }
+
+    /**
+     * Aggiunge una recensione
+     * 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function addReview($product, Request $request) {
+        
+        $rules = array(
+            'text' => 'required|string|max:1000',
+            'stars' => 'numeric|min:1|max:5'
+        );
+
+        $error = Validator::make($request->all(), $rules)->validate();
+        
+        $prod = Product::findOrFail($product);
+
+        $me = Auth::user();
+
+        $data = array(
+            'text' => $request->text,
+            'stars' => $request->stars,
+            'product_id' => $prod->id,
+            'user_id' => $me->id,
+        );
+
+        Review::create($data);
+
+        return back();
     }
 
     /**

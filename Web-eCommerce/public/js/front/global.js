@@ -530,4 +530,29 @@ $(document).ready(function(){
     }
 
 
+    $('.add_star').click( function(event) {
+      event.preventDefault();
+
+      var val = $(this).attr('data-value'); 
+      
+      $(this).prevAll().html('<i class="fa fa-star" aria-hidden="true"></i>');
+      $(this).html('<i class="fa fa-star" aria-hidden="true"></i>');
+      $(this).nextAll().html('<i class="fa fa-star-o" aria-hidden="true"></i>');
+
+      $('#stars_value').val(val);
+    
+    });
+
+
+    
+    /**
+     * Resource Substitution
+     * 
+     * Homepage
+     */
+    $('.home_slider h1').addClass('mb-2');
+    $('.home_slider h2').addClass('subheading mb-4');
+    $('.home_slider a').addClass('btn btn-primary');
+
+
 });

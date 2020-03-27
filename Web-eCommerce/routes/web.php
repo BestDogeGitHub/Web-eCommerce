@@ -17,6 +17,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'FrontEnd\ShopController@index')->name('/');
 Route::get('products/{type}', 'FrontEnd\ShopController@getProductsFromType')->name('products');
+Route::post('product/details/{id}/addReview', 'FrontEnd\AuthUserController@addReview')->name('add_review');
 Route::get('products/details/{id}', 'FrontEnd\ProductDetailController@show')->name('product_detail');
 Route::get('carriers/{id}', 'FrontEnd\ProductDetailController@showCarrier')->name('carrier_detail');
 
@@ -125,6 +126,10 @@ Route::prefix('auth')->group(function () {
         Route::get('attributes/{id}/values', 'AttributeController@getValues')->name('getValuesByAttribute');
         Route::get('products/{id}/images', 'ProductController@redirectToProductImages')->name('redirectToProductImages');
         Route::get('users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');
+
+        Route::get('website/edit', 'FrontEnd\AdminDashboardController@getComponents')->name('components.index');
+        Route::get('website/edit/{resource}', 'FrontEnd\AdminDashboardController@editResource')->name('components.edit');
+        Route::post('website/edit/{resource}', 'FrontEnd\AdminDashboardController@updateResource')->name('components.update');
         
     });
 });

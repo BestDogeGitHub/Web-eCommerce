@@ -321,3 +321,20 @@ label.input_label {
 input:disabled {
     background-color: ghostwhite !important;
 }
+
+.tab-content {
+    width: 100%;
+}
+
+.category-wrap h2 {
+    color: white !important;
+}
+
+.square {
+    max-height: 100px;
+}
+
+.cat-img {
+    height: 180px;
+    width: 100%;
+}

@@ -97,7 +97,7 @@
 				<nav class="w-100">
 					<div class="nav nav-tabs" id="product-tab" role="tablist">
 						<a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
-						<a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
+						<a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Comments <span class="badge badge-info ml-2 bg-primary" id="nav_wish_link">{{ count($product->reviews) }}</span></a>
 					</div>
 				</nav>
 					<div class="tab-content p-3" id="nav-tabContent">
@@ -110,8 +110,40 @@
 
 						<!-- REVIEWS DIV -->
 						<div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab"> 
+
+							@auth
+							<div class="post">
+								<form action="{{ route('add_review', $product->id) }}" method="POST" class="billing-form">
+									@csrf
+									<div class="user-block">
+										<img class="img-circle img-bordered-sm" src="{{ asset('/images/static/user-circle.png') }}" alt="user image">
+										<span class="username">
+										<a href="#">{{ Auth::user()->name }} {{ Auth::user()->surname }}</a> > <a href="{{ route('products', $product->id) }}"><small>{{ $product->productType->name }} - {{ $product->variant_name }}</small></a>
+										</span>
+										<span class="description">{{ date("H:i",strtotime( now() )) }} {{ date("d:m:Y",strtotime( now() )) }}</span>
+									</div>
+									<!-- /.user-block -->
+									<p>
+										<div class="form-group">
+											<label for="text">Your Review</label>
+											<textarea name="text" class="form-control" rows="3" placeholder="Type here your comment..."></textarea>
+										</div>										
+									</p>
+									<input type="hidden" name="stars" value="0" id="stars_value"/>
+									<p>
+										Valutation<br/>             
+										@for($i = 1; $i <= 5; $i++)
+											<a data-value="{{$i}}" class="add_star" href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a>
+										@endfor
+									</p>
+									<button type="submit" class="btn btn-primary">Send</button>
+								</form>
+							</div>
+							@endauth
+						
+
 							@forelse ($reviews as $index=>$review)
-								@if($index > 3) 
+								@if($loop->iteration > 3) 
 									@include('frontoffice.partials._partial_show_review', ['review' => $review, 'more' => 1])
 								@else 
 									@include('frontoffice.partials._partial_show_review', ['review' => $review, 'more' => 0])

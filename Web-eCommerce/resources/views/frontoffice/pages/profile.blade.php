@@ -92,8 +92,12 @@
                                 <strong><i class="fa fa-map-pin mr-1"></i> Location</strong>
 
                                 <p class="text-muted">
-                                    {{$user->address->town->name}}, <i>{{$user->address->town->nation->name}}</i>.<br/>
-                                    Street <b>{{$user->address->street_number}}</b>, Building <b>{{$user->address->building_number}}</b> ({{$user->address->country_code}}).
+                                    @if($user->address)
+                                        {{$user->address->town->name}}, <i>{{$user->address->town->nation->name}}</i>.<br/>
+                                        Street <b>{{$user->address->street_number}}</b>, Building <b>{{$user->address->building_number}}</b> ({{$user->address->country_code}}).
+                                    @else
+                                    No address
+                                    @endif                             
                                 </p>
 
                             </div>

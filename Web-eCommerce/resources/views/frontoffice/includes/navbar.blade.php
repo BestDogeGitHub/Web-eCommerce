@@ -33,12 +33,12 @@
                 <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist <span class="badge badge-info right bg-primary" id="nav_wish_link">{{ Auth::user()->productInWishlist->count() }}</span></a> 
                 <a class="dropdown-item" href="{{ route('cart') }}">Cart</a> 
                 <a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a>
-                <a class="dropdown-item" href="{{ route('orders') }}">Orders</a>
                 @endauth
               	
               </div>
             </li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            
+            <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
 	          <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
 	          <!-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
             <!-- Authentication Links -->
@@ -78,6 +78,7 @@
                             @else
                             @endhasanyrole
                         @endguest
+                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
             @auth
 	          <li class="nav-item cta cta-colored"><a href="{{ route('cart') }}" class="nav-link"><span class="icon-shopping_cart"></span>[<span id="nav_cart_link">{{ Auth::user()->productsInCart->count()}}</span>]</a></li>
             @endauth

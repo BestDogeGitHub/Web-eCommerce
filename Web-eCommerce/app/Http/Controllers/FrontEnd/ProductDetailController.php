@@ -16,7 +16,7 @@ class ProductDetailController extends Controller
 
         $product = ProductController::getById($id);
         $related = ProductController::getRelatedById($id);
-        $reviews = $product->productType->reviews;
+        $reviews = $product->reviews->sortByDesc('id');
 
         return View('frontoffice.pages.product_details', ['product' => $product, 'related' => $related, 'reviews' => $reviews]);
     }

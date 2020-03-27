@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\SiteImage;
+
 class AdminDashboardController extends Controller
 {
 
@@ -57,6 +59,43 @@ class AdminDashboardController extends Controller
         $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
 
         return View('backoffice.pages.edit_roles', ['user' => $user, 'roles' => $roles]);
+    }
+
+    /**
+     * Restituisce la pagina di modifica ruoli utente
+     */
+    public function getComponents() {
+
+        $components = SiteImage::all();
+
+
+        return View('backoffice.pages.edit_website', ['components' => $components]);
+    }
+
+    /**
+     * Restituisce la pagina di modifica ruoli utente
+     */
+    public function editResource($resource) {
+
+        $resource = SiteImage::findOrFail($resource);
+
+        return View('backoffice.pages.edit_resource', ['resource' => $resource]);
+    }
+
+    /**
+     * Aggiorna la descrizione del campo
+     */
+    public function updateResource($resource, Request $request) {
+
+        $resource = SiteImage::findOrFail($resource);
+
+        $data = array(
+            'image_details' => $request->details
+        );
+
+        $resource->update($data);
+
+        return View('backoffice.pages.edit_resource', ['resource' => $resource]);
     }
 
     /**

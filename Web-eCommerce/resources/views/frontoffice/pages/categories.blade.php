@@ -23,22 +23,24 @@
     <section class="ftco-section ftco-category ftco-no-pt">
         <div class="container">
         @foreach($categories as $index=>$cat)
-
-            @if($index == 0) 
+            @if($loop->iteration == 1) 
             <!-- FIRST -->
             <div class="row">
             @endif
 
-
-                <div class="col-md-4">
-                    <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end fadeInUp ftco-animated" style="background-image: url( {{ $cat->image_ref }} );">
-                        <div class="text px-3 py-1">
-                            <h2 class="mb-0"><a href="{{ asset('shop/categories/' . $cat->id) }}">{{ $cat->name }}</a></h2>
-                        </div>		
+            
+                <div class="col-lg-3 ftco-animate">
+                    <div class="product square">
+                        <a href="{{ route('categories_par', $cat->id) }}" class="img-prod"><img class="img-fluid cat-img" src="{{ $cat->image_ref }}" alt="Category image">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3 class="text-uppercase"><a href="{{ route('categories_par', $cat->id) }}">{{ $cat->name }}</a></h3>
+                        </div>
                     </div>
                 </div>
 
-            @if( ($index+1) % 3 == 0 )
+            @if( ($loop->iteration) % 4 == 0 )
             </div><!-- NEW LINE --><div class="row">
             @endif
 

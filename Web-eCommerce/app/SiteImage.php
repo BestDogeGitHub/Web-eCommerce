@@ -10,6 +10,6 @@ class SiteImage extends Model
 
     public function role()
     {
-        return $this->belongsTo('App\SiteImageRole');
+        return $this->belongsTo('App\SiteImageRole', 'site_image_role_id');
     }
 }

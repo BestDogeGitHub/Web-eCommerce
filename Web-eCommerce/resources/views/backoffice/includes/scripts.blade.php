@@ -54,6 +54,9 @@
 <!-- Filterizr-->
 <script src="{{asset('plugins/filterizr/jquery.filterizr.min.js')}}"></script>
 
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 <!-- CUSTOM ADMIN SCRIPTS -->
 <script src="{{ asset('dist/js/custom_admin.js') }}"></script>
 <script src="{{ asset('dist/js/crud_operations.js') }}"></script>

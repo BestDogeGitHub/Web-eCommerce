@@ -21,8 +21,6 @@
         </div><!-- /.container-fluid -->
         </section>
 
-
-
         <div class="card">
               <div class="card-body">
 

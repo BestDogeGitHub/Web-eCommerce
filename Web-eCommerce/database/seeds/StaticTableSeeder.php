@@ -67,6 +67,41 @@ class StaticTableSeeder extends Seeder
             DB::table('coupons')->insert($coupon);
         }
 
+
+        /**
+         * STATIC IMAGES AND RESOURCES
+         */
+
+        $roles = [
+            ['id' => 1, 'name' => 'Background Homepage Slider', 'role_details' => 'Immagini che scorrono nella homepage del sito'],
+            ['id' => 2, 'name' => 'Background 1', 'role_details' => 'Background di tipo 1 che compare nelle intestazioni del sito'],
+            ['id' => 3, 'name' => 'Background 2', 'role_details' => 'Background di tipo 2 che compare nelle intestazioni del sito'],
+            ['id' => 4, 'name' => 'Background 3', 'role_details' => 'Background di tipo 3 che compare nelle intestazioni del sito'],
+            ['id' => 5, 'name' => 'Background Deal Of The Day', 'role_details' => 'Background di del Deal of the Day'],
+        ];
+
+        foreach ($roles as $role) {
+            DB::table('site_image_roles')->insert($role);
+        }
+
+        $resources = [
+            ['id' => 1, 'image_ref' => '/images/static/bg_1.jpg', 'image_details' => '<h1>We serve best Musical Instruments &amp; Accessories</h1> <h2>We deliver best choice</h2>', 'site_image_role_id' => 1],
+            ['id' => 2, 'image_ref' => '/images/static/bg_2.jpg', 'image_details' => '<h1>100% Quality and Professionality</h1> <h2>We serve best musical instruments and accessories</h2>', 'site_image_role_id' => 1],
+            ['id' => 3, 'image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 1', 'site_image_role_id' => 2],
+            ['id' => 4, 'image_ref' => '/images/static/bg_2.jpg', 'image_details' => 'Background 2', 'site_image_role_id' => 3],
+            ['id' => 5, 'image_ref' => '/images/static/bg_3.fif', 'image_details' => 'Background 3', 'site_image_role_id' => 4],
+            ['id' => 6, 'image_ref' => '/images/static/bg_3.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 5],
+        ];
+
+        foreach ($resources as $resource) {
+            DB::table('site_images')->insert($resource);
+        }
+
+        /**
+         * END IMAGES
+         */
+
+
         $carriers = [            
             [ 'id' => 1, 'name' => 'United Parcel Service', 'image_ref' => '/images/carriers/UPS_logo.png', 
             'link' => 'www.ups.com', 'details' => 'United Parcel Service (UPS; stylized as ups) is an American multinational package delivery and supply chain management company.
@@ -269,7 +304,7 @@ class StaticTableSeeder extends Seeder
         $node3 = new Category(['name' => 'Chitarre', 'image_ref' => 'https://d1t3zg51rvnesz.cloudfront.net/p/images/cms2/715/sa-leo-abrahams_product_lkp_2021_small.jpg']);
         $node4 = new Category(['name' => 'Batterie', 'image_ref' => 'https://i.udemycdn.com/course/750x422/195576_d3b9_3.jpg']);
         $node5 = new Category(['name' => 'Tastiere', 'image_ref' => 'https://cdn.schoolofrock.com/img/hero-large-750w/piano-lessons1527267213.jpg']);
-        $node6 = new Category(['name' => 'Bassi', 'image_ref' => 'https://www.ibanez.com/common/product_artist_file/file/pc_main_electric_basses_eu_sp.jpg']);
+        $node6 = new Category(['name' => 'Bassi', 'image_ref' => 'https://lh3.googleusercontent.com/proxy/bDrnFZI_BUut-N1sHTDWuYD4JlU_F5OxL31J5gE_0JaDx1sy3hXnpI-PgjDzi0KC36z3j7nHTgTfnXLrZLfjfZfA0It-i7uBtZviFwwdUHMXgQ']);
         $node7 = new Category(['name' => 'Alimentazione e cavi', 'image_ref' => 'https://shop.scavino.it/files/scavino2_Files/Foto/643172_2.PNG']);
         $node8 = new Category(['name' => 'Impianti e attrezzatura', 'image_ref' => 'https://d287ku8w5owj51.cloudfront.net/images/products/hero/others/hero-creative-t30-wireless.jpg?width=800&height=800']);
         $node9 = new Category(['name' => 'Alimentatori', 'image_ref' => 'https://muzikercdn.com/uploads/products/2413/241367/thumb_d_gallery_base_bfe274af.jpg']);
