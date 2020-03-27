@@ -18,6 +18,11 @@ class Product extends Model
         return $this->belongsToMany('App\User', 'cart');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
     public function userWish()
     {
         return $this->belongsToMany('App\User', 'wishlist');

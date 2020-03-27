@@ -20,8 +20,8 @@ class Review extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function productType()
+    public function product()
     {
-        return $this->belongsTo('App\ProductType');
+        return $this->belongsTo('App\Product');
     }
 }
