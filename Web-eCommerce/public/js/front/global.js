@@ -504,4 +504,30 @@ $(document).ready(function(){
       
     });
 
+    $('#editProfile').click( function(event){
+      event.preventDefault();
+
+      $('#settingsProfile').click();
+    });
+
+    $('#check_address').click( function(event) {
+      var value = $(this).is(":checked");
+
+      if(value) {
+        $('.addr_input').prop('disabled', false);
+      }
+      else {
+        $('.addr_input').prop('disabled', true);
+      }
+
+    }); 
+
+    if($('#success_changed').length) {
+      Toast.fire({
+        type: 'success',
+        title: 'Changes are successfully saved'
+      });
+    }
+
+
 });

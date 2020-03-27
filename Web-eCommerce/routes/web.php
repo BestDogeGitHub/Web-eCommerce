@@ -81,7 +81,8 @@ Route::prefix('auth')->group(function () {
     /**
      * USER ROUTES
      */
-    Route::get('/profile', 'FrontEnd\AuthUserController@getProfile')->name('edit_profile');
+    Route::get('/profile', 'FrontEnd\AuthUserController@getProfile')->name('profile');
+    Route::post('/profile/edit', 'FrontEnd\AuthUserController@editProfile')->name('edit_profile');
 
     /**
      * ADMINISTRATION ROUTES

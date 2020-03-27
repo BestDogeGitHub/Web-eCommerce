@@ -275,19 +275,49 @@ span.page {
 
 label.input_label {
     font-weight: 300;
-    padding-right: 40px;
-    padding-left: 15px;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
     font-size: 14px;
     border-radius: 0px;
     height: 54px !important;
-    text-align: center;
     bordeR: 1px solid rgba(0, 0, 0, 0.1) !important;
     padding: 0;
     display: block;
     width: 100%;
     line-height: 3.5em;
+    background-color: gainsboro;
 }
 
 .billing-form .form-control {
     bordeR: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #82ae46;
+}
+
+.table {
+    min-width: 600px !important;
+}
+
+/* DELIVERY STATUSES BAR */
+.delivered {
+    width: 100%;
+}
+
+.transit {
+    width: 50%;
+}
+
+.other_ds {
+    width: 50%;
+}
+
+.pick_up {
+    width: 20%;
+}
+
+input:disabled {
+    background-color: ghostwhite !important;
 }
