@@ -101,6 +101,10 @@ class AddForeignKeys extends Migration
         Schema::table('product_types', function(Blueprint $table18) {
             $table18->foreign('producer_id')->references('id')
             ->on('producers')->onDelete('cascade'); }); 
+
+        Schema::table('site_images', function(Blueprint $table20) {
+            $table20->foreign('site_image_role_id')->references('id')
+            ->on('site_image_roles')->onDelete('cascade'); }); 
     }
 
     /**
@@ -131,5 +135,6 @@ class AddForeignKeys extends Migration
         $table16->dropForeign(['product_type_id']);
         $table17->dropForeign(['attribute_id']);
         $table18->dropForeign(['producer_id']);
+        $table20->dropForeign(['site_image_role_id']);
     }
 }
