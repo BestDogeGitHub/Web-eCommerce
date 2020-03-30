@@ -48,6 +48,26 @@
 
                     <textarea id="html_editor_textarea" name="details">{{ $resource->image_details }}</textarea>
 
+                    @error('details')
+                        <span class="invalid-feedback du" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                    <div class="form-group">
+                        <label>Actual Image</label><br/>
+                        <img class="img-responsive crud" src="{{ asset($resource->image_ref) }}" id="actualImage">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="editImage" name="image">
+                            <label class="custom-file-label" for="editImage">Change Image</label>
+                        </div>
+                        @error('image')
+                            <span class="invalid-feedback du" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
                     @csrf
 					<input type="submit" class="btn btn-warning" value="Edit" id="save_res">
 				</form>

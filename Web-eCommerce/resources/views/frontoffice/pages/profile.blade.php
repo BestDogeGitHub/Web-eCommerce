@@ -4,27 +4,29 @@
 
 
 
-        <div class="hero-wrap hero-bread back3">
+<div class="d-none" id="hidden_link_image" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 8)->first()->image_ref) }}"></div>
+
+    <div class="hero-wrap hero-bread" id="header_div">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('/') }}">Home</a></span> <span>Profile</span></p>
-                <h1 class="mb-0 bread">My Profile</h1>
+                <h1 class="mb-0 bread">@if($public) {{ $user->name }} {{ $user->surname }} @else My @endif Profile</h1>
             </div>
             </div>
         </div>
         </div>
 
 
-        <div class="container" style="padding-top: 5%; padding-bottom: 5%;">
-        @if($changed) <div class="d-none" id="success_changed"></div> @endif
+        <div class="container @if($public) public_profile_container @endif" style="padding-top: 5%; padding-bottom: 5%;">
+        @if($changed ?? false) <div class="d-none" id="success_changed"></div> @endif
 
 
             <!-- Main content -->
             <section class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4">
+                <div class="@if(!$public) row @else public_profile_container @endif">
+                    <div @if(!$public) class="col-md-4" @endif>
 
                         <!-- Profile Image -->
                         <div class="card card-primary card-outline ftco-animate">
@@ -40,18 +42,22 @@
                             <p class="text-muted text-center">{{ $user->roles->pluck('name')->implode(', ') }}</p>
 
                             <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b>Orders</b> <a class="float-right">{{ count($user->orders) }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Reviews</b> <a class="float-right">{{ count($user->reviews) }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Credit Cards</b> <a class="float-right">{{ count($user->creditCards) }}</a>
-                            </li>
+                                @if(!$public)
+                                <li class="list-group-item">
+                                    <b>Orders</b> <a class="float-right">{{ count($user->orders) }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Credit Cards</b> <a class="float-right">{{ count($user->creditCards) }}</a>
+                                </li>
+                                @endif
+                                <li class="list-group-item">
+                                    <b>Reviews</b> <a class="float-right">{{ count($user->reviews) }}</a>
+                                </li>
                             </ul>
 
-                            <a href="#" id="editProfile" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+                            @if(!$public)
+                                <a href="#" id="editProfile" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+                            @endif
                         </div>
                         <!-- /.card-body -->
                         </div>
@@ -106,6 +112,7 @@
                         <!-- /.card -->
                     </div>
                 <!-- /.col -->
+                @if(!$public)
                 <div class="col-md-8">
                     <div class="card ftco-animate">
                     <div class="card-header p-2">
@@ -161,44 +168,7 @@
                                                 </td>
                                                 
                                                 <td class="text-uppercase">
-                                                    @if($order->shipment->delivery_status_id == 5)
-                                                    <div class="progress progress-sm active">
-                                                        <div class="progress-bar bg-success progress-bar-striped delivered" role="progressbar"
-                                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">100% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    @elseif($order->shipment->delivery_status_id == 4)
-                                                    <div class="progress progress-sm active">
-                                                        <div class="progress-bar bg-danger progress-bar-striped delivered" role="progressbar"
-                                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">Error</span>
-                                                        </div>
-                                                    </div>
-                                                    @elseif($order->shipment->delivery_status_id == 3)
-                                                    <div class="progress progress-sm active">
-                                                        <div class="progress-bar bg-success progress-bar-striped pick_up" role="progressbar"
-                                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">20% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    @elseif($order->shipment->delivery_status_id == 2)
-                                                    <div class="progress progress-sm active">
-                                                        <div class="progress-bar bg-success progress-bar-striped transit" role="progressbar"
-                                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">50% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                    @else
-                                                    <div class="progress progress-sm active">
-                                                        <div class="progress-bar bg-warning progress-bar-striped other_ds" role="progressbar"
-                                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                            <span class="sr-only">Error</span>
-                                                        </div>
-                                                    </div>
-                                                    @endif
-                                                    
-                                                    {{$order->shipment->deliveryStatus->status}}
+                                                    @include('frontoffice.partials._partial_show_order_status', $order)
                                                 </td>
 
                                                 
@@ -498,6 +468,8 @@
                     <!-- /.nav-tabs-custom -->
                 </div>
                 <!-- /.col -->
+
+                @endif
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->

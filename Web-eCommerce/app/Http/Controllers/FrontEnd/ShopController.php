@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductTypeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Category as Category;
-use App\ProductType as ProductType;
-use App\Product as Product;
+use App\Category;
+use App\ProductType;
+use App\Product;
 use App\Producer;
+
 
 class ShopController extends Controller
 {
@@ -46,27 +47,61 @@ class ShopController extends Controller
      * 
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getCategoriesView($parent)
+    public function getCategoriesView(Request $request, $parent)
     {
-
-        if($parent == 0) {
-            $categories = Category::where('parent_id', 1)->get();
-        } 
-        else {
+        if($request->ajax()) {
             $categories = Category::where('parent_id', $parent)->get();
+            $categories->map( function($cat){
+    
+                $cat['num_products'] = $cat->getNumProducts();
+                if(Category::where('parent_id', $cat)->count())
+                    $cat['leaf'] = 0;
+                else $cat['leaf'] = 1;
+                
+            });
+            return response()->json([
+                'categories' => $categories,
+            ]);
         }
+        else {
 
-        /**
-         * Se non esistono sottocategorie restituisce la vista dei prodotti
-         * di quella categoria.
-         */
-        if(!$categories->count()) {
-            return $this->getCatalogoCategory($parent);
+            if($parent == "all") {
+                $categories = Category::whereIsLeaf()->get();
+                $cat_par = null;
+                $type = 1;
+            }
+            elseif($parent == 0) {
+                $categories = Category::where('parent_id', 1)->get();
+                $cat_par = Category::findOrFail($parent);
+                $type = 2;
+            } 
+            else {
+                $categories = Category::where('parent_id', $parent)->get();
+                $cat_par = Category::findOrFail($parent);
+                $type = 2;
+            }
+    
+            /**
+             * Se non esistono sottocategorie restituisce la vista dei prodotti
+             * di quella categoria.
+             */
+            if(!$categories->count() && !($parent == 'all')) {
+                return $this->getCatalogoCategory($parent);
+            }
+    
+            
+    
+            $categories->map( function($cat){
+    
+                $cat['num_products'] = ProductType::whereHas('categories', function($query) use ($cat) {
+                    $query->where('category_product_type.category_id', '=', $cat->id);
+                })->pluck('id')->count();
+                
+            });
+    
+            return view('frontoffice.pages.categories', ['categories' => $categories, 'parent' => $cat_par, 'type' => $type]);
         }
-
-        $cat_par = Category::findOrFail($parent);
         
-        return view('frontoffice.pages.categories', ['categories' => $categories, 'parent' => $cat_par]);
     }
 
     /**
@@ -149,4 +184,6 @@ class ShopController extends Controller
         return view('frontoffice.pages.search', ['products' => $products, 'search' => $request->search]);
 
     }
+
+    
 }

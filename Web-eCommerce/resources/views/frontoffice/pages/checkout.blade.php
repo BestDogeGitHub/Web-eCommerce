@@ -2,15 +2,17 @@
 
 @section('content')
 
-    <div class="hero-wrap hero-bread back3">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{ route('/') }}">Home</a></span> <span>Checkout</span></p>
-            <h1 class="mb-0 bread">Checkout</h1>
-          </div>
+<div class="d-none" id="hidden_link_image" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 4)->first()->image_ref) }}"></div>
+
+    <div class="hero-wrap hero-bread" id="header_div">
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="{{ route('/') }}">Home</a></span> <span>Checkout</span></p>
+                <h1 class="mb-0 bread">Checkout</h1>
+            </div>
+            </div>
         </div>
-      </div>
     </div>
 
         <div class="container" style="padding-top: 5%; padding-bottom: 5%;">
@@ -31,7 +33,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstname">Firt Name *</label>
-                                            <input type="text" class="form-control" required="required" placeholder="" value="{{ Auth::user()->name }}" disabled="disabled">  
+                                            <label class="input_label">{{ Auth::user()->name }}</label>
                                         </div>
                                     </div>
 
@@ -39,7 +41,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="lastname">Last Name *</label>
-                                            <input type="text" class="form-control" required="required" placeholder="" value="{{ Auth::user()->surname }}" disabled="disabled">
+                                            <label class="input_label">{{ Auth::user()->surname }}</label>
                                         </div>
                                     </div>
 

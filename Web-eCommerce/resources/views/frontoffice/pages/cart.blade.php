@@ -4,7 +4,9 @@
 
 
 
-<div class="hero-wrap hero-bread back3">
+<div class="d-none" id="hidden_link_image" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 5)->first()->image_ref) }}"></div>
+
+	<div class="hero-wrap hero-bread" id="header_div">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -100,19 +102,6 @@
 
     		</div>
     		<div class="row justify-content-end">
-    			<div class="col-lg-6 mt-5 cart-wrap ftco-animate">
-    				<div class="cart-total mb-3">
-    					<h3>Coupon Code</h3>
-    					<p>Enter your coupon code if you have one</p>
-  						<form action="#" class="info">
-							<div class="form-group">
-								<label for="">Coupon code</label>
-								<input type="text" class="form-control text-left px-3" placeholder="">
-							</div>
-	            		</form>
-    				</div>
-					<p><a href="#" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
-				</div>
 				<div class="col-lg-6 mt-5 cart-wrap ftco-animate">
 					<a href="{{ route('checkout') }}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a>
                 </div>

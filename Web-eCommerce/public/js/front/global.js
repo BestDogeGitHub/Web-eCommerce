@@ -445,6 +445,10 @@ $(document).ready(function(){
             var html = '';
             if(data.errors)
             {
+                  Toast.fire({
+                    type: 'error',
+                    title: 'Oops... there are some errors'
+                });
                 html = '<div class="alert alert-danger">';
                 for(var count = 0; count < data.errors.length; count++)
                 {
@@ -554,5 +558,103 @@ $(document).ready(function(){
     $('.home_slider h2').addClass('subheading mb-4');
     $('.home_slider a').addClass('btn btn-primary');
 
+
+    /**
+     * Image Header Setting
+     */
+    var image_link = $('#hidden_link_image').attr('data-link');
+    $( '#header_div' ).css( "background-image", 'url(' + image_link +')' ).on('load', function() {
+      $( '#header_div' ).addClass('loading');
+   });
+    $( '#header_div' ).removeClass('loading');
+
+    /**
+     * Image Deal Of The Day
+     */
+    var image_link_dd = $('#hidden_link_image_dotd').attr('data-link');
+    $( '#deal_of_the_day' ).css( "background-image", 'url(' + image_link_dd +')' );
+    $( '#deal_of_the_day' ).removeClass('loading');
+
+
+
+    /**
+     * CATEGORIES DYNAMICS LOGIC
+     */
+    $('body').on('click', 'a.category_link', function(event) {
+      if(!parseInt($(this).attr('data-leaf'))) event.preventDefault();
+
+      var parent = parseInt($(this).attr('data-parent'));
+      var parent_name = $(this).attr('data-parent-name');
+      var logic_row = $(this).closest('.categories_row').eq(0);
+
+      logic_row.nextAll('.categories_row').fadeOut(1000);
+      logic_row.nextAll('.categories_row').remove();
+
+      $.ajax({
+        url: "/shop/categories/" + parent,
+        method: "GET",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data){
+          console.log(data);
+
+          if(data.categories)
+          {
+
+            var new_row = '<div class="row categories_row">';
+
+            $.each(data.categories, function(key, item) {
+
+              var content = $('#category_template').clone();
+              content.find('div div a img').attr('src', item.image_ref);
+              content.find('.parent_cat').html(parent_name);
+              content.find('.target_cat').html(item.name);
+              if(item.leaf) {
+                content.find('.category_link').attr('href', '/shop/categories/' + item.id);
+              }
+              content.find('.category_link').attr('data-leaf', item.leaf);
+              content.find('.category_link').attr('data-logic-row', parent);
+              content.find('.category_link').attr('data-parent', item.id);
+              content.find('.category_link').attr('data-parent-name', item.name);
+              content.find('.num_prod_cat').html(item.num_products);
+              new_row += content.html();
+              
+            });
+
+            new_row += '</div>';
+            //console.log(new_row);
+            $('.categories_row:last').after(new_row);
+
+          }
+
+        },
+        error:function (xhr, ajaxOptions, thrownError){
+            if(xhr.status == 404) {
+              Toast.fire({
+                type: 'error',
+                title: 'Category not found'
+              });
+            }else if(xhr.status == 409) {
+                Toast.fire({
+                  type: 'warning',
+                  title: 'Conflict alert (409).'
+                });
+            }else if(xhr.status == 500) {
+              Toast.fire({
+                type: 'error',
+                title: 'Oops... something went wrong (500). Server error: contact your wesite administrator'
+              });
+            }else{
+              Toast.fire({
+                type: 'error',
+                title: 'Generic error. (' + xhr.status + ')'
+              });
+            }
+        }
+    });
+
+
+    });
 
 });

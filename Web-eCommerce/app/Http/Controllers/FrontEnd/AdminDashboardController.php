@@ -6,8 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 use App\SiteImage;
+use App\Order;
+use App\Category;
+use App\Review;
+use App\User;
+use App\Product;
+use App\Shipment;
+use Validator;
+use Image;
+use File;
 
 class AdminDashboardController extends Controller
 {
@@ -87,16 +97,58 @@ class AdminDashboardController extends Controller
      */
     public function updateResource($resource, Request $request) {
 
+        $rules = array(
+            'details' => 'required|string|max:1000',
+            'image' => 'image|max:4096'
+        );
+
+        $error = Validator::make($request->all(), $rules)->validate();
+
         $resource = SiteImage::findOrFail($resource);
 
-        $data = array(
-            'image_details' => $request->details
-        );
+        if(!$request->hasFile('image')) {
+            
+            // IMAGE NOT CHANGED
+            
+            $data = array(
+                'image_details' => $request->details
+            );
+
+        } else {
+            
+            // IMAGE CHANGED
+            
+            // UPLOAD IMAGE
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+            $destination_path = "/images/static";
+
+
+            
+            $resize_image = Image::make($image->getRealPath());
+
+            //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+            $resize_image->save(public_path($destination_path . '/' . $new_name));
+
+
+            $old_image_path = $resource->image_ref;
+
+            /*if(File::exists(public_path() . $old_image_path)) {
+                File::delete(public_path() . $old_image_path);
+            }*/
+
+            $data = array(
+                'image_ref' => '/images/static/' . $new_name,
+                'image_details' => $request->details
+            ); 
+        }
 
         $resource->update($data);
 
         return View('backoffice.pages.edit_resource', ['resource' => $resource]);
     }
+
+
 
     /**
      * Gestisce i ruoli dell'utente
@@ -122,6 +174,64 @@ class AdminDashboardController extends Controller
             'msg' => $user->roles,
         );
         return response()->json($response);
+    }
+
+
+
+    /**
+     * Restituisce i dati utili ai diagrammi nella home del backoffice
+     */
+    public function getInformations(Request $request)
+    {
+        if($request->ajax()) {
+
+            $orders_stat = array(
+                '1' => 0,
+                '2' => 0,
+                '3' => 0,
+                '4' => 0,
+                '5' => 0,
+                '6' => 0,
+                '7' => 0,
+            );
+
+            foreach(Order::whereDate('created_at', '>=', Carbon::now()->subDays(7))->get() as $index=>$order) {
+                //$created = Carbon::createFromFormat('Y-m-d', $order->created_at);
+                $order_date = $order->created_at->format('d.m.Y');
+                $now = Carbon::now()->format('d.m.Y');
+                $day_of = date_diff(date_create($now), date_create($order_date))->days;
+                if(array_key_exists($day_of, $orders_stat)) $orders_stat[$day_of]++;
+            }
+
+
+            $reviews_stat = array(
+                '1' => 0,
+                '2' => 0,
+                '3' => 0,
+                '4' => 0,
+                '5' => 0,
+                '6' => 0,
+                '7' => 0,
+            );
+
+            foreach(Review::whereDate('created_at', '>=', Carbon::now()->subDays(7))->get() as $index=>$review) {
+                $review_date = $review->created_at->format('d.m.Y');
+                $now = Carbon::now()->format('d.m.Y');
+                $day_of = date_diff(date_create($now), date_create($review_date))->days;
+                if(array_key_exists($day_of, $reviews_stat)) $reviews_stat[$day_of]++;
+            }
+
+            
+            
+            return response()->json([
+                'orders' => $orders_stat,
+                'reviews' => $reviews_stat,
+                'users' => User::whereDate('created_at', '>=', Carbon::now()->subDays(7))->count(), // Users last week
+                'num_orders' => Order::whereDate('created_at', '>=', Carbon::now()->subDays(7))->count(), // Orders last week
+                'num_products' => Product::whereDate('created_at', '>=', Carbon::now()->subDays(7))->count(), // products last week 
+                'in_transit' => Shipment::where('delivery_status_id', 2)->count(), // Transit orders
+            ]);
+        }
     }
     
 }

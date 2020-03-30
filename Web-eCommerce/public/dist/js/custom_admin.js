@@ -2,7 +2,7 @@
 
 
 $(document).ready(function() {
-    $("#spinner").fadeOut(1000);
+    if(!$('#not_fadeout').length) $("#spinner").fadeOut(1000);
     var table = $("#rolesTable").DataTable();
 
     $('#rolesTable tbody').on( 'click', 'tr', function () {

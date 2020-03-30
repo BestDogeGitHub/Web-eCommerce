@@ -10,6 +10,7 @@ use App\Nation;
 use App\Town;
 use App\Review;
 use App\Product;
+use App\User;
 
 use Validator;
 
@@ -25,7 +26,18 @@ class AuthUserController extends Controller
         $nations = Nation::all();
         $towns = Town::all();
 
-        return view('frontoffice.pages.profile', ['user' => $user, 'nations' => $nations, 'towns' => $towns, 'changed' => $changed]);
+        return view('frontoffice.pages.profile', ['user' => $user, 'public' => false, 'nations' => $nations, 'towns' => $towns, 'changed' => $changed]);
+    }
+
+    /**
+     * Restituisce il profilo pubblico
+     */
+    public function publicProfile($user_id)
+    {   
+        if($user_id == Auth::user()->id) return $this->getProfile();
+
+        return view('frontoffice.pages.profile', ['user' => User::findOrFail($user_id), 'public' => true]);
+
     }
 
     /**

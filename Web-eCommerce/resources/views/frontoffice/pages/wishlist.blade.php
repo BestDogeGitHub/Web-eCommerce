@@ -3,7 +3,9 @@
 @section('content')
 
 
-    <div class="hero-wrap hero-bread back3">
+<div class="d-none" id="hidden_link_image" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 6)->first()->image_ref) }}"></div>
+
+    <div class="hero-wrap hero-bread" id="header_div">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">

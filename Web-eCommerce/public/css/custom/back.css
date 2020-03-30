@@ -154,3 +154,33 @@ img.category {
     width: 20%;
 }
 /* END DS BAR */
+
+
+
+/**
+    CHARTS HOMEPAGE
+*/
+.orders_chart {
+    min-height: 350px; 
+    height: 350px; 
+    max-height: 350px; 
+    max-width: 100%;
+}
+
+.reviews_chart {
+    min-height: 400px; 
+    height: 400px; 
+    max-height: 400px; 
+    max-width: 100%;
+}
+
+.sup {
+    font-size: 20px;
+}
+
+.title_sec {
+    font-size: 1.25rem !important;
+    font-weight: bold !important;
+    font-family: "Source Sans Pro" !important;
+}
+

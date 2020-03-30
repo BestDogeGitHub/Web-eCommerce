@@ -2,7 +2,9 @@
 
 @section('content')
 
-<div class="hero-wrap hero-bread" style="background-image: url({{ asset('images/bg_2.jpg') }});">
+<div class="d-none" id="hidden_link_image" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 3)->first()->image_ref) }}"></div>
+
+	<div class="hero-wrap hero-bread loading" id="header_div" >
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -11,6 +13,10 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div id="header_div2" class="loading">
+      
     </div>
 
     <section class="ftco-section ftco-cart">

@@ -74,10 +74,14 @@ class StaticTableSeeder extends Seeder
 
         $roles = [
             ['id' => 1, 'name' => 'Background Homepage Slider', 'role_details' => 'Immagini che scorrono nella homepage del sito'],
-            ['id' => 2, 'name' => 'Background 1', 'role_details' => 'Background di tipo 1 che compare nelle intestazioni del sito'],
-            ['id' => 3, 'name' => 'Background 2', 'role_details' => 'Background di tipo 2 che compare nelle intestazioni del sito'],
-            ['id' => 4, 'name' => 'Background 3', 'role_details' => 'Background di tipo 3 che compare nelle intestazioni del sito'],
-            ['id' => 5, 'name' => 'Background Deal Of The Day', 'role_details' => 'Background di del Deal of the Day'],
+            ['id' => 2, 'name' => 'Background Shop Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
+            ['id' => 3, 'name' => 'Background Catalog Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
+            ['id' => 4, 'name' => 'Background Checkout Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
+            ['id' => 5, 'name' => 'Background Cart Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
+            ['id' => 6, 'name' => 'Background Wishlist Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
+            ['id' => 7, 'name' => 'Background Orders Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
+            ['id' => 8, 'name' => 'Background Profile Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
+            ['id' => 9, 'name' => 'Background Deal Of The Day', 'role_details' => 'Background di del Deal of the Day nella HomePage'],
         ];
 
         foreach ($roles as $role) {
@@ -85,12 +89,17 @@ class StaticTableSeeder extends Seeder
         }
 
         $resources = [
-            ['id' => 1, 'image_ref' => '/images/static/bg_1.jpg', 'image_details' => '<h1>We serve best Musical Instruments &amp; Accessories</h1> <h2>We deliver best choice</h2>', 'site_image_role_id' => 1],
-            ['id' => 2, 'image_ref' => '/images/static/bg_2.jpg', 'image_details' => '<h1>100% Quality and Professionality</h1> <h2>We serve best musical instruments and accessories</h2>', 'site_image_role_id' => 1],
-            ['id' => 3, 'image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 1', 'site_image_role_id' => 2],
-            ['id' => 4, 'image_ref' => '/images/static/bg_2.jpg', 'image_details' => 'Background 2', 'site_image_role_id' => 3],
-            ['id' => 5, 'image_ref' => '/images/static/bg_3.fif', 'image_details' => 'Background 3', 'site_image_role_id' => 4],
-            ['id' => 6, 'image_ref' => '/images/static/bg_3.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 5],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => '<h1>We serve best Musical Instruments &amp; Accessories</h1> <h2>We deliver best choice</h2>', 'site_image_role_id' => 1],
+            ['image_ref' => '/images/static/bg_2.jpg', 'image_details' => '<h1>100% Quality and Professionality</h1> <h2>We serve best musical instruments and accessories</h2>', 'site_image_role_id' => 1],
+            ['image_ref' => '/images/static/bg_11.jpg', 'image_details' => '<h1>100% Quality and Professionality</h1> <h2>We deliver best choice</h2>', 'site_image_role_id' => 1],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 1', 'site_image_role_id' => 2],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 2', 'site_image_role_id' => 3],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 4],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 5],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 6],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 7],
+            ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 8],
+            ['image_ref' => '/images/static/bg_3.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 9],
         ];
 
         foreach ($resources as $resource) {
@@ -412,13 +421,13 @@ class StaticTableSeeder extends Seeder
         }
 
         $products = [
-            [ 'variant_name' => 'BROWN', 'payment' => 452, 'product_type_id' => 1 ], // chitarre
-            [ 'variant_name' => 'BROWN', 'payment' => 171.11, 'product_type_id' => 2 ],
-            [ 'variant_name' => 'BLACK', 'payment' => 177.12, 'product_type_id' => 2 ],
-            [ 'variant_name' => 'light', 'payment' => 300.33, 'product_type_id' => 3 ],
-            [ 'variant_name' => 'Todd Krouse', 'payment' => 725.25, 'product_type_id' => 4 ],
-            [ 'variant_name' => 'Artic White', 'payment' => 126.00, 'product_type_id' => 5 ],
-            [ 'variant_name' => 'TRANSLUCED BLACK', 'payment' => 1.335, 'product_type_id' => 6 ],//
+            [ 'variant_name' => 'BROWN', 'payment' => 452, 'product_type_id' => 1, 'info' => 'Solid American Cedar Top, Rosewood Back and Sides, Mahogany Neck, Ebony Fingerboard, Rosewood Bridge'], // chitarre
+            [ 'variant_name' => 'BROWN', 'payment' => 171.11, 'product_type_id' => 2, 'info' => 'La chitarra classica entry level Yamaha C40 II è un modello tradizionale full-size che vanta sonorità eccezionali ed è pensata per chi si avvicina per la prima volta allo strumento, Dal flamenco alla bossa nova, la chitarra C40II si adatta a diversi generi e stili e offre l eccellente rapporto tra qualità artigianale e sonora che contraddistingue le chitarre della serie C Yamaha. Caratterizzata da top in abete, retro e lati meranti, tastiera in palissandro che le conferiscono un aspetto molto naturale, la C40II ha una struttura leggera, maneggevole e facile da trasportare, Perfetta per i principianti di tutte le età e consigliata dagli insegnanti di musica, la C40II è la scelta ideale per chi desidera uno strumento facile da usare e dalle buone doti estetiche e sonore. Articolo consegnato: 1 x Chitarra Classica Yamaha C40II / Scala di 650mm (25 9/16”) / Alta Qualità / Colore Naturale'],
+            [ 'variant_name' => 'BLACK', 'payment' => 177.12, 'product_type_id' => 2, 'info' => 'La chitarra classica entry level Yamaha C40 II è un modello tradizionale full-size che vanta sonorità eccezionali ed è pensata per chi si avvicina per la prima volta allo strumento, Dal flamenco alla bossa nova, la chitarra C40II si adatta a diversi generi e stili e offre l eccellente rapporto tra qualità artigianale e sonora che contraddistingue le chitarre della serie C Yamaha. Caratterizzata da top in abete, retro e lati meranti, tastiera in palissandro che le conferiscono un aspetto molto naturale, la C40II ha una struttura leggera, maneggevole e facile da trasportare, Perfetta per i principianti di tutte le età e consigliata dagli insegnanti di musica, la C40II è la scelta ideale per chi desidera uno strumento facile da usare e dalle buone doti estetiche e sonore. Articolo consegnato: 1 x Chitarra Classica Yamaha C40II / Scala di 650mm (25 9/16”) / Alta Qualità / Colore Naturale' ],
+            [ 'variant_name' => 'light', 'payment' => 300.33, 'product_type_id' => 3, 'info' => 'Features :Top Material: Solid CedarBody Material: Sapele ArchedBody Type: Thinline CutawayBridge Material: RosewoodBody Finish: SatinColour: NaturalNeck Material: MahoganyFingerboard Material: RosewoodFingerboard Inlay: DotNumber of Frets: 20Scale Length: 650 mmNut Material: 47 mm'],
+            [ 'variant_name' => 'Todd Krouse', 'payment' => 725.25, 'product_type_id' => 4, 'info' => 'Features :Top Material: Solid CedarBody Material: Sapele ArchedBody Type: Thinline CutawayBridge Material: RosewoodBody Finish: SatinColour: NaturalNeck Material: MahoganyFingerboard Material: RosewoodFingerboard Inlay: DotNumber of Frets: 20Scale Length: 650 mmNut Material: 47 mm' ],
+            [ 'variant_name' => 'Artic White', 'payment' => 126.00, 'product_type_id' => 5,  'info' => 'Features :Top Material: Solid CedarBody Material: Sapele ArchedBody Type: Thinline CutawayBridge Material: RosewoodBody Finish: SatinColour: NaturalNeck Material: MahoganyFingerboard Material: RosewoodFingerboard Inlay: DotNumber of Frets: 20Scale Length: 650 mmNut Material: 47 mm' ],
+            [ 'variant_name' => 'TRANSLUCED BLACK', 'payment' => 1.335, 'product_type_id' => 6, 'info' => 'Gibson SG è una linea di chitarre elettriche solid body prodotte dalla Gibson a partire dagli anni sessanta. La sigla SG sta per "solid guitar". Questa linea rappresentò un tentativo di rinnovare la famiglia della leggendaria Gibson Les Paul (che nel tempo era stata estesa e includeva già nei primi anni sessanta una vasta gamma di modelli sia economici sia professionali), soprattutto allo scopo di reagire all avvento della Fender Stratocaster, che con il suo corpo leggero aveva contribuito notevolmente al calo delle vendite della Les Paul, difatti la SG ha un corpo sottile da 1,35" (35 mm circa), ma si dice che le originali avessero un corpo poco più spesso da 1,5" (38 mm circa)[senza fonte]. Si tratta di uno strumento impiegato estensivamente dai musicisti hard rock che nondimeno ha saputo ritagliarsi dei nobili spazi anche in ambito blues, posto che Duane Allman utilizzava quasi esclusivamente una Gibson SG per l improvvisazione con lo slide.'],//
             [ 'variant_name' => 'Black and White', 'payment' => 725.25, 'product_type_id' => 7 ], // tastiere
             [ 'variant_name' => 'Black and White', 'payment' => 126.00, 'product_type_id' => 8 ],
             [ 'variant_name' => 'Black and White', 'payment' => 725.25, 'product_type_id' => 9 ],
@@ -552,5 +561,25 @@ class StaticTableSeeder extends Seeder
         foreach ($images as $image) {
             DB::table('product_images')->insert($image);
         }
+
+
+        /**
+         * ADDING USER ADMINISTRATOR
+         */
+        $user = array(
+            'name' => 'Name',
+            'surname' => 'Surname',
+            'username' => 'Admin',
+            'email' => 'e@e.it',
+            'password' => '$2y$10$xlQJOc3MoU9Fpz/OWpU8QeXSlntx16/Mddfb7p19/CmDUD0NKnWX2', // password : passpass
+            'phone' => '+2213074638058'
+        );
+
+        DB::table('users')->insert($user);
+
+        DB::table('model_has_roles')->insert(
+            ['role_id' => 4, 'model_type' => 'App\User', 'model_id' => 1],
+        );
+
     }
 }

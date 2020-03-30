@@ -49,6 +49,12 @@ Route::group(['middleware' => ['auth']], function () {
      */
     Route::post('shop/make_order', 'FrontEnd\ShopUserController@makeOrder')->name('make_order');
     Route::get('shop/orders/', 'FrontEnd\ShopUserController@showOrders')->name('orders');
+    Route::get('shop/orders/{id}/invoice', 'FrontEnd\ShopUserController@showInvoice')->name('show_invoice');
+
+    /**
+     * PUBLIC PROFILES
+     */
+    Route::get('shop/users/{id}', 'FrontEnd\AuthUserController@publicProfile')->name('get_public_profile');
 
 });
 
@@ -130,6 +136,7 @@ Route::prefix('auth')->group(function () {
         Route::get('website/edit', 'FrontEnd\AdminDashboardController@getComponents')->name('components.index');
         Route::get('website/edit/{resource}', 'FrontEnd\AdminDashboardController@editResource')->name('components.edit');
         Route::post('website/edit/{resource}', 'FrontEnd\AdminDashboardController@updateResource')->name('components.update');
+        Route::get('home/informations', 'FrontEnd\AdminDashboardController@getInformations')->name('website.informations');
         
     });
 });

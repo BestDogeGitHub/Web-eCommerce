@@ -4,7 +4,9 @@
 
 
 
-        <div class="hero-wrap hero-bread back3">
+<div class="d-none" id="hidden_link_image" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 7)->first()->image_ref) }}"></div>
+
+<div class="hero-wrap hero-bread" id="header_div">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
@@ -30,7 +32,7 @@
                                     <th>Purchase Order Number</th>
                                     <th>Details</th>
                                     <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th>Status</th>
                                     <th>Invoice</th>
                                     </tr>
                                 </thead>
@@ -55,15 +57,12 @@
                                         </td>
                                         
                                         <td class="quantity data">
-                                            <div class="d-inline product-details ftco-animate">
-                                                <h3>Status</h3>
-                                                <p class="black">{{$order->shipment->deliveryStatus->status}}</p>
-                                            </div>
+                                            @include('frontoffice.partials._partial_show_order_status', $order)
                                         </td>
 
                                         <td class="data">
-                                            <p class="price"><a href="#"></a></p>
-                                        </td>
+                                            <p class="price"><a href="{{ route('show_invoice', $order->id) }}">Print invoice</a></p>
+                                        </td> 
 
                                     </tr><!-- END TR-->
                                     @endforeach

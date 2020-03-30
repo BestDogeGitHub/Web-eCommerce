@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <span class="brand-text font-weight-light">BackOffice</span>
+      <span class="brand-text font-weight-light">BackOffice | MusicStore.net</span>
     </a>
 
     <!-- Sidebar -->
@@ -55,7 +55,7 @@
               </li>
               <li class="nav-item">
                 <a href="{{route('productImages.index')}}" class="nav-link">
-                  <i class="fa fa-file-image nav-icon"></i>
+                  <i class="ion ion-images nav-icon"></i>
                   <p>Product Images</p>
                 </a>
               </li>
@@ -135,7 +135,7 @@
               </li>
               <li class="nav-item">
                 <a href="{{route('nations.index')}}" class="nav-link">
-                  <i class="fa fa-globe nav-icon"></i>
+                  <i class="ion ion-android-globe nav-icon"></i>
                   <p>Nations</p>
                 </a>
               </li>

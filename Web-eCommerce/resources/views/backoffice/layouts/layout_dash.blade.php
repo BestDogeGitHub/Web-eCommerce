@@ -26,7 +26,8 @@
         <div id="spinner" class="container--box">
             <div class="box">
                 <div class="inner-image">
-                    <img src="{{ asset('/images/util/spinner.png') }}" class="spinner_img" />
+                    <!-- <img src="{{ asset('/images/util/spinner.png') }}" class="spinner_img" /> -->
+                    <i class="ion ion-text-nowrap ion-ios-musical-notes spinner_img"></i>
                 </div>
                 <div class="spinner spinner--6" >
                     

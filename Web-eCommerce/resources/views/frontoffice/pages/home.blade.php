@@ -8,9 +8,10 @@
 
 		  	@forelse(\App\SiteImage::where('site_image_role_id', 1)->get() as $resource)
 
-			<div class="slider-item" style="background-image: url({{ asset($resource->image_ref) }});">
-	      		<div class="overlay"></div>
-	        	<div class="container">
+			<div class="slider-item">
+				<img class="d-block home_slide" src="{{ asset($resource->image_ref) }}" alt="First slide">
+				<div class="overlay"></div>
+				<div class="carousel-caption d-md-block">
 	          		<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
 
@@ -22,7 +23,8 @@
 
 					</div>
 				</div>
-			</div>
+
+			</div> 
 
 			@empty
 
@@ -183,8 +185,9 @@
 				
 </div>
 				
+					<div class="d-none" id="hidden_link_image_dotd" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 9)->first()->image_ref) }}"></div>
 					
-					<section class="ftco-section img" style="background-image: url( {{ \App\SiteImage::where('site_image_role_id', 5)->first()->image_ref }});">
+					<section class="ftco-section img" id="deal_of_the_day">
 					<div class="container">
 							<div class="row justify-content-end">
 					<div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
@@ -329,7 +332,7 @@
 						<div class="row">
 							@foreach($partners as $partner)
 							<div class="col-sm ftco-animate">
-								<a href="https://{{ $partner->link }}" class="partner"><img src="{{ asset($partner->image_ref) }}" class="img-fluid" alt="{{$partner->name}} logo"></a>
+								<a href="{{ $partner->link }}" class="partner"><img src="{{ asset($partner->image_ref) }}" class="img-fluid" alt="{{$partner->name}} logo"></a>
 							</div>
 							@endforeach
 						</div>	

@@ -13,17 +13,17 @@
 						<div class="carousel-inner">
 							@if(!count($product->productImages))
 								<div class="carousel-item active img_prod">
-									<a href="{{ asset('products/' . $product->id) }}" class="image-popup"><img src="{{ asset('/images/products/no-image.png') }}" class="img-fluid" alt="Image of product"></a>
+									<a href="{{ asset('/images/products/no-image.png') }}" class="image-popup"><img src="{{ asset('/images/products/no-image.png') }}" class="img-fluid" alt="Image of product"></a>
 								</div>
 							@endif
 							@foreach ($product->productImages as $index=>$image)
 								@if ($index == 0 )
 									<div class="carousel-item active img_prod">
-										<a href="{{ asset('products/' . $product->id) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid" alt="Image of product"></a>
+										<a href="{{ asset($image->image_ref) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid" alt="Image of product"></a>
 									</div>
 								@else
 									<div class="carousel-item img_prod">
-										<a href="{{ asset('products/' . $product->id) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid" alt="Image of product"></a>
+										<a href="{{ asset($image->image_ref) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid" alt="Image of product"></a>
 									</div>
 								@endif
 							@endforeach
@@ -44,11 +44,19 @@
 					<h3 class="text-uppercase" >{{ $product->productType->name }}</h3> 
 					<h4><strong>{{ $product->variant_name }}</strong></h4>
     				<div class="rating d-flex">
-							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+							<p class="text-left mr-5">
+								<a href="#" class="mr-2 detail-rating">
+									@for($i = 1; $i <= 5; $i++)
+										@if($product->n_reviews && $i <= intval($product->star_tot_number / $product->n_reviews)) 
+										<i class="fa fa-star" aria-hidden="true"></i>
+										@else
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										@endif
+									@endfor 
+								</a>
 							</p>
 							<p class="text-left">
-								<a href="#" class="mr-2" style="color: #000;">{{ $product->buy_counter }} <span style="color: #bbb;">Sold</span></a>
+								<a href="#" class="mr-2 detail-link">{{ $product->buy_counter }} <span class="detail">Sold</span></a>
 							</p>
 						</div>
 						@if($product->sale != 0)
@@ -104,7 +112,17 @@
 
 						<!-- INFO DIV -->
 						<div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> 
-							Info:  {{ $product->info }}
+							Info:  {{ $product->info ?? 
+									
+									'A musical instrument is a device created or adapted to make musical sounds. In principle, any object that produces sound can be considered a musical instrument—it is through purpose that the object becomes a musical instrument. The history of musical instruments dates to the beginnings of human culture. Early musical instruments may have been used for ritual, such as a horn to signal success on the hunt, or a drum in a religious ceremony. Cultures eventually developed composition and performance of melodies for entertainment. Musical instruments evolved in step with changing applications and technologies.
+
+									The date and origin of the first device considered a musical instrument is disputed. The oldest object that some scholars refer to as a musical instrument, a simple flute, dates back as far as 67,000 years. Some consensus dates early flutes to about 37,000 years ago. However, most historians believe that determining a specific time of musical instrument invention is impossible, as many early musical instruments were made from animal skins, bone, wood and other non-durable materials.
+
+									Musical instruments developed independently in many populated regions of the world. However, contact among civilizations caused rapid spread and adaptation of most instruments in places far from their origin. By the Middle Ages, instruments from Mesopotamia were in maritime Southeast Asia, and Europeans played instruments originating from North Africa. Development in the Americas occurred at a slower pace, but cultures of North, Central, and South America shared musical instruments.
+
+									By 1400, musical instrument development slowed in many areas and was dominated by the Occident. During the Classical and Romantic periods of music, lasting from roughly 1750 to 1900, many new musical instruments were developed. While the evolution of traditional musical instruments slowed beginning in the 20th century, new electronic instruments such as electric guitars and synthesizers were invented.
+
+									Musical instrument classification is a discipline in its own right, and many systems of classification have been used over the years. Instruments can be classified by their effective range, their material composition, their size, role, etc. However, the most common academic method, Hornbostel–Sachs, uses the means by which they produce sound. The academic study of musical instruments is called organology.' }}
 						</div>
 						
 

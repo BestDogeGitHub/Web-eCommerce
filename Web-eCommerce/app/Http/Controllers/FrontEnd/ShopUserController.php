@@ -16,6 +16,7 @@ use App\CreditCardCompany;
 use App\CreditCard;
 use App\Address;
 use App\Coupon;
+use App\Order;
 use Validator;
 
 class ShopUserController extends Controller
@@ -212,18 +213,20 @@ class ShopUserController extends Controller
         $cart = $user->productsInCart;
         $subtotal = 0;
         $discount = 0;
+
         foreach($cart as $product)
         {
             if($product->sale != 0){
-                $fullprice = $product->payment / (1 - $product->sale / 100);
-                $discount += $fullprice - $product->payment;
-                $subtotal += $fullprice;
+                $realprice = $product->payment - ($product->payment / 100 * $product->sale);
+                $discount += $product->payment - $realprice;
+                $subtotal += $realprice;
             }
             else {
                 $subtotal += $product->payment;
             } 
             
         } 
+
         // Manipulate product
         $cart->map(function ($product) {
             $product->payment = number_format((float)$product->payment, 2, '.', '');
@@ -397,7 +400,7 @@ class ShopUserController extends Controller
 
         OrderController::checkout(Auth::user()->id, $card_id, $address_id, $coupon_id, $paymentMethod);
 
-        $this->showOrders();
+        return $this->showOrders();
 
     }
 
@@ -414,4 +417,22 @@ class ShopUserController extends Controller
 
         return view('frontoffice.pages.orders', ['orders' => $orders]);
     }
+
+    /**
+     * Show invoice
+     */
+    public function showInvoice($id)
+    {
+        $user = Auth::user();
+        $order = Order::findOrFail($id);
+        if($order->user->id == $user->id || $user->hasAnyRole(['Administrator']))
+        {
+            return view('frontoffice.partials._partial_invoice_to_pdf', ['invoice' => $order->invoice]);
+        }
+        else{
+            abort(401); // Utente non autorizzato alla visualizzazione della fattura
+        }
+    }
+
+
 }

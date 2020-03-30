@@ -71,17 +71,20 @@
                                     
                                 </div>
                             </li>
-                            @hasanyrole('Administrator|Shipment Representative|Inventory Representative')
-                              <li class="nav-item">
-                                  <a class="nav-link" href="{{ route('dashboard') }}" target="_blank">BackOffice</a>
-                              </li>
-                            @else
-                            @endhasanyrole
+                            
+                            
                         @endguest
                         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
             @auth
 	          <li class="nav-item cta cta-colored"><a href="{{ route('cart') }}" class="nav-link"><span class="icon-shopping_cart"></span>[<span id="nav_cart_link">{{ Auth::user()->productsInCart->count()}}</span>]</a></li>
+                @hasanyrole('Administrator|Shipment Representative|Inventory Representative')
+                  <li class="nav-item cta cta-colored cta_backoffice">
+                      <a class="nav-link" href="{{ route('dashboard') }}" target="_blank"><span class="fa fa-wrench mr-2"></span>BackOffice</a>
+                  </li>
+                @else
+                @endhasanyrole
             @endauth
+            
 	        </ul>
 
 	      </div>
