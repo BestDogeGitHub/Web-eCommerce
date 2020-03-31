@@ -54,7 +54,7 @@ $(document).ready(function(){
             }
 
             var salesChartData = {
-                labels  : order_labels,
+                labels  : order_labels.reverse(),
                 datasets: [
                 {
                     label               : 'Orders',
@@ -136,7 +136,7 @@ $(document).ready(function(){
                     pointHoverRadius    : 7,
                     pointColor          : '#efefef',
                     pointBackgroundColor: '#efefef',
-                    data                : reviews_week_data
+                    data                : reviews_week_data.reverse()
                   }
                 ]
               };

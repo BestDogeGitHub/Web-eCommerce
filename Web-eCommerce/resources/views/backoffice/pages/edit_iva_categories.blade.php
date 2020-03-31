@@ -27,47 +27,51 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
-            <div class="table-title">
-                <div class="row">
-					<div class="col-sm-12">
-						<a href="#addIvaCategoryModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Category</span></a>				
-					</div>
-                </div>
-            </div>
-
-            <table class="table table-striped table-hover" id="ivaCategoriesTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Value in %</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach($ivaCategories as $category)
-                    <tr>
-                        <td>{{$category->id}}</td>
-                        <td>{{$category->category}}</td>
-                        <td>{{$category->value}}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="#" class="btn btn-warning _edit" id="{{ $category->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                <a href="#" class="btn btn-danger _delete" id="{{ $category->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                    <div class="container">
+                        <div class="table-wrapper table-responsive">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="#addIvaCategoryModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Category</span></a>				
+                                    </div>
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+                            <table class="table table-striped table-hover" id="ivaCategoriesTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Value in %</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach($ivaCategories as $category)
+                                    <tr>
+                                        <td>{{$category->id}}</td>
+                                        <td>{{$category->category}}</td>
+                                        <td>{{$category->value}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="#" class="btn btn-warning _edit" id="{{ $category->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                                <a href="#" class="btn btn-danger _delete" id="{{ $category->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>  
+            </div>
 
 
 

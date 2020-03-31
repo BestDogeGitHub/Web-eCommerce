@@ -26,49 +26,52 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
+                <div class="container">
+                    <div class="table-wrapper table-responsive">
 
-            <table class="table table-striped table-hover" id="ordersTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Purchase Order Number</th>
-                        <th>Payment</th>
-                        <th>User</th>
-                        <th>See invoice</th>
-                        <th>Delivery Status</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($orders as $order)
-                    <tr>
-                        <td>{{$order->id}}</td>
-                        <td>{{$order->PO_Number}}</td>
-                        <td><span class="badge badge-danger">&euro; {{$order->invoice->payment}}</span></td>
-                        <td><a href="{{ route('users.show', $order->user->id) }}" target="_blank">{{$order->user->username}}</a></td>
-                        <td>
-						    <a href="{{ route('getInvoicePDF', $order->invoice->id) }}" target="_blank"><i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="Show Invoice"></i></a>
-                        </td>
-                        <td>
-						     {{$order->shipment->deliveryStatus->status}}
-                        </td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="#" class="btn btn-info _show" id="{{ $order->id }}" ><i class="fa fa-plus-circle" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
+                        <table class="table table-striped table-hover" id="ordersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Purchase Order Number</th>
+                                    <th>Payment</th>
+                                    <th>User</th>
+                                    <th>See invoice</th>
+                                    <th>Delivery Status</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($orders as $order)
+                                <tr>
+                                    <td>{{$order->id}}</td>
+                                    <td>{{$order->PO_Number}}</td>
+                                    <td><span class="badge badge-danger">&euro; {{$order->invoice->payment}}</span></td>
+                                    <td><a href="{{ route('users.show', $order->user->id) }}" target="_blank">{{$order->user->username}}</a></td>
+                                    <td>
+                                        <a href="{{ route('getInvoicePDF', $order->invoice->id) }}" target="_blank"><i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="Show Invoice"></i></a>
+                                    </td>
+                                    <td>
+                                        {{$order->shipment->deliveryStatus->status}}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="#" class="btn btn-info _show" id="{{ $order->id }}" ><i class="fa fa-plus-circle" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
 
 
     <!-- !!! MODALS !!! -->

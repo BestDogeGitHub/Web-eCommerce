@@ -27,59 +27,64 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
-            <div class="table-title">
-                <div class="row">
-					<div class="col-sm-12">
-						<a href="#addCreditCardModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Credit Card</span></a>				
-					</div>
+                    <div class="container">
+                        <div class="table-wrapper table-responsive">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="#addCreditCardModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Credit Card</span></a>				
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-striped table-hover" id="creditCardsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Type</th>
+                                        <th>Number</th>
+                                        <th>Expiration</th>
+                                        <th>User</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach($credit_cards as $credit_card)
+                                    <tr>
+                                        <td>{{$credit_card->id}}</td>
+                                        <td>
+                                        <i class="fa fa-credit-card card-icon" aria-hidden="true"></i><span class="badge badge-warning">{{$credit_card->type}}</span>
+                                        </td>
+                                        <td><p class="cardNumber">{{$credit_card->number}}</p></td>
+                                        <td><p class="cardExp">{{$credit_card->expiration_date}}</p></td>
+                                        <td>
+                                        @if(is_null($credit_card->user_id))
+                                            <span class="badge badge-danger">Card not assigned</span>
+                                        @else 
+                                            <a href="{{ route('users.show', $credit_card->user->id) }}" target="_blank">{{$credit_card->user->username}}</a>
+                                        @endif
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="#" class="btn btn-warning _edit" id="{{ $credit_card->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                                <a href="#" class="btn btn-danger _delete" id="{{ $credit_card->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-
-            <table class="table table-striped table-hover" id="creditCardsTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Number</th>
-                        <th>Expiration</th>
-                        <th>User</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach($credit_cards as $credit_card)
-                    <tr>
-                        <td>{{$credit_card->id}}</td>
-                        <td>
-                         <i class="fa fa-credit-card card-icon" aria-hidden="true"></i><span class="badge badge-warning">{{$credit_card->type}}</span>
-                        </td>
-                        <td><p class="cardNumber">{{$credit_card->number}}</p></td>
-                        <td><p class="cardExp">{{$credit_card->expiration_date}}</p></td>
-                        <td>
-                        @if(is_null($credit_card->user_id))
-                            <span class="badge badge-danger">Card not assigned</span>
-                        @else 
-                            <a href="{{ route('users.show', $credit_card->user->id) }}" target="_blank">{{$credit_card->user->username}}</a>
-                        @endif
-                        </td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="#" class="btn btn-warning _edit" id="{{ $credit_card->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                <a href="#" class="btn btn-danger _delete" id="{{ $credit_card->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
 
 
 

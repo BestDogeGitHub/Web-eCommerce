@@ -12,13 +12,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Manage Product <b>Attributes</b></h1>
+                    <h1>Manage Product Attributes' <b>values</b></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('dashboard.properties') }}">Properties</a></li>
-                    <li class="breadcrumb-item active">Attributes</li>
+                    <li class="breadcrumb-item active">Values</li>
                     </ol>
                 </div>
                 </div>
@@ -36,29 +36,32 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a href="#addAttributeModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Attribute</span></a>				
+                                    <a href="#addValueModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Value</span></a>		
+                                    <hr/>		
                                 </div>
                             </div>
                         </div>
 
-                        <table class="table table-striped table-hover" id="attributesTable">
+                        <table class="table table-striped table-hover" id="valuesTable">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Attribute</th>
+                                    <th>Value</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach($attributes as $attribute)
+                                @foreach($values as $value)
                                 <tr>
-                                    <td>{{$attribute->id}}</td>
-                                    <td>{{$attribute->name}}</td>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->attribute->name}}</td>
+                                    <td>{{$value->name}}</td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <a href="#" class="btn btn-warning _edit" id="{{ $attribute->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                            <a href="#" class="btn btn-danger _delete" id="{{ $attribute->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                            <a href="#" class="btn btn-warning _edit" id="{{ $value->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                            <a href="#" class="btn btn-danger _delete" id="{{ $value->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -75,10 +78,10 @@
 
     <!-- !!! MODALS !!! -->
     <!-- Add Modal HTML -->
-    <div id="addAttributeModal" class="modal fade">
+    <div id="addValueModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-                <form id="addAttributeForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form id="addValueForm" method="post" class="form-horizontal" enctype="multipart/form-data">
                 @csrf
 					<div class="modal-header">						
 						<h4 class="modal-title">Add Attribute</h4>
@@ -87,9 +90,18 @@
 					<div class="modal-body">
                         
                         <div class="form-group">
-							<label>Name</label>
+							<label>Attribute</label>
+							<select class="custom-select" name="attribute_id">
+                                @foreach($attributes as $attribute)
+                                <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+							<label>Value</label>
 							<input type="text" class="form-control" required="required" name="name"/>
-						</div>	
+                        </div>	
 
 
                         <div id="forErrors"></div>					
@@ -105,13 +117,13 @@
 	</div>
     <!-- FOR SHOW AND EDIT -->
 
-    <div id="editAttributeModal" class="modal fade">
+    <div id="editValueModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-                <form id="editAttributeForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form id="editValueForm" method="post" class="form-horizontal" enctype="multipart/form-data">
                 @csrf
 					<div class="modal-header">						
-						<h4 class="modal-title">Edit Attribute</h4>
+						<h4 class="modal-title">Edit Value</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -123,7 +135,16 @@
                         <div class="form-group">
 							<label>Name</label>
 							<input type="text" class="form-control" required="required" name="name" id="editName"/>
-						</div>	
+                        </div>	
+                        
+                        <div class="form-group">
+							<label>Attribute</label>
+							<select class="custom-select" name="attribute_id" id="editAttribute">
+                                @foreach($attributes as $attribute)
+                                <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
 
                         <div id="forEditErrors"></div>					
@@ -139,16 +160,16 @@
 	</div>
     
     <!-- Delete Modal HTML -->
-	<div id="deleteAttributeModal" class="modal fade">
+	<div id="deleteValueModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-                <form id="deleteAttributeForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form id="deleteValueForm" method="post" class="form-horizontal" enctype="multipart/form-data">
 					<div class="modal-header">						
-						<h4 class="modal-title">Delete Attribute</h4>
+						<h4 class="modal-title">Delete Value</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>Are you sure you want to delete this Attribute?</p>
+						<p>Are you sure you want to delete this Value?</p>
 						<p class="text-warning"><small>!!! This action cannot be undone !!!</small></p>
 					</div>
 					<div class="modal-footer">
@@ -161,5 +182,5 @@
     </div>       
 
 
-<script src="{{ asset('dist/js/pages/attributes.js') }}"></script>
+<script src="{{ asset('dist/js/pages/values.js') }}"></script>
 @endsection('content')

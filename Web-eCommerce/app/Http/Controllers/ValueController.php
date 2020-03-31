@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Value;
+use App\Attribute;
 use Illuminate\Http\Request;
+
+use Validator;
 
 class ValueController extends Controller
 {
@@ -25,8 +28,9 @@ class ValueController extends Controller
     public function index()
     {
         $values = Value::all();
+        $attributes = Attribute::all();
 
-        return View('backoffice.pages.edit_values', ['values' => $values]);
+        return View('backoffice.pages.edit_values', ['values' => $values, 'attributes' => $attributes]);
     }
 
     /**
@@ -74,11 +78,14 @@ class ValueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Value $value)
     {
-        $value = Value::find($id);
-
-        return View::make('values.edit')->with('value', $value);
+        if(request()->ajax())
+        {
+            return response()->json([
+                'data' => $value
+            ]);
+        }
     }
 
     /**

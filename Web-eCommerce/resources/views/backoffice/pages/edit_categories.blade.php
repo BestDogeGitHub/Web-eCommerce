@@ -27,35 +27,40 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-        <div class="container">
-            <div class="table-wrapper table-responsive">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <a href="#addCategoryModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Category</span></a>				
+                    <div class="container">
+                        <div class="table-wrapper table-responsive">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="#addCategoryModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Category</span></a>				
+                                    </div>
+                                    <br /> <br /> <br /> <br /> 
+                                </div>
+                            <strong><p>Actual Tree of Categories</p></strong><br/>
+                            
+                            <ul id="catTree">
+
+                                <li>
+                                    All Categories
+                                    @if(count($categories->first()->childs))
+                                        @include('backoffice.partials._partial_edit_category_child', ['childs' => $categories->first()->childs])
+                                    @endif
+                                </li>
+                            
+                            </ul>
+
+                                
+                            </div>
+
                         </div>
-                        <br /> <br /> <br /> <br /> 
                     </div>
-                <strong><p>Actual Tree of Categories</p></strong><br/>
-                
-                <ul id="catTree">
-
-                    <li>
-                        All Categories
-                        @if(count($categories->first()->childs))
-                            @include('backoffice.partials._partial_edit_category_child', ['childs' => $categories->first()->childs])
-                        @endif
-                    </li>
-                
-                </ul>
-
                     
                 </div>
-
             </div>
-        </div>
 
     <!-- Add Modal HTML -->
     <div id="addCategoryModal" class="modal fade">

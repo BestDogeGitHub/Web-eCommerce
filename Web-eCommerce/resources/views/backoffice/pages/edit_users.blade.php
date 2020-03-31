@@ -26,46 +26,47 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
+                <div class="container">
+                    <div class="table-wrapper table-responsive">
 
-            <table class="table table-striped table-hover" id="usersTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Creation</th>
-                        <th>Last Update</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($users as $user)
-                    <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->username}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
-                        <td>{{ date('d-m-Y', strtotime($user->updated_at)) }}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="#" class="btn btn-info _show" id="{{ $user->id }}" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                                <a href="#" class="btn btn-warning _edit" id="{{ $user->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                <a href="#" class="btn btn-danger _delete" id="{{ $user->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
+                        <table class="table table-striped table-hover" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Creation</th>
+                                    <th>Last Update</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($users as $user)
+                                <tr>
+                                    <td>{{$user->id}}</td>
+                                    <td>{{$user->username}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($user->updated_at)) }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="#" class="btn btn-warning _edit" id="{{ $user->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                            <a href="#" class="btn btn-danger _delete" id="{{ $user->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-
 
     <!-- !!! MODALS !!! -->
 

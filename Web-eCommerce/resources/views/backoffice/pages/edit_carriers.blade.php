@@ -27,48 +27,53 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
-            <div class="table-title">
-                <div class="row">
-					<div class="col-sm-12">
-						<a href="#addCarrierModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Carrier</span></a>				
-					</div>
-                </div>
-            </div>
-
-            <table class="table table-striped table-hover" id="carriersTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Logo</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach($carriers as $carrier)
-                    <tr>
-                        <td>{{$carrier->id}}</td>
-                        <td><a href="http:\\{{ $carrier->link }}" target="_blank">{{$carrier->name}}</a></td>
-                        <td><img class="img-responsive crud" src="{{ asset($carrier->image_ref) }}"></td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="{{ route('carrier_detail', $carrier->id) }}" class="btn btn-info _show" id="{{ $carrier->id }}" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                                <a href="#" class="btn btn-warning _edit" id="{{ $carrier->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                <a href="#" class="btn btn-danger _delete" id="{{ $carrier->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                <div class="container">
+                    <div class="table-wrapper table-responsive">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="#addCarrierModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Carrier</span></a>				
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
+                        </div>
+
+                        <table class="table table-striped table-hover" id="carriersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Logo</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach($carriers as $carrier)
+                                <tr>
+                                    <td>{{$carrier->id}}</td>
+                                    <td><a href="http:\\{{ $carrier->link }}" target="_blank">{{$carrier->name}}</a></td>
+                                    <td><img class="img-responsive crud" src="{{ asset($carrier->image_ref) }}"></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ route('carrier_detail', $carrier->id) }}" class="btn btn-info _show" id="{{ $carrier->id }}" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                                            <a href="#" class="btn btn-warning _edit" id="{{ $carrier->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                            <a href="#" class="btn btn-danger _delete" id="{{ $carrier->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
         </div>
-    </div>
 
 
 

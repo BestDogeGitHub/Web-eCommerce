@@ -25,6 +25,9 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+
+        
+
         <div class="row">
           <div class="col-md-4">
             <!-- PRODUCT DESCRIPTION -->
