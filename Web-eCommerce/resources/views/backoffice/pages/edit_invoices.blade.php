@@ -26,46 +26,50 @@
         </section>
 
 
+        <div class="card">
+              <div class="card-body">
 
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
-            <div class="table-title">
-                <div class="row">
-					<div class="col-sm-12">
-						<a href="#addInvoiceModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Invoice</span></a>				
-					</div>
+                <div class="container">
+                    <div class="table-wrapper table-responsive">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="#addInvoiceModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Invoice</span></a>				
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-striped table-hover" id="invocesTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Purchase Order Number</th>
+                                    <th>Edit Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($invoices as $invoice)
+                                <tr>
+                                    <td>{{$invoice->id}}</td>
+                                    <td>{{$invoice->order->PO_Number}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="#" class="btn btn-info _edit" id="{{ $invoice->id }}" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                                            <a href="#" class="btn btn-warning _edit" id="{{ $invoice->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                            <a href="#" class="btn btn-danger _delete" id="{{ $invoice->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
-            <table class="table table-striped table-hover" id="invocesTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Purchase Order Number</th>
-                        <th>Edit Items</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($invoices as $invoice)
-                    <tr>
-                        <td>{{$invoice->id}}</td>
-                        <td>{{$invoice->order->PO_Number}}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="#" class="btn btn-info _edit" id="{{ $invoice->id }}" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                                <a href="#" class="btn btn-warning _edit" id="{{ $invoice->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                <a href="#" class="btn btn-danger _delete" id="{{ $invoice->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
         </div>
-    </div>
 
 
 

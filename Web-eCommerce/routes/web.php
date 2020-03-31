@@ -100,26 +100,42 @@ Route::prefix('auth')->group(function () {
             'addresses' => 'AddressController', //Implemented         
             'attributes' => 'AttributeController',   //Implemented
             'carriers' => 'CarrierController',  //Implemented
-            'categories' => 'CategoryController',   //Implemented
             'creditCards' => 'CreditCardController',    //Implemented
             'deliveryStatuses' => 'DeliveryStatusController', //Implemented
             'invoices' => 'InvoiceController',      //Implemented
             'ivaCategories' => 'IvaCategoryController', //Implemented
             'nations' => 'NationController',    //Implemented
-            'orders' => 'OrderController',  //Implemented
-            'orderDetails' => 'OrderDetailController',  //Implemented
             'paymentMethods' => 'PaymentMethodController', //Implemented
             'producers' => 'ProducerController',    //Implemented
-            'products' => 'ProductController',  //Implemented
-            'productImages' => 'ProductImageController', //Implemented
-            'productTypes' => 'ProductTypeController',  //Implemented
             'reviews' => 'ReviewController',
-            'shipments' => 'ShipmentController',   //Implemented
             'towns' => 'TownController',
             'users' => 'UserController',
             'values' => 'ValueController'
         ]);
 
+    });
+
+    Route::group(['middleware' => ['role:Administrator|Shipment Representative']], function () {
+        Route::resources([
+            'orders' => 'OrderController',  //Implemented
+            'orderDetails' => 'OrderDetailController',  //Implemented
+            'shipments' => 'ShipmentController',   //Implemented
+        ]);
+    });
+
+    Route::group(['middleware' => ['role:Administrator|Inventory Representative']], function () {
+        Route::resources([
+            'categories' => 'CategoryController',   //Implemented
+            'products' => 'ProductController',  //Implemented
+            'productImages' => 'ProductImageController', //Implemented
+            'productTypes' => 'ProductTypeController',  //Implemented
+        ]);
+    });
+
+
+
+
+    Route::group(['middleware' => ['role:Administrator|Shipment Representative|Inventory Representative']], function () {
         Route::get('roles', 'FrontEnd\AdminDashboardController@manageRoles')->name('manageRoles');
         Route::get('home', 'FrontEnd\AdminDashboardController@index')->name('dashboard');
         Route::get('categories/properties', 'FrontEnd\AdminDashboardController@editProperties')->name('dashboard.properties');

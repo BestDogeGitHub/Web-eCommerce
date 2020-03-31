@@ -42,7 +42,7 @@
 	          <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
 	          <!-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
             <!-- Authentication Links -->
-            @guest
+                          @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -51,7 +51,8 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                    @else
+                            
+                            @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

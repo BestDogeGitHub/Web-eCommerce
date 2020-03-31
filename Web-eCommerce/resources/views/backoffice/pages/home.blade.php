@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">BackOffice Dashboard<small> - MusicStore | Administration Tools</small></h1>
+            <h1 class="m-0 text-dark">BackOffice Dashboard<small> - MusicStore | <i class="ion ion-settings ml-2 mr-2"></i>Administration Tools</small></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

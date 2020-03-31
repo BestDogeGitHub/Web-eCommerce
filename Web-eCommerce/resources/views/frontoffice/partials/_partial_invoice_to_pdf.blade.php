@@ -33,6 +33,7 @@
 
 
     <link rel="stylesheet" href="{{ asset('css/custom/pdf.css') }}">
+    <script src="{{ asset('js/invoice.js') }}"></script>
   </head>
   <body>
     <div class="container invoice-container">

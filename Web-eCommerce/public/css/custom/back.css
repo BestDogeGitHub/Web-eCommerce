@@ -97,7 +97,7 @@ img.category {
 
 .card-icon {
     margin-right: 10px;
-    font-size: 15pt;
+    font-size: 12pt;
 }
 
 .cardNumber {
@@ -182,5 +182,12 @@ img.category {
     font-size: 1.25rem !important;
     font-weight: bold !important;
     font-family: "Source Sans Pro" !important;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 70vw !important;
+    }
+
 }
 

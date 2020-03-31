@@ -24,48 +24,53 @@
             </div><!-- /.container-fluid -->
         </section>
 
+        <div class="card">
+              <div class="card-body">
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
-            <div class="table-title">
-                <div class="row">
-					<div class="col-sm-12">
-						<a href="#addNationModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Nation</span></a>				
-					</div>
-                </div>
-            </div>
 
-            <table class="table table-striped table-hover" id="nationsTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Role</th>
-                        <th>Dettagli</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach($components as $component)
-                    <tr>
-                        <td>{{ $component->id }}</td>
-                        <td><img class="img-responsive crud" src="{{ asset($component->image_ref) }}" ></td>
-                        <td>{{ $component->role->name }}</td>
-                        <td>{{ $component->image_details }}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="{{ route('components.edit', $component->id) }}" class="btn btn-warning _edit" id="{{ $component->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                <a href="#" class="btn btn-danger _delete" id="{{ $component->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                    <div class="container">
+                        <div class="table-wrapper table-responsive">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="#addNationModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Nation</span></a>				
+                                    </div>
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
+
+                            <table class="table table-striped table-hover" id="nationsTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Image</th>
+                                        <th>Role</th>
+                                        <th>Dettagli</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach($components as $component)
+                                    <tr>
+                                        <td>{{ $component->id }}</td>
+                                        <td><img class="img-responsive crud" src="{{ asset($component->image_ref) }}" ></td>
+                                        <td>{{ $component->role->name }}</td>
+                                        <td>{{ $component->image_details }}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="{{ route('components.edit', $component->id) }}" class="btn btn-warning _edit" id="{{ $component->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                                <a href="#" class="btn btn-danger _delete" id="{{ $component->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
         </div>
-    </div>
 
 
 

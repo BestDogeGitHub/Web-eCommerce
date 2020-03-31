@@ -186,13 +186,13 @@ class AdminDashboardController extends Controller
         if($request->ajax()) {
 
             $orders_stat = array(
+                '0' => 0,
                 '1' => 0,
                 '2' => 0,
                 '3' => 0,
                 '4' => 0,
                 '5' => 0,
                 '6' => 0,
-                '7' => 0,
             );
 
             foreach(Order::whereDate('created_at', '>=', Carbon::now()->subDays(7))->get() as $index=>$order) {
@@ -205,13 +205,13 @@ class AdminDashboardController extends Controller
 
 
             $reviews_stat = array(
+                '0' => 0,
                 '1' => 0,
                 '2' => 0,
                 '3' => 0,
                 '4' => 0,
                 '5' => 0,
                 '6' => 0,
-                '7' => 0,
             );
 
             foreach(Review::whereDate('created_at', '>=', Carbon::now()->subDays(7))->get() as $index=>$review) {

@@ -109,8 +109,6 @@ $(document).ready(function() {
                 $('#editName').val(html.data.name);
                 $('#actualImage').attr('src', html.data.image_ref);
                 $('#editAvailable').val(html.data.available);
-                $('#editStarRate').val(html.data.star_tot_number);
-                $('#editNReviews').val(html.data.n_reviews);
                 $('#hidden_id').val(html.data.id);
                 $("#editProducer option[value=" + html.data.producer_id +"]").attr("selected", "selected");
                 var $values = new Array();

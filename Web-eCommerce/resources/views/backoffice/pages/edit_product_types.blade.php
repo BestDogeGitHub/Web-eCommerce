@@ -45,8 +45,6 @@
                             <th>Name</th>
                             <th>Image</th>
                             <th>Av.</th>
-                            <th>Rate</th>
-                            <th>Rev.</th>
                             <th>Producer</th>
                             <th>Creation</th>
                             <th>Update</th>
@@ -66,8 +64,6 @@
                                 <span class="badge badge-pill badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
                                 @endif
                             </td>
-                            <td>{{$product->star_rate}}</td>
-                            <td>{{$product->n_reviews}}</td>
                             <td class="text-uppercase">{{$product->producer->name}}</td>
                             <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
                             <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
@@ -173,11 +169,6 @@
 							<label>Available</label>
 							<input type="number" class="form-control" required="required" name="available" id="editAvailable"/>
                         </div>
-
-                        <div class="form-group">
-							<label>Star Rate</label>
-							<input type="numeric" class="form-control" required="required" name="star_rate" id="editStarRate"/>
-                        </div>	
                         
                         <div class="form-group">
                             <label>Category</label>
@@ -189,11 +180,6 @@
                         </div>
                         <!-- /.form-group -->
 
-                        
-                        <div class="form-group">
-							<label>N Reviews</label>
-							<input type="numeric" class="form-control" required="required" name="n_reviews" id="editNReviews"/>
-                        </div>
                         <!-- METHOD SPOOFING -->
 						<input type="hidden" name="_method" value="PUT" />		
 

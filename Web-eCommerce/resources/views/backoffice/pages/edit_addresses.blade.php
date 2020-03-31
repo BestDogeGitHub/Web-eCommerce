@@ -27,56 +27,60 @@
 
 
 
+        <div class="card">
+              <div class="card-body">
 
 
-    <div class="container">
-        <div class="table-wrapper table-responsive">
-            <div class="table-title">
-                <div class="row">
-					<div class="col-sm-12">
-						<a href="#addAddressModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Address</span></a>				
-					</div>
+                    <div class="container">
+                        <div class="table-wrapper table-responsive">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a href="#addAddressModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Address</span></a>				
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="table table-striped table-hover" id="addressesTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Country Code</th>
+                                        <th>Nation</th>
+                                        <th>Town</th>
+                                        <th>Post Code</th>
+                                        <th>Street</th>
+                                        <th>Building</th>
+                                        <th>Edit Items</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($addresses as $address)
+                                    <tr>
+                                        <td>{{$address->id}}</td>
+                                        <td>{{$address->country_code}}</td>
+                                        <td>{{$address->town->nation->name}}</td>
+                                        <td>{{$address->town->name}}</td>
+                                        <td>{{$address->postcode}}</td>
+                                        <td>{{$address->street_number}}</td>
+                                        <td>{{$address->building_number}}</td>
+                                        
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a href="#" class="btn btn-warning _edit" id="{{ $address->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                                <a href="#" class="btn btn-danger _delete" id="{{ $address->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-
-            <table class="table table-striped table-hover" id="addressesTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Country Code</th>
-                        <th>Nation</th>
-                        <th>Town</th>
-                        <th>Post Code</th>
-                        <th>Street</th>
-                        <th>Building</th>
-                        <th>Edit Items</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($addresses as $address)
-                    <tr>
-                        <td>{{$address->id}}</td>
-                        <td>{{$address->country_code}}</td>
-                        <td>{{$address->town->nation->name}}</td>
-                        <td>{{$address->town->name}}</td>
-                        <td>{{$address->postcode}}</td>
-                        <td>{{$address->street_number}}</td>
-                        <td>{{$address->building_number}}</td>
-                        
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <a href="#" class="btn btn-warning _edit" id="{{ $address->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                <a href="#" class="btn btn-danger _delete" id="{{ $address->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
-
 
 
     <!-- !!! MODALS !!! -->
