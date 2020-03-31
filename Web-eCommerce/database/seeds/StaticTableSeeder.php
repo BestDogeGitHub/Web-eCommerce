@@ -42,7 +42,7 @@ class StaticTableSeeder extends Seeder
 
         $invPermissions = collect([ $permission8, $permission9 ]);
 
-        $adminPermissions = collect([$permission1, $permission2, $permission3, $permission4, $permission5, $permission6, $permission7, $permission8, $permission9, $permission1, $permission1, $permission1, $permission1, $permission14]);
+        $adminPermissions = collect([$permission1, $permission2, $permission3, $permission4, $permission5, $permission6, $permission7, $permission8, $permission9, $permission10, $permission11, $permission12, $permission13, $permission14]);
 
         $designPermissions = collect([ $permission14 ]);
 
