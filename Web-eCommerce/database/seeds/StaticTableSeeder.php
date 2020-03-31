@@ -19,12 +19,38 @@ class StaticTableSeeder extends Seeder
         $role2 = Role::create(['name' => 'Shipment Representative']);
         $role3 = Role::create(['name' => 'Inventory Representative']);
         $role4 = Role::create(['name' => 'Administrator']);
+        $role5 = Role::create(['name' => 'Designer']);
         
-        $permission = Permission::create(['name' => 'Management products']);
-        $permission = Permission::create(['name' => 'Management delivery']);
-        $permission = Permission::create(['name' => 'Management users']);
-        $permission = Permission::create(['name' => 'See invoices']);
-        $role1->givePermissionTo($permission);
+        $permission1 = Permission::create(['name' => 'wishlist']);// user
+        $permission2 = Permission::create(['name' => 'cart']);
+        $permission3 = Permission::create(['name' => 'checkout']);
+        $permission4 = Permission::create(['name' => 'writeReview']);
+        $permission5 = Permission::create(['name' => 'showPublicProfile']);
+        $permission6 = Permission::create(['name' => 'manageOrders']); // ship rep
+        $permission7 = Permission::create(['name' => 'manageShipments']);
+        $permission8 = Permission::create(['name' => 'manageProducts']); // inv rep
+        $permission9 = Permission::create(['name' => 'manageProductTypes']);
+        $permission10 = Permission::create(['name' => 'manageProductImages']);
+        $permission11 = Permission::create(['name' => 'manageCategories']);
+        $permission12 = Permission::create(['name' => 'manageAccounts']); // admin 
+        $permission13 = Permission::create(['name' => 'manageProperties']);
+        $permission14 = Permission::create(['name' => 'manageLayout']); // designer
+        
+        $userPermissions = collect([ $permission1, $permission2, $permission3, $permission4, $permission5 ]);
+
+        $shipPermissions = collect([ $permission6, $permission7 ]);
+
+        $invPermissions = collect([ $permission8, $permission9 ]);
+
+        $adminPermissions = collect([$permission1, $permission2, $permission3, $permission4, $permission5, $permission6, $permission7, $permission8, $permission9, $permission1, $permission1, $permission1, $permission1, $permission14]);
+
+        $designPermissions = collect([ $permission14 ]);
+
+        $role1->syncPermissions($userPermissions);
+        $role2->syncPermissions($shipPermissions);
+        $role3->syncPermissions($invPermissions);
+        $role4->syncPermissions($adminPermissions);
+        $role5->syncPermissions($designPermissions);
 
 
         /**
