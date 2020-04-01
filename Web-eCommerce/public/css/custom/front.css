@@ -334,6 +334,8 @@ input:disabled {
     color: white !important;
 }
 
+
+
 .cat-img {
     height: 250px;
     width: 100%;
@@ -461,3 +463,44 @@ input:disabled {
   .swal2-success-circular-line-right{
     background: transparent !important;
   }
+
+  /* COOKIE CONSENT */
+
+  .cookie-consent {
+    border-radius: 5px;
+    border: 1px solid #d98e00;
+    position: fixed;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
+    background: #fff2e0;
+    text-align: center;
+}
+
+.cookie-consent__message {
+    display: inline-block;
+    color: #d98e00;
+}
+
+.cookie-consent__message p {
+    margin: 0;
+}
+
+.cookie-consent__agree {
+    font-weight: bold;
+    margin: 0 1em;
+    padding: .5em 1em;
+    color: #fff2e0;
+    background-color: #d98e00;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(217, 142, 0, 0.15);
+}
+
+.cookie-consent__agree:hover {
+    background-color: #734d00;
+}
+
+.cookie-consent__agree:active {
+    top: 1px;
+}

@@ -17,7 +17,9 @@ use App\CreditCard;
 use App\Address;
 use App\Coupon;
 use App\Order;
+
 use Validator;
+use Session;
 
 class ShopUserController extends Controller
 {
@@ -28,14 +30,54 @@ class ShopUserController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getWishlist() {
-        $user = Auth::user();
-        $wishlist = $user->productInWishlist;
-        // Manipulate product
+
+        $wishlist = collect([]);
+
+        if(!Auth::check()) {
+            
+            /**
+             * SESSION USER
+             */
+            //Session::forget('wishlist');
+
+            //dd(Session::all());
+            
+
+            if(Session::has('wishlist')) {
+                $checkArray = array();
+                foreach(Session::get('wishlist') as $id) {
+                    if(is_numeric($id)) array_push($checkArray, $id);
+                }
+
+                $wishlist = Product::whereIn('id', $checkArray)->get();
+                
+            }
+
+        } 
+        else {
+            /**
+             * AUTHENTICATED USER
+             */
+            $user = Auth::user();
+            $wishlist = $user->productInWishlist;
+
+        }
+
+        // MANIPULATE PRODUCT FOR VISUALIZATION
         $wishlist->map(function ($product) {
             $product->payment = number_format((float)$product->payment, 2, '.', '');
+
+            if(count($product->productImages)) {
+                $product['image'] = $product->productImages->first()->image_ref;
+            }
+            elseif ($product->productType->image_ref){
+                $product['image'] = $product->productType->image_ref;
+            }
+            else $product['image'] = "/images/products/no-image.png";
     
             return $product;
         });;
+            
 
         return view('frontoffice.pages.wishlist', ['wishlist' => $wishlist]);
     }
@@ -50,15 +92,42 @@ class ShopUserController extends Controller
     {   
         $product = Product::findOrFail($request->id);
 
-        $user = Auth::user();
+        if(!Auth::check()) {
+            
+            /**
+             * SESSION USER
+             */
 
-        if($user->productInWishlist->find($request->id)){
-            return response()->json('error', 409);
+            if($request->session()->has('wishlist')) {
+                $wishlist = $request->session()->get('wishlist');
+            } else {
+                $wishlist = [];
+            }
+
+
+            if(in_array($product->id, $wishlist)) {
+                return response()->json('error', 409); // Conflict
+            }
+
+            array_push($wishlist, $product->id);
+
+            $request->session()->put('wishlist', $wishlist);
+
+
+        } else {
+            /**
+             * AUTHENTICATED USER
+             */
+
+            $user = Auth::user();
+            if($user->productInWishlist->find($request->id)) {
+                return response()->json('error', 409); // Conflict
+            }
+    
+            $user->productInWishlist()->syncWithoutDetaching($product);
+
         }
 
-        $user->productInWishlist()->syncWithoutDetaching($product);
-        
-    
         return response()->json(['success' => 'Product successfully added to wishlist!']);
     }
 
@@ -70,11 +139,35 @@ class ShopUserController extends Controller
      */
     public function removeFromWishlist($id)
     {   
-        $product = Product::findOrFail($id);
+        if(!Auth::check()) {
+            
+            /**
+             * SESSION USER
+             */
+
+            if(Session::has('wishlist')) {
+                $wishlist = Session::get('wishlist');
+
+                if (($key = array_search($id, $wishlist)) !== false) {
+                    unset($wishlist[$key]);
+                    Session::put('wishlist', $wishlist);
+                } else {
+                    return response()->json('error', 404); // Not Found
+                }
+            }
+
+
+        } else {
+            /**
+             * AUTHENTICATED USER
+             */
+            $product = Product::findOrFail($id);
         
-        $user = Auth::user();
+            $user = Auth::user();
+            
+            $user->productInWishlist()->detach($product);
+        }
         
-        $user->productInWishlist()->detach($product);
     
         return response()->json(['success' => 'Product successfully deleted from wishlist!']);
     }

@@ -128,7 +128,7 @@
             </li>
           @endhasanyrole
 
-          @hasanyrole('Inventory Representative|Administrator')
+          @hasanyrole('Inventory Representative')
             <li class="nav-header text-uppercase"><i class="nav-icon fa fa-archive card-icon"></i>Inventory Management</li>
 
             <li class="nav-item has-treeview">
@@ -139,30 +139,43 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+
+                @can('manageProducts')
                 <li class="nav-item">
                   <a href="{{route('products.index')}}" class="nav-link">
                     <i class="fa fa-barcode nav-icon"></i>
                     <p>Products</p>
                   </a>
                 </li>
+                @endcan
+
+                @can('manageProductTypes')
                 <li class="nav-item">
                   <a href="{{route('productTypes.index')}}" class="nav-link">
                     <i class="fa fa-list nav-icon"></i>
                     <p>Proudct Types</p>
                   </a>
                 </li>
+                @endcan
+
+                @can('manageProductImages')
                 <li class="nav-item">
                   <a href="{{route('productImages.index')}}" class="nav-link">
                     <i class="ion ion-images nav-icon"></i>
                     <p>Product Images</p>
                   </a>
                 </li>
+                @endcan
+
+                @can('manageCategories')
                 <li class="nav-item">
                   <a href="{{route('categories.index')}}" class="nav-link">
                     <i class="fa fa-th nav-icon"></i>
                     <p>Categories</p>
                   </a>
                 </li>
+                @endcan
+                
               </ul>
             </li>
           @endhasanyrole

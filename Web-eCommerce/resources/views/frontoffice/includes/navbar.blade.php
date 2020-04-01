@@ -27,13 +27,28 @@
 	          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
+                
                 <a class="dropdown-item" href="{{ route('shop') }}">Shop</a>
+                
                 <a class="dropdown-item" href="{{ route('categories_par', 1) }}">Cataglog</a>
+                
                 @auth
-                <a class="dropdown-item" href="{{ route('wishlist') }}">Wishlist <span class="badge badge-info right bg-primary" id="nav_wish_link">{{ Auth::user()->productInWishlist->count() }}</span></a> 
-                <a class="dropdown-item" href="{{ route('cart') }}">Cart</a> 
-                <a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a>
+                <a class="dropdown-item" href="{{ route('wishlist.index') }}">Wishlist <span class="badge badge-info right bg-primary" id="nav_wish_link">{{ Auth::user()->productInWishlist->count() }}</span></a> 
+                @else
+                <a class="dropdown-item" href="{{ route('wishlist.index') }}">Wishlist <span class="badge badge-info right bg-primary" id="nav_wish_link">
+                  @if(Session::has('wishlist'))
+                    {{ count(Session::get('wishlist')) }}
+                  @else
+                    0
+                  @endif
+                </span></a>
                 @endauth
+
+                <a class="dropdown-item" href="{{ route('cart') }}">Cart</a> 
+                
+                @can('checkout')
+                <a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a>
+                @endcan
               	
               </div>
             </li>

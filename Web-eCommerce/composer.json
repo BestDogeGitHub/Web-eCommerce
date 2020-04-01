@@ -17,6 +17,7 @@
         "laravel/telescope": "^2.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
+        "spatie/laravel-cookie-consent": "^2.12",
         "spatie/laravel-permission": "^3.7",
         "spatie/laravel-searchable": "^1.6"
     },

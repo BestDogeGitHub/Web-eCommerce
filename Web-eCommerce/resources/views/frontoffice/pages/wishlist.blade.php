@@ -34,18 +34,17 @@
                                     @foreach($wishlist as $product)
                                     <tr class="text-center" id="wish_prod_{{$product->id}}">
                                         <td class="product-remove"><a href="#" class="removeFromWishlist" data-id="{{ $product->id }}"><span class="ion-ios-close"></span></a></td>
-                                        @php
-                                            if(count($product->productImages))
-                                                $image = $product->productImages->first()->image_ref;
-                                            else $image = "/images/products/no-image.png";
-                                        @endphp
-                                        <td class="image-prod"><div class="img">
-                                            <img class="img-fluid" src='{{ asset("$image") }}' alt="Product Image">
-                                        </div></td>
+
+                                        <td class="image-prod">
+                                            <div class="img">
+                                                <a href="{{ route('product_detail', $product->id) }}">
+                                                    <img class="img-fluid" src='{{ asset($product->image) }}' alt="Product Image">
+                                                </a>
+                                            </div>
+                                        </td>
                                         
                                         <td class="product-name">
                                             <h3>{{$product->productType->name}}</h3>
-                                            <p>{{$product->info}}</p>
                                             <p class="black">Properties: <br/>
                                             @forelse($product->values as $value)
                                             {{$value->attribute->name}} : {{$value->name}} <br/>
@@ -60,6 +59,9 @@
 
                                 </tbody>
                             </table>
+                            @if(!count($wishlist))
+                            <h2 class="text-center">No products in wishlist</h2>
+                            @endif
                         </div>
                     </div>
                 </div>
