@@ -9,9 +9,11 @@
           <div class="col-md-9 ftco-animate text-center">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="{{ route('categories_par', 1) }}">Categories</a></span></p>
             <h1 class="mb-0 bread">
-
-                {{ $parent->name ?? 'Categories'}}
-
+                @if($parent && $parent->id != 1)
+                    {{ $parent->name ?? 'Categories'}}
+                @else
+                    Browse into categories
+                @endif
             </h1>
           </div>
         </div>
@@ -44,20 +46,9 @@
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
                             <h3 class="text-uppercase"><a href="#" class="category_link"><small><span class="parent_cat">?</span></small> > <b><span class="target_cat">?</span></b></a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p>
-                                    ( <b><span class="num_prod_cat"></span></b> Product Types)
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                <a href="#" class="d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                </div>
-                            </div>
+                            <p>
+                                ( <b><span class="num_prod_cat"></span></b> Product Types)
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -73,25 +64,14 @@
             
                 <div class="col-lg-3 ftco-animate">
                     <div class="product square">
-                        <a href="{{ route('categories_par', $cat->id) }}" data-leaf="0" class="img-prod category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><img class="img-fluid cat-img" src="{{ $cat->image_ref }}" alt="Category image">
+                        <a href="{{ route('categories_par', $cat->id) }}" data-leaf="@if($type == 1) 1 @else 0 @endif" class="img-prod category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><img class="img-fluid cat-img" src="{{ $cat->image_ref }}" alt="Category image">
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3 class="text-uppercase"><a href="{{ route('categories_par', $cat->id) }}" data-leaf="0" class="category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><small>{{ $cat->getParentName() }}</small> > <b>{{ $cat->name }}</b></a></h3>
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p>
-                                    ( <b>{{ $cat->getNumProducts() }}</b> Product Types )
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                <a href="#" class="d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                </div>
-                            </div>
+                            <h3 class="text-uppercase"><a href="{{ route('categories_par', $cat->id) }}" data-leaf="@if($type == 1) 1 @else 0 @endif" class="category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><small>{{ $cat->getParentName() }}</small> > <b>{{ $cat->name }}</b></a></h3>
+                            <p>
+                                ( <b>{{ $cat->getNumProducts() }}</b> Product Types )
+                            </p>
                         </div>
                     </div>
                 </div>

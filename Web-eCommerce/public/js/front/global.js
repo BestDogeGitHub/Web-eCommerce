@@ -47,7 +47,12 @@ $(document).ready(function(){
                 }
             },
             error:function (xhr, ajaxOptions, thrownError){
-                if(xhr.status == 404) {
+                if(xhr.status == 400) {
+                  Toast.fire({
+                    type: 'error',
+                    title: '(400) Bad Request. Check that cookies are allowed'
+                  });
+                }else if(xhr.status == 404) {
                   Toast.fire({
                     type: 'error',
                     title: '404 Error...'
@@ -95,7 +100,12 @@ $(document).ready(function(){
                 }
             },
             error:function (xhr, ajaxOptions, thrownError){
-                if(xhr.status == 404) {
+              if(xhr.status == 400) {
+                Toast.fire({
+                  type: 'error',
+                  title: '(400) Bad Request. Check that cookies are allowed'
+                });
+              }else if(xhr.status == 404) {
                   Toast.fire({
                     type: 'error',
                     title: '404 Error...'
@@ -155,7 +165,12 @@ $(document).ready(function(){
                 }
             },
             error:function (xhr, ajaxOptions, thrownError){
-                if(xhr.status == 404) {
+              if(xhr.status == 400) {
+                Toast.fire({
+                  type: 'error',
+                  title: '(400) Bad Request. Check that cookies are allowed'
+                });
+              }else if(xhr.status == 404) {
                   Toast.fire({
                     type: 'error',
                     title: 'Cart Error: Resource not found (404).'
@@ -204,7 +219,12 @@ $(document).ready(function(){
                 }
             },
             error:function (xhr, ajaxOptions, thrownError){
-                if(xhr.status == 404) {
+              if(xhr.status == 400) {
+                Toast.fire({
+                  type: 'error',
+                  title: '(400) Bad Request. Check that cookies are allowed'
+                });
+              }else if(xhr.status == 404) {
                   Toast.fire({
                     type: 'error',
                     title: 'Wishlist Error: Resource not found (404).'
@@ -288,7 +308,12 @@ $(document).ready(function(){
                 }
             },
             error:function (xhr, ajaxOptions, thrownError){
-                if(xhr.status == 404) {
+              if(xhr.status == 400) {
+                Toast.fire({
+                  type: 'error',
+                  title: '(400) Bad Request. Check that cookies are allowed'
+                });
+              }else if(xhr.status == 404) {
                   Toast.fire({
                     type: 'error',
                     title: 'Cart Error: Resource not found (404).'
@@ -353,7 +378,12 @@ $(document).ready(function(){
                     }
                 },
                 error:function (xhr, ajaxOptions, thrownError){
-                    if(xhr.status == 404) {
+                  if(xhr.status == 400) {
+                    Toast.fire({
+                      type: 'error',
+                      title: '(400) Bad Request. Check that cookies are allowed'
+                    });
+                  }else if(xhr.status == 404) {
                     Toast.fire({
                         type: 'error',
                         title: 'Cart Error: Resource not found (404).'
@@ -558,6 +588,8 @@ $(document).ready(function(){
     $('.home_slider h2').addClass('subheading mb-4');
     $('.home_slider a').addClass('btn btn-primary');
 
+    
+
 
     /**
      * Image Header Setting
@@ -581,80 +613,90 @@ $(document).ready(function(){
      * CATEGORIES DYNAMICS LOGIC
      */
     $('body').on('click', 'a.category_link', function(event) {
-      if(!parseInt($(this).attr('data-leaf'))) event.preventDefault();
+      if(!parseInt($(this).attr('data-leaf'))) 
+      { 
+          event.preventDefault();
 
-      var parent = parseInt($(this).attr('data-parent'));
-      var parent_name = $(this).attr('data-parent-name');
-      var logic_row = $(this).closest('.categories_row').eq(0);
+          $('#ftco-loader').addClass('show');
 
-      logic_row.nextAll('.categories_row').fadeOut(1000);
-      logic_row.nextAll('.categories_row').remove();
+          var parent = parseInt($(this).attr('data-parent'));
+          var parent_name = $(this).attr('data-parent-name');
+          var logic_row = $(this).closest('.categories_row').eq(0);
 
-      $.ajax({
-        url: "/shop/categories/" + parent,
-        method: "GET",
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data){
-          console.log(data);
+          logic_row.nextAll('.categories_row').fadeOut(1000);
+          logic_row.nextAll('.categories_row').remove();
 
-          if(data.categories)
-          {
+          $.ajax({
+            url: "/shop/categories/" + parent,
+            method: "GET",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data){
+              console.log(data);
 
-            var new_row = '<div class="row categories_row">';
+              if(data.categories)
+              {
 
-            $.each(data.categories, function(key, item) {
+                var new_row = '<div class="row categories_row">';
 
-              var content = $('#category_template').clone();
-              content.find('div div a img').attr('src', item.image_ref);
-              content.find('.parent_cat').html(parent_name);
-              content.find('.target_cat').html(item.name);
-              if(item.leaf) {
-                content.find('.category_link').attr('href', '/shop/categories/' + item.id);
-              }
-              content.find('.category_link').attr('data-leaf', item.leaf);
-              content.find('.category_link').attr('data-logic-row', parent);
-              content.find('.category_link').attr('data-parent', item.id);
-              content.find('.category_link').attr('data-parent-name', item.name);
-              content.find('.num_prod_cat').html(item.num_products);
-              new_row += content.html();
-              
-            });
+                $.each(data.categories, function(key, item) {
 
-            new_row += '</div>';
-            //console.log(new_row);
-            $('.categories_row:last').after(new_row);
-
-          }
-
-        },
-        error:function (xhr, ajaxOptions, thrownError){
-            if(xhr.status == 404) {
-              Toast.fire({
-                type: 'error',
-                title: 'Category not found'
-              });
-            }else if(xhr.status == 409) {
-                Toast.fire({
-                  type: 'warning',
-                  title: 'Conflict alert (409).'
+                  var content = $('#category_template').clone();
+                  content.find('div div a img').attr('src', item.image_ref);
+                  content.find('.parent_cat').html(parent_name);
+                  content.find('.target_cat').html(item.name);
+                  if(item.leaf) {
+                    content.find('.category_link').attr('href', '/shop/categories/' + item.id);
+                  }
+                  content.find('.category_link').attr('data-leaf', item.leaf);
+                  content.find('.category_link').attr('data-logic-row', parent);
+                  content.find('.category_link').attr('data-parent', item.id);
+                  content.find('.category_link').attr('data-parent-name', item.name);
+                  content.find('.num_prod_cat').html(item.num_products);
+                  new_row += content.html();
+                  
                 });
-            }else if(xhr.status == 500) {
-              Toast.fire({
-                type: 'error',
-                title: 'Oops... something went wrong (500). Server error: contact your wesite administrator'
-              });
-            }else{
-              Toast.fire({
-                type: 'error',
-                title: 'Generic error. (' + xhr.status + ')'
-              });
+
+                new_row += '</div>';
+                //console.log(new_row);
+                $('.categories_row:last').after(new_row);
+
+                $('#ftco-loader').removeClass('show');
+
+              }
+
+            },
+            error:function (xhr, ajaxOptions, thrownError){
+                $('#ftco-loader').removeClass('show');
+                if(xhr.status == 404) {
+                  Toast.fire({
+                    type: 'error',
+                    title: 'Category not found'
+                  });
+                }else if(xhr.status == 409) {
+                    Toast.fire({
+                      type: 'warning',
+                      title: 'Conflict alert (409).'
+                    });
+                }else if(xhr.status == 500) {
+                  Toast.fire({
+                    type: 'error',
+                    title: 'Oops... something went wrong (500). Server error: contact your wesite administrator'
+                  });
+                }else{
+                  Toast.fire({
+                    type: 'error',
+                    title: 'Generic error. (' + xhr.status + ')'
+                  });
+                }
             }
-        }
-    });
+        });
+      }
 
 
     });
+
+
 
 });

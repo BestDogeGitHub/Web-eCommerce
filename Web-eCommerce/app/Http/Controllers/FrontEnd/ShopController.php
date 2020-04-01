@@ -10,6 +10,7 @@ use App\Category;
 use App\ProductType;
 use App\Product;
 use App\Producer;
+use App\SiteImage;
 
 
 class ShopController extends Controller
@@ -25,9 +26,29 @@ class ShopController extends Controller
 
         $rankProducts = $this->getTopProductTypes();
         $partners = Producer::all()->random(6);
+        $testimonies = SiteImage::where('site_image_role_id', 10)->inRandomOrder()->get();;
+
+        // PARSING HTML
+        $testimonies->map( function($item){
+
+            preg_match_all ( '#<p>(.+?)</p>#', $item->image_details, $parts );
+
+            if(count($parts[1]) != 3) {
+                $item['text'] = "Error";
+                $item['user'] = "Error";
+                $item['man'] = "Error";
+            } else {
+                $item['text'] = $parts[1][0];
+                $item['user'] = $parts[1][1];
+                $item['man'] = $parts[1][2];
+            }
+
+            
+        });
+
         //$topCategories = $this->getTopCategories();
  
-        return view('frontoffice.pages.home', ['rankProducts' => $rankProducts, 'partners' => $partners]);
+        return view('frontoffice.pages.home', ['rankProducts' => $rankProducts, 'partners' => $partners, 'testimonies' => $testimonies]);
     }
 
     /**
@@ -54,7 +75,7 @@ class ShopController extends Controller
             $categories->map( function($cat){
     
                 $cat['num_products'] = $cat->getNumProducts();
-                if(Category::where('parent_id', $cat)->count())
+                if(Category::where('parent_id', $cat->id)->count())
                     $cat['leaf'] = 0;
                 else $cat['leaf'] = 1;
                 

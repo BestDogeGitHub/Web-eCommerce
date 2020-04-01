@@ -20,6 +20,7 @@ use App\Order;
 
 use Validator;
 use Session;
+use Cookie;
 
 class ShopUserController extends Controller
 {
@@ -31,7 +32,7 @@ class ShopUserController extends Controller
      */
     public function getWishlist() {
 
-        $wishlist = collect([]);
+        $wishlist = collect();
 
         if(!Auth::check()) {
             
@@ -41,16 +42,19 @@ class ShopUserController extends Controller
             //Session::forget('wishlist');
 
             //dd(Session::all());
+
+            if(Cookie::get('laravel_cookie_consent') !== null) {
             
 
-            if(Session::has('wishlist')) {
-                $checkArray = array();
-                foreach(Session::get('wishlist') as $id) {
-                    if(is_numeric($id)) array_push($checkArray, $id);
-                }
+                if(Session::has('wishlist')) {
+                    $checkArray = array();
+                    foreach(Session::get('wishlist') as $id) {
+                        if(is_numeric($id)) array_push($checkArray, $id);
+                    }
 
-                $wishlist = Product::whereIn('id', $checkArray)->get();
-                
+                    $wishlist = Product::whereIn('id', $checkArray)->get();
+                    
+                }
             }
 
         } 
@@ -98,20 +102,25 @@ class ShopUserController extends Controller
              * SESSION USER
              */
 
-            if($request->session()->has('wishlist')) {
-                $wishlist = $request->session()->get('wishlist');
+            if(Cookie::get('laravel_cookie_consent') !== null) {
+
+                if($request->session()->has('wishlist')) {
+                    $wishlist = $request->session()->get('wishlist');
+                } else {
+                    $wishlist = [];
+                }
+
+
+                if(in_array($product->id, $wishlist)) {
+                    return response()->json('error', 409); // Conflict
+                }
+
+                array_push($wishlist, $product->id);
+
+                $request->session()->put('wishlist', $wishlist);
             } else {
-                $wishlist = [];
+                return response()->json('Cookies not accepted', 400); // Bad Request
             }
-
-
-            if(in_array($product->id, $wishlist)) {
-                return response()->json('error', 409); // Conflict
-            }
-
-            array_push($wishlist, $product->id);
-
-            $request->session()->put('wishlist', $wishlist);
 
 
         } else {
@@ -145,15 +154,20 @@ class ShopUserController extends Controller
              * SESSION USER
              */
 
-            if(Session::has('wishlist')) {
-                $wishlist = Session::get('wishlist');
+            if(Cookie::get('laravel_cookie_consent') !== null) {
 
-                if (($key = array_search($id, $wishlist)) !== false) {
-                    unset($wishlist[$key]);
-                    Session::put('wishlist', $wishlist);
-                } else {
-                    return response()->json('error', 404); // Not Found
+                if(Session::has('wishlist')) {
+                    $wishlist = Session::get('wishlist');
+
+                    if (($key = array_search($id, $wishlist)) !== false) {
+                        unset($wishlist[$key]);
+                        Session::put('wishlist', $wishlist);
+                    } else {
+                        return response()->json('error', 404); // Not Found
+                    }
                 }
+            } else {
+                return response()->json('Cookies not accepted', 400); // Bad Request
             }
 
 
@@ -184,10 +198,50 @@ class ShopUserController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getCart() {
-        $user = Auth::user();
-        $cart = $user->productsInCart;
+
         $subtotal = 0;
         $discount = 0;
+        // DELIVERY COST
+        $delivery = ShipmentController::getDeliveryCost();
+
+        if(!Auth::check()) {
+            
+            /**
+             * SESSION USER
+             */
+            $cart = collect();
+
+            if(Cookie::get('laravel_cookie_consent') !== null) {
+
+                if(Session::has('cart')) {
+
+                    $cart_var = Session::get('cart');
+
+                    $cart = Product::whereIn('id', array_keys($cart_var))->get(); // Le chiavi sono gli id dei prodotti
+
+                    $cart->map(function ($product) use ($cart_var) {
+                        $product['quantity'] = $cart_var[$product->id];
+                
+                        return $product;
+                    });
+                    
+                }
+            } 
+
+
+        } else {
+
+            $user = Auth::user();
+            $cart = $user->productsInCart;
+
+            $cart->map(function ($product) {
+                $product['quantity'] = $product->pivot->quantity;
+        
+                return $product;
+            });
+            
+        }
+
         foreach($cart as $product)
         {
             if($product->sale != 0){
@@ -200,17 +254,13 @@ class ShopUserController extends Controller
             } 
             
         } 
+
         // Manipulate product
         $cart->map(function ($product) {
             $product->payment = number_format((float)$product->payment, 2, '.', '');
     
             return $product;
-        });;
-        
-        
-
-        // DELIVERY COST
-        $delivery = ShipmentController::getDeliveryCost();
+        });
 
         return view('frontoffice.pages.cart', ['cart' => $cart, 'subtotal' => number_format((float)$subtotal, 2, '.', ''), 'delivery' => number_format((float)$delivery, 2, '.', ''), 'discount' => number_format((float)$discount, 2, '.', '')]);
     }
@@ -225,13 +275,46 @@ class ShopUserController extends Controller
     {   
         $product = Product::findOrFail($request->id);
 
-        $user = Auth::user();
+        if(!Auth::check()) {
+            
+            /**
+             * SESSION USER
+             */
 
-        if($user->productsInCart->contains($request->id)){
-            return response()->json('error', 409);
+            if(Cookie::get('laravel_cookie_consent') !== null) {
+
+                if($request->session()->has('cart')) {
+                    $cart = $request->session()->get('cart');
+                } else {
+                    $cart = [];
+                }
+
+                if(array_key_exists($product->id, $cart)) {
+                    return response()->json('error', 409); // Conflict
+                }
+
+                $cart[$product->id] = 1;
+                
+                $request->session()->put('cart', $cart);
+
+            } else {
+                return response()->json('Cookies not accepted', 400); // Bad Request
+            }
+
+
+        } else {
+            /**
+             * AUTHENTICATED USER
+             */
+
+            $user = Auth::user();
+
+            if($user->productsInCart->contains($request->id)){
+                return response()->json('error', 409);
+            }
+            
+            $user->productsInCart()->syncWithoutDetaching($product);
         }
-        
-        $user->productsInCart()->syncWithoutDetaching($product);
     
         return response()->json(['success' => 'Product successfully added to cart!']);
     }
@@ -244,11 +327,39 @@ class ShopUserController extends Controller
      */
     public function removeFromCart($id)
     {   
-        $product = Product::findOrFail($id);
-        
-        $user = Auth::user();
-        
-        $user->productsInCart()->detach($product);
+        if(!Auth::check()) {
+            
+            /**
+             * SESSION USER
+             */
+
+            if(Cookie::get('laravel_cookie_consent') !== null) {
+
+                if(Session::has('cart')) {
+                    $cart = Session::get('cart');
+
+                    if(array_key_exists($id, $cart)) {
+                        unset($cart[$id]);
+                        Session::put('cart', $cart);
+                    } else {
+                        return response()->json('error', 404); // Not Found
+                    }
+                }
+            } else {
+                return response()->json('Cookies not accepted', 400); // Bad Request
+            }
+
+
+        } else {
+            /**
+             * AUTHENTICATED USER
+             */
+            $product = Product::findOrFail($id);
+            
+            $user = Auth::user();
+            
+            $user->productsInCart()->detach($product);
+        }
     
         return response()->json(['success' => 'Product successfully deleted from cart!']);
     }
@@ -262,13 +373,8 @@ class ShopUserController extends Controller
      */
     public function setQuantityCart($id, Request $request)
     {
+
         $product = Product::findOrFail($id);
-
-        $user = Auth::user();
-
-        if(!$user->productsInCart->contains($id)){
-            return response()->json('error', 404);
-        }
 
         $rules = array(
             'quantity' => 'required|numeric',
@@ -276,9 +382,47 @@ class ShopUserController extends Controller
 
         $error = Validator::make($request->all(), $rules);
         if($error->fails()){ return response()->json(['errors' => $error->errors()->all()]); }
+
         
-        $user->productsInCart->find($id)->pivot->quantity = $request->quantity;
-        $user->productsInCart->find($id)->pivot->save();
+        if(!Auth::check()) { 
+            /**
+             * Guest session user
+             */
+            if(Cookie::get('laravel_cookie_consent') !== null) {
+
+                if($request->session()->has('cart')) { 
+                    $cart_var = $request->session()->get('cart');
+
+                    if(array_key_exists($id, $cart_var)) {
+                        $cart_var[$id] = $request->quantity;
+                    }
+                    else {
+                        return response()->json('error', 404);
+                    }
+                }
+            
+            } else {
+                return response()->json('Cookies not accepted', 400); // Bad Request
+            }
+
+
+
+        }
+        else {
+            /**
+             * Authenticated
+             */
+            $user = Auth::user();
+
+            if(!$user->productsInCart->contains($id)){
+                return response()->json('error', 404);
+            }
+
+            $user->productsInCart->find($id)->pivot->quantity = $request->quantity;
+            $user->productsInCart->find($id)->pivot->save();
+
+        }
+        
 
         return response()->json(['success' => 'Quantity successfully modified']);
     }

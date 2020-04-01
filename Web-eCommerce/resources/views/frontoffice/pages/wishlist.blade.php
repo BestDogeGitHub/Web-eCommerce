@@ -25,24 +25,27 @@
                             <table class="table">
                                 <thead class="thead-primary">
                                 <tr class="text-center">
-                                    <th>&nbsp;</th>
-                                    <th>Product List</th>
-                                    <th>&nbsp;</th>
+                                    
+                                    <th class="w-auto" scope="col">&nbsp;</th>
+                                    <th class="w-auto d-none d-md-block" scope="col">&nbsp;</th>
+                                    <th class="w-auto" scope="col">Product List</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($wishlist as $product)
                                     <tr class="text-center" id="wish_prod_{{$product->id}}">
+
+                                        
                                         <td class="product-remove"><a href="#" class="removeFromWishlist" data-id="{{ $product->id }}"><span class="ion-ios-close"></span></a></td>
 
-                                        <td class="image-prod">
+                                        <td class="image-prod d-none d-md-block">
                                             <div class="img">
                                                 <a href="{{ route('product_detail', $product->id) }}">
                                                     <img class="img-fluid" src='{{ asset($product->image) }}' alt="Product Image">
                                                 </a>
                                             </div>
                                         </td>
-                                        
+
                                         <td class="product-name">
                                             <h3>{{$product->productType->name}}</h3>
                                             <p class="black">Properties: <br/>
@@ -53,6 +56,10 @@
                                             @endforelse
                                             </p>
                                         </td>
+
+                                        
+                                        
+                                        
                                         
                                     </tr><!-- END TR-->
                                     @endforeach

@@ -95,9 +95,12 @@
 	          		<p style="color: #000;"> {{ $product->stock }} pieces available</p>
 	          	</div>
 			  </div>
-			  				@if($product->stock)
-							  <p><a href="#" class="buy-now btn btn-black py-3 px-5 @guest disabled @endguest"  data-id="{{$product->id}}">Add to Cart</a></p>
-							@endif
+
+				@if($product->stock)
+					<p><a href="#" class="buy-now btn btn-black py-3 px-5"  data-id="{{$product->id}}">Add to Cart</a></p>
+				@else
+					<p><a href="#" class="buy-now btn btn-black py-3 px-5 disabled">Not Available</a></p>
+				@endif
 							  
     			</div>
 			</div>

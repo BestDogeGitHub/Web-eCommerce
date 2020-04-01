@@ -108,6 +108,7 @@ class StaticTableSeeder extends Seeder
             ['id' => 7, 'name' => 'Background Orders Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
             ['id' => 8, 'name' => 'Background Profile Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
             ['id' => 9, 'name' => 'Background Deal Of The Day', 'role_details' => 'Background di del Deal of the Day nella HomePage'],
+            ['id' => 10, 'name' => 'Reviews on HomePage', 'role_details' => 'Immagini dei reviewers con relativa descrizione'],
         ];
 
         foreach ($roles as $role) {
@@ -126,6 +127,14 @@ class StaticTableSeeder extends Seeder
             ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 7],
             ['image_ref' => '/images/static/bg_1.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 8],
             ['image_ref' => '/images/static/bg_3.jpg', 'image_details' => 'Background 3', 'site_image_role_id' => 9],
+            ['image_ref' => '/images/static/person_1.jpg', 'image_details' => '<p>It is a well-known fact in the video game industry that movies made after video games are often impossible to watch.</p><p>Garreth Smith</p><p>Inventory Manager</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '/images/static/person_2.jpg', 'image_details' => '<p>When something becomes ubiquitous, it tends to lose its uniqueness and complexity.</p><p>James Brown</p><p>Customer</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '/images/static/person_3.jpg', 'image_details' => '<p>I love science fiction. My first science-fiction novel was Ray Bradbury’s “451 Fahrenheit,” and it is still one of my favorites.</p><p>Carola White</p><p>Developer</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '/images/static/person_4.jpg', 'image_details' => '<p>It is a well-known fact in the video game industry that movies made after video games are often impossible to watch.</p><p>Garreth Smith</p><p>Inventory Manager</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '/images/static/person_5.jpg', 'image_details' => '<p>When something becomes ubiquitous, it tends to lose its uniqueness and complexity.</p><p>James Brown</p><p>Customer</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '/images/static/person_6.jpg', 'image_details' => '<p>I love science fiction. My first science-fiction novel was Ray Bradbury’s “451 Fahrenheit,” and it is still one of my favorites.</p><p>Carola White</p><p>Developer</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '/images/static/person_7.jpg', 'image_details' => '<p>It is a well-known fact in the video game industry that movies made after video games are often impossible to watch.</p><p>Garreth Smith</p><p>Inventory Manager</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '/images/static/person_8.jpg', 'image_details' => '<p>When something becomes ubiquitous, it tends to lose its uniqueness and complexity.</p><p>James Brown</p><p>Customer</p>', 'site_image_role_id' => 10],
         ];
 
         foreach ($resources as $resource) {
@@ -339,7 +348,7 @@ class StaticTableSeeder extends Seeder
         $node3 = new Category(['name' => 'Chitarre', 'image_ref' => 'https://d1t3zg51rvnesz.cloudfront.net/p/images/cms2/715/sa-leo-abrahams_product_lkp_2021_small.jpg']);
         $node4 = new Category(['name' => 'Batterie', 'image_ref' => 'https://i.udemycdn.com/course/750x422/195576_d3b9_3.jpg']);
         $node5 = new Category(['name' => 'Tastiere', 'image_ref' => 'https://cdn.schoolofrock.com/img/hero-large-750w/piano-lessons1527267213.jpg']);
-        $node6 = new Category(['name' => 'Bassi', 'image_ref' => 'https://lh3.googleusercontent.com/proxy/bDrnFZI_BUut-N1sHTDWuYD4JlU_F5OxL31J5gE_0JaDx1sy3hXnpI-PgjDzi0KC36z3j7nHTgTfnXLrZLfjfZfA0It-i7uBtZviFwwdUHMXgQ']);
+        $node6 = new Category(['name' => 'Bassi', 'image_ref' => 'https://i2.wp.com/www.elrick.com/wp-content/uploads/2019/11/E3319A.jpg?fit=2050%2C2050&ssl=1']);
         $node7 = new Category(['name' => 'Alimentazione e cavi', 'image_ref' => 'https://shop.scavino.it/files/scavino2_Files/Foto/643172_2.PNG']);
         $node8 = new Category(['name' => 'Impianti e attrezzatura', 'image_ref' => 'https://d287ku8w5owj51.cloudfront.net/images/products/hero/others/hero-creative-t30-wireless.jpg?width=800&height=800']);
         $node9 = new Category(['name' => 'Alimentatori', 'image_ref' => 'https://muzikercdn.com/uploads/products/2413/241367/thumb_d_gallery_base_bfe274af.jpg']);

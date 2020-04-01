@@ -19,16 +19,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     /**
-     * CART ROUTES
-     */
-    Route::group(['middleware' => ['can:cart']], function () {
-        Route::get('shop/cart', 'FrontEnd\ShopUserController@getCart')->name('cart');
-        Route::delete('shop/cart/{id}', 'FrontEnd\ShopUserController@removeFromCart')->name('remove_from_cart');
-        Route::post('shop/cart', 'FrontEnd\ShopUserController@addToCart')->name('add_to_cart');
-        Route::post('shop/cart/{id}/quantity', 'FrontEnd\ShopUserController@setQuantityCart')->name('set_product_quantity_cart');
-    });
-
-    /**
      * CHECKOUT
      */
     Route::group(['middleware' => ['can:checkout']], function () {
@@ -61,6 +51,13 @@ Route::get('shop/wishlist', 'FrontEnd\ShopUserController@getWishlist')->name('wi
 Route::delete('shop/wishlist/{id}', 'FrontEnd\ShopUserController@removeFromWishlist')->name('wishlist.destroy');
 Route::post('shop/wishlist', 'FrontEnd\ShopUserController@addToWishlist')->name('wishlist.store');
 
+/**
+ * CART ROUTES
+ */
+Route::get('shop/cart', 'FrontEnd\ShopUserController@getCart')->name('cart');
+Route::delete('shop/cart/{id}', 'FrontEnd\ShopUserController@removeFromCart')->name('remove_from_cart');
+Route::post('shop/cart', 'FrontEnd\ShopUserController@addToCart')->name('add_to_cart');
+Route::post('shop/cart/{id}/quantity', 'FrontEnd\ShopUserController@setQuantityCart')->name('set_product_quantity_cart');
 
 
 /**
