@@ -85,6 +85,6 @@ class InvoiceController extends Controller
     public function getPDF($id)
     {
         $invoice = Invoice::find($id);
-        return View('backoffice.partials._partial_invoice_to_pdf', ['invoice' => $invoice]);
+        return View('shared._partial_invoice_to_pdf', ['invoice' => $invoice]);
     }
 }

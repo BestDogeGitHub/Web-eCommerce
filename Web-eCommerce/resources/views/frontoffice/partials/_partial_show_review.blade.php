@@ -5,7 +5,7 @@
         <span class="username">
         <a href="{{ route('get_public_profile', $review->user->id) }}">{{ $review->user->name }} {{ $review->user->surname }}</a> > <a href="{{ route('product_detail', $review->product->id) }}"><small>{{ $review->product->productType->name }} - {{ $review->product->variant_name }}</small></a>
         </span>
-        <span class="description">{{ date("H:i",strtotime($review->created_at)) }} {{ date("d:m:Y",strtotime($review->created_at)) }}</span>
+        <span class="description">{{ date("H:i",strtotime($review->created_at)) }} {{ date("d/m/Y",strtotime($review->created_at)) }}</span>
     </div>
     <!-- /.user-block -->
     <p>

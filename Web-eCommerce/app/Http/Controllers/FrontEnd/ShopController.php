@@ -4,8 +4,11 @@ namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductTypeController;
+use App\Http\Controllers\CarrierController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
 use App\Category;
 use App\ProductType;
 use App\Product;
@@ -204,6 +207,13 @@ class ShopController extends Controller
 
         return view('frontoffice.pages.search', ['products' => $products, 'search' => $request->search]);
 
+    }
+
+    public function showCarrier($idCarrier) {
+
+        $carrier = CarrierController::getById($idCarrier);
+
+        return View('frontoffice.pages.carrier_detail', ['carrier' => $carrier]);
     }
 
     

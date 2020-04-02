@@ -71,7 +71,7 @@
             <thead>
             <tr>
                 <th class="w-15">Product</th>
-                <th class="w-25"><b>Description</b></th>
+                <th class="w-25"><b>Name</b></th>
                 <th class="w-15"><b>Unit Cost</b></th>
                 <th class="w-15"><b>Q.ty</b></th> 
                 <th class="w-15">Iva</th>
@@ -86,7 +86,7 @@
                     Prod #: <b>{{$detail->product->id}}</b><br/></p>
                     </td>
                     <td>
-                    <p class="info-box">{{$detail->product->info}}<br/></p>
+                    <p>{{$detail->product->variant_name}}<br/></p>
                     </td>
                     <td>
                     &euro; {{ number_format((float)$detail->product->payment, 2, '.', '')}}

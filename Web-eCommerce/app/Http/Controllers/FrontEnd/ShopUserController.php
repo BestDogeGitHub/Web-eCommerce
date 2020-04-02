@@ -637,7 +637,7 @@ class ShopUserController extends Controller
 
         OrderController::checkout(Auth::user()->id, $card_id, $address_id, $coupon_id, $paymentMethod);
 
-        return $this->showOrders();
+        return redirect()->route('orders');
 
     }
 
@@ -664,10 +664,10 @@ class ShopUserController extends Controller
         $order = Order::findOrFail($id);
         if($order->user->id == $user->id || $user->hasAnyRole(['Administrator']))
         {
-            return view('frontoffice.partials._partial_invoice_to_pdf', ['invoice' => $order->invoice]);
+            return view('shared._partial_invoice_to_pdf', ['invoice' => $order->invoice]);
         }
         else{
-            abort(401); // Utente non autorizzato alla visualizzazione della fattura
+            abort(401); // HTTP ERROR 401 UNAUTHORIZED - Utente non autorizzato alla visualizzazione della fattura, non è sua
         }
     }
 

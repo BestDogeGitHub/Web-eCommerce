@@ -11,8 +11,8 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Vegefoods</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+              <h2 class="ftco-heading-2">MusicStore</h2>
+              <p>Only best brands. Partnership with all famous producers. Buy musical instruments and accessories.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -24,10 +24,9 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="{{ route('shop') }}" class="py-2 d-block">Shop</a></li>
+                <li><a href="{{ route('cart') }}" class="py-2 d-block">Cart</a></li>
+                <li><a href="{{ route('wishlist.index') }}" class="py-2 d-block">Wishlist</a></li>
               </ul>
             </div>
           </div>
@@ -50,7 +49,7 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<h2 class="ftco-heading-2">Contact us</h2>
             	<div class="block-23 mb-3">
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>

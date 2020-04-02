@@ -29,9 +29,10 @@
                             <table class="table">
                                 <thead class="thead-primary">
                                     <tr class="text-center">
-                                    <th>Purchase Order Number</th>
+                                    <th>PON</th>
                                     <th>Details</th>
-                                    <th>Price</th>
+                                    <th>Price (&euro;)</th>
+                                    <th>Carrier</th>
                                     <th>Status</th>
                                     <th>Invoice</th>
                                     </tr>
@@ -53,7 +54,11 @@
                                         </td>
                                         
                                         <td class="price data">
-                                            <p class="price"><span>&euro; {{$order->invoice->payment}}</span></p>
+                                            <p class="price"><span>{{$order->invoice->payment}}</span></p>
+                                        </td>
+
+                                        <td class="data">
+                                            <a href="@if($order->shipment->carrier) {{ route('carrier_detail', $order->shipment->carrier->id) }} @else # @endif" ><span>{{$order->shipment->carrier->name ?? 'Unavailable'}}</span></a>
                                         </td>
                                         
                                         <td class="quantity data">

@@ -74,7 +74,7 @@ Route::get('products/{type}', 'FrontEnd\ShopController@getProductsFromType')->na
 Route::get('products/details/{id}', 'FrontEnd\ProductDetailController@show')->name('product_detail');
 
 // Carrier details by id
-Route::get('carriers/{id}', 'FrontEnd\ProductDetailController@showCarrier')->name('carrier_detail');
+Route::get('carriers/{id}', 'FrontEnd\ShopController@showCarrier')->name('carrier_detail');
 
 // Categories view
 Route::get('shop/categories', 'FrontEnd\ShopController@getCategoriesView')->name('shop_categories')->defaults('parent', 0);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\AddressController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,6 +13,7 @@ use App\Town;
 use App\Review;
 use App\Product;
 use App\User;
+use App\Address;
 
 use Validator;
 
@@ -113,6 +116,35 @@ class AuthUserController extends Controller
         );
 
         $me->update($data);
+
+
+        /**
+         * Edit address if requested
+         */
+
+        if($request->add_address) {
+            
+            $data_address = array(
+                'building_number' => $request->building_number,
+                'street_number' => $request->street_number,
+                'postcode' => $request->postcode,
+                'country_code' => $request->country_code,
+                'town_id' => $request->town_id
+            ); 
+
+            if($me->address == null) {
+                $address = Address::create($data_address);
+                $me->address()->associate($address);
+                $me->save();
+            } 
+            else {
+                $me->address->update($data_address);
+            }
+            
+        }
+        
+        
+        
 
         return $this->getProfile(true);
     }

@@ -308,7 +308,7 @@
                                                     <label for="country">Town / City</label>
                                                     <div class="select-wrap">
                                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                        <select disabled="disabled" name="town_id" class="form-control addr_input @error('town_id') is-invalid @enderror" required="required">
+                                                        <select disabled="disabled" id="billing_town" name="town_id" class="form-control addr_input @error('town_id') is-invalid @enderror" required="required">
                                                             @foreach($towns as $town)
                                                             <option value="{{ $town->id }}" data-nation-id="{{ $town->nation->id }}" 
                                                             @if ($user->address && $town->id == $user->address->town->id)

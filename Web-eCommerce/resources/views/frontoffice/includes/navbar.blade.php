@@ -53,7 +53,9 @@
               </div>
             </li>
             
+            @auth
             <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Orders</a></li>
+            @endauth
 	          <!-- <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li> -->
 	          <!-- <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li> -->
             <!-- Authentication Links -->
@@ -87,10 +89,7 @@
                                     
                                 </div>
                             </li>
-                            
-                            
                         @endguest
-                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
             @auth
 	          <li class="nav-item cta cta-colored"><a href="{{ route('cart') }}" class="nav-link"><span class="icon-shopping_cart"></span>[<span id="nav_cart_link">{{ Auth::user()->productsInCart->count()}}</span>]</a></li>
                
