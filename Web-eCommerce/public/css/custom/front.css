@@ -351,11 +351,19 @@ img.test {
   height: 100px !important;
 }
 
+#topbar {
+  display: none;
+}
+
 
 @media (min-width: 576px) {
   .owl-carousel .owl-item img {
     width: 50%;
     max-height: unset;
+  }
+
+  #topbar {
+    display: block;
   }
 }
 
@@ -561,4 +569,35 @@ td.product-name {
   width: 150px;
   height: 150px;
   margin: 0 auto;
+}
+
+.search-form-container {
+  height: 40px;
+  text-align: right;
+}
+
+.search-row {
+  display: flex;
+  margin-left: auto;
+  width: 250px;
+}
+
+.icon-search-my {
+  width: fit-content;
+  background-color: #f2f4f6 !important;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+}
+
+.search_in_table {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  margin-bottom: 0;
 }

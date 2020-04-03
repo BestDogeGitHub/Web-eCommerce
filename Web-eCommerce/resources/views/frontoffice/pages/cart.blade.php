@@ -26,7 +26,17 @@
                 @if($cart->count())
     			<div class="col-md-12 ftco-animate">
     				<div class="cart-list">
-	    				<table class="table">
+
+                <div class="search-form-container mb-2">  
+                  <div class="search-row">
+                    <div class="icon-search-my">
+                      <i class="fa fa-search"></i>
+                    </div>
+                    <input class="search_input search_in_table ml-auto table_search" data-table-id="cart_table" data-table-fields="[2]" name="search" type="search" placeholder="Search products" aria-label="Search"> 
+                  </div>
+                </div>
+
+	    				<table class="table" id="cart_table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th>&nbsp;</th>

@@ -698,5 +698,34 @@ $(document).ready(function(){
     });
 
 
+    $('.table_search').keyup( function () {
+      var td, txtValue;
+      var id_table = $(this).attr('data-table-id');
+      var num_fields = $(this).attr('data-table-fields');
+      var table = $('#' + id_table);
+      var input = $(this).val().toUpperCase();
+      //console.log('Searching ' + input + ', in table ' + id_table + ', ' + table.html() + 'fields ' + num_fields.toString());
+      table.find('tbody tr').each( function(index) {
+        
+        tr_v = $(this);
+
+        $.each(JSON.parse(num_fields), function(key, val) {
+          td = tr_v.children("td:eq(" + val + ")");
+          if (td) {
+            txtValue = td.text();
+            if (txtValue.toUpperCase().indexOf(input) > -1) {
+              tr_v.removeClass('d-none');
+            } else {
+              tr_v.addClass('d-none');
+            }
+          }     
+        });
+
+      });
+
+
+    });
+
+
 
 });
