@@ -64,11 +64,11 @@
             
                 <div class="col-lg-3 ftco-animate">
                     <div class="product square">
-                        <a href="{{ route('categories_par', $cat->id) }}" data-leaf="@if($type == 1) 1 @else 0 @endif" class="img-prod category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><img class="img-fluid cat-img" src="{{ $cat->image_ref }}" alt="Category image">
+                        <a href="{{ route('categories_par', $cat->id) }}" data-leaf="@if($type == 1 || $cat->leaf) 1 @else 0 @endif" class="img-prod category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><img class="img-fluid cat-img" src="{{ $cat->image_ref }}" alt="Category image">
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3 class="text-uppercase"><a href="{{ route('categories_par', $cat->id) }}" data-leaf="@if($type == 1) 1 @else 0 @endif" class="category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><small>{{ $cat->getParentName() }}</small> > <b>{{ $cat->name }}</b></a></h3>
+                            <h3 class="text-uppercase"><a href="{{ route('categories_par', $cat->id) }}" data-leaf="@if($type == 1  || $cat->leaf) 1 @else 0 @endif" class="category_link" data-logic-row="{{$cat->parent->id}}" data-parent="{{ $cat->id }}" data-parent-name="{{ $cat->name }}"><small>{{ $cat->getParentName() }}</small> > <b>{{ $cat->name }}</b></a></h3>
                             <p>
                                 ( <b>{{ $cat->getNumProducts() }}</b> Product Types )
                             </p>

@@ -23,13 +23,13 @@
                     <div class="col-md-12 ftco-animate">
                         <div class="cart-list">
 
-                        <div class="search-form-container mb-2">  
-                            <div class="search-row">
-                                <div class="icon-search-my">
-                                <i class="fa fa-search"></i>
+                            <div class="search-form-container mb-2">  
+                                <div class="search-row">
+                                    <div class="icon-search-my">
+                                    <i class="fa fa-search"></i>
+                                    </div>
+                                    <input class="search_input search_in_table ml-auto table_search" data-table-id="wish_talbe" data-table-fields="[2]" name="search" type="search" placeholder="Search products" aria-label="Search"> 
                                 </div>
-                                <input class="search_input search_in_table ml-auto table_search" data-table-id="wish_talbe" data-table-fields="[2]" name="search" type="search" placeholder="Search products" aria-label="Search"> 
-                            </div>
                             </div>
 
                             <table class="table" id="wish_talbe">

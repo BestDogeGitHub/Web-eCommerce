@@ -31,11 +31,7 @@
                     <div class="container">
                         <div class="table-wrapper table-responsive">
                             <div class="table-title">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a href="#addNationModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Nation</span></a>				
-                                    </div>
-                                </div>
+                                <h2>Static components</h2>
                             </div>
 
                             <table class="table table-striped table-hover" id="nationsTable">
@@ -75,35 +71,6 @@
 
 
     <!-- !!! MODALS !!! -->
-    <!-- Add Modal HTML -->
-    <div id="addNationModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-                <form id="addNationForm" method="post" class="form-horizontal" enctype="multipart/form-data">
-                @csrf
-					<div class="modal-header">						
-						<h4 class="modal-title">Add Nation</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-                        
-                        <div class="form-group">
-							<label>Name</label>
-							<input type="text" class="form-control" required="required" name="name"/>
-						</div>	
-
-
-                        <div id="forErrors"></div>					
-                    </div>
-                    
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-success" value="Add">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
     <!-- FOR SHOW AND EDIT -->
 
     <!-- Delete Modal HTML -->
@@ -112,11 +79,11 @@
 			<div class="modal-content">
                 <form id="deleteNationForm" method="post" class="form-horizontal" enctype="multipart/form-data">
 					<div class="modal-header">						
-						<h4 class="modal-title">Delete Nation</h4>
+						<h4 class="modal-title">Delete Components</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>Are you sure you want to delete this Nation?</p>
+						<p>Are you sure you want to delete this Components?</p>
 						<p class="text-warning"><small>!!! This action cannot be undone !!!</small></p>
 					</div>
 					<div class="modal-footer">
@@ -129,5 +96,5 @@
     </div>       
 
 
-<script src="{{ asset('dist/js/pages/nations.js') }}"></script>
+<script src="{{ asset('dist/js/pages/website.js') }}"></script>
 @endsection('content')

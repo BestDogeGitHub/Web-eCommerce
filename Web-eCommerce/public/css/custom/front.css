@@ -400,7 +400,7 @@ img.test {
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 80vw !important;
+        max-width: 75vw !important;
     }
 
 }
@@ -600,4 +600,9 @@ td.product-name {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   margin-bottom: 0;
+}
+.img_det {
+    max-width: 400px !important;
+    width: 100% !important;
+    height: auto !important;
 }

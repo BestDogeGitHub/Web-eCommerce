@@ -184,6 +184,10 @@ img.category {
     font-family: "Source Sans Pro" !important;
 }
 
+.tox-notifications-container {
+    display:none!important;
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 70vw !important;

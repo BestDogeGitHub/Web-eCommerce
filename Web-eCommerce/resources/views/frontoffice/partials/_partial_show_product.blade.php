@@ -17,9 +17,9 @@
         <div class="d-flex">
             <div class="pricing">
                 @if($prod->sale != 0)
-                <p class="price"><span class="mr-2 price-dc">&euro; {{number_format((float)$product->payment, 2, '.', '') }}</span><span class="price-sale">&euro; {{$product->getRealPrice()}}</span></p>
+                <p class="price"><span class="mr-2 price-dc">&euro; {{ $product->getPrintablePrice() }}</span><span class="price-sale">&euro; {{ $product->getRealPrice() }}</span></p>
                 @else
-                <p class="price"><span>&euro; {{$prod->payment}}</span></p>
+                <p class="price"><span>&euro; {{ $product->getPrintablePrice() }}</span></p>
                 @endif
                 <p >
                 @for($i = 1; $i <= 5; $i++)

@@ -8,7 +8,7 @@
         @include('backoffice.includes.scripts')
   </head>
   
-    <body class="goto-here">
+    <body class="hold-transition sidebar-mini layout-fixed">
         <!-- SPINNER 1
         <div class="cs-loader" id="spinner">
             <div class="cs-loader-inner">

@@ -53,8 +53,15 @@ class Product extends Model
         return $this->belongsTo('App\IvaCategory');
     }
 
+    // FORMATTED TO SHOWING PRICE 
     public function getRealPrice()
     {
-        return $this->payment - ($this->payment * $this->sale / 100);
+        return number_format($this->payment - ($this->payment * $this->sale / 100), 2, ",", ".");
+    }
+
+    // FORMATTED TO SHOWING PRICE
+    public function getPrintablePrice()
+    {
+        return number_format($this->payment, 2, ",", ".");
     }
 }

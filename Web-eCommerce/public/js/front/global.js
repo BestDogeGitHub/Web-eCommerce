@@ -271,7 +271,6 @@ $(document).ready(function(){
         // Get the field name
         var quantity = parseInt($('#cart_quant_val_' + id_prod).text());
         
-        
 
         // If is not undefined
             
@@ -444,6 +443,8 @@ $(document).ready(function(){
       $('input[name=short_comp][value=5]').click();
     });
 
+
+    // If Auth User has credit card associated, select cart in checkout is enabled
     if($('#card_id').length) {
       $('input[name=associated][value=1]').click();
     }
@@ -698,6 +699,10 @@ $(document).ready(function(){
     });
 
 
+
+    /**
+     * Search in Cart and Wishlist
+     */
     $('.table_search').keyup( function () {
       var td, txtValue;
       var id_table = $(this).attr('data-table-id');

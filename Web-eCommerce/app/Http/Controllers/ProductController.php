@@ -165,7 +165,8 @@ class ProductController extends Controller
      */
     public static function getById($id)
     {
-        return Product::where('id', $id)->first();
+        $product = Product::where('id', $id)->first();
+        return $product;
     }
 
 
@@ -181,18 +182,18 @@ class ProductController extends Controller
         $related = Product::where([
             ['product_type_id', '=' , $product->productType->id],
             ['id', '!=' , $id]
-            ])->take(4)->get();
+        ])->take(4)->get();
 
         if(!count($related)){
             $productTypesIds = ProductType::where('producer_id', '=', $product->productType->producer->id)->pluck('id');
             $products = Product::whereIn('product_type_id', $productTypesIds)->where('id', '!=', $id)->get();
             if(count($products) >= 4) 
-                return $products->random(4);
+                $related = $products->random(4);
             else 
-                return $products;
+                $related = $products;
         }
-
-        else return $related;
+        
+        return $related;
     }
 
     /**
