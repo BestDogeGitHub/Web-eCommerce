@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
@@ -110,5 +111,16 @@ class ReviewController extends Controller
         $review->delete();
 
         return response()->json(['success' => 'success!']);
+    }
+
+    public function isReviewLegal($idUser, $idProduct) // torna true se l'utente può scrivere la recensione, false se non la può scrivere
+    {
+        // l'id dell'utente che vuole scrivere la recensione
+        // l'id del prodotto di cui l'utente vuole scrivere la recensione
+
+        $entry = DB::table('review_permissions')->where([['product_id', '=', $idProduct],['user_id', '=', $idUser]])->first();
+
+        if (is_null($entry)) return false;
+        else return true;
     }
 }

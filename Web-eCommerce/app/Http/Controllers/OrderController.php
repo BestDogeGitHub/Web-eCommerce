@@ -147,17 +147,18 @@ class OrderController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public static function checkout($idUser, $idCard, $idAdd, $idCoupon, $paymentMethod)
+    public static function checkout()
     {
         /*
          *  DEBUG Parameters
-         *
+         */
             $user = User::find(1);//Auth::user();
+            $idUser = 2;
             $idAdd = 5;
             $idCoupon = 1;
             $idCard = 55;
             $paymentMethod = 1;
-        */
+        
         
         // DEBUG
         $payment = 0; // il prezzo da pagare
@@ -181,6 +182,14 @@ class OrderController extends Controller
                 'quantity' => $product->quantity
             ]);
             $payment += ( Product::find($product->product_id)->payment * $product->quantity );
+        }
+
+        foreach($products as $product)
+        {
+            DB::table('review_permissions')->insert([
+                'user_id' => $idUser,
+                'product_id' => $product->product_id
+            ]);
         }
 
         $ship = Shipment::create([
