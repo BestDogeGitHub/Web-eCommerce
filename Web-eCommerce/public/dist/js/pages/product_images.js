@@ -58,6 +58,8 @@ $(document).ready(function() {
                   //html_to_add += '<img src="' + element.image_ref + '" class="img-thumbnail prodImg">'
                 });
               }
+              $('#product_name').text(html.product_type + " - " + html.product.variant_name);
+              $('#product_info').text(html.product.info);
               $('#imgContainer').append(html_to_add);
               $('#uploadImg').removeClass('disabledFile');
               $('#product_id').val(product_id);

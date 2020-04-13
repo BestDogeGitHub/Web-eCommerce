@@ -24,65 +24,63 @@
     <div class="card">
         <div class="card-body">
 
-
-
-        <div class="container">
-            <div class="table-wrapper table-responsive">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <a href="#addProductTypeModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Product Type</span></a>				
+            <div class="container">
+                <div class="table-wrapper table-responsive">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="#addProductTypeModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Product Type</span></a>				
+                            </div>
                         </div>
+                        <hr/>
                     </div>
-                    <hr/>
-                </div>
 
-                <!-- TABLE OF PRODUCTS-->
-                <table class="table table-striped table-hover" id="productsTable">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Av.</th>
-                            <th>Producer</th>
-                            <th>Creation</th>
-                            <th>Update</th>
-                            <th>Edit Item</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($productTypes as $product)
-                        <tr>
-                            <td>{{$product->id}}</td>
-                            <td class="text-uppercase">{{$product->name}}</a></td>
-                            <td><img class="img-responsive crud" src="{{ asset($product->image_ref) }}" ></td>
-                            <td>
-                                @if($product->available)
-                                <span class="badge badge-pill badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
-                                @else
-                                <span class="badge badge-pill badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                @endif
-                            </td>
-                            <td class="text-uppercase">{{$product->producer->name}}</td>
-                            <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
-                            <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <a href="{{ route('products', $product->id) }}" class="btn btn-info _show" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
-                                    <a href="#" class="btn btn-warning _edit" data-id="{{ $product->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
-                                    <a href="#" class="btn btn-danger _delete" data-id="{{ $product->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </tbody>
-                </table>
+                    <!-- TABLE OF PRODUCTS-->
+                    <table class="table table-striped table-hover" id="productsTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Av.</th>
+                                <th>Producer</th>
+                                <th>Creation</th>
+                                <th>Update</th>
+                                <th>Edit Item</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($productTypes as $product)
+                            <tr>
+                                <td>{{$product->id}}</td>
+                                <td class="text-uppercase">{{$product->name}}</a></td>
+                                <td>
+                                    @if($product->available)
+                                    <span class="badge badge-pill badge-success"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                    @else
+                                    <span class="badge badge-pill badge-danger"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                    @endif
+                                </td>
+                                <td class="text-uppercase">{{$product->producer->name}}</td>
+                                <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ route('products', $product->id) }}" class="btn btn-info _show" target="_blank"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Show"></i></a>
+                                        <a href="#" class="btn btn-warning _edit" data-id="{{ $product->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
+                                        <a href="#" class="btn btn-danger _delete" data-id="{{ $product->id }}"><i class="fas fa-trash" aria-hidden="true" data-toggle="tooltip" title="Delete"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
+                    <div id="info"></div>
+                </div>
             </div>
+
         </div>
     </div>
-</div>
 
 
     <!-- !!! MODALS !!! -->
@@ -112,11 +110,6 @@
 						</div>
                         
                         <!-- CONVENZIONE: AVAILABLE A FALSE AL MOMENTO DELLA CREAZIONE DEL TIPO, NON CI SONO ANCORA PRODOTTI - VEDI CONTROLLER -->
-
-                        <!-- CONVENZIONE: STAR RATE A 3 AL MOMENTO DELLA CREAZIONE DEL TIPO, UNA MEDIA - VEDI CONTROLLER -->
-
-                        <!-- CONVENZIONE: N REVIEWS A 0 AL MOMENTO DELLA CREAZIONE DEL TIPO - VEDI CONTROLLER -->
-
 
                         <div class="form-group">
 							<label>Producer</label>

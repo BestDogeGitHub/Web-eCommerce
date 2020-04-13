@@ -413,12 +413,12 @@ class StaticTableSeeder extends Seeder
             [ 'name' => 'Pedals Digitech TONE DRIVE', 'image_ref' => '/images/product_type/xtd-tone-drive.jpg', 'producer_id' => 9],
             [ 'name' => 'Pedals Tc Electronic VINTAGE PRE DRIVE PEDAL', 'image_ref' => '/images/product_type/vpd1-vintage-pre-drive-pedal.jpg', 'producer_id' => 10],
             [ 'name' => 'Pedals Tc Electronic XII PHASER', 'image_ref' => '/images/product_type/classic-tc-xii-phaser.jpg', 'producer_id' => 10],
-            [ 'name' => 'Picrophone Shure SM58 LCE', 'image_ref' => '/images/product_type/sm58-lce.jpg', 'producer_id' => 2], //  microfoni
-            [ 'name' => 'Picrophone Shure BETA58A BETA 58A', 'image_ref' => '/images/product_type/beta58a-beta-58a.jpg', 'producer_id' => 2],
-            [ 'name' => 'Picrophone Shure SM57 LCE', 'image_ref' => '/images/product_type/sm57-lce.jpg', 'producer_id' => 2],
-            [ 'name' => 'Picrophone Sennheiser E935', 'image_ref' => '/images/product_type/e935.jpg', 'producer_id' => 6],
-            [ 'name' => 'Picrophone Shure 55SH SERIES II', 'image_ref' => '/images/product_type/55sh-series-ii.jpg', 'producer_id' => 2],
-            [ 'name' => 'Picrophone Sennheiser E825S', 'image_ref' => '/images/product_type/e825s.jpg', 'producer_id' => 6],
+            [ 'name' => 'Microphone Shure SM58 LCE', 'image_ref' => '/images/product_type/sm58-lce.jpg', 'producer_id' => 2], //  microfoni
+            [ 'name' => 'Microphone Shure BETA58A BETA 58A', 'image_ref' => '/images/product_type/beta58a-beta-58a.jpg', 'producer_id' => 2],
+            [ 'name' => 'Microphone Shure SM57 LCE', 'image_ref' => '/images/product_type/sm57-lce.jpg', 'producer_id' => 2],
+            [ 'name' => 'Microphone Sennheiser E935', 'image_ref' => '/images/product_type/e935.jpg', 'producer_id' => 6],
+            [ 'name' => 'Microphone Shure 55SH SERIES II', 'image_ref' => '/images/product_type/55sh-series-ii.jpg', 'producer_id' => 2],
+            [ 'name' => 'Microphone Sennheiser E825S', 'image_ref' => '/images/product_type/e825s.jpg', 'producer_id' => 6],
             [ 'name' => 'Cable Proel CHL120LU5', 'image_ref' => '/images/product_type/chl120lu5-jack-jack-pipa-5m.jpg', 'producer_id' => 11], // Cavi
             [ 'name' => 'Cable Proel BULK100LU3', 'image_ref' => '/images/product_type/bulk100lu3-jack-jack-3m.jpg', 'producer_id' => 11],
             [ 'name' => 'Cable Proel BULK100LU1', 'image_ref' => '/images/product_type/bulk100lu1-j-j-mt-1.jpg', 'producer_id' => 11],
@@ -592,6 +592,8 @@ class StaticTableSeeder extends Seeder
             [ 'image_ref' => '/images/product_type/smart-dot.jpg', 'product_id' => 63],
             [ 'image_ref' => '/images/product_type/plc64ws-bk-2Blamp-pllpp64a.jpg', 'product_id' => 64],
             [ 'image_ref' => '/images/product_type/pllp200016-2000w-230v-gy16.jpg', 'product_id' => 65],
+            [ 'image_ref' => '/images/products/1322483849.jpg', 'product_id' => 32],
+            [ 'image_ref' => '/images/products/1756337395.JPG', 'product_id' => 32],
         ];
         foreach ($images as $image) {
             DB::table('product_images')->insert($image);

@@ -22,16 +22,24 @@
     <section class="ftco-section ftco-cart">
 			<div class="container">
 
-
+              <div class="row justify-content-center">
+                <div class="col-md-10 mb-5 text-center">
+                    <ul class="product-category">
+                        <li><a href="{{ route('categories_par', 'all') }}">All categories</a></li>
+                        <li><a href="{{ route('categories_par', '1') }}">Browse</a></li>
+                        <li><a href="{{ route('shop') }}">Products</a></li>
+                    </ul>
+                </div>
+              </div>
 
               <div class="row">
-              @forelse ($products as $prod)
-                @include('frontoffice.partials._partial_show_product', ['product' => $prod])
-              @empty
-                <p>There are no products at this moment...</p>
-              @endforelse
-    			
-            </div>
+                @forelse ($products as $prod)
+                  @include('frontoffice.partials._partial_show_product', ['product' => $prod])
+                @empty
+                  <p>There are no products at this moment...</p>
+                @endforelse
+            
+              </div>
 
           	
             <div class="col text-center">

@@ -45,6 +45,26 @@
                       <input type="submit" class="btn btn-warning" value="Edit Images">
                 </form>
                 <hr/>
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">
+                      <i class="fas fa-info mr-2"></i>
+                      Description
+                    </h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <dl>
+                      <dt>Product Name</dt>
+                      <dd id="product_name">Select a product</dd>
+                      <dt>Info</dt>
+                      <dd id="product_info">Select a product</dd>
+                    </dl>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <hr/>
                 
                 
                   <div class="jumbotron container">

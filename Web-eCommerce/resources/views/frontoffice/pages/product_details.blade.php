@@ -13,17 +13,17 @@
 						<div class="carousel-inner">
 							@if(!count($product->productImages))
 								<div class="carousel-item active img_prod">
-									<a href="{{ asset('/images/products/no-image.png') }}" class="image-popup"><img src="{{ asset('/images/products/no-image.png') }}" class="img-fluid" alt="Image of product"></a>
+									<a href="{{ asset('/images/products/no-image.png') }}" class="image-popup"><img src="{{ asset('/images/products/no-image.png') }}" class="img-fluid img_det" alt="Image of product"></a>
 								</div>
 							@endif
 							@foreach ($product->productImages as $index=>$image)
 								@if ($index == 0 )
 									<div class="carousel-item active img_prod">
-										<a href="{{ asset($image->image_ref) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid" alt="Image of product"></a>
+										<a href="{{ asset($image->image_ref) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid img_det" alt="Image of product"></a>
 									</div>
 								@else
 									<div class="carousel-item img_prod">
-										<a href="{{ asset($image->image_ref) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid" alt="Image of product"></a>
+										<a href="{{ asset($image->image_ref) }}" class="image-popup"><img src="{{ asset($image->image_ref) }}" class="img-fluid img_det" alt="Image of product"></a>
 									</div>
 								@endif
 							@endforeach
@@ -60,9 +60,9 @@
 							</p>
 						</div>
 						@if($product->sale != 0)
-							<p class="price"><span class="mr-2 price-dc">&euro; {{number_format((float)$product->payment, 2, '.', '') }}</span><span class="price-sale">&euro; {{$product->getRealPrice()}}</span></p>
+							<p class="price"><span class="mr-2 price-dc">&euro; {{ $product->getPrintablePrice() }}</span><span class="price-sale">&euro; {{$product->getRealPrice()}}</span></p>
 							@else
-							<p class="price"><span>&euro; {{$product->payment}}</span></p>
+							<p class="price"><span>&euro; {{ $product->getPrintablePrice() }}</span></p>
 							@endif
 					<h4>Properties</h4>
 					@foreach($product->values as $value)
@@ -147,7 +147,7 @@
 									<p>
 										<div class="form-group">
 											<label for="text">Your Review</label>
-											<textarea name="text" class="form-control" rows="3" placeholder="Type here your comment..."></textarea>
+											<textarea required="required" name="text" class="form-control" rows="3" placeholder="Type here your comment..."></textarea>
 										</div>										
 									</p>
 									<input type="hidden" name="stars" value="0" id="stars_value"/>

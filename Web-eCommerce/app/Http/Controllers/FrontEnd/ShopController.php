@@ -120,6 +120,10 @@ class ShopController extends Controller
                 $cat['num_products'] = ProductType::whereHas('categories', function($query) use ($cat) {
                     $query->where('category_product_type.category_id', '=', $cat->id);
                 })->pluck('id')->count();
+
+                if(Category::where('parent_id', $cat->id)->count())
+                    $cat['leaf'] = 0;
+                else $cat['leaf'] = 1;
                 
             });
     
@@ -205,8 +209,16 @@ class ShopController extends Controller
     {
         $products = ProductTypeController::search($request->search);
 
-        return view('frontoffice.pages.search', ['products' => $products, 'search' => $request->search]);
+        return $this->showSearchResults($products, $request->search);
 
+    }
+
+    /**
+     * Mostra i risultati della ricerca
+     */
+    public function showSearchResults($products, $query)
+    {
+        return view('frontoffice.pages.search', ['products' => $products, 'search' => $query]);
     }
 
     public function showCarrier($idCarrier) {

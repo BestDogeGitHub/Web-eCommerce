@@ -1,7 +1,7 @@
 // SCRIPT FOR PRODUCT TYPES
 $(document).ready(function() {
     var table = $("#productsTable").DataTable({
-        "order": [[ 0, "desc" ]]
+        "lengthMenu": [[10], [10]]
     });
 
      //Initialize Select2 Elements

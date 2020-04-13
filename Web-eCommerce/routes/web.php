@@ -178,7 +178,7 @@ Route::prefix('auth')->group(function () {
         ]);
     });
 
-    Route::group(['middleware' => ['can:manageproductTypes']], function () {
+    Route::group(['middleware' => ['can:manageProductTypes']], function () {
         Route::resources([
             'productTypes' => 'ProductTypeController',  //Implemented
         ]);

@@ -38,37 +38,14 @@
             </div>
 			
 
-			
-			@foreach($products as $index=>$prod)
+			<div class="row">
+			@forelse($products as $index=>$prod)
+				@include('frontoffice.partials._partial_show_product_type', ['prod' => $prod])
+			@empty
+                <p>No products</p>
+			@endforelse
+			</div>
 
-				@if($index == 0) 
-				<!-- FIRST -->
-				<div class="row">
-				@endif
-
-					<div class="col-lg-3 ftco-animate">
-						<div class="product">
-							<a href="{{ asset('products/' . $prod->id) }}" class="img-prod"><img class="img-fluid" src="{{ asset($prod->image_ref) }}" alt="Product type image">
-								<div class="overlay"></div>
-							</a>
-							<div class="text py-3 pb-4 px-3 text-center">
-								<h3><a href="asset('products/' . $prod->id)">{{ $prod->name }}</a></h3>
-								
-							</div>
-						</div>
-					</div>
-
-				@if( ($index+1) % 4 == 0 )
-				</div><!-- NEW LINE --><div class="row">
-				@endif
-
-				@if($loop->last)
-				<!-- LAST -->
-				</div>
-				@endif
-
-			@endforeach
-			
 				<div class="col text-center">
                   	<div class="block-27">
                     	<ul>

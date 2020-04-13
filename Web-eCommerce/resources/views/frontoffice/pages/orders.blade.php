@@ -45,10 +45,10 @@
                                         </td>
 
                                         <td class="data">
-                                            <h3>Details</h3>
+                                            <h35>Details</h3>
                                             <ul> 
                                             @foreach($order->orderDetails as $detail)
-                                                <li>{{ $detail->product->productType->name }} : {{ $detail->product->variant_name }}</li>
+                                                <li class="text-left">{{ $detail->product->productType->name }} : {{ $detail->product->variant_name }}</li>
                                             @endforeach
                                             </ul>
                                         </td>
@@ -66,7 +66,7 @@
                                         </td>
 
                                         <td class="data">
-                                            <p class="price"><a href="{{ route('show_invoice', $order->id) }}">Print invoice</a></p>
+                                            <p class="price"><a href="{{ route('show_invoice', $order->id) }}" target="_blank">Print invoice</a></p>
                                         </td> 
 
                                     </tr><!-- END TR-->
