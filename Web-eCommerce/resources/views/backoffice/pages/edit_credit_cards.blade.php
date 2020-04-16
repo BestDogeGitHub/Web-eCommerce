@@ -45,7 +45,15 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Type</th>
+                                        <th>
+                                            Type
+                                            <!--
+                                            <img src="{{asset('dist/img/credit/visa.png') }}" alt="Visa">
+                                            <img src="{{asset('dist/img/credit/mastercard.png') }}" alt="Mastercard">
+                                            <img src="{{asset('dist/img/credit/american-express.png') }}" alt="American Express">
+                                            <img src="{{asset('dist/img/credit/paypal2.png') }}" alt="Paypal">
+                                            -->
+                                        </th>
                                         <th>Number</th>
                                         <th>Expiration</th>
                                         <th>User</th>
@@ -58,15 +66,16 @@
                                     <tr>
                                         <td>{{$credit_card->id}}</td>
                                         <td>
-                                        <i class="fa fa-credit-card card-icon" aria-hidden="true"></i><span class="badge badge-warning">{{$credit_card->type}}</span>
+                                        <i class="fa fa-credit-card card-icon" aria-hidden="true"></i><b>{{$credit_card->company->name}}</b>
                                         </td>
-                                        <td><p class="cardNumber">{{$credit_card->number}}</p></td>
+                                        <td><p class="cardNumber"><span class="badge badge-warning">{{$credit_card->number}}</span></p></td>
                                         <td><p class="cardExp">{{$credit_card->expiration_date}}</p></td>
                                         <td>
                                         @if(is_null($credit_card->user_id))
                                             <span class="badge badge-danger">Card not assigned</span>
                                         @else 
-                                            <a href="{{ route('users.show', $credit_card->user->id) }}" target="_blank">{{$credit_card->user->username}}</a>
+                                            
+                                            <a href="{{ route('users.show', $credit_card->user->id) }}" target="_blank"><i class="fa fa-user card-icon" aria-hidden="true"></i>{{$credit_card->user->username}}</a>
                                         @endif
                                         </td>
                                         <td>

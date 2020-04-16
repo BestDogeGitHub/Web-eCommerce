@@ -4,10 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+
 use App\User;
+use App\Product;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
+use Session;
+use Cookie;
 
 class RegisterController extends Controller
 {
@@ -78,6 +84,35 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('User');
+
+        if(Cookie::get('laravel_cookie_consent') !== null) {
+        
+            if(Session::has('wishlist')) {
+                $checkArray = array();
+                foreach(Session::get('wishlist') as $id) {
+                    if(is_numeric($id)) array_push($checkArray, $id);
+                }
+
+                $wishlist = Product::whereIn('id', $checkArray)->get();
+                $user->productInWishlist()->attach($wishlist);
+
+                Session::forget('wishlist');
+            }
+            
+            if(Session::has('cart')) {
+                $cart_var = Session::get('cart');
+
+                $cart = Product::whereIn('id', array_keys($cart_var))->get(); // Le chiavi sono gli id dei prodotti
+
+                foreach($cart as $product) {
+
+                    $user->productsInCart()->attach($product->id, array('quantity' => $cart_var[$product->id]));
+
+                }
+                Session::forget('cart');
+            }
+        
+        }
 
         return $user;
     }

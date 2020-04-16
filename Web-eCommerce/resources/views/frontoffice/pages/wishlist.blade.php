@@ -60,7 +60,7 @@
                                             <h3>{{$product->productType->name}}</h3>
                                             <p class="black">Properties: <br/>
                                             @forelse($product->values as $value)
-                                            {{$value->attribute->name}} : {{$value->name}} <br/>
+                                            <span class="badge badge-warning">{{$value->attribute->name}} : {{$value->name}}</span> <br/>
                                             @empty
                                             -
                                             @endforelse

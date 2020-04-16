@@ -399,6 +399,8 @@ class ShopUserController extends Controller
                     else {
                         return response()->json('error', 404);
                     }
+
+                    $request->session()->put('cart', $cart_var);
                 }
             
             } else {

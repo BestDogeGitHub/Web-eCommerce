@@ -69,10 +69,12 @@
                                     
                                     <td class="product-name">
                                         <h3>{{ $prod->productType->name }}</h3>
-                                        <p>Properties: 
-                                        @foreach($prod->values as $value)
-                                         {{ $value->attribute->name }} : {{ $value->name }},
-                                        @endforeach
+                                        <p>Properties: <br>
+                                        @forelse($prod->values as $value)
+                                          <span class="badge badge-warning">{{$value->attribute->name}} : {{$value->name}}</span> <br/>
+                                        @empty
+                                          -
+                                        @endforelse
                                         </p>
                                     </td>
                                     

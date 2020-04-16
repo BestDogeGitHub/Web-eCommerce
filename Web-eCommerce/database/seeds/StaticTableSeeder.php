@@ -416,7 +416,7 @@ class StaticTableSeeder extends Seeder
             [ 'name' => 'Microphone Shure SM58 LCE', 'image_ref' => '/images/product_type/sm58-lce.jpg', 'producer_id' => 2], //  microfoni
             [ 'name' => 'Microphone Shure BETA58A BETA 58A', 'image_ref' => '/images/product_type/beta58a-beta-58a.jpg', 'producer_id' => 2],
             [ 'name' => 'Microphone Shure SM57 LCE', 'image_ref' => '/images/product_type/sm57-lce.jpg', 'producer_id' => 2],
-            [ 'name' => 'Microphone Sennheiser E935', 'image_ref' => '/images/product_type/e935.jpg', 'producer_id' => 6],
+            [ 'name' => 'Microphone Sennheiser E Series', 'image_ref' => '/images/product_type/e935.jpg', 'producer_id' => 6],
             [ 'name' => 'Microphone Shure 55SH SERIES II', 'image_ref' => '/images/product_type/55sh-series-ii.jpg', 'producer_id' => 2],
             [ 'name' => 'Microphone Sennheiser E825S', 'image_ref' => '/images/product_type/e825s.jpg', 'producer_id' => 6],
             [ 'name' => 'Cable Proel CHL120LU5', 'image_ref' => '/images/product_type/chl120lu5-jack-jack-pipa-5m.jpg', 'producer_id' => 11], // Cavi
@@ -489,7 +489,7 @@ class StaticTableSeeder extends Seeder
             [ 'variant_name' => 'Basic', 'payment' => 37.50, 'product_type_id' => 30 ],
             [ 'variant_name' => 'Basic', 'payment' => 90.50, 'product_type_id' => 31 ],
             [ 'variant_name' => 'Basic', 'payment' => 100, 'product_type_id' => 32 ],
-            [ 'variant_name' => 'Basic', 'payment' => 46.34, 'product_type_id' => 33 ],//
+            [ 'variant_name' => 'Basic', 'payment' => 46.34, 'product_type_id' => 31 ],//
             [ 'variant_name' => 'JACK JACK PIPA 5M', 'payment' => 7.50, 'product_type_id' => 34 ],// Cavi
             [ 'variant_name' => 'JACK JACK 3M', 'payment' => 8.50, 'product_type_id' => 35 ],
             [ 'variant_name' => 'J-J MT.1', 'payment' => 13.50, 'product_type_id' => 36 ],
