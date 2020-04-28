@@ -147,17 +147,17 @@ class OrderController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public static function checkout()
+    public static function checkout($idUser, $idCard, $idAdd, $idCoupon, $paymentMethod)
     {
         /*
          *  DEBUG Parameters
-         */
             $user = User::find(1);//Auth::user();
             $idUser = 2;
             $idAdd = 5;
             $idCoupon = 1;
             $idCard = 55;
             $paymentMethod = 1;
+        */
         
         
         // DEBUG
