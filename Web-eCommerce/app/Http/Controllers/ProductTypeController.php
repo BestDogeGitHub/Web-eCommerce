@@ -103,7 +103,6 @@ class ProductTypeController extends Controller
             'image_ref' => '/images/product_types/' . $new_name,
             'available' => 0,
             'star_tot_number' => 3,
-            'n_reviews' => 0,
             'producer_id' => $producer->id
         ); 
 
@@ -154,8 +153,6 @@ class ProductTypeController extends Controller
             'producer' => 'required|numeric',
             'name' => 'required|max:200',
             'available' => 'required|numeric|between:0,1',
-            'star_rate' => 'required|numeric|between:0,5',
-            'n_reviews' => 'required|numeric'
         );
         
         $error = Validator::make($request->all(), $rules);
@@ -178,8 +175,6 @@ class ProductTypeController extends Controller
                 'name' => $request->name,
                 'image_ref' => $productType->image_ref,
                 'available' => $request->available,
-                'star_tot_number' => $request->star_rate,
-                'n_reviews' => $request->n_reviews,
                 'producer_id' => $producer->id
             );
 
@@ -232,8 +227,6 @@ class ProductTypeController extends Controller
                 'name' => $request->name,
                 'image_ref' => '/images/product_types/' . $new_name,
                 'available' => $request->available,
-                'star_rate' => $request->star_rate,
-                'n_reviews' => $request->n_reviews,
                 'producer_id' => $producer->id
             ); 
         }

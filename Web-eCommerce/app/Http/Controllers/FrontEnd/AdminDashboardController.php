@@ -15,6 +15,7 @@ use App\Review;
 use App\User;
 use App\Product;
 use App\Shipment;
+
 use Validator;
 use Image;
 use File;
@@ -24,7 +25,20 @@ class AdminDashboardController extends Controller
 
     public function index()
     {
+        if(!Auth::check()) abort(401);
         return view('backoffice.pages.home');
+    }
+
+    public function getPropertiesManagement()
+    {
+        if(!Auth::check() || !Auth::user()->can('manageProperties')) abort(401);
+        return view('backoffice.pages.properties');
+    }
+
+    public function getCatalogManagement()
+    {
+        if(!Auth::check() || !Auth::user()->can('manageProducts')) abort(401);
+        return view('backoffice.pages.catalog');
     }
 
     /**
@@ -64,11 +78,42 @@ class AdminDashboardController extends Controller
      */
     public function editUserRoles($id_user) {
 
-        $userController = new UserController();
-        $user = $userController->getById($id_user);
+        $user = UserController::getById($id_user);
         $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
 
         return View('backoffice.pages.edit_roles', ['user' => $user, 'roles' => $roles]);
+    }
+
+    /**
+     * Gestisce i ruoli dell'utente
+     */
+    public function changeUserRoles(Request $request) {
+
+        //implode($request->roles);
+
+        //return response()->json($request->roles);
+
+        $roles = explode('/', $request->roles);
+
+        return response()->json($roles);
+
+        $string = "";
+
+        foreach($roles as $item){
+            $string += " $item";
+        }
+
+        return response()->json($request->roles);
+
+
+        $user = UserController::validateRoles($id_user);
+        $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
+        
+        $response = array(
+            'status' => 'success',
+            'msg' => $user->roles,
+        );
+        return response()->json($response);
     }
 
     /**
@@ -148,33 +193,6 @@ class AdminDashboardController extends Controller
         return View('backoffice.pages.edit_resource', ['resource' => $resource]);
     }
 
-
-
-    /**
-     * Gestisce i ruoli dell'utente
-     */
-    public function changeUserRoles(Request $request) {
-
-        return $request->getContent();
-        $userController = new UserController();
-        $string = "";
-
-        foreach(json_decode($request->getContent()) as $item){
-            $string += " $item";
-        }
-
-        return $string;
-
-
-        $user = $userController->validateRoles($id_user);
-        $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
-        
-        $response = array(
-            'status' => 'success',
-            'msg' => $user->roles,
-        );
-        return response()->json($response);
-    }
 
 
 

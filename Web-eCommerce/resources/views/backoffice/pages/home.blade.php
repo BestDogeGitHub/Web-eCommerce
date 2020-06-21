@@ -46,7 +46,8 @@
                   <div class="icon">
                     <i class="ion ion-ios-locked"></i>
                   </div>
-                  <a href="{{ route('users.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('users.index') }}" class="small-box-footer">Manage Accounts <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('dashboard.properties') }}" class="small-box-footer">Manage Properties <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             @endhasanyrole
@@ -63,7 +64,7 @@
                 <div class="icon">
                   <i class="ion ion-paper-airplane"></i>
                 </div>
-                <a href="{{ route('shipments.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('shipments.index') }}" class="small-box-footer">Manage Shipments <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             @endhasanyrole
@@ -80,7 +81,7 @@
                 <div class="icon">
                   <i class="ion ion-folder"></i>
                 </div>
-                <a href="{{ route('productTypes.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.catalog') }}" class="small-box-footer">Manage Catalog <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           
@@ -98,7 +99,7 @@
                 <div class="icon">
                   <i class="ion ion-images"></i>
                 </div>
-                <a href="{{ route('components.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('components.index') }}" class="small-box-footer">Manage Website Layout <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           
@@ -120,7 +121,7 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('orders.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -150,7 +151,7 @@
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('users.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -165,7 +166,7 @@
               <div class="icon">
                 <i class="ion ion-ios-paperplane"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('orders.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

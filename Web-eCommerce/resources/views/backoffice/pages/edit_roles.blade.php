@@ -49,7 +49,7 @@
                                 <tr>
                                     <th scope="row">{{ $role->id }}</th>
                                     <td class="text-uppercase">{{ $role->name }}</td>
-                                    <td><button id="but_{{ $role->id }}" type="button" class="btn btn-danger" onclick="deleteRow(this.id)"><i class="fa fa-times" aria-hidden="true"></i>&nbsp; Delete</button></td>
+                                    <td><button id="but_{{ $role->id }}" type="button" class="btn btn-danger deleteRoleButton"><i class="fa fa-times" aria-hidden="true"></i>&nbsp; Delete</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -67,7 +67,8 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="button" class="btn btn-primary float-right" onclick="sendRolesData()">Save changes</button>
+                        <span class="d-none" id="id_user">{{$user->id}}</span>
+                        <button id="sendRoleData" type="button" class="btn btn-primary float-right">Save changes</button>
                     </div>
                 </div>
             </div> 
@@ -95,7 +96,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"  data-dismiss="modal" onclick="addRow()">Add</button>
+                    <button id="addRoleButton" type="submit" class="btn btn-success"  data-dismiss="modal">Add</button>
                 </div>
                 </div>
             </div>
@@ -106,5 +107,5 @@
     </section>
     <!-- /.content -->
 
-
+    <script src="{{ asset('dist/js/pages/roles.js') }}"></script>
 @endsection('content')

@@ -7,7 +7,9 @@
     @endphp
     <a href="{{ route('product_detail', $prod->id) }}" class="img-prod"><img class="img-fluid" src='{{ asset("$image") }}' alt="Product Image">
     
-        @if($prod->sale != 0)
+        @if(!$prod->available)
+        <span class="status bg-danger">Not Available</span>
+        @elseif($prod->sale != 0)
         <span class="status">{{$prod->sale}}%</span>
         @endif
         <div class="overlay"></div>

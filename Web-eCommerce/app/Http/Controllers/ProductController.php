@@ -89,9 +89,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $frontController = new \App\Http\Controllers\FrontEnd\ProductDetailController();
-        
-        return $frontController->show($product->id);
+
+        return redirect()->route('product_detail', $product->id);
     }
 
     /**

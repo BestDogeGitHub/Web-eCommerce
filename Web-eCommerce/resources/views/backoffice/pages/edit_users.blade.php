@@ -39,6 +39,7 @@
                                     <th>ID</th>
                                     <th>Username</th>
                                     <th>Email</th>
+                                    <th>Roles</th>
                                     <th>Creation</th>
                                     <th>Last Update</th>
                                     <th>Edit</th>
@@ -52,6 +53,9 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                                     <td>{{ date('d-m-Y', strtotime($user->updated_at)) }}</td>
+                                    <td>
+                                        <a class="btn btn-primary" href="{{ route('editUserRoles', ['id' => $user->id]) }}"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Edit Roles</a>
+                                    </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
                                             <a href="#" class="btn btn-warning _edit" id="{{ $user->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
