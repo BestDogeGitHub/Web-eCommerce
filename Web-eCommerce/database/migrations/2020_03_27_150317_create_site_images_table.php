@@ -17,6 +17,7 @@ class CreateSiteImagesTable extends Migration
             $table->bigIncrements('id');
             $table->string('image_ref',255);
             $table->text('image_details')->nullable();
+            $table->string('link',2048)->nullable();
 
             $table->unsignedBigInteger('site_image_role_id')->nullable();
 

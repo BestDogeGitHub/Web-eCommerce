@@ -113,7 +113,7 @@ class ReviewController extends Controller
         return response()->json(['success' => 'success!']);
     }
 
-    public function isReviewLegal($idUser, $idProduct) // torna true se l'utente può scrivere la recensione, false se non la può scrivere
+    public function isReviewLegal($idUser, $idProduct) // torna true se l'utente può scrivere la recensione, false se non la può scrivere perchè non ha mai comprato il prodotto
     {
         // l'id dell'utente che vuole scrivere la recensione
         // l'id del prodotto di cui l'utente vuole scrivere la recensione
@@ -122,5 +122,16 @@ class ReviewController extends Controller
 
         if (is_null($entry)) return false;
         else return true;
+    }
+
+    public function isReviewDuplicate($idUser, $idProduct) // torna true se l'utente può scrivere la recensione, false se non la può scrivere perchè ha già scritto una recensione per quel prodotto
+    {
+        // l'id dell'utente che vuole scrivere la recensione
+        // l'id del prodotto di cui l'utente vuole scrivere la recensione
+
+        $entry = DB::table('reviews')->where([['product_id', '=', $idProduct],['user_id', '=', $idUser]])->first();
+
+        if (is_null($entry)) return true;
+        else return false;
     }
 }
