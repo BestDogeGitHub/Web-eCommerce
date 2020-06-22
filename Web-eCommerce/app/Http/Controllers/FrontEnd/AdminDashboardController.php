@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 use App\SiteImage;
+use App\SiteImageRole;
 use App\Order;
 use App\Category;
 use App\Review;
@@ -122,9 +123,9 @@ class AdminDashboardController extends Controller
     public function getComponents() {
 
         $components = SiteImage::all();
+        $roles = SiteImageRole::all();
 
-
-        return View('backoffice.pages.edit_website', ['components' => $components]);
+        return View('backoffice.pages.edit_website', ['components' => $components, 'roles' => $roles]);
     }
 
     /**
@@ -141,10 +142,10 @@ class AdminDashboardController extends Controller
      * Aggiorna la descrizione del campo
      */
     public function updateResource($resource, Request $request) {
-
         $rules = array(
             'details' => 'required|string|max:1000',
-            'image' => 'image|max:4096'
+            'image' => 'image|max:4096',
+            'link' => 'string'
         );
 
         $error = Validator::make($request->all(), $rules)->validate();
@@ -186,13 +187,76 @@ class AdminDashboardController extends Controller
                 'image_ref' => '/images/static/' . $new_name,
                 'image_details' => $request->details
             ); 
+
+            
         }
 
+        if($request->link) $data['link'] = $request->link;
         $resource->update($data);
 
         return View('backoffice.pages.edit_resource', ['resource' => $resource]);
+        
     }
 
+    public function storeResource(Request $request) {
+        
+
+        $rules = array(
+            'details' => 'required|string|max:1000',
+            'image' => 'image|max:4096',
+            'link' => 'string',
+            'image_role_id' => 'required|exists:site_image_roles,id'
+        );
+
+        $error = Validator::make($request->all(), $rules)->validate();
+
+        if(!$request->hasFile('image')) {
+            
+            // IMAGE NOT ADDED
+            $data = array(
+                'image_ref' => '',
+                'image_details' => $request->details
+            );
+
+        } else {
+            
+            // IMAGE ADDED
+            
+            // UPLOAD IMAGE
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+            $destination_path = "/images/static";
+            $resize_image = Image::make($image->getRealPath());
+            //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+            $resize_image->save(public_path($destination_path . '/' . $new_name));
+            $old_image_path = $resource->image_ref;
+            /*if(File::exists(public_path() . $old_image_path)) {
+                File::delete(public_path() . $old_image_path);
+            }*/
+
+            $data = array(
+                'image_ref' => '/images/static/' . $new_name,
+                'image_details' => $request->details
+            ); 
+
+            
+        }
+
+        if($request->link) $data['link'] = $request->link;
+        $data['site_image_role_id'] = $request->image_role_id;
+        $new = SiteImage::create($data);
+
+        return redirect()->route('components.update', ['resource' => $new->id]);
+    }
+
+    public function deleteResource(SiteImage $resource) {
+        $image_path = $resource->image_ref;
+        if($resource->delete()){
+            if(File::exists(public_path() . $image_path)) {
+                File::delete(public_path() . $image_path);
+            }
+        }
+    }
 
 
 

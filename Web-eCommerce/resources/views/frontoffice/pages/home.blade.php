@@ -156,7 +156,6 @@
 							</div>
 						</div>
 					</section>
-
 				<section class="ftco-section">
 					<div class="container">
 							<div class="row justify-content-center mb-3 pb-3">

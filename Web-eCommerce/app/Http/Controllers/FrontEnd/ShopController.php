@@ -29,7 +29,8 @@ class ShopController extends Controller
 
         $rankProducts = $this->getTopProductTypes();
         $partners = Producer::all()->random(6);
-        $testimonies = SiteImage::where('site_image_role_id', 10)->inRandomOrder()->get();;
+        $testimonies = SiteImage::where('site_image_role_id', 10)->inRandomOrder()->get();
+        
 
         // PARSING HTML
         $testimonies->map( function($item){
@@ -49,8 +50,7 @@ class ShopController extends Controller
             
         });
 
-        //$topCategories = $this->getTopCategories();
- 
+        //$topCategories = $this->getTopCategories(); 
         return view('frontoffice.pages.home', ['rankProducts' => $rankProducts, 'partners' => $partners, 'testimonies' => $testimonies]);
     }
 

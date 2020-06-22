@@ -216,6 +216,8 @@ Route::prefix('auth')->group(function () {
          */
         Route::get('website/edit', 'FrontEnd\AdminDashboardController@getComponents')->name('components.index');
         Route::get('website/edit/{resource}', 'FrontEnd\AdminDashboardController@editResource')->name('components.edit');
+        Route::post('website/edit/', 'FrontEnd\AdminDashboardController@storeResource')->name('components.add');
+        Route::delete('website/edit/{resource}', 'FrontEnd\AdminDashboardController@deleteResource')->name('components.remove');
         Route::post('website/edit/{resource}', 'FrontEnd\AdminDashboardController@updateResource')->name('components.update');
         Route::get('home/informations', 'FrontEnd\AdminDashboardController@getInformations')->name('website.informations');
         

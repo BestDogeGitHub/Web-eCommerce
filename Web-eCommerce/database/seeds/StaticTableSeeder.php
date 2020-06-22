@@ -109,6 +109,10 @@ class StaticTableSeeder extends Seeder
             ['id' => 8, 'name' => 'Background Profile Header', 'role_details' => 'Background che compare nelle intestazioni del sito'],
             ['id' => 9, 'name' => 'Background Deal Of The Day', 'role_details' => 'Background di del Deal of the Day nella HomePage'],
             ['id' => 10, 'name' => 'Reviews on HomePage', 'role_details' => 'Immagini dei reviewers con relativa descrizione'],
+            ['id' => 11, 'name' => 'Footer Main', 'role_details' => 'Footer main description'],
+            ['id' => 12, 'name' => 'Footer Menu', 'role_details' => 'Footer menu section links'],
+            ['id' => 13, 'name' => 'Footer Help', 'role_details' => 'Footer help section links'],
+            ['id' => 14, 'name' => 'Footer Contact', 'role_details' => 'Footer contact section links'],
         ];
 
         foreach ($roles as $role) {
@@ -135,6 +139,19 @@ class StaticTableSeeder extends Seeder
             ['image_ref' => '/images/static/person_6.jpg', 'image_details' => '<p>I love science fiction. My first science-fiction novel was Ray Bradbury’s “451 Fahrenheit,” and it is still one of my favorites.</p><p>Carola White</p><p>Developer</p>', 'site_image_role_id' => 10],
             ['image_ref' => '/images/static/person_7.jpg', 'image_details' => '<p>It is a well-known fact in the video game industry that movies made after video games are often impossible to watch.</p><p>Garreth Smith</p><p>Inventory Manager</p>', 'site_image_role_id' => 10],
             ['image_ref' => '/images/static/person_8.jpg', 'image_details' => '<p>When something becomes ubiquitous, it tends to lose its uniqueness and complexity.</p><p>James Brown</p><p>Customer</p>', 'site_image_role_id' => 10],
+            ['image_ref' => '', 'image_details' => '<p>Only best brands. Partnership with all famous producers. Buy musical instruments and accessories.</p>', 'site_image_role_id' => 11],
+            ['image_ref' => '', 'image_details' => 'Shop', 'site_image_role_id' => 12, 'link' => '/shop'],
+            ['image_ref' => '', 'image_details' => 'Cart', 'site_image_role_id' => 12, 'link' => '/shop/cart'],
+            ['image_ref' => '', 'image_details' => 'Wishlist', 'site_image_role_id' => 12, 'link' => '/shop/wishlist'],
+            ['image_ref' => '', 'image_details' => 'Shipping Informations', 'site_image_role_id' => 13, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => 'Returns & Exchange', 'site_image_role_id' => 13, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => 'Terms & Conditions', 'site_image_role_id' => 13, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => 'Privacy Policy', 'site_image_role_id' => 13, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => 'FAQs', 'site_image_role_id' => 13, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => 'Contacts', 'site_image_role_id' => 13, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '203 Fake St. Mountain View, San Francisco, California, USA', 'site_image_role_id' => 14, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '+2 392 3929 210', 'site_image_role_id' => 14, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => 'info AT store.com', 'site_image_role_id' => 14, 'link' => '/'],
         ];
 
         foreach ($resources as $resource) {

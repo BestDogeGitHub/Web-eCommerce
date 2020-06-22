@@ -33,6 +33,12 @@
                             <div class="table-title">
                                 <h2>Static components</h2>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a href="#addResourceModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Component</span></a>				
+                                </div>
+                            </div>
+                            <hr/>
 
                             <table class="table table-striped table-hover" id="nationsTable">
                                 <thead>
@@ -49,9 +55,9 @@
                                     @foreach($components as $component)
                                     <tr>
                                         <td>{{ $component->id }}</td>
-                                        <td><img class="img-responsive crud" src="{{ asset($component->image_ref) }}" ></td>
-                                        <td>{{ $component->role->name }}</td>
-                                        <td>{{ $component->image_details }}</td>
+                                        <td><img class="img-responsive crud" src="{{ asset($component->image_ref ?? '') }}" ></td>
+                                        <td>{{ $component->role->name ?? ''}}</td>
+                                        <td>{{ $component->image_details ?? ''}}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <a href="{{ route('components.edit', $component->id) }}" class="btn btn-warning _edit" id="{{ $component->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
@@ -72,12 +78,55 @@
 
     <!-- !!! MODALS !!! -->
     <!-- FOR SHOW AND EDIT -->
+    
+
+	<!-- Add Modal HTML -->
+	<div id="addResourceModal" class="modal fade">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+                <form id="addResourceForm" action="{{ route('components.add') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
+                @csrf
+					<div class="modal-header">						
+						<h4 class="modal-title">Add Resource</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+                        <div class="form-group">
+							<label>Component Role</label>
+							<select class="custom-select text-uppercase" name="image_role_id">
+                                @foreach($roles as $role)
+                                <option class="text-uppercase" value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <textarea id="html_editor_textarea" name="details"></textarea>
+                        <div class="form-group">
+							<label>Link</label>
+							<input type="text" class="form-control" required="required" name="link"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Component Image</label><br/>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="editImage" name="image">
+                                <label class="custom-file-label" for="editImage">Change Image</label>
+                            </div>
+                        </div>	
+                    </div>
+                    
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="btn btn-success" value="Add">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
     <!-- Delete Modal HTML -->
-	<div id="deleteNationModal" class="modal fade">
+	<div id="deleteResourceModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-                <form id="deleteNationForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+                <form id="deleteResourceForm" method="post" class="form-horizontal" enctype="multipart/form-data">
 					<div class="modal-header">						
 						<h4 class="modal-title">Delete Components</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
