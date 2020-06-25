@@ -1,5 +1,18 @@
 $(document).ready(function(){
 
+    if($('#src_img_instruments').length > 0) {
+      $('.instruments').css('background-image', 'url(' + $('#src_img_instruments').attr('data-val') + ')');
+    }
+    if($('#src_img_accessories').length > 0) {
+      $('.accessories').css('background-image', 'url(' + $('#src_img_accessories').attr('data-val') + ')');
+    }
+    if($('#src_img_console').length > 0) {
+      $('.console').css('background-image', 'url(' + $('#src_img_console').attr('data-val') + ')');
+    }
+    if($('#src_img_systems').length > 0) {
+      $('.systems').css('background-image', 'url(' + $('#src_img_systems').attr('data-val') + ')');
+    }
+
     var product_id;
 
     const Toast = Swal.mixin({

@@ -132,6 +132,7 @@ class UserController extends Controller
         return View('backoffice.pages.edit_user', ['user' => $user]);
     }
 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -160,8 +161,6 @@ class UserController extends Controller
             'name' => 'required|max:45',
             'surname' => 'required|max:45',
             'phone' => 'required|integer|max:999999999999999',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:3|max:60'
         );
         
         $error = Validator::make($request->all(), $rules);
@@ -175,7 +174,6 @@ class UserController extends Controller
         $data = array(
             'name' => $request->name,
             'surname' => $request->surname,
-            'email' => $request->email,
             'phone' => $request->phone
         );
 

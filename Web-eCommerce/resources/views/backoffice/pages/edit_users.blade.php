@@ -93,7 +93,7 @@
 
                         <div class="form-group">
 							<label><i class="fa fa-user" aria-hidden="true"></i> &nbsp;&nbsp;Username</label>
-							<input type="text" class="form-control" required="required" id="editUsername" disabled/>
+							<input type="text" name="username" class="form-control" required="required" id="editUsername" readonly/>
 						</div>	
 
                         <div class="form-group">
@@ -137,7 +137,7 @@
 						</div>
 
 
-                        <div id="forErrors"></div>					
+                        <div id="forEditErrors"></div>					
                     </div>
                     
 					<div class="modal-footer">

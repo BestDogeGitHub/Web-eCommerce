@@ -114,12 +114,13 @@
 													<h2>Start</h2>
 													<p>Visi our catalog</p>
 													<p><a href="{{ route('shop') }}" class="btn btn-primary">Shop now</a></p>
-													<img class="start" src="{{ asset('/images/static/start.png') }}" alt="start"/>
+													<img class="start" src="{{ asset($img_cat->image_ref) }}" alt="start"/>
 												</div>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<a href="{{ route('categories_par', 2) }}">
+												<span class="d-none" id="src_img_instruments" data-val="{{asset($cat1->image_ref)}}"></span>
 												<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end instruments">
 													<div class="text px-3 py-1">
 														<h2 class="mb-0">Instruments</h2>
@@ -127,6 +128,7 @@
 												</div>
 											</a>
 											<a href="{{ route('categories_par', 3) }}">
+											<span class="d-none" id="src_img_accessories" data-val="{{asset($cat2->image_ref)}}"></span>
 												<div class="category-wrap ftco-animate img d-flex align-items-end accessories">
 													<div class="text px-3 py-1">
 														<h2 class="mb-0">Accessories</h2>
@@ -139,6 +141,7 @@
 
 								<div class="col-md-4">
 									<a href="{{ route('categories_par', 19) }}">
+									<span class="d-none" id="src_img_console" data-val="{{asset($cat3->image_ref)}}"></span>
 										<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end console">
 											<div class="text px-3 py-1">
 												<h2 class="mb-0">Electronic</h2>
@@ -146,6 +149,7 @@
 										</div>
 									</a>
 									<a href="{{ route('categories_par', 12) }}">
+									<span class="d-none" id="src_img_systems" data-val="{{asset($cat4->image_ref)}}"></span>
 										<div class="category-wrap ftco-animate img d-flex align-items-end systems">
 											<div class="text px-3 py-1">
 												<h2 class="mb-0">Sound Systems</h2>
@@ -185,26 +189,26 @@
 </div>
 				
 					<div class="d-none" id="hidden_link_image_dotd" data-link="{{ asset(\App\SiteImage::where('site_image_role_id', 9)->first()->image_ref) }}"></div>
-					
-					<section class="ftco-section img" id="deal_of_the_day">
+				<!-- 	
+				<section class="ftco-section img" id="deal_of_the_day">
 					<div class="container">
-							<div class="row justify-content-end">
-					<div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
-						<span class="subheading">Best Price For You</span>
-						<h2 class="mb-4">Deal of the day</h2>
-						<p>Un regalo speciale solo per te</p>
-						<h3><a href="#">Fender Stratocaster American 1976</a></h3>
-						<span class="price">$1600 <a href="#">now $999 only</a></span>
-						<div id="timer" class="d-flex mt-5">
+						<div class="row justify-content-end">
+							<div class="col-md-6 heading-section ftco-animate deal-of-the-day ftco-animate">
+								<span class="subheading">Best Price For You</span>
+								<h2 class="mb-4">Deal of the day</h2>
+								<p>Un regalo speciale solo per te</p>
+								<h3><a href="#">Fender Stratocaster American 1976</a></h3>
+								<span class="price">$1600 <a href="#">now $999 only</a></span>
+								<div id="timer" class="d-flex mt-5">
 									<div class="time" id="days"></div>
 									<div class="time pl-3" id="hours"></div>
 									<div class="time pl-3" id="minutes"></div>
 									<div class="time pl-3" id="seconds"></div>
-									</div>
+								</div>
+							</div>
+						</div>   		
 					</div>
-					</div>   		
-					</div>
-				</section>
+				</section> -->
 
 <div class="container" style="padding-top: 5%; padding-bottom: 5%;">
 

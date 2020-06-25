@@ -113,6 +113,11 @@ class StaticTableSeeder extends Seeder
             ['id' => 12, 'name' => 'Footer Menu', 'role_details' => 'Footer menu section links'],
             ['id' => 13, 'name' => 'Footer Help', 'role_details' => 'Footer help section links'],
             ['id' => 14, 'name' => 'Footer Contact', 'role_details' => 'Footer contact section links'],
+            ['id' => 15, 'name' => 'Category1', 'role_details' => 'Category in HomePage'],
+            ['id' => 16, 'name' => 'Category2', 'role_details' => 'Category in HomePage'],
+            ['id' => 17, 'name' => 'Category3', 'role_details' => 'Category in HomePage'],
+            ['id' => 18, 'name' => 'Category4', 'role_details' => 'Category in HomePage'],
+            ['id' => 19, 'name' => 'Central Category Info', 'role_details' => 'Category in HomePage']
         ];
 
         foreach ($roles as $role) {
@@ -152,6 +157,11 @@ class StaticTableSeeder extends Seeder
             ['image_ref' => '', 'image_details' => '203 Fake St. Mountain View, San Francisco, California, USA', 'site_image_role_id' => 14, 'link' => '/'],
             ['image_ref' => '', 'image_details' => '+2 392 3929 210', 'site_image_role_id' => 14, 'link' => '/'],
             ['image_ref' => '', 'image_details' => 'info AT store.com', 'site_image_role_id' => 14, 'link' => '/'],
+            ['image_ref' => '/images/static/Instruments.jpg', 'image_details' => 'Instruments', 'site_image_role_id' => 15, 'link' => '/shop/categories/2'],
+            ['image_ref' => '/images/static/Accessories.jpg', 'image_details' => 'Accessories', 'site_image_role_id' => 16, 'link' => '/shop/categories/3'],
+            ['image_ref' => '/images/static/console.webp', 'image_details' => 'Electronic', 'site_image_role_id' => 17, 'link' => '/shop/categories/19'],
+            ['image_ref' => '/images/static/Systems.jpg', 'image_details' => 'Sound Systems', 'site_image_role_id' => 18, 'link' => '/shop/categories/12'],
+            ['image_ref' => '/images/static/start.png', 'image_details' => '', 'site_image_role_id' => 19, 'link' => ''],
         ];
 
         foreach ($resources as $resource) {

@@ -31,7 +31,8 @@ $(document).ready(function() {
         });
 
         var id = $('#id_user').text();
-    
+        console.log(dataArr);
+        /*
         var jsonString = JSON.stringify(dataArr);
         console.log(jsonString);
         console.log('d: ' + dataArr);
@@ -40,22 +41,24 @@ $(document).ready(function() {
         data.append("roles", dataArr);
 
         console.log(data);
-    
+    */
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type : "POST",
             url : '/auth/roles/edit/' + id,
-            data : data,
-            cache: false,
-            dataType: "json",
-            success: function(data) {
-                alert(data);// alert the data from the server
-                console.log('response data: ' + data);
+            data : {
+                'roles' : dataArr
             },
-            error : function() {
-                alert("Errore");// alert the data from the server
+            cache: false,
+            success: function(data) {
+                console.log(data, 'response data');
+                location.reload();
+                $('#spinner').fadeIn();
+            },
+            error : function(xhr) {
+                console.log(xhr, 'response error');
             }
         });
     });

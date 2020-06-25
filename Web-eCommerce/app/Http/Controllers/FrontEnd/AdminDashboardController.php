@@ -88,28 +88,25 @@ class AdminDashboardController extends Controller
     /**
      * Gestisce i ruoli dell'utente
      */
-    public function changeUserRoles(Request $request) {
+    public function changeUserRoles($user_id, Request $request) {
 
-        //implode($request->roles);
-
-        //return response()->json($request->roles);
-
-        $roles = explode('/', $request->roles);
-
-        return response()->json($roles);
-
-        $string = "";
-
+        $roles = $request->roles;
+        $user = User::findOrFail($user_id);
+        /*
+        $rolesObj = array();
         foreach($roles as $item){
-            $string += " $item";
-        }
+            array_push($rolesObj, \Spatie\Permission\Models\Role::where('id', $item));
+        }*/
 
+        $user->syncRoles($roles);
+
+        /*
         return response()->json($request->roles);
 
 
         $user = UserController::validateRoles($id_user);
         $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
-        
+        */
         $response = array(
             'status' => 'success',
             'msg' => $user->roles,
@@ -141,16 +138,18 @@ class AdminDashboardController extends Controller
     /**
      * Aggiorna la descrizione del campo
      */
-    public function updateResource($resource, Request $request) {
+    public function updateResource($res, Request $request) {
         $rules = array(
             'details' => 'required|string|max:1000',
             'image' => 'image|max:4096',
-            'link' => 'string'
+            'link' => 'string|nullable'
         );
 
         $error = Validator::make($request->all(), $rules)->validate();
 
-        $resource = SiteImage::findOrFail($resource);
+        $resource = SiteImage::findOrFail($res);
+
+        
 
         if(!$request->hasFile('image')) {
             
