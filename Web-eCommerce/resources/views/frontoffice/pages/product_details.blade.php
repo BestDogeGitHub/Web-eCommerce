@@ -118,7 +118,7 @@
 
 						<!-- INFO DIV -->
 						<div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> 
-							Info:  {{ $product->info ?? 
+							Info:  {!! $product->info ?? 
 									
 									'A musical instrument is a device created or adapted to make musical sounds. In principle, any object that produces sound can be considered a musical instrument—it is through purpose that the object becomes a musical instrument. The history of musical instruments dates to the beginnings of human culture. Early musical instruments may have been used for ritual, such as a horn to signal success on the hunt, or a drum in a religious ceremony. Cultures eventually developed composition and performance of melodies for entertainment. Musical instruments evolved in step with changing applications and technologies.
 
@@ -128,7 +128,7 @@
 
 									By 1400, musical instrument development slowed in many areas and was dominated by the Occident. During the Classical and Romantic periods of music, lasting from roughly 1750 to 1900, many new musical instruments were developed. While the evolution of traditional musical instruments slowed beginning in the 20th century, new electronic instruments such as electric guitars and synthesizers were invented.
 
-									Musical instrument classification is a discipline in its own right, and many systems of classification have been used over the years. Instruments can be classified by their effective range, their material composition, their size, role, etc. However, the most common academic method, Hornbostel–Sachs, uses the means by which they produce sound. The academic study of musical instruments is called organology.' }}
+									Musical instrument classification is a discipline in its own right, and many systems of classification have been used over the years. Instruments can be classified by their effective range, their material composition, their size, role, etc. However, the most common academic method, Hornbostel–Sachs, uses the means by which they produce sound. The academic study of musical instruments is called organology.' !!}
 						</div>
 						
 

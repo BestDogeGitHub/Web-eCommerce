@@ -155,7 +155,9 @@ img.category {
 }
 /* END DS BAR */
 
-
+.modal-dialog {
+    max-width: 1140px !important;
+}
 
 /**
     CHARTS HOMEPAGE

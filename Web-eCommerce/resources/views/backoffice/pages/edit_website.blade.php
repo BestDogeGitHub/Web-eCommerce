@@ -55,7 +55,7 @@
                                     @foreach($components as $component)
                                     <tr>
                                         <td>{{ $component->id }}</td>
-                                        <td><img class="img-responsive crud" src="{{ asset($component->image_ref ?? '') }}" ></td>
+                                        <td>@if(empty($component->image_ref)) No Image @else<img class="img-responsive crud" src="{{ asset($component->image_ref) }}" >@endif</td>
                                         <td>{{ $component->role->name ?? ''}}</td>
                                         <td>{{ $component->image_details ?? ''}}</td>
                                         <td>
