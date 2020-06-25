@@ -48,7 +48,7 @@
 
                             <form id="editResource" method="post" class="form-horizontal" action="{{ route('components.update', $resource->id) }}" enctype="multipart/form-data">
                                 
-                                @if(in_array($resource->site_image_role_id, [11, 12, 13, 14]))
+                                @if(in_array($resource->site_image_role_id, [11, 12, 13, 14, 15, 16, 17, 18, 19]))
                                     <textarea id="editor_textarea" name="details" class="form-control">{{ $resource->image_details }}</textarea>
                                 @else
                                     <textarea id="html_editor_textarea" name="details">{{ $resource->image_details }}</textarea>
