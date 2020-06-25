@@ -204,9 +204,15 @@ Route::prefix('auth')->group(function () {
         Route::get('roles/edit/{id}', 'FrontEnd\AdminDashboardController@editUserRoles')->name('editUserRoles');
         Route::post('roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles'); // --> FOR AJAX CALL
         Route::post('products/{id}/images', 'ProductController@getImages')->name('getProductImages');
+
         Route::get('products/{id}/properties', 'ProductController@getProperties')->name('getProductProperties');
         Route::post('products/{id}/properties', 'ProductController@addValue')->name('addProperty');
         Route::delete('products/{id}/properties/{value}', 'ProductController@removeValue')->name('property.delete');
+        
+        Route::get('productTypes/{id}/properties', 'ProductTypeController@getProperties')->name('getProductTypeProperties');
+        Route::post('productTypes/{id}/properties', 'ProductTypeController@addValue')->name('addTypeProperty');
+        Route::delete('productTypes/{id}/properties/{value}', 'ProductTypeController@removeValue')->name('typeProperty.delete');
+        
         Route::get('attributes/{id}/values', 'AttributeController@getValues')->name('getValuesByAttribute');
         Route::get('products/{id}/images', 'ProductController@redirectToProductImages')->name('redirectToProductImages');
         Route::get('users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ProductType;
 use App\Producer;
 use App\Category;
+use App\Attribute;
+use App\Value;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Validator;
@@ -288,4 +290,48 @@ class ProductTypeController extends Controller
         });
         return $orderedWithoutCount;
     }
+
+
+
+    public function getProperties($id) 
+    {
+
+        $productType = ProductType::findOrFail($id);
+        $attributes = Attribute::all();
+        
+        return View('backoffice.pages.edit_product_type_properties', ['productType' => $productType, 'attributes' => $attributes]);
+    }
+
+    public function addValue($id, Request $request) 
+    {
+
+        $rules = array([
+            'value_id' => 'required|integer|exists:values,id'
+        ]);
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        
+
+        $productType = ProductType::findOrFail($id);
+        $value = Value::findOrFail($request->value_id);
+
+        $productType->values()->attach($value);
+
+        return response()->json(['success' => 'Property Added successfully.']);
+    }
+
+    public function removeValue($id, $value)
+    {
+        $productType = ProductType::findOrFail($id);
+        $value = Value::findOrFail($value);
+
+        $productType->values()->detach($value);
+    }
+
 }

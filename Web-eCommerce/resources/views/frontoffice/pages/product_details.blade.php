@@ -68,6 +68,9 @@
 					@foreach($product->values as $value)
 					<p>{{ $value->attribute->name }} : {{ $value->name }}</p>
 					@endforeach
+					@foreach($product->productType->values as $value)
+					<p>{{ $value->attribute->name }} : {{ $value->name }}</p>
+					@endforeach
 						<div class="row mt-4">
 							<div class="col-md-6">
 								<div class="form-group d-flex">

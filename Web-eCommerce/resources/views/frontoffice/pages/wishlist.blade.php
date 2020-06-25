@@ -62,7 +62,10 @@
                                             @forelse($product->values as $value)
                                             <span class="badge badge-warning">{{$value->attribute->name}} : {{$value->name}}</span> <br/>
                                             @empty
-                                            -
+                                            @endforelse
+                                            @forelse($product->productType->values as $value)
+                                            <span class="badge badge-warning">{{$value->attribute->name}} : {{$value->name}}</span> <br/>
+                                            @empty
                                             @endforelse
                                             </p>
                                         </td>

@@ -44,6 +44,7 @@
                                 <th>Name</th>
                                 <th>Av.</th>
                                 <th>Producer</th>
+                                <th>Properties</th>
                                 <th>Creation</th>
                                 <th>Update</th>
                                 <th>Edit Item</th>
@@ -62,6 +63,7 @@
                                     @endif
                                 </td>
                                 <td class="text-uppercase">{{$product->producer->name}}</td>
+                                <td><a href="{{ route('getProductTypeProperties', $product->id) }}">Edit Properties</a></td>
                                 <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
                                 <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
                                 <td>
