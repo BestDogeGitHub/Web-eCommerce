@@ -11,8 +11,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Edit User</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Edit Users</a></li>
               <li class="breadcrumb-item active">Edit Roles</li>
             </ol>
           </div>
@@ -26,10 +26,36 @@
           
         <div class="row">
             @isset($user)
+            
+            
+                <div class="col-md-6">
+                    <!-- PRODUCT DESCRIPTION -->
+                    <div class="card">
+                        <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fa fa-user"></i>
+                            User Description
+                        </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                        <dl>
+                            <dt># <dd>{{$user->id}}<dd></dt>
+                            <dt>Email<dd>{{$user->email}}</dd></dt>
+                            <dt>Name<dd>{{$user->name}}</dd></dt>
+                            <dt>Surname<dd>{{$user->surname}}<dd></dt>
+                            <dt>Created at <dd>{{ date('d-m-Y', strtotime($user->created_at))}}</dd></dt>
+                            <dt>Updated at <dd>{{ date('d-m-Y', strtotime($user->updated_at))}}</dd></dt>
+                        </dl>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
                 <!-- general form elements -->
-                <div class="col-12">
-                 <div class="card card-primary">
-                    <div class="card-header">
+                <div class="col-md-6">
+                 <div class="card">
+                    <div class="card-header bg-primary">
                     <h3 class="card-title">Edit</h3>
                     </div>
                     <!-- /.card-header -->
@@ -55,7 +81,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th scope="row"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRoles"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add</button></th>
+                                <th scope="row"><button type="button" class="btn bg-primary-full" data-toggle="modal" data-target="#modalRoles"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add</button></th>
                                 <th scope="col">&nbsp;</th>
                                 <th scope="col">&nbsp;</th>
                                 <th scope="col">&nbsp;</th>
@@ -68,7 +94,7 @@
 
                     <div class="card-footer">
                         <span class="d-none" id="id_user">{{$user->id}}</span>
-                        <button id="sendRoleData" type="button" class="btn btn-primary float-right">Save changes</button>
+                        <button id="sendRoleData" type="button" class="btn bg-primary-full float-right">Save changes</button>
                     </div>
                 </div>
             </div> 

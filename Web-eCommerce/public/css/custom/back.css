@@ -202,6 +202,23 @@ img.category {
     background-color: rgba(130,174,70, 1) !important;
 }
 
+.bg-primary-full {
+    color: white !important;
+    background-color: rgba(130,174,70, 1) !important;
+}
+
+.bg-primary-full:hover {
+    background-color: transparent !important;
+    color: rgba(130,174,70, 1) !important;
+    border: 1px solid rgba(130,174,70, 1) !important;
+}
+
+.text-warning small {
+    color: red;
+}
+
+
+/*
 .navbar-white {
     background-color: #82ae46 !important;
     color: white !important;
@@ -209,6 +226,21 @@ img.category {
 
 .navbar-white a {
     color: white !important;
+}
+*/
+
+.reviews-card {
+    background-color: #51a3c8;
+    color: white;
+}
+
+.bg-green {
+    background-color: #28a745!important;
+}
+
+.logo_sm {
+    width: 2em;
+    height: 2em;
 }
 
 .navbar-white .dropdown-item {
@@ -229,7 +261,6 @@ img.category {
 
 .dataTable td {
     vertical-align: middle !important;
-    text-transform: uppercase;
 }
 
 .dataTable td a {

@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">BackOffice Dashboard<small> - MusicStore | <i class="ion ion-settings ml-2 mr-2"></i>Administration Tools</small></h1>
+            <h1 class="m-0 text-dark"><img src="{{ asset('/images/logo.png') }}" class="logo_sm mr-2"/> BackOffice Dashboard<small> - MusicStore | <i class="ion ion-settings ml-2 mr-2"></i>Administration Tools</small></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -112,7 +112,7 @@
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-primary">
+            <div class="small-box bg-info">
               <div class="inner">
                 <h3 id="new_orders"></h3>
 
@@ -127,7 +127,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-primary">
+            <div class="small-box bg-green">
               <div class="inner">
                 <h3 id="num_products"></h3>
 
@@ -142,7 +142,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-primary">
+            <div class="small-box bg-warning">
               <div class="inner">
                 <h3 id="users_reg"></h3>
 
@@ -157,7 +157,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-primary">
+            <div class="small-box bg-danger">
               <div class="inner">
                 <h3 id="in_transit"></h3>
 
@@ -225,7 +225,7 @@
 
 
             <!-- solid sales graph -->
-            <div class="card">
+            <div class="card reviews-card">
               <div class="card-header border-0">
                 <h3 class="card-title">
                   <i class="fas fa-edit mr-1"></i>
@@ -241,7 +241,7 @@
                   </button>
                 </div>
               </div>
-              <div class="card-body bg-primary">
+              <div class="card-body">
                 <canvas class="reviews_chart" id="review-chart"></canvas>
               </div>
               <!-- /.card-body -->
