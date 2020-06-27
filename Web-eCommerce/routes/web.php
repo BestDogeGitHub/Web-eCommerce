@@ -145,6 +145,9 @@ Route::prefix('auth')->group(function () {
             'users' => 'UserController',
             'values' => 'ValueController'
         ]);
+
+        Route::get('/properties', 'FrontEnd\AdminDashboardController@getPropertiesManagement')->name('dashboard.properties');
+        Route::get('/catalog', 'FrontEnd\AdminDashboardController@getCatalogManagement')->name('dashboard.catalog');
     });
 
     Route::group(['middleware' => ['can:manageAccounts']], function () {
@@ -198,19 +201,29 @@ Route::prefix('auth')->group(function () {
     Route::group(['middleware' => ['role:Administrator|Shipment Representative|Inventory Representative']], function () {
         Route::get('roles', 'FrontEnd\AdminDashboardController@manageRoles')->name('manageRoles');
         Route::get('home', 'FrontEnd\AdminDashboardController@index')->name('dashboard');
-        Route::get('categories/properties', 'FrontEnd\AdminDashboardController@editProperties')->name('dashboard.properties');
         Route::get('roles/edit/{id}', 'FrontEnd\AdminDashboardController@editUserRoles')->name('editUserRoles');
-        Route::post('roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles');
+        Route::post('roles/edit/{id}', 'FrontEnd\AdminDashboardController@changeUserRoles'); // --> FOR AJAX CALL
         Route::post('products/{id}/images', 'ProductController@getImages')->name('getProductImages');
+
         Route::get('products/{id}/properties', 'ProductController@getProperties')->name('getProductProperties');
         Route::post('products/{id}/properties', 'ProductController@addValue')->name('addProperty');
         Route::delete('products/{id}/properties/{value}', 'ProductController@removeValue')->name('property.delete');
+        
+        Route::get('productTypes/{id}/properties', 'ProductTypeController@getProperties')->name('getProductTypeProperties');
+        Route::post('productTypes/{id}/properties', 'ProductTypeController@addValue')->name('addTypeProperty');
+        Route::delete('productTypes/{id}/properties/{value}', 'ProductTypeController@removeValue')->name('typeProperty.delete');
+        
         Route::get('attributes/{id}/values', 'AttributeController@getValues')->name('getValuesByAttribute');
         Route::get('products/{id}/images', 'ProductController@redirectToProductImages')->name('redirectToProductImages');
         Route::get('users/edit/{id}', 'FrontEnd\AdminDashboardController@editUser')->name('editUser');
 
+        /**
+         * Design routes
+         */
         Route::get('website/edit', 'FrontEnd\AdminDashboardController@getComponents')->name('components.index');
         Route::get('website/edit/{resource}', 'FrontEnd\AdminDashboardController@editResource')->name('components.edit');
+        Route::post('website/edit/', 'FrontEnd\AdminDashboardController@storeResource')->name('components.add');
+        Route::delete('website/edit/{resource}', 'FrontEnd\AdminDashboardController@deleteResource')->name('components.remove');
         Route::post('website/edit/{resource}', 'FrontEnd\AdminDashboardController@updateResource')->name('components.update');
         Route::get('home/informations', 'FrontEnd\AdminDashboardController@getInformations')->name('website.informations');
         

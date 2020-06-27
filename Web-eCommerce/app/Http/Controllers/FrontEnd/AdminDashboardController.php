@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 use App\SiteImage;
+use App\SiteImageRole;
 use App\Order;
 use App\Category;
 use App\Review;
 use App\User;
 use App\Product;
 use App\Shipment;
+
 use Validator;
 use Image;
 use File;
@@ -24,7 +26,20 @@ class AdminDashboardController extends Controller
 
     public function index()
     {
+        if(!Auth::check()) abort(401);
         return view('backoffice.pages.home');
+    }
+
+    public function getPropertiesManagement()
+    {
+        if(!Auth::check() || !Auth::user()->can('manageProperties')) abort(401);
+        return view('backoffice.pages.properties');
+    }
+
+    public function getCatalogManagement()
+    {
+        if(!Auth::check() || !Auth::user()->can('manageProducts')) abort(401);
+        return view('backoffice.pages.catalog');
     }
 
     /**
@@ -64,11 +79,39 @@ class AdminDashboardController extends Controller
      */
     public function editUserRoles($id_user) {
 
-        $userController = new UserController();
-        $user = $userController->getById($id_user);
+        $user = UserController::getById($id_user);
         $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
 
         return View('backoffice.pages.edit_roles', ['user' => $user, 'roles' => $roles]);
+    }
+
+    /**
+     * Gestisce i ruoli dell'utente
+     */
+    public function changeUserRoles($user_id, Request $request) {
+
+        $roles = $request->roles;
+        $user = User::findOrFail($user_id);
+        /*
+        $rolesObj = array();
+        foreach($roles as $item){
+            array_push($rolesObj, \Spatie\Permission\Models\Role::where('id', $item));
+        }*/
+
+        $user->syncRoles($roles);
+
+        /*
+        return response()->json($request->roles);
+
+
+        $user = UserController::validateRoles($id_user);
+        $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
+        */
+        $response = array(
+            'status' => 'success',
+            'msg' => $user->roles,
+        );
+        return response()->json($response);
     }
 
     /**
@@ -77,9 +120,9 @@ class AdminDashboardController extends Controller
     public function getComponents() {
 
         $components = SiteImage::all();
+        $roles = SiteImageRole::all();
 
-
-        return View('backoffice.pages.edit_website', ['components' => $components]);
+        return View('backoffice.pages.edit_website', ['components' => $components, 'roles' => $roles]);
     }
 
     /**
@@ -95,16 +138,18 @@ class AdminDashboardController extends Controller
     /**
      * Aggiorna la descrizione del campo
      */
-    public function updateResource($resource, Request $request) {
-
+    public function updateResource($res, Request $request) {
         $rules = array(
             'details' => 'required|string|max:1000',
-            'image' => 'image|max:4096'
+            'image' => 'image|max:4096',
+            'link' => 'string|nullable'
         );
 
         $error = Validator::make($request->all(), $rules)->validate();
 
-        $resource = SiteImage::findOrFail($resource);
+        $resource = SiteImage::findOrFail($res);
+
+        
 
         if(!$request->hasFile('image')) {
             
@@ -141,39 +186,75 @@ class AdminDashboardController extends Controller
                 'image_ref' => '/images/static/' . $new_name,
                 'image_details' => $request->details
             ); 
+
+            
         }
 
+        if($request->link) $data['link'] = $request->link;
         $resource->update($data);
 
         return View('backoffice.pages.edit_resource', ['resource' => $resource]);
+        
     }
 
+    public function storeResource(Request $request) {
+        
 
+        $rules = array(
+            'details' => 'required|string|max:1000',
+            'image' => 'image|max:4096',
+            'link' => 'string',
+            'image_role_id' => 'required|exists:site_image_roles,id'
+        );
 
-    /**
-     * Gestisce i ruoli dell'utente
-     */
-    public function changeUserRoles(Request $request) {
+        $error = Validator::make($request->all(), $rules)->validate();
 
-        return $request->getContent();
-        $userController = new UserController();
-        $string = "";
+        if(!$request->hasFile('image')) {
+            
+            // IMAGE NOT ADDED
+            $data = array(
+                'image_ref' => '',
+                'image_details' => $request->details
+            );
 
-        foreach(json_decode($request->getContent()) as $item){
-            $string += " $item";
+        } else {
+            
+            // IMAGE ADDED
+            
+            // UPLOAD IMAGE
+            $image = $request->file('image');
+            $new_name = rand() . '.' . $image->getClientOriginalExtension(); // Name of new Image
+            $destination_path = "/images/static";
+            $resize_image = Image::make($image->getRealPath());
+            //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
+            $resize_image->save(public_path($destination_path . '/' . $new_name));
+            $old_image_path = $resource->image_ref;
+            /*if(File::exists(public_path() . $old_image_path)) {
+                File::delete(public_path() . $old_image_path);
+            }*/
+
+            $data = array(
+                'image_ref' => '/images/static/' . $new_name,
+                'image_details' => $request->details
+            ); 
+
+            
         }
 
-        return $string;
+        if($request->link) $data['link'] = $request->link;
+        $data['site_image_role_id'] = $request->image_role_id;
+        $new = SiteImage::create($data);
 
+        return redirect()->route('components.update', ['resource' => $new->id]);
+    }
 
-        $user = $userController->validateRoles($id_user);
-        $roles = \Spatie\Permission\Models\Role::whereNotIn('id', $user->roles->pluck('id'))->get();
-        
-        $response = array(
-            'status' => 'success',
-            'msg' => $user->roles,
-        );
-        return response()->json($response);
+    public function deleteResource(SiteImage $resource) {
+        $image_path = $resource->image_ref;
+        if($resource->delete()){
+            if(File::exists(public_path() . $image_path)) {
+                File::delete(public_path() . $image_path);
+            }
+        }
     }
 
 

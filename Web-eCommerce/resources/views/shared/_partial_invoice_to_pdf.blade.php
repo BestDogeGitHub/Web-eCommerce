@@ -108,10 +108,7 @@
 
         <hr/>
         <div class="row">
-            <div class="col">
-            <h4>Invoice Total <i class="total">&euro; {{ number_format((float)$invoice->payment, 2, '.', '') }}</i></h4>
-            </div>
-            <div class="col">
+            <h4>Invoice Total <i class="total">&euro; {{ number_format((float)$invoice->payment, 2, '.', '') }}</i><small class="ml-5">@if($invoice->coupon_sale > 0) Sconto applicato: {{ $invoice->coupon_sale }}% @endif</small></h4>
         </div>
     </div>
     

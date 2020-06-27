@@ -41,6 +41,7 @@
                                     <th>Email</th>
                                     <th>Creation</th>
                                     <th>Last Update</th>
+                                    <th>Roles</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -52,6 +53,9 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                                     <td>{{ date('d-m-Y', strtotime($user->updated_at)) }}</td>
+                                    <td>
+                                        <a class="btn bg-primary-full" href="{{ route('editUserRoles', ['id' => $user->id]) }}"><i class="fa fa-users" aria-hidden="true"></i><i class="fas fa-pencil-alt ml-2" aria-hidden="true" data-toggle="tooltip" title="Edit"></i>&nbsp; Roles</a>
+                                    </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
                                             <a href="#" class="btn btn-warning _edit" id="{{ $user->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
@@ -89,7 +93,7 @@
 
                         <div class="form-group">
 							<label><i class="fa fa-user" aria-hidden="true"></i> &nbsp;&nbsp;Username</label>
-							<input type="text" class="form-control" required="required" id="editUsername" disabled/>
+							<input type="text" name="username" class="form-control" required="required" id="editUsername" readonly/>
 						</div>	
 
                         <div class="form-group">
@@ -133,7 +137,7 @@
 						</div>
 
 
-                        <div id="forErrors"></div>					
+                        <div id="forEditErrors"></div>					
                     </div>
                     
 					<div class="modal-footer">

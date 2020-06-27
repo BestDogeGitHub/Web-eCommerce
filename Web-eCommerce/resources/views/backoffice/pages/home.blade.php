@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">BackOffice Dashboard<small> - MusicStore | <i class="ion ion-settings ml-2 mr-2"></i>Administration Tools</small></h1>
+            <h1 class="m-0 text-dark"><img src="{{ asset('/images/logo.png') }}" class="logo_sm mr-2"/> BackOffice Dashboard<small> - MusicStore | <i class="ion ion-settings ml-2 mr-2"></i>Administration Tools</small></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -37,7 +37,7 @@
 
             @hasanyrole('Administrator')
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
+                <div class="small-box bg-secondary">
                   <div class="inner">
                     <h3 class="title_sec">Admin Tools</h3>
 
@@ -46,7 +46,8 @@
                   <div class="icon">
                     <i class="ion ion-ios-locked"></i>
                   </div>
-                  <a href="{{ route('users.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('users.index') }}" class="small-box-footer">Manage Accounts <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('dashboard.properties') }}" class="small-box-footer">Manage Properties <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             @endhasanyrole
@@ -54,7 +55,7 @@
             @hasanyrole('Shipment Representative|Administrator')
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-primary">
+              <div class="small-box bg-secondary">
                 <div class="inner">
                   <h3 class="title_sec">Shipments</h3>
 
@@ -63,7 +64,7 @@
                 <div class="icon">
                   <i class="ion ion-paper-airplane"></i>
                 </div>
-                <a href="{{ route('shipments.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('shipments.index') }}" class="small-box-footer">Manage Shipments <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             @endhasanyrole
@@ -80,7 +81,7 @@
                 <div class="icon">
                   <i class="ion ion-folder"></i>
                 </div>
-                <a href="{{ route('productTypes.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('dashboard.catalog') }}" class="small-box-footer">Manage Catalog <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           
@@ -89,7 +90,7 @@
           @hasanyrole('Designer|Administrator')
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-success">
+              <div class="small-box bg-secondary">
                 <div class="inner">
                   <h3 class="title_sec">Design</h3>
 
@@ -98,7 +99,7 @@
                 <div class="icon">
                   <i class="ion ion-images"></i>
                 </div>
-                <a href="{{ route('components.index') }}" class="small-box-footer">Go to <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('components.index') }}" class="small-box-footer">Manage Website Layout <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           
@@ -120,13 +121,13 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('orders.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-green">
               <div class="inner">
                 <h3 id="num_products"></h3>
 
@@ -150,7 +151,7 @@
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('users.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -165,7 +166,7 @@
               <div class="icon">
                 <i class="ion ion-ios-paperplane"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('orders.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -224,7 +225,7 @@
 
 
             <!-- solid sales graph -->
-            <div class="card bg-gradient-info">
+            <div class="card reviews-card">
               <div class="card-header border-0">
                 <h3 class="card-title">
                   <i class="fas fa-edit mr-1"></i>
@@ -232,10 +233,10 @@
                 </h3>
 
                 <div class="card-tools">
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                  <button type="button" class="btn bg-default btn-sm" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                  <button type="button" class="btn bg-danger btn-sm" data-card-widget="remove">
                     <i class="fas fa-times"></i>
                   </button>
                 </div>

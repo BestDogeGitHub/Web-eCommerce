@@ -109,7 +109,7 @@ class CarrierController extends Controller
     {
         $rules = array(
             'name' => 'required|max:45',
-            'image_ref' => 'required|max:255',
+            'image_ref' => 'string|max:255',
             'link' => 'required|string|max:2048',
             'details' => 'required|string|max:3000'
         );

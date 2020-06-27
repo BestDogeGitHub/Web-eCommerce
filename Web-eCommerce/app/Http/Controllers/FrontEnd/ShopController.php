@@ -29,7 +29,13 @@ class ShopController extends Controller
 
         $rankProducts = $this->getTopProductTypes();
         $partners = Producer::all()->random(6);
-        $testimonies = SiteImage::where('site_image_role_id', 10)->inRandomOrder()->get();;
+        $testimonies = SiteImage::where('site_image_role_id', 10)->inRandomOrder()->get();
+        $cat1 = SiteImage::where('site_image_role_id', 15)->first();
+        $cat2 = SiteImage::where('site_image_role_id', 16)->first();
+        $cat3 = SiteImage::where('site_image_role_id', 17)->first();
+        $cat4 = SiteImage::where('site_image_role_id', 18)->first();
+        $img_cat = SiteImage::where('site_image_role_id', 19)->first();
+        
 
         // PARSING HTML
         $testimonies->map( function($item){
@@ -49,9 +55,10 @@ class ShopController extends Controller
             
         });
 
-        //$topCategories = $this->getTopCategories();
- 
-        return view('frontoffice.pages.home', ['rankProducts' => $rankProducts, 'partners' => $partners, 'testimonies' => $testimonies]);
+
+
+        //$topCategories = $this->getTopCategories(); 
+        return view('frontoffice.pages.home', ['rankProducts' => $rankProducts, 'partners' => $partners, 'testimonies' => $testimonies, 'cat1' => $cat1, 'cat2' => $cat2, 'cat3' => $cat3, 'cat4' => $cat4, 'img_cat' => $img_cat]);
     }
 
     /**

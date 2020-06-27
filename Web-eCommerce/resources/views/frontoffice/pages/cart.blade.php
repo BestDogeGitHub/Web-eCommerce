@@ -71,9 +71,12 @@
                                         <h3>{{ $prod->productType->name }}</h3>
                                         <p>Properties: <br>
                                         @forelse($prod->values as $value)
-                                          <span class="badge badge-warning">{{$value->attribute->name}} : {{$value->name}}</span> <br/>
+                                        <span class="badge badge-warning">{{$value->attribute->name}} : {{$value->name}}</span> <br/>
                                         @empty
-                                          -
+                                        @endforelse
+                                        @forelse($prod->productType->values as $value)
+                                        <span class="badge badge-warning">{{$value->attribute->name}} : {{$value->name}}</span> <br/>
+                                        @empty
                                         @endforelse
                                         </p>
                                     </td>

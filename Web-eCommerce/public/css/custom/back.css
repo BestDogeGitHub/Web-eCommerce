@@ -123,6 +123,216 @@ img.category {
 }
 
 
+/** MODALS STYLE **/
+.modal-dialog {
+    border-radius: 0 !important;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 0 !important;
+}
+
+.modal-title {
+    text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.62);
+}
+
+.modal-header {
+    background-color: #82ae46;
+    color: white;
+    border-radius: 0;
+}
+
+.modal-footer {
+    border-radius: 0;
+}
+
+.btn{
+    /*background-color: rgba(130,174,70, .07);*/
+    border-radius: 0 !important;
+}
+
+.btn-success, .modal-dialog .btn-warning{
+    color: white;
+    background-color: rgba(130,174,70, 1);
+    border-color: rgba(130,174,70, 1) !important;
+}
+
+.btn-default{
+    border: none;
+    background-color: transparent !important;
+}
+
+.btn-default:hover{
+    border: none;
+    background-color: inherit;
+}
+
+.btn-success:hover{
+    background-color: rgba(130,174,70, 1) !important;
+    border-color: rgba(130,174,70, 1) !important;
+    box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,.4) !important;
+}
+
+.btn-success:active{
+    background-color: rgba(130,174,70, 1) !important;
+    border-color: rgba(130,174,70, 1) !important;
+    box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,.4) !important;
+}
+
+.modal-body .form-control, .modal-body select {
+    border-radius: 0 !important;
+}
+
+.modal-body .form-control:focus, .modal-body select:focus {
+    border-color: rgba(130,174,70, 1);
+}
+
+.select2-container--default .select2-indigo .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-indigo .select2-results__option--highlighted[aria-selected]:hover, .select2-indigo .select2-container--default .select2-results__option--highlighted[aria-selected], .select2-indigo .select2-container--default .select2-results__option--highlighted[aria-selected]:hover , .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: rgba(130,174,70, 1) !important;
+    border-color: rgba(130,174,70, 1) !important;
+}
+
+.badge-success {
+    color: #82ae46 !important;
+    background-color: unset !important; 
+}
+
+.bg-primary, .bg-success {
+    background-color: rgba(130,174,70, 1) !important;
+}
+
+.bg-primary-full {
+    color: white !important;
+    background-color: rgba(130,174,70, 1) !important;
+}
+
+.bg-primary-full:hover {
+    background-color: transparent !important;
+    color: rgba(130,174,70, 1) !important;
+    border: 1px solid rgba(130,174,70, 1) !important;
+}
+
+.text-warning small {
+    color: red;
+}
+
+
+/*
+.navbar-white {
+    background-color: #82ae46 !important;
+    color: white !important;
+}
+
+.navbar-white a {
+    color: white !important;
+}
+*/
+
+.reviews-card {
+    background-color: #51a3c8;
+    color: white;
+}
+
+.bg-green {
+    background-color: #28a745!important;
+}
+
+.logo_sm {
+    width: 2em;
+    height: 2em;
+}
+
+.navbar-white .dropdown-item {
+    color: inherit !important;
+}
+
+.page-link {
+    color: rgb(52, 58, 64) !important;
+    background-color: white !important; 
+}
+
+.page-item.active .page-link {
+    z-index: 1 !important;
+    color: #fff !important;
+    background-color:#82ae46 !important;
+    border-color: #82ae46 !important;
+}
+
+.dataTable td {
+    vertical-align: middle !important;
+}
+
+.dataTable td a {
+} 
+
+.dataTable td a:hover {
+} 
+
+._show {
+    margin-right: 1em !important;
+    background: none !important;
+    background-color: #82ae46 !important;
+    color: white !important;
+    border-radius: 50% !important;
+    border: 1px solid #82ae46 !important;
+} 
+
+._show:hover {
+    background: none !important;
+    background-color: transparent !important;
+    color: #82ae46 !important;
+    border: 1px solid #82ae46 !important;
+    border-radius: 50% !important;
+} 
+
+._edit {
+    background: none !important;
+    background-color: #82ae46 !important;
+    color: white !important;
+    border-radius: 50% !important;
+    border: 1px solid #82ae46 !important;
+} 
+
+._edit:hover, ._edit:focus, ._edit:active {
+    background: none !important;
+    background-color: transparent !important;
+    color: #82ae46 !important;
+    border: 1px solid #82ae46 !important;
+    border-radius: 50% !important;
+} 
+
+._delete {
+    margin-left: 1em !important;
+    background: none !important;
+    background-color: red !important;
+    color: white !important;
+    border-radius: 50% !important;
+    border: 1px solid red !important;
+} 
+
+._delete:hover {
+    background: none !important;
+    border: 1px solid red !important;
+    background-color: transparent !important;
+    color: red !important;
+    border-radius: 50% !important;
+    border: 1px solid red !important;
+} 
+
+
+
+a {
+    color: #82ae46;
+}
+
+a:hover {
+    color: rgb(52, 70, 28);
+}
+
+/** END MODALS STYLE **/
+
+
 .prodImg{
     max-width: 200px !important;
     height: 200px !important;
@@ -155,7 +365,9 @@ img.category {
 }
 /* END DS BAR */
 
-
+.modal-dialog {
+    max-width: 1140px !important;
+}
 
 /**
     CHARTS HOMEPAGE

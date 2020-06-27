@@ -8,7 +8,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="{{ asset('/') }}">Home</a></span> <span><a href="{{ route('categories_par', $category->id) }}">{{ $category->name }}</a></span></p>
+          	<p class="breadcrumbs"><span class="mr-2"><a href="{{ asset('/') }}">Home</a></span> @isset($category) <span><a href="{{ route('categories_par', $category->id) }}">{{ $category->name }}</a></span> @endisset </p>
             <h1 class="mb-0 bread">{{ $type }} Products</h1>
           </div>
         </div>

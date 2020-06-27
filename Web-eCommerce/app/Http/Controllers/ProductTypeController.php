@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ProductType;
 use App\Producer;
 use App\Category;
+use App\Attribute;
+use App\Value;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Validator;
@@ -103,7 +105,6 @@ class ProductTypeController extends Controller
             'image_ref' => '/images/product_types/' . $new_name,
             'available' => 0,
             'star_tot_number' => 3,
-            'n_reviews' => 0,
             'producer_id' => $producer->id
         ); 
 
@@ -154,8 +155,6 @@ class ProductTypeController extends Controller
             'producer' => 'required|numeric',
             'name' => 'required|max:200',
             'available' => 'required|numeric|between:0,1',
-            'star_rate' => 'required|numeric|between:0,5',
-            'n_reviews' => 'required|numeric'
         );
         
         $error = Validator::make($request->all(), $rules);
@@ -178,8 +177,6 @@ class ProductTypeController extends Controller
                 'name' => $request->name,
                 'image_ref' => $productType->image_ref,
                 'available' => $request->available,
-                'star_tot_number' => $request->star_rate,
-                'n_reviews' => $request->n_reviews,
                 'producer_id' => $producer->id
             );
 
@@ -232,8 +229,6 @@ class ProductTypeController extends Controller
                 'name' => $request->name,
                 'image_ref' => '/images/product_types/' . $new_name,
                 'available' => $request->available,
-                'star_rate' => $request->star_rate,
-                'n_reviews' => $request->n_reviews,
                 'producer_id' => $producer->id
             ); 
         }
@@ -295,4 +290,48 @@ class ProductTypeController extends Controller
         });
         return $orderedWithoutCount;
     }
+
+
+
+    public function getProperties($id) 
+    {
+
+        $productType = ProductType::findOrFail($id);
+        $attributes = Attribute::all();
+        
+        return View('backoffice.pages.edit_product_type_properties', ['productType' => $productType, 'attributes' => $attributes]);
+    }
+
+    public function addValue($id, Request $request) 
+    {
+
+        $rules = array([
+            'value_id' => 'required|integer|exists:values,id'
+        ]);
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        
+
+        $productType = ProductType::findOrFail($id);
+        $value = Value::findOrFail($request->value_id);
+
+        $productType->values()->attach($value);
+
+        return response()->json(['success' => 'Property Added successfully.']);
+    }
+
+    public function removeValue($id, $value)
+    {
+        $productType = ProductType::findOrFail($id);
+        $value = Value::findOrFail($value);
+
+        $productType->values()->detach($value);
+    }
+
 }

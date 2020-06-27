@@ -12,7 +12,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.catalog') }}">Catalog</a></li>
                         <li class="breadcrumb-item active">Product Types</li>
                         </ol>
                     </div>
@@ -43,6 +44,7 @@
                                 <th>Name</th>
                                 <th>Av.</th>
                                 <th>Producer</th>
+                                <th>Properties</th>
                                 <th>Creation</th>
                                 <th>Update</th>
                                 <th>Edit Item</th>
@@ -61,6 +63,7 @@
                                     @endif
                                 </td>
                                 <td class="text-uppercase">{{$product->producer->name}}</td>
+                                <td><a href="{{ route('getProductTypeProperties', $product->id) }}">Edit Properties</a></td>
                                 <td>{{ date('d-m-Y', strtotime($product->created_at)) }}</td>
                                 <td>{{ date('d-m-Y', strtotime($product->updated_at)) }}</td>
                                 <td>

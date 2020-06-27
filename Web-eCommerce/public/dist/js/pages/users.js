@@ -106,7 +106,7 @@ $(document).ready(function() {
 
     $('#editUserForm').on('submit', function(event) {
         event.preventDefault();
-
+        console.log('submitting')
         $.ajax({
             url: "/auth/users/" + user_id,
             method: "POST",
@@ -119,6 +119,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+                console.log(data, 'data_received');
                 var html = '';
                 if(data.errors)
                 {
@@ -139,6 +140,9 @@ $(document).ready(function() {
                     location.reload();
                     $('#spinner').fadeIn();
                 }
+            },
+            error: function(xhr) {
+                console.log(xhr, 'error on updating');
             }
         });
 
