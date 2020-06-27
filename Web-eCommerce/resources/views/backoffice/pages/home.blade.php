@@ -37,7 +37,7 @@
 
             @hasanyrole('Administrator')
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
+                <div class="small-box bg-secondary">
                   <div class="inner">
                     <h3 class="title_sec">Admin Tools</h3>
 
@@ -55,7 +55,7 @@
             @hasanyrole('Shipment Representative|Administrator')
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-primary">
+              <div class="small-box bg-secondary">
                 <div class="inner">
                   <h3 class="title_sec">Shipments</h3>
 
@@ -90,7 +90,7 @@
           @hasanyrole('Designer|Administrator')
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-success">
+              <div class="small-box bg-secondary">
                 <div class="inner">
                   <h3 class="title_sec">Design</h3>
 
@@ -112,7 +112,7 @@
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box bg-primary">
               <div class="inner">
                 <h3 id="new_orders"></h3>
 
@@ -127,7 +127,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-primary">
               <div class="inner">
                 <h3 id="num_products"></h3>
 
@@ -142,7 +142,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-primary">
               <div class="inner">
                 <h3 id="users_reg"></h3>
 
@@ -157,7 +157,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-primary">
               <div class="inner">
                 <h3 id="in_transit"></h3>
 
@@ -225,7 +225,7 @@
 
 
             <!-- solid sales graph -->
-            <div class="card bg-gradient-info">
+            <div class="card">
               <div class="card-header border-0">
                 <h3 class="card-title">
                   <i class="fas fa-edit mr-1"></i>
@@ -233,15 +233,15 @@
                 </h3>
 
                 <div class="card-tools">
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                  <button type="button" class="btn bg-default btn-sm" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
+                  <button type="button" class="btn bg-danger btn-sm" data-card-widget="remove">
                     <i class="fas fa-times"></i>
                   </button>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body bg-primary">
                 <canvas class="reviews_chart" id="review-chart"></canvas>
               </div>
               <!-- /.card-body -->
