@@ -52,6 +52,7 @@ $(document).ready(function() {
     
 
     $(document).on('click', '._edit', function(){
+        tinymce.remove("textarea[name='details']");
         carrier_id = $(this).attr('id');
         var button = $(this);
         $.ajax({
@@ -62,6 +63,7 @@ $(document).ready(function() {
                 $('#actualImage').attr('src', html.data.image_ref);
                 $('#editLink').val(html.data.link);
                 $('#editDetails').val(html.data.details);
+                setTinyEditor("textarea[name='details']");
             }
         });
 

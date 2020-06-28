@@ -84,7 +84,7 @@ $(document).ready(function() {
     var producer_id;
 
     $(document).on('click', '.edit', function(){
-        
+        tinymce.remove("textarea[name='details']");
         producer_id = $(this).attr('id');
         var button = $(this);
         $('#forEditErrors').html(' '); 
@@ -97,6 +97,7 @@ $(document).ready(function() {
                 $('#actualImage').attr('src', html.data.image_ref);
                 $('#editLink').val(html.data.link);
                 $('#editDetails').val(html.data.details);
+                setTinyEditor("textarea[name='details']");
             }
         });
         
