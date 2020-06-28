@@ -155,7 +155,7 @@
                         </div>
                         <div class="alert alert-danger confirm" role="alert" id="confirmDelete">
                             <p>Are you sure you want to delete this Category? Also nested categories will be delete</p>
-                            <p class="text-warning"><small>!!! This action cannot be undone !!!</small></p>
+                            <p class="text-warning"><small class="text-white">!!! This action cannot be undone !!!</small></p>
                             <input id="delButton" type="button" class="btn btn-danger" value="Delete">
                         </div>
                         <div id="forEditErrors"></div>					

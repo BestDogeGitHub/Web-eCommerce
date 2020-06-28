@@ -110,7 +110,7 @@ class CategoryController extends Controller
     {
         $rules = array(
             'name' => 'required|string|min:1|max:45',
-            'image_ref' => 'required|max:255',
+            'image' => 'required|max:255',
             'parent_id' => 'required'
         );
         
