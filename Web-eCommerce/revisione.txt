@@ -1,5 +1,0 @@
-editor rich text per i campi nelle form
-
-form più grandi
-
-togliere le immagini
