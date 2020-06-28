@@ -13,7 +13,7 @@
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">MusicStore</h2>
               @forelse($footerMain as $elem)
-              {{ $elem->image_details}}
+              {!! $elem->image_details !!}
               @empty
               <p>Welcome to MusicStore.net</p>
               @endforelse
@@ -29,7 +29,7 @@
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
                 @forelse($footerMenu as $elem)
-                <li><a href="{{ $elem->link}}" class="py-2 d-block">{{ $elem->image_details}}</a></li>
+                <li><a href="{{ $elem->link}}" class="py-2 d-block">{!! $elem->image_details !!}</a></li>
                 @empty
                 @endforelse
               </ul>
@@ -41,7 +41,7 @@
               <div class="d-flex">
 	              <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
                   @forelse($footerHelp as $elem)
-                  <li><a href="{{ $elem->link}}" class="py-2 d-block">{{ $elem->image_details}}</a></li>
+                  <li><a href="{{ $elem->link}}" class="py-2 d-block">{!! $elem->image_details !!}</a></li>
                   @empty
                   @endforelse
 	              </ul>
@@ -54,7 +54,7 @@
             	<div class="block-23 mb-3">
 	              <ul>
                   @forelse($footerContacts as $elem)
-                  <li><a href="{{ $elem->link}}" class="py-2 d-block">{{ $elem->image_details}}</a></li>
+                  <li><a href="{{ $elem->link}}" class="py-2 d-block">{!! $elem->image_details !!}</a></li>
                   @empty
                   @endforelse
 	              </ul>
