@@ -82,6 +82,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+                console.log(data);
                 var html = '';
                 if(data.errors)
                 {
@@ -102,6 +103,9 @@ $(document).ready(function() {
                     location.reload();
                     $('#spinner').fadeIn();
                 }
+            },
+            error: function(xhr) {
+                console.log(xhr);
             }
         });
 

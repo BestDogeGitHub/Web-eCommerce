@@ -20,7 +20,7 @@
         
       </div>
       <div class="card text-center">
-                <div class="card-footer text-muted">
+                <div class="card-footer text-muted text-truncate">
                     @foreach(Auth::user()->roles as $role)
                       {{ $role->name }} <br/>
                     @endforeach
