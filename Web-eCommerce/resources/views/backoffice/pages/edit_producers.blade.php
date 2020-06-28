@@ -55,8 +55,8 @@
                                         <td>{{$producer->id}}</td>
                                         <td class="text-uppercase">{{$producer->name}}</td>
                                         <td><img class="img-responsive crud" src="{{ asset($producer->image_ref) }}" ></td>
-                                        <td><a href="https://{{$producer->link}}" target="_blank">Visit link</a></td>
-                                        <td>{!!$producer->details!!}</td>
+                                        <td><a href="http://{{$producer->link}}" target="_blank">Visit link</a></td>
+                                        <td>{{$producer->details}}</td>
                                         <td>
                                             <div class="btn-group btn-group-sm">
                                                 <a href="#" class="btn btn-warning edit" id="{{ $producer->id }}"><i class="fas fa-pencil-alt" aria-hidden="true" data-toggle="tooltip" title="Edit"></i></a>
