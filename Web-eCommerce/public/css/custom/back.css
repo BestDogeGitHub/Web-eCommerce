@@ -269,7 +269,7 @@ img.category {
 .dataTable td a:hover {
 } 
 
-._show {
+._show, button .show {
     margin-right: 1em !important;
     background: none !important;
     background-color: #82ae46 !important;
@@ -278,7 +278,7 @@ img.category {
     border: 1px solid #82ae46 !important;
 } 
 
-._show:hover {
+._show:hover, button .show:hover {
     background: none !important;
     background-color: transparent !important;
     color: #82ae46 !important;
@@ -286,7 +286,7 @@ img.category {
     border-radius: 50% !important;
 } 
 
-._edit {
+._edit, .edit {
     background: none !important;
     background-color: #82ae46 !important;
     color: white !important;
@@ -294,7 +294,7 @@ img.category {
     border: 1px solid #82ae46 !important;
 } 
 
-._edit:hover, ._edit:focus, ._edit:active {
+._edit:hover, .edit:hover {
     background: none !important;
     background-color: transparent !important;
     color: #82ae46 !important;
@@ -302,7 +302,7 @@ img.category {
     border-radius: 50% !important;
 } 
 
-._delete {
+._delete, .delete {
     margin-left: 1em !important;
     background: none !important;
     background-color: red !important;
@@ -311,7 +311,7 @@ img.category {
     border: 1px solid red !important;
 } 
 
-._delete:hover {
+._delete:hover, .delete:hover {
     background: none !important;
     border: 1px solid red !important;
     background-color: transparent !important;

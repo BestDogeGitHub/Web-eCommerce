@@ -75,6 +75,7 @@ class PaymentMethodController extends Controller
      */
     public function edit($id)
     {
+        $paymentMethod = PaymentMethod::findOrFail($id);
         if(request()->ajax())
         {
             return response()->json([
@@ -103,9 +104,10 @@ class PaymentMethodController extends Controller
      * Remove the specified resource from storage.
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PaymentMethod $item)
+    public function destroy($id)
     {
-        $item->delete();
+        $paymentMethod = PaymentMethod::findOrFail($id);
+        $paymentMethod->delete();
         return response()->json(['success' => 'success!']);
     }
 }

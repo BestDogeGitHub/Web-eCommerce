@@ -53,9 +53,10 @@ $(document).ready(function() {
                             var _product = $('#product_info_template').clone();
                             _product.find("small").html('Product ID: ' + add.product.id);
                             _product.attr('href', '/products/' + add.product_type.id);
-                            _product.find("div h5").html('Product Type: <b>' + add.product_type.name + '</b>');
+                            _product.find("div h5").html('Product: <b>' + add.product_type.name + '</b>');
                             _product.find("img").attr('src', add.product_type.image_ref);
-                            _product.find("p").html('Product Info: ' + add.product.info);
+                            if(add.product.info != null) _product.find("p").html('Product Info: ' + add.product.info);
+                            else _product.find("p").html('Nessuna informazione sul prodotto');
                             _product.find("div small").html('Quantity: ' + add.orderDetail.quantity);
                             //console.log(html_product.html());
                             $('#order_products').append(_product);

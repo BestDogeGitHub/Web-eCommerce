@@ -119,6 +119,7 @@
 
                         
                         <div class="list-group" id="order_products">
+                            
 
                         </div>
                         <br/>
