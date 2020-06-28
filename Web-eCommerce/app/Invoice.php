@@ -17,4 +17,9 @@ class Invoice extends Model
     {
         return $this->belongsTo('App\PaymentMethod');
     }
+
+    public function getPrintablePrice()
+    {
+        return number_format($this->payment, 2, ",", ".");
+    }
 }

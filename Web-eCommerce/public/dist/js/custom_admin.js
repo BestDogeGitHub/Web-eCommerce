@@ -1,9 +1,12 @@
 
 $(document).ready(function() {
 
+
+
     if(!$('#not_fadeout').length) $("#spinner").fadeOut(1000);
 
-    console.log('ci sono')
+    bsCustomFileInput.init();
+    //console.log('ci sono')
 
     
 

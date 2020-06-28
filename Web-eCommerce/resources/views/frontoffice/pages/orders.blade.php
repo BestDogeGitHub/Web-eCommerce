@@ -54,7 +54,7 @@
                                         </td>
                                         
                                         <td class="price data">
-                                            <p class="price"><span>{{$order->invoice->payment}}</span></p>
+                                            <p class="price"><span>{{$order->invoice->getPrintablePrice() }}</span></p>
                                         </td>
 
                                         <td class="data">
