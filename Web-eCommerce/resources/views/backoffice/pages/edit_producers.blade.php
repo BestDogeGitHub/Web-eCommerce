@@ -108,7 +108,7 @@
                         
                         <div class="form-group">
 							<label>Details</label>
-							<textarea class="form-control" name="details"></textarea>
+							<textarea class="form-control" name="details" id="addInfo"></textarea>
                         </div>
 
                         <div id="forErrors"></div>					
