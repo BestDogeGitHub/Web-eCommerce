@@ -1,5 +1,6 @@
 // SCRIPT FOR PRODUCTS
 $(document).ready(function() {
+    setTinyEditor("#addInfo");
     var table = $("#productsTable").DataTable();
 
 

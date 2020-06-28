@@ -1,5 +1,6 @@
 // SCRIPT FOR PRODUCT TYPES
 $(document).ready(function() {
+    setTinyEditor("#addInfo");
     var table = $("#producersTable").DataTable({
     });
 

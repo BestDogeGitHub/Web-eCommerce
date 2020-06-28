@@ -138,7 +138,7 @@
 						</div>
 						<div class="form-group">
 							<label>Info</label>
-							<textarea class="form-control" required="required" name="info"></textarea>
+							<textarea class="form-control" required="required" name="info" id="addInfo"></textarea>
                         </div>
                         <div id="forErrors"></div>					
                     </div>

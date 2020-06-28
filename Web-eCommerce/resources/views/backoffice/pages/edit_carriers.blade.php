@@ -55,7 +55,7 @@
                                 @foreach($carriers as $carrier)
                                 <tr>
                                     <td>{{$carrier->id}}</td>
-                                    <td><a href="http:\\{{ $carrier->link }}" target="_blank">{{$carrier->name}}</a></td>
+                                    <td><a href="http://{{ $carrier->link }}" target="_blank">{{$carrier->name}}</a></td>
                                     <td><img class="img-responsive crud" src="{{ asset($carrier->image_ref) }}"></td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
@@ -110,7 +110,7 @@
                         
                         <div class="form-group">
 							<label>Details</label>
-							<textarea class="form-control" required="required" name="details"></textarea>
+							<textarea class="form-control" required="required" name="details" id="addInfo"></textarea>
                         </div>	
 
 

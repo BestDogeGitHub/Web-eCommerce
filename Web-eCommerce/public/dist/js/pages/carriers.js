@@ -2,7 +2,7 @@ $(document).ready(function() {
     
     var table = $("#carriersTable").DataTable();
     var carrier_id = 0;
-
+    setTinyEditor("#addInfo");
     
     /**
      * CREATE
