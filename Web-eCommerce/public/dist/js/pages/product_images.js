@@ -52,14 +52,14 @@ $(document).ready(function() {
               else {
                 html.images.forEach( function(element) {
                   html_to_add += '<div class="filtr-item" data-category="1" data-sort="white sample">';
-                  html_to_add += '<a href="#" class="btn btn-danger _delete" data-id="' + element.id + '">x</a><a href="' + element.image_ref + '" data-toggle="lightbox" data-title="' + element.image_ref + '">';
+                  html_to_add += '<a href="#" class="btn btn-danger _delete img_del" data-id="' + element.id + '">x</a><a href="' + element.image_ref + '" data-toggle="lightbox" data-title="' + element.image_ref + '">';
                   html_to_add += '<img src="' + element.image_ref + '" class="img-fluid mb-2 img-thumbnail prodImg" alt="' + element.image_ref + '"/>';
                   html_to_add += '</a></div>';
                   //html_to_add += '<img src="' + element.image_ref + '" class="img-thumbnail prodImg">'
                 });
               }
               $('#product_name').text(html.product_type + " - " + html.product.variant_name);
-              $('#product_info').text(html.product.info);
+              $('#product_info').html(html.product.info);
               $('#imgContainer').append(html_to_add);
               $('#uploadImg').removeClass('disabledFile');
               $('#product_id').val(product_id);

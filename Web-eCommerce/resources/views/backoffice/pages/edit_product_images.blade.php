@@ -122,8 +122,8 @@
                                  
 
 
-                                  <div id="forEditErrors"></div>					
-                              </div>
+                            <div id="forEditErrors"></div>					
+                        </div>
                               
                     <div class="modal-footer">
                       <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">

@@ -36,7 +36,7 @@
                             <div class="table-title">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="fa fa-plus" aria-hidden="true"></i> <span>Add New Product</span></a>				
+                                        <h2>Edit Shipments</h2>				
                                     </div>
                                 </div>
                                 <hr/>
