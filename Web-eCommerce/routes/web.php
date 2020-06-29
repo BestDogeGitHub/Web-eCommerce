@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('shop/users/{id}', 'FrontEnd\AuthUserController@publicProfile')->name('get_public_profile');
     });
 
+    // Add review to product route
+    Route::post('product/details/{id}/addReview', 'FrontEnd\AuthUserController@addReview')->name('add_review');
 
 });
 
@@ -95,8 +97,7 @@ Route::get('invoices/{id}/print', 'InvoiceController@getPDF')->name('getInvoiceP
  * SHOP PUBLIC ROUTES [POST]
  */
 
-// Add review to product route
-Route::post('product/details/{id}/addReview', 'FrontEnd\AuthUserController@addReview')->name('add_review');
+
 
 // SEARCH product type
 Route::post('shop/search/', 'FrontEnd\ShopController@searchProductTypes')->name('search_product_types');

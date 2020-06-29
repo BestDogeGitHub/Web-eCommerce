@@ -228,7 +228,7 @@ class AdminDashboardController extends Controller
             $resize_image = Image::make($image->getRealPath());
             //return response()->json(['errors' => [$destination_path . '/' . $new_name]]);
             $resize_image->save(public_path($destination_path . '/' . $new_name));
-            $old_image_path = $resource->image_ref;
+            $old_image_path = $request->image_ref;
             /*if(File::exists(public_path() . $old_image_path)) {
                 File::delete(public_path() . $old_image_path);
             }*/
