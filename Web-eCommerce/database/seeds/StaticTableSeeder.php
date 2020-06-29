@@ -117,7 +117,8 @@ class StaticTableSeeder extends Seeder
             ['id' => 16, 'name' => 'Category2', 'role_details' => 'Category in HomePage'],
             ['id' => 17, 'name' => 'Category3', 'role_details' => 'Category in HomePage'],
             ['id' => 18, 'name' => 'Category4', 'role_details' => 'Category in HomePage'],
-            ['id' => 19, 'name' => 'Central Category Info', 'role_details' => 'Category in HomePage']
+            ['id' => 19, 'name' => 'Central Category Info', 'role_details' => 'Category in HomePage'],
+            ['id' => 20, 'name' => 'Product Home', 'role_details' => 'Prodotti da mostrare in Homepage']
         ];
 
         foreach ($roles as $role) {
@@ -162,6 +163,14 @@ class StaticTableSeeder extends Seeder
             ['image_ref' => '/images/static/console.webp', 'image_details' => 'Electronic', 'site_image_role_id' => 17, 'link' => '/shop/categories/19'],
             ['image_ref' => '/images/static/Systems.jpg', 'image_details' => 'Sound Systems', 'site_image_role_id' => 18, 'link' => '/shop/categories/12'],
             ['image_ref' => '/images/static/start.png', 'image_details' => '', 'site_image_role_id' => 19, 'link' => ''],
+            ['image_ref' => '', 'image_details' => '2', 'site_image_role_id' => 20, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '14', 'site_image_role_id' => 20, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '23', 'site_image_role_id' => 20, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '17', 'site_image_role_id' => 20, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '4', 'site_image_role_id' => 20, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '24', 'site_image_role_id' => 20, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '12', 'site_image_role_id' => 20, 'link' => '/'],
+            ['image_ref' => '', 'image_details' => '8', 'site_image_role_id' => 20, 'link' => '/']
         ];
 
         foreach ($resources as $resource) {
