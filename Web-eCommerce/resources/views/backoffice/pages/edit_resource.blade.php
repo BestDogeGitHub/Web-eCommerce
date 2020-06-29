@@ -48,7 +48,7 @@
 
                             <form id="editResource" method="post" class="form-horizontal" action="{{ route('components.update', $resource->id) }}" enctype="multipart/form-data">
                                 
-                                @if(in_array($resource->site_image_role_id, [11, 12, 13, 14, 15, 16, 17, 18, 19]))
+                                @if(in_array($resource->site_image_role_id, [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]))
                                     <textarea id="editor_textarea" name="details" class="form-control">{{ $resource->image_details }}</textarea>
                                 @else
                                     <textarea id="html_editor_textarea" name="details">{{ $resource->image_details }}</textarea>
@@ -64,7 +64,7 @@
 
                                 <div class="form-group">
                                     <label>Actual Image</label><br/>
-                                    <img class="img-responsive crud" src="{{ asset($resource->image_ref) }}" id="actualImage">
+                                    @if(empty($resource->image_ref)) <p class="mb-2 text-danger">No Image</p> @else <img class="img-responsive crud" src="{{ asset($resource->image_ref) }}" id="actualImage"> @endif
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="editImage" name="image">
                                         <label class="custom-file-label" for="editImage">Change Image</label>

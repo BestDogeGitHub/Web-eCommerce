@@ -27,7 +27,9 @@ class ShopController extends Controller
     {
         //Auth::user()->assignRole('Administrator');
 
-        $rankProducts = $this->getTopProductTypes();
+        $prodIds = SiteImage::where('site_image_role_id', 20)->pluck('image_details');
+        $rankProducts = Product::whereIn('id', $prodIds)->get();
+        
         $partners = Producer::all()->random(6);
         $testimonies = SiteImage::where('site_image_role_id', 10)->inRandomOrder()->get();
         $cat1 = SiteImage::where('site_image_role_id', 15)->first();
@@ -36,7 +38,7 @@ class ShopController extends Controller
         $cat4 = SiteImage::where('site_image_role_id', 18)->first();
         $img_cat = SiteImage::where('site_image_role_id', 19)->first();
         
-
+ 
         // PARSING HTML
         $testimonies->map( function($item){
 
